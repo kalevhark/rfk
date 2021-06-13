@@ -27,7 +27,7 @@ class ICF_Eng():
 
     def __init__(self):
         self.df = dict()
-        with open(STATIC_DIR / 'icf2017_eng_v20210601.csv', newline='', encoding='utf-8') as csvfile:
+        with open(STATIC_DIR / 'icf2017_eng_v20210601.csv', newline='', encoding='windows-1252') as csvfile:
             reader = csv.DictReader(csvfile, delimiter=';', quotechar='"')
             n = 0
             for row in reader:
@@ -41,7 +41,7 @@ class ICF_Est():
 
     def __init__(self):
         self.df = dict()
-        with open(STATIC_DIR / 'icf2017_est_v20210513.csv', newline='', encoding='utf-8') as csvfile:
+        with open(STATIC_DIR / 'icf2017_est_v20210513.csv', newline='', encoding='windows-1252') as csvfile:
             reader = csv.DictReader(csvfile, delimiter=';', quotechar='"')
             n = 0
             for row in reader:
