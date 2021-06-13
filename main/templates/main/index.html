@@ -6,6 +6,7 @@
 {% block src %}
   <script type="text/javascript">
     // Muutujad vue jaoks
+    var host = 'http://3.136.97.151:8000/'
     {#var wiki_artikkel_filter_url = "{% url 'wiki:wiki_artikkel_filter' %}"#}
     {#var question = "{{ question }}"#}
   </script>
@@ -89,5 +90,5 @@
 {% endblock %}
 
 {% block javascript %}
-  <script src="{% static 'main/main.js'%}?ver=2021.06"></script>
+  <script src="{% static 'main/main.js'%}?ver=2021.06.13"></script>
 {% endblock %}
