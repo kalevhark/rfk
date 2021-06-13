@@ -87,7 +87,7 @@ var mainVM = new Vue({
             var vm = this
             for (const property in vm.inputs) {
                 if (vm.inputs[property].question.length > 3) {
-                    axios.get('http://localhost:8000/main/get_icf_calcs/?content=' + JSON.stringify(vm.inputs[property].question))
+                    axios.get('/main/get_icf_calcs/?content=' + JSON.stringify(vm.inputs[property].question))
                         .then(function (response) {
                             vm.inputs[property].result1 = response.data.icf_table_matrix_level1
                             vm.inputs[property].result2 = response.data.icf_table_matrix_level2
@@ -113,7 +113,7 @@ var mainVM = new Vue({
         getRFKSummary: function () {
             var vm = this
             console.log(vm.rfkSummary)
-            axios.get('http://localhost:8000/main/get_icf_summary/?content=' + JSON.stringify(vm.rfkSummary))
+            axios.get('/main/get_icf_summary/?content=' + JSON.stringify(vm.rfkSummary))
                 .then(function (response) {
                     vm.resultSummary0 = response.data.icf_table_matrix_level0
                     vm.resultSummary2 = response.data.icf_table_matrix_level2
