@@ -2,6 +2,8 @@ from django.urls import path
 
 from . import views
 
+app_name = 'main'
+
 urlpatterns = [
     path('', views.index, name='index'),
     path('get_icf_calcs/', views.get_icf_calcs, name='get_icf_calcs'),
