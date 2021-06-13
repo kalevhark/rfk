@@ -1,0 +1,93 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block title %}{{ block.super }} mängunurk{% endblock %}
+
+{% block src %}
+  <script type="text/javascript">
+    // Muutujad vue jaoks
+    {#var wiki_artikkel_filter_url = "{% url 'wiki:wiki_artikkel_filter' %}"#}
+    {#var question = "{{ question }}"#}
+  </script>
+{% endblock %}
+
+{% block css %}
+  <style>
+    .verticalColumnHeader {
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+  <div class="w3-container" id="watch-example">
+    <div class="w3-container">
+      <p>
+        RFK kood (ilma määrajateta):<br>
+        <input v-model="rfkCode">
+        [[ rfkPath ]]
+      </p>
+    </div>
+    <div
+        class="w3-row w3-padding-16"
+        v-for="input in inputs"
+        v-bind:key="input.id"
+    >
+      <div class="w3-container w3-padding">
+        <strong>Valdkond [[ input.id ]]</strong>
+      </div>
+      <div class="w3-col l1">
+        <div class="w3-container">
+          <textarea
+                  v-model="input.question"
+                  placeholder="Siia kirjuta või kleebi RFK koodid"
+                  rows="10"
+                  cols="10"
+          ></textarea>
+        </div>
+      </div>
+      <div class="w3-col l2">
+        <div class="w3-container">
+          <span v-html="input.result1"></span>
+        </div>
+      </div>
+      <div class="w3-col l3">
+        <div class="w3-container">
+          <span v-html="input.result2"></span>
+        </div>
+      </div>
+      <div class="w3-col l3">
+        <div class="w3-container">
+          <span v-html="input.result3"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="w3-row">
+      <div class="w3-container w3-padding">
+        <strong>Kokkuvõte</strong>
+      </div>
+    </div>
+    <div class="w3-row">
+      <div class="w3-col l3 w3-container">
+        <span v-html="resultSummary0"></span>
+      </div>
+      <div class="w3-col l3 w3-container">
+        <span v-html="resultSummary2"></span>
+      </div>
+      <div class="w3-col l3 w3-container">
+        <span v-html="resultSummary3"></span>
+      </div>
+    </div>
+
+    <div class="w3-row w3-small w3-container w3-padding">
+      [[ answer ]]
+    </div>
+  </div>
+
+{% endblock %}
+
+{% block javascript %}
+  <script src="{% static 'main/main.js'%}?ver=2020.12"></script>
+{% endblock %}
