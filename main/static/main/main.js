@@ -58,7 +58,7 @@ var mainVM = new Vue({
           }
           this.rfkPath = 'Otsime...'
           var vm = this
-          axios.get('http://localhost:8000/main/get_icf_path/?code=' + vm.rfkCode)
+          axios.get('/main/get_icf_path/?code=' + vm.rfkCode)
             .then(function (response) {
                 if ( response.data ) {
                     vm.rfkPath = response.data.rfkPath
