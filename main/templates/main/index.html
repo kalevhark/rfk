@@ -7,7 +7,7 @@
   <script type="text/javascript">
     // Muutujad vue jaoks
     var host = 'http://3.136.97.151:8000'
-    var urlICFPath = "{% url 'main:get_icf_path' %}"
+    var urlICFPath = host + "{% url 'main:get_icf_path' %}"
     var urlICFCalcs = "{% url 'main:get_icf_calcs' %}"
     var urlICFSummary = "{% url 'main:get_icf_summary' %}"
     {#var wiki_artikkel_filter_url = "{% url 'wiki:wiki_artikkel_filter' %}"#}
