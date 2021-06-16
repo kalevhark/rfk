@@ -187,12 +187,17 @@ def make_icf_matrix(rfk_set, rows=['d'], columns=['b'], ignore=['s', 'e'], level
             in icf_eng.keys()
             if (code[0] in rows and len(code) == 2)
         ]
-        vect_columns = [
-            code
-            for code
-            in icf_eng.keys()
-            if (code[0] in columns and len(code) == 2)
-        ]
+        columns_exist = any((code[0] in columns) for code in rfk_set) # kas on func või strukt koode?
+        # columns_exist = True
+        if columns_exist:
+            vect_columns = [
+                code
+                for code
+                in icf_eng.keys()
+                if (code[0] in columns and len(code) == 2)
+            ]
+        else:
+            vect_columns = ['TTa']  # kui func või struct piiranguid pole, siis Täpsustamata (TTa)
     else:
         vect_rows = [
             code_block
@@ -247,9 +252,12 @@ def make_icf_matrix(rfk_set, rows=['d'], columns=['b'], ignore=['s', 'e'], level
                 )
             except:
                 if c == 'TTa': # kui func/struct t2psustamata, siis ainult d keskmine
-                    score = int(round(
-                        parts[r][0] / parts[r][1]
-                    ))
+                    try:
+                        score = int(round(
+                            parts[r][0] / parts[r][1]
+                        ))
+                    except KeyError:
+                        score = ''
                 elif r == 'TTa': # kui tegevus/osalus t2psustamata, siis ainult b/s keskmine
                     score = int(round(
                         parts[c][0] / parts[c][1]

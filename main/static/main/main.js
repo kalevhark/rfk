@@ -9,7 +9,7 @@ var mainVM = new Vue({
         // resultSummary1: '',
         resultSummary2: '',
         resultSummary3: '',
-        answer: 'Pole midagi analüüsida...',
+        answer: 'Pole veel midagi analüüsida...',
         inputs: [
             {id: 1, question: '', result1: '', result2: '', result3: '', len: 0},
             {id: 2, question: '', result1: '', result2: '', result3: '', len: 0},
@@ -77,7 +77,7 @@ var mainVM = new Vue({
                 if ( response.data ) {
                     vm.rfkPath = response.data.rfkPath
                 } else {
-                    vm.rfkPath = this.rfkCode + ': sellist koodi ei ole'
+                    vm.rfkPath = vm.rfkCode + ': sellist koodi ei ole'
                 }
             })
             .catch(function (error) {
@@ -89,7 +89,11 @@ var mainVM = new Vue({
             var arr = Object.keys( b ).map( function ( key ) { return b[key].question.length });
             var max = Math.max.apply( null, arr );
             if (max < 3) {
-                this.answer = 'Questions are longer. ;-)'
+                this.answer = 'Lisa andmeid, et midagi analüüsida...'
+                this.resultSummary0 = ''
+                this.resultSummary1 = ''
+                this.resultSummary2 = ''
+                this.resultSummary3 = ''
                 for (const property in this.inputs) {
                     this.inputs[property].result1 = ''
                     this.inputs[property].result2 = ''
@@ -117,7 +121,7 @@ var mainVM = new Vue({
                             vm.inputs[property].result1 = ''
                             vm.inputs[property].result2 = ''
                             vm.inputs[property].result3 = ''
-                            this.inputs[property].len = 0
+                            vm.inputs[property].len = 0
                             vm.answer = 'Error! Could not reach the API. ' + error
                         })
                     } else {
