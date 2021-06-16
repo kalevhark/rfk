@@ -7,7 +7,7 @@
   <script type="text/javascript">
     // Muutujad vue jaoks
     var host = 'http://3.136.97.151:8000'
-    var urlICFPath = host + "{% url 'main:get_icf_path' %}"
+    var urlICFPath = "{% url 'main:get_icf_path' %}"
     var urlICFCalcs = "{% url 'main:get_icf_calcs' %}"
     var urlICFSummary = "{% url 'main:get_icf_summary' %}"
     {#var wiki_artikkel_filter_url = "{% url 'wiki:wiki_artikkel_filter' %}"#}
@@ -18,8 +18,11 @@
 {% block css %}
   <style>
     .verticalColumnHeader {
+      display:flex;
       writing-mode: vertical-rl;
       transform: rotate(180deg);
+      justify-content:center;
+      align-items:center;
     }
   </style>
 {% endblock %}
@@ -34,9 +37,20 @@
       </p>
     </div>
     <div
-        class="w3-row w3-padding-16"
+						class="w3-bar"
+				>
+					<button
+							class="w3-bar-item w3-button tablink"
+							v-for="input in inputs"
+							v-on:click="openTab($event, 'valdkond_' + input.id)"
+					>Valdkond [[ input.id ]] ([[ input.len ]])</button>
+				</div>
+    <div
+        class="w3-row w3-padding-16 w3-border tab"
         v-for="input in inputs"
+        v-bind:style="[(input.id===1) ?  {'display': ''}: {'display': 'none'}]"
         v-bind:key="input.id"
+				v-bind:id="'valdkond_' + input.id"
     >
       <div class="w3-container w3-padding">
         <strong>Valdkond [[ input.id ]]</strong>

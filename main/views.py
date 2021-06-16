@@ -217,7 +217,7 @@ def make_icf_matrix(rfk_set, rows=['d'], columns=['b'], ignore=['s', 'e'], level
             vect_columns = ['TTa'] # kui func või struct piiranguid pole, siis Täpsustamata (TTa)
 
     if max(map(len, vect_columns)) > 4:
-        column_header_class = 'w3-center verticalColumnHeader' # kui veerupealkirjad pikad, siis vertikaalselt
+        column_header_class = 'verticalColumnHeader' # kui veerupealkirjad pikad, siis vertikaalselt
     else:
         column_header_class = 'w3-center'
 
@@ -269,16 +269,17 @@ def make_icf_matrix(rfk_set, rows=['d'], columns=['b'], ignore=['s', 'e'], level
 def get_icf_calcs(request):
     content = request.GET.get('content', '')
     rfk_set = read_content_to_rfk(icf_eng, content)
-    icf_table_html = make_icf_table(rfk_set)
+    # icf_table_html = make_icf_table(rfk_set)
     icf_table_matrix_level1 = make_icf_matrix(rfk_set, level=1)
     icf_table_matrix_level2 = make_icf_matrix(rfk_set, level=2)
     icf_table_matrix_level3 = make_icf_matrix(rfk_set, level=3)
     return JsonResponse(
         {
-            'icf_table_html': icf_table_html,
+            # 'icf_table_html': icf_table_html,
             'icf_table_matrix_level1': icf_table_matrix_level1,
             'icf_table_matrix_level2': icf_table_matrix_level2,
             'icf_table_matrix_level3': icf_table_matrix_level3,
+            'rfk_codeset_count': len(rfk_set.keys())
         },
         safe=False
     )

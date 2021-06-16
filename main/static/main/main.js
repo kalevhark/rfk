@@ -11,9 +11,9 @@ var mainVM = new Vue({
         resultSummary3: '',
         answer: 'Pole midagi analüüsida...',
         inputs: [
-            {id: 1, question: '', result1: '', result2: '', result3: ''},
-            {id: 2, question: '', result1: '', result2: '', result3: ''},
-            {id: 3, question: '', result1: '', result2: '', result3: ''},
+            {id: 1, question: '', result1: '', result2: '', result3: '', len: 0},
+            {id: 2, question: '', result1: '', result2: '', result3: '', len: 0},
+            {id: 3, question: '', result1: '', result2: '', result3: '', len: 0},
         ]
     },
     watch: {
@@ -51,7 +51,21 @@ var mainVM = new Vue({
         this.debouncedGetRFKSummary = _.debounce(this.getRFKSummary, 500)
     },
     methods: {
-          getRFKPath: function () {
+        openTab: function (evt, tabName) {
+            // console.log(tabName)
+            var i, x, tablinks;
+            x = document.getElementsByClassName("tab");
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablink");
+            for (i = 0; i < x.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" w3-red", "");
+            }
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " w3-red";
+        },
+        getRFKPath: function () {
             if (this.rfkCode.length < 1) {
             this.rfkPath = ''
             return
@@ -80,6 +94,7 @@ var mainVM = new Vue({
                     this.inputs[property].result1 = ''
                     this.inputs[property].result2 = ''
                     this.inputs[property].result3 = ''
+                    this.inputs[property].len = 0
                 }
                 return
             }
@@ -92,6 +107,7 @@ var mainVM = new Vue({
                             vm.inputs[property].result1 = response.data.icf_table_matrix_level1
                             vm.inputs[property].result2 = response.data.icf_table_matrix_level2
                             vm.inputs[property].result3 = response.data.icf_table_matrix_level3
+                            vm.inputs[property].len = response.data.rfk_codeset_count
                             var b = vm.inputs
                             var arr_question = Object.keys( b ).map( function ( key ) { return b[key].question });
                             vm.answer = arr_question.join(' ')
@@ -101,12 +117,14 @@ var mainVM = new Vue({
                             vm.inputs[property].result1 = ''
                             vm.inputs[property].result2 = ''
                             vm.inputs[property].result3 = ''
+                            this.inputs[property].len = 0
                             vm.answer = 'Error! Could not reach the API. ' + error
                         })
                     } else {
                         vm.inputs[property].result1 = ''
                         vm.inputs[property].result2 = ''
                         vm.inputs[property].result3 = ''
+                        this.inputs[property].len = 0
                     }
             }
         },
