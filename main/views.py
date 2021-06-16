@@ -1,5 +1,6 @@
 from collections import Counter, deque
 import csv
+import math
 import re
 
 from django.conf import settings
@@ -175,10 +176,11 @@ def make_icf_matrix(rfk_set, rows=['d'], columns=['b'], ignore=['s', 'e'], level
             try:
                 parts[part] = [
                     parts[part][0] + rfk_set[code][3],
-                    parts[part][1] + 1
+                    parts[part][1] + 1,
+                    ' + '.join([f'{code}.{rfk_set[code][3]}', parts[part][2]])
                 ]
             except:
-                parts[part] = [rfk_set[code][3], 1]
+                parts[part] = [rfk_set[code][3], 1, f'{code}.{rfk_set[code][3]}']
 
     if level == 0: # võetakse kõik kahekohalised klassifikaatorikoodid (b1, b2, ..., d1, d2 jne)
         vect_rows = [
@@ -243,25 +245,30 @@ def make_icf_matrix(rfk_set, rows=['d'], columns=['b'], ignore=['s', 'e'], level
     for r in vect_rows:
         row = [td(title=get_icf_path(request=None, code=r))(r)]
         for c in vect_columns:
+            title = ''
             try:
-                score = int(round(
-                    parts[r][0]/parts[r][1] *
-                    parts[c][0]/parts[c][1] /
-                    4
-                    )
+                score = round(
+                    (parts[r][0]/parts[r][1] + parts[c][0]/parts[c][1]) / 2,
+                    1
                 )
+                title = f'({parts[r][2]})/{parts[r][1]} + ({parts[c][2]})/{parts[c][1]} / 2 = {score}'
+                score = int(math.ceil(score))
             except:
                 if c == 'TTa': # kui func/struct t2psustamata, siis ainult d keskmine
                     try:
-                        score = int(round(
-                            parts[r][0] / parts[r][1]
-                        ))
+                        score = round(
+                            parts[r][0] / parts[r][1], 1
+                        )
+                        title = f'({parts[r][2]})/{parts[r][1]} = {score}'
+                        score = int(math.ceil(score))
                     except KeyError:
                         score = ''
                 elif r == 'TTa': # kui tegevus/osalus t2psustamata, siis ainult b/s keskmine
-                    score = int(round(
-                        parts[c][0] / parts[c][1]
-                    ))
+                    score = round(
+                        parts[c][0] / parts[c][1], 1
+                    )
+                    title = f'({parts[c][2]})/{parts[c][1]} = {score}'
+                    score = int(math.ceil(score))
                 else:
                     score = ''
             if score:
@@ -270,10 +277,11 @@ def make_icf_matrix(rfk_set, rows=['d'], columns=['b'], ignore=['s', 'e'], level
                 score_class = ''
             el = str(score)
 
-            row.append(td(class_=f"w3-center {score_class}")(el))
+            row.append(td(class_=f"w3-center {score_class}", title=title)(el))
         trs.append(tr(row))
     return table(border="1", class_="w3-table-all w3-small w3-card-4")(header, trs).render()
 
+# Vue küsib siit andmeid valdkondade jaoks
 def get_icf_calcs(request):
     content = request.GET.get('content', '')
     rfk_set = read_content_to_rfk(icf_eng, content)
@@ -292,6 +300,7 @@ def get_icf_calcs(request):
         safe=False
     )
 
+# Vue küsib siit andmeid kokkuvõtte jaoks
 def get_icf_summary(request):
     content = request.GET.get('content', '')
     rfk_set = read_content_to_rfk(icf_eng, content)

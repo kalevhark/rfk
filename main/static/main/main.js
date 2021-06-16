@@ -11,9 +11,9 @@ var mainVM = new Vue({
         resultSummary3: '',
         answer: 'Pole veel midagi analüüsida...',
         inputs: [
-            {id: 1, question: '', result1: '', result2: '', result3: '', len: 0},
-            {id: 2, question: '', result1: '', result2: '', result3: '', len: 0},
-            {id: 3, question: '', result1: '', result2: '', result3: '', len: 0},
+            {id: 1, category: 'Valdkond 1', question: '', result1: '', result2: '', result3: '', len: 0},
+            {id: 2, category: 'Valdkond 2', question: '', result1: '', result2: '', result3: '', len: 0},
+            {id: 3, category: 'Valdkond 3', question: '', result1: '', result2: '', result3: '', len: 0},
         ]
     },
     watch: {
@@ -144,6 +144,25 @@ var mainVM = new Vue({
                 .catch(function (error) {
                     vm.answer = 'Error! Could not reach the API. ' + error
                 })
+        },
+        makeDemo: function () {
+            this.inputs[0].question = 'b28011.3\n' +
+                'd4104.2\n' +
+                'd4501.3\n' +
+                's6302.3\n' +
+                's4301.3\n' +
+                'd4154.2\n' +
+                'd8451.4\n' +
+                'b4402.2\n' +
+                'b4551.3\n' +
+                'b4552.2\n' +
+                'b28014.2'
+            this.inputs[1].question = 'd4452.3\n' +
+                'd430.3\n' +
+                's6302.3\n' +
+                's4201.3\n' +
+                's4301.3\n' +
+                'b4552.2'
         }
     }
 })

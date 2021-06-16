@@ -10,8 +10,6 @@
     var urlICFPath = "{% url 'main:get_icf_path' %}"
     var urlICFCalcs = "{% url 'main:get_icf_calcs' %}"
     var urlICFSummary = "{% url 'main:get_icf_summary' %}"
-    {#var wiki_artikkel_filter_url = "{% url 'wiki:wiki_artikkel_filter' %}"#}
-    {#var question = "{{ question }}"#}
   </script>
 {% endblock %}
 
@@ -29,6 +27,31 @@
 
 {% block content %}
   <div class="w3-container" id="watch-example">
+
+    <div class="w3-container">
+      <h2>RFK mängunurk</h2>
+      <button onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-black">Mis värk on?</button>
+      <button v-on:click="makeDemo" class="w3-button w3-black">Demo</button>
+
+      <div id="id01" class="w3-modal">
+        <div class="w3-modal-content">
+          <div class="w3-container">
+            <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+            <p>RFK mängunurka saab erinevate valdkondade alla lisada RFK koodide komplekte koos määrajatega.</p>
+            <p>Määrajate alusel grupeeritakse need 1. (nt b2), 2. (nt b230) ja 3. taseme (b230-b249) järgi.</p>
+            <p>Risttabel arvutatakse nii:</p>
+            <ul>
+              <li>leitakse grupi määrajate keskmine nt b230.1 ja b240.2 -> 1,5</li>
+              <li>leitakse rea ja veeru väärtuse keskmine d4=2,5 ja b2=1,5 -> 2,0</li>
+              <li>saadud keskmine ümardatakse üles 2,0 -> 2, 2,2 -> 3 jne</li>
+            </ul>
+            <p>Kokkuvõttes võetakse kõikide valdkondade unikaalsed koodid ja tehakse sama operatsioon nagu valdkonniti</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
     <div class="w3-container">
       <p>
         RFK kood (ilma määrajateta):<br>
@@ -53,13 +76,13 @@
 				v-bind:id="'valdkond_' + input.id"
     >
       <div class="w3-container w3-padding">
-        <strong>Valdkond [[ input.id ]]</strong>
+        <strong>[[ input.category ]]</strong>
       </div>
       <div class="w3-col l1">
         <div class="w3-container">
           <textarea
                   v-model="input.question"
-                  placeholder="Siia kirjuta või kleebi RFK koodid koos määrajatega"
+                  placeholder="Siia kirjuta või kleebi RFK koodid koos määrajatega (e ja s koode ignoreeritakse)"
                   rows="10"
                   cols="10"
           ></textarea>
