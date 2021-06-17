@@ -163,6 +163,30 @@ def make_icf_table(rfk_set):
     icf_table_html = table(trs)
     return icf_table_html.render()
 
+def calc_score(row_code, col_code, method=1):
+    if method == 1: # keskmiste meetod
+        score = round(
+            (
+                (row_code[0] / row_code[1] if row_code else 1) +
+                (col_code[0] / col_code[1] if col_code else 1)
+            ) /
+            2 if all([row_code, col_code]) else 1,
+            1
+        )
+        title = f'(({row_code[2]})/{row_code[1]} + ({col_code[2]})/{col_code[1]}) / 2 = {score}'
+    elif method == 2: # ruutkeskmine meetod
+        score = (row_code[0] / row_code[1] if row_code else 0)**2 + (col_code[0] / col_code[1] if col_code else 0)**2
+        score = round(
+            math.sqrt(score/2) if all([row_code, col_code]) else math.sqrt(score),
+            1
+        )
+        title = f'sqrt(({row_code[2]})/{row_code[1]} * ({col_code[2]})/{col_code[1]}) = {score}'
+    elif method == 3:  # skaala/protsentide meetod
+        pass
+    # score = int(math.ceil(score))
+    score = int(score)
+    return score, title
+
 def make_icf_matrix(rfk_set, rows=['d'], columns=['b'], ignore=['s', 'e'], level=1):
     parts = dict()
     for code in rfk_set:
@@ -247,28 +271,31 @@ def make_icf_matrix(rfk_set, rows=['d'], columns=['b'], ignore=['s', 'e'], level
         for c in vect_columns:
             title = ''
             try:
-                score = round(
-                    (parts[r][0]/parts[r][1] + parts[c][0]/parts[c][1]) / 2,
-                    1
-                )
-                title = f'({parts[r][2]})/{parts[r][1]} + ({parts[c][2]})/{parts[c][1]} / 2 = {score}'
-                score = int(math.ceil(score))
+                score, title = calc_score(parts[r], parts[c], method=1)
+                # score = round(
+                #     (parts[r][0]/parts[r][1] + parts[c][0]/parts[c][1]) / 2,
+                #     1
+                # )
+                # title = f'({parts[r][2]})/{parts[r][1]} + ({parts[c][2]})/{parts[c][1]} / 2 = {score}'
+                # score = int(math.ceil(score))
             except:
                 if c == 'TTa': # kui func/struct t2psustamata, siis ainult d keskmine
                     try:
-                        score = round(
-                            parts[r][0] / parts[r][1], 1
-                        )
-                        title = f'({parts[r][2]})/{parts[r][1]} = {score}'
-                        score = int(math.ceil(score))
+                        score, title = calc_score(parts[r], None, method=1)
+                        # score = round(
+                        #     parts[r][0] / parts[r][1], 1
+                        # )
+                        # title = f'({parts[r][2]})/{parts[r][1]} = {score}'
+                        # score = int(math.ceil(score))
                     except KeyError:
                         score = ''
                 elif r == 'TTa': # kui tegevus/osalus t2psustamata, siis ainult b/s keskmine
-                    score = round(
-                        parts[c][0] / parts[c][1], 1
-                    )
-                    title = f'({parts[c][2]})/{parts[c][1]} = {score}'
-                    score = int(math.ceil(score))
+                    score, title = calc_score(None, parts[c], method=1)
+                    # score = round(
+                    #     parts[c][0] / parts[c][1], 1
+                    # )
+                    # title = f'({parts[c][2]})/{parts[c][1]} = {score}'
+                    # score = int(math.ceil(score))
                 else:
                     score = ''
             if score:

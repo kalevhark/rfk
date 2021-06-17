@@ -40,10 +40,18 @@
             <p>RFK mängunurka saab erinevate valdkondade alla lisada RFK koodide komplekte koos määrajatega.</p>
             <p>Määrajate alusel grupeeritakse need 1. (nt b2), 2. (nt b230) ja 3. taseme (b230-b249) järgi.</p>
             <p>Risttabel arvutatakse nii:</p>
+            <p>Meetod 1 - keskmiste meetod:</p>
             <ul>
-              <li>leitakse grupi määrajate keskmine nt b230.1 ja b240.2 -> 1,5</li>
-              <li>leitakse rea ja veeru väärtuse keskmine d4=2,5 ja b2=1,5 -> 2,0</li>
-              <li>saadud keskmine ümardatakse üles 2,0 -> 2, 2,2 -> 3 jne</li>
+              <li>leitakse grupi määrajate keskmine nt b230.1 ja b240.2 -> b2 1,5</li>
+              <li>leitakse rea ja veeru väärtuse keskmiste summa keskmine d4=2,5 ja b2=1,5 -> 2,0</li>
+              <li>saadud keskmine ümardatakse täisarvuks 2,2 -> 2, 2,5 -> 3 jne</li>
+            </ul>
+            <p>Meetod 2 - ruutkeskmise meetod: (tegemisel)</p>
+            <ul>
+              <li>leitakse grupi määrajate keskmine nt b230.1 ja b240.2 -> b2 1,5</li>
+              <li>leitakse rea ja veeru väärtuse keskmiste korrutis d4=2,5 ja b2=1,5 -> 3,75</li>
+              <li>korrutisest võetakse ruutjuur ja ümardatakse täisarvuks 3,75 -> 2, 4 -> 2 jne</li>
+              <li>vt https://et.wikipedia.org/wiki/Ruutkeskmine</li>
             </ul>
             <p>Kokkuvõttes võetakse kõikide valdkondade unikaalsed koodid ja tehakse sama operatsioon nagu valdkonniti</p>
           </div>
@@ -55,7 +63,10 @@
     <div class="w3-container">
       <p>
         RFK kood (ilma määrajateta):<br>
-        <input v-model="rfkCode">
+        <input
+                v-model="rfkCode"
+                placeholder="näiteks b230"
+        >
         [[ rfkPath ]]
       </p>
     </div>

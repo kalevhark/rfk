@@ -146,6 +146,7 @@ var mainVM = new Vue({
                 })
         },
         makeDemo: function () {
+            this.rfkCode = 'b230'
             this.inputs[0].question = 'b28011.3\n' +
                 'd4104.2\n' +
                 'd4501.3\n' +
