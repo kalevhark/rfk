@@ -29,10 +29,15 @@
   <div class="w3-container" id="watch-example">
 
     <div class="w3-container">
-      <h2>RFK mängunurk</h2>
-      <button onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-black">Mis värk on?</button>
-      <button v-on:click="makeDemo" class="w3-button w3-black">Demo</button>
-
+      <div class="w3-row w3-padding-16">
+        <div class="w3-col l3">
+          <h2>RFK mängunurk</h2>
+        </div>
+        <div class="w3-col l9">
+          <button onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-black">Mis värk on?</button>
+          <button v-on:click="makeDemo" class="w3-button w3-black">Demo</button>
+        </div>
+      </div>
       <div id="id01" class="w3-modal">
         <div class="w3-modal-content">
           <div class="w3-container">

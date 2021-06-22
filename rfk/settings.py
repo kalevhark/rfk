@@ -10,17 +10,24 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+import configparser
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
+# Access configparser to load variable values
+config = configparser.SafeConfigParser(
+    allow_no_value=True,
+    interpolation=None
+)
+config.read(BASE_DIR / 'rfk' / 'settings.ini')
+
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-d)6y2(cv41jc12djsrb%o1@44i)-t21$v7-+d#3_n3od=3vqsv'
+SECRET_KEY = config['django']['SECRET_KEY']
+# SECRET_KEY = 'django-insecure-d)6y2(cv41jc12djsrb%o1@44i)-t21$v7-+d#3_n3od=3vqsv'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
