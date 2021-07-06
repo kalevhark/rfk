@@ -30,10 +30,8 @@
 
     <div class="w3-container">
       <div class="w3-row w3-padding-16">
-        <div class="w3-col l3">
-          <h2>RFK mängunurk</h2>
-        </div>
-        <div class="w3-col l9">
+        <div class="w3-col l6">
+          <button v-on:click="makeDemo" class="w3-button">RFK mängunurk</button>
           <button onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-black">Mis värk on?</button>
           <button v-on:click="makeDemo" class="w3-button w3-black">Demo</button>
         </div>
@@ -44,19 +42,34 @@
             <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-display-topright">&times;</span>
             <p>RFK mängunurka saab erinevate valdkondade alla lisada RFK koodide komplekte koos määrajatega.</p>
             <p>Määrajate alusel grupeeritakse need 1. (nt b2), 2. (nt b230) ja 3. taseme (b230-b249) järgi.</p>
+            <p>s- ja e-koode ning koode määrajatega 8 (täpsustamata - Tta) ja 9 (ei ole rakendatav) ignoreeritakse</p>
             <p>Risttabel arvutatakse nii:</p>
-            <p>Meetod 1 - keskmiste meetod:</p>
+            <p>Meetod 1 - aritmeetiliste keskmiste meetod:</p>
             <ul>
-              <li>leitakse grupi määrajate keskmine nt b230.1 ja b240.2 -> b2 1,5</li>
-              <li>leitakse rea ja veeru väärtuse keskmiste summa keskmine d4=2,5 ja b2=1,5 -> 2,0</li>
-              <li>saadud keskmine ümardatakse täisarvuks 2,2 -> 2, 2,5 -> 3 jne</li>
+              <li>rea ja veeru väärtused leitakse grupi määrajate aritmeetiline keskmisena nt b230.1 ja b240.2 -> b2 1,5</li>
+              <li>leitakse rea ja veeru väärtuse aritmeetiline keskmine d4=2,5 ja b2=1,5 -> 2,0</li>
+              <li>saadud arv ümardatakse täisarvuks 2,2 -> 2, 2,5 -> 3 jne</li>
             </ul>
-            <p>Meetod 2 - ruutkeskmise meetod: (tegemisel)</p>
+            <p>Meetod 2 - ruutkeskmise meetod:</p>
             <ul>
-              <li>leitakse grupi määrajate keskmine nt b230.1 ja b240.2 -> b2 1,5</li>
-              <li>leitakse rea ja veeru väärtuse keskmiste korrutis d4=2,5 ja b2=1,5 -> 3,75</li>
-              <li>korrutisest võetakse ruutjuur ja ümardatakse täisarvuks 3,75 -> 2, 4 -> 2 jne</li>
+              <li>rea ja veeru väärtused leitakse grupi määrajate ruutkeskmisena nt b230.1 ja b240.2 -> b2 1,58</li>
+              <li>leitakse rea ja veeru väärtuste aritmeetiline keskmine d4=2 ja b2=1,58 -> 1,80</li>
+              <li>tulemusest võetakse ruutjuur ja ümardatakse täisarvuks 1,80 -> 2, 2,2 -> 2, 2,5 -> 3 jne</li>
               <li>vt https://et.wikipedia.org/wiki/Ruutkeskmine</li>
+            </ul>
+            <p>Meetod 3 - geomeetriliste keskmiste meetod (0->1):</p>
+            <ul>
+              <li>NB! 0-määrajad saavad väärtuseks 1</li>
+              <li>rea ja veeru väärtused leitakse grupi määrajate geomeetriline keskmisena nt b230.1 ja b240.2 -> b2 1,41</li>
+              <li>leitakse rea ja veeru väärtuse keskmiste summa keskmine d4=2,5 ja b2=1,41 -> 1,68</li>
+              <li>saadud keskmine ümardatakse täisarvuks 1,68 -> 2, 2,2 -> 2, 2,5 -> 3 jne</li>
+            </ul>
+            <p>Meetod 4 - geomeetriliste keskmiste meetod (0-määrajatega koode ignoreeritakse):</p>
+            <ul>
+              <li>NB! 0-määrajatega koode ignoreeritakse</li>
+              <li>rea ja veeru väärtused leitakse grupi määrajate geomeetriline keskmisena nt b230.1 ja b240.2 -> b2 1,41</li>
+              <li>leitakse rea ja veeru väärtuse keskmiste summa keskmine d4=2,5 ja b2=1,41 -> 1,68</li>
+              <li>saadud keskmine ümardatakse täisarvuks 1,68 -> 2, 2,2 -> 2, 2,5 -> 3 jne</li>
             </ul>
             <p>Kokkuvõttes võetakse kõikide valdkondade unikaalsed koodid ja tehakse sama operatsioon nagu valdkonniti</p>
           </div>
@@ -75,15 +88,23 @@
         [[ rfkPath ]]
       </p>
     </div>
-    <div
-						class="w3-bar"
-				>
-					<button
-							class="w3-bar-item w3-button tablink"
-							v-for="input in inputs"
-							v-on:click="openTab($event, 'valdkond_' + input.id)"
-					>Valdkond [[ input.id ]] ([[ input.len ]])</button>
-				</div>
+    <div class="w3-container">
+      <select v-model="selected">
+        <option v-for="option in options" v-bind:value="option.value">
+          [[ option.text ]]
+        </option>
+      </select>
+      <span>Meetod: [[ selected ]]</span>
+    </div>
+    <div class="w3-bar">
+      <button
+          class="w3-bar-item w3-button tablink"
+          v-for="input in inputs"
+          v-on:click="openTab($event, 'valdkond_' + input.id)"
+      >
+        Valdkond [[ input.id ]]: [[ input.category ]] <span class="w3-text-red" v-if="input.len">([[ input.len ]])</span>
+      </button>
+    </div>
     <div
         class="w3-row w3-padding-16 w3-border tab"
         v-for="input in inputs"
@@ -109,12 +130,12 @@
           <span v-html="input.result1"></span>
         </div>
       </div>
-      <div class="w3-col l3">
+      <div class="w3-col l4">
         <div class="w3-container">
           <span v-html="input.result2"></span>
         </div>
       </div>
-      <div class="w3-col l3">
+      <div class="w3-col l4">
         <div class="w3-container">
           <span v-html="input.result3"></span>
         </div>
@@ -130,10 +151,15 @@
       <div class="w3-col l3 w3-container">
         <span v-html="resultSummary0"></span>
       </div>
-      <div class="w3-col l3 w3-container">
-        <span v-html="resultSummary2"></span>
+      <div class="w3-col l4 w3-container">
+        <div class="w3-row">
+          <span v-html="resultSummary2"></span>
+        </div>
+        <div class="w3-row w3-padding-16">
+          <span v-html="resultVerbose2"></span>
+        </div>
       </div>
-      <div class="w3-col l3 w3-container">
+      <div class="w3-col l4 w3-container">
         <span v-html="resultSummary3"></span>
       </div>
     </div>
@@ -146,5 +172,5 @@
 {% endblock %}
 
 {% block javascript %}
-  <script src="{% static 'main/main.js'%}?ver=2021.06.13"></script>
+  <script src="{% static 'main/main.js'%}?ver=2021.07.06"></script>
 {% endblock %}

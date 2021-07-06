@@ -4,16 +4,26 @@ var mainVM = new Vue({
     data: {
         rfkCode: '',
         rfkPath: '',
+        selected: 1,
+        options: [
+          { text: 'Aritmeetiline keskmine', value: 1 },
+          { text: 'Ruutkeskmine', value: 2 },
+          { text: 'Geomeetriline keskmine (0-määraja->1)', value: 3 },
+          { text: 'Geomeetriline keskmine (0-määrajaid ignoreeritakse)', value: 4 },
+        ],
         rfkSummary: '',
         resultSummary0: '',
         // resultSummary1: '',
         resultSummary2: '',
         resultSummary3: '',
+        resultVerbose2: '',
         answer: 'Pole veel midagi analüüsida...',
         inputs: [
-            {id: 1, category: 'Valdkond 1', question: '', result1: '', result2: '', result3: '', len: 0},
-            {id: 2, category: 'Valdkond 2', question: '', result1: '', result2: '', result3: '', len: 0},
-            {id: 3, category: 'Valdkond 3', question: '', result1: '', result2: '', result3: '', len: 0},
+            {id: 1, category: 'Liikumine', question: '', result1: '', result2: '', result3: '', len: 0},
+            {id: 2, category: 'Nägemine', question: '', result1: '', result2: '', result3: '', len: 0},
+            {id: 3, category: 'Kuulmine', question: '', result1: '', result2: '', result3: '', len: 0},
+            {id: 4, category: 'Keel ja kõne', question: '', result1: '', result2: '', result3: '', len: 0},
+            {id: 5, category: 'Vaimne', question: '', result1: '', result2: '', result3: '', len: 0},
         ]
     },
     watch: {
@@ -37,6 +47,12 @@ var mainVM = new Vue({
                 this.debouncedGetRFKSummary()
             },
         },
+        selected: {
+            handler(newQuestion, oldQuestion) {
+                this.getTables()
+                this.getRFKSummary()
+            },
+        }
     },
     created: function () {
         // _.debounce is a function provided by lodash to limit how
@@ -94,6 +110,7 @@ var mainVM = new Vue({
                 this.resultSummary1 = ''
                 this.resultSummary2 = ''
                 this.resultSummary3 = ''
+                this.resultVerbose2 = ''
                 for (const property in this.inputs) {
                     this.inputs[property].result1 = ''
                     this.inputs[property].result2 = ''
@@ -106,7 +123,12 @@ var mainVM = new Vue({
             var vm = this
             for (const property in vm.inputs) {
                 if (vm.inputs[property].question.length > 3) {
-                    axios.get(urlICFCalcs + '?content=' + JSON.stringify(vm.inputs[property].question))
+                    params = {
+                        method: vm.selected,
+                        content: JSON.stringify(vm.inputs[property].question)
+                    }
+                    // var querystring = ['?method=' + method, 'content=' + content].join('&')
+                    axios.get(urlICFCalcs, {params: params}) // '?content=' + JSON.stringify(vm.inputs[property].question))
                         .then(function (response) {
                             vm.inputs[property].result1 = response.data.icf_table_matrix_level1
                             vm.inputs[property].result2 = response.data.icf_table_matrix_level2
@@ -134,12 +156,16 @@ var mainVM = new Vue({
         },
         getRFKSummary: function () {
             var vm = this
-            console.log(vm.rfkSummary)
-            axios.get(urlICFSummary + '?content=' + JSON.stringify(vm.rfkSummary))
+            params = {
+                method: vm.selected,
+                content: JSON.stringify(vm.rfkSummary)
+            }
+            axios.get(urlICFSummary, {params: params})
                 .then(function (response) {
                     vm.resultSummary0 = response.data.icf_table_matrix_level0
                     vm.resultSummary2 = response.data.icf_table_matrix_level2
                     vm.resultSummary3 = response.data.icf_table_matrix_level3
+                    vm.resultVerbose2 = response.data.icf_table_verbose_level2
                 })
                 .catch(function (error) {
                     vm.answer = 'Error! Could not reach the API. ' + error

@@ -9,10 +9,12 @@ if __name__ != '__main__':
     from django.shortcuts import render
     from pyhtml import *
 
-    RFK_REGEX = r"[bdes](?:\d{3,}\.\d+)"
     STATIC_DIR = settings.BASE_DIR / 'main' / 'static' / 'main'
-    SCRORE_CLASSES = ['', 'w3-pale-yellow', 'w3-yellow', 'w3-pale-red', 'w3-red']
-    SCRORE_SCALE = [5, 25, 50, 95, 100]
+
+RFK_REGEX = r"[bdes](?:\d{3,}\.\d+)"
+SCORE_CLASSES = ['', 'w3-pale-yellow', 'w3-yellow', 'w3-pale-red', 'w3-red']
+SCORE_SCALE = [5, 25, 50, 95, 100]
+ROWS, COLUMNS, IGNORE = (('d'), ('b'), ('s', 'e')) # Milliseid koodigruppe ja kus arvesse v6tta
 
 #
 # Kooditabelite import ja töötlus
@@ -62,8 +64,8 @@ def icf_add_translations(icf_eng_set, icf_est_set):
         except:
             # print(key)
             continue
-        icf_eng_set[key]['Translated_title'] = icf_est_set[key]['Kirjeldus']
-        icf_eng_set[key]['Translated_description'] = icf_est_set[key]['Selgitus']
+        icf_eng_set[key]['Translated_title'] = icf_est_set[key]['Kirjeldus'].strip()
+        icf_eng_set[key]['Translated_description'] = icf_est_set[key]['Selgitus'].strip()
         icf_eng_set[key]['Translated_inclusions'] = icf_est_set[key]['KA']
         icf_eng_set[key]['Translated_exclusions'] = icf_est_set[key]['VA']
     # Kontrollime settide sisalduvust
@@ -94,11 +96,23 @@ def get_icf_group(code):
 def get_rfk_title(code):
     if code[0] in icf_eng.keys():
         try:
-            return icf_eng[code]['Translated_title']
+            title = icf_eng[code]['Translated_title']
+            if not title and icf_eng[code]['parent']:
+                title = get_rfk_title(icf_eng[code]['parent'])
         except KeyError: # ilmselt osaline kood nt b23
-            return ''
+            title = ''
     else:
-        return 'Täpsustamata'
+        title = 'Täpsustamata'
+    return title
+
+def get_rfk_qualifier(code, score):
+    qualifiers = ['ei ole probleemi', 'kerge probleem', 'mõõdukas probleem', 'raske probleem', 'täielik probleem']
+    # qualifier = code[1]
+    try:
+        qualifier = qualifiers[score]
+    except IndexError:
+        qualifier = score
+    return qualifier
 
 def get_icf_path(request=None, code=None):
     if request:
@@ -136,13 +150,17 @@ def index(request):
     )
 
 # Loeb textareast kõik RFK koodid koos määrajatega listi ja eraldab komponentideks
-def read_content_to_rfk(icf_eng_set, content):
+def read_content_to_rfk(icf_eng_set, content, method=1):
     data = re.findall(RFK_REGEX, content)
+    if method == 4: # 0-määrajatega koode ei arvestata
+        start = 1
+    else:
+        start = 0
     codeset = dict()
     for el in data:
         code = el.strip().split('.')
         if code[0] in icf_eng_set.keys():
-            if code[1][0] in ['0', '1', '2', '3', '4']:
+            if code[1][0] in [str(m22raja) for m22raja in range(start, 5)]:
                 codeset[code[0]] = (
                     code[0][:2], # 1. taseme kood d4
                     code[0][:4], # 2. taseme kood d410
@@ -172,16 +190,7 @@ def calc_mean(rfk_set, parts, part, code, method=1):
             ]
         except:
             parts[part] = [rfk_set[code][3], 1, f'{code}.{rfk_set[code][3]}']
-    elif method == 2:  # geomeetriline keskmine
-        try:
-            parts[part] = [
-                parts[part][0] * (rfk_set[code][3] if rfk_set[code][3]>0 else 1),
-                parts[part][1] + 1,
-                ' * '.join([f'{code}.{rfk_set[code][3]}', parts[part][2]])
-            ]
-        except:
-            parts[part] = [rfk_set[code][3], 1, f'{code}.{rfk_set[code][3]}']
-    elif method == 3:  # ruutkeskmine
+    elif method == 2:  # ruutkeskmine
         try:
             parts[part] = [
                 parts[part][0] + (rfk_set[code][3] ** 2),
@@ -190,6 +199,25 @@ def calc_mean(rfk_set, parts, part, code, method=1):
             ]
         except:
             parts[part] = [rfk_set[code][3] ** 2, 1, f'{code}.{rfk_set[code][3]} ^ 2']
+    elif method == 3:  # geomeetriline keskmine NB! 0 -> 1
+        try:
+            parts[part] = [
+                parts[part][0] * (rfk_set[code][3] if rfk_set[code][3]>0 else 1),
+                parts[part][1] + 1,
+                ' * '.join([f'{code}.{rfk_set[code][3]}', parts[part][2]])
+            ]
+        except:
+            parts[part] = [rfk_set[code][3] if rfk_set[code][3]>0 else 1, 1, f'{code}.{rfk_set[code][3]}']
+    elif method == 4:  # geomeetriline keskmine NB! ignoreeritakse 0-väärtusi
+        if rfk_set[code][3] > 0:
+            try:
+                parts[part] = [
+                    parts[part][0] * rfk_set[code][3],
+                    parts[part][1] + 1,
+                    ' * '.join([f'{code}.{rfk_set[code][3]}', parts[part][2]])
+                ]
+            except:
+                parts[part] = [rfk_set[code][3], 1, f'{code}.{rfk_set[code][3]}']
     return parts
 
 def calc_score(row_code, col_code, method=1):
@@ -205,18 +233,7 @@ def calc_score(row_code, col_code, method=1):
         row_string = f'{row_code[2]}) / {row_code[1]}' if row_code else '0'
         col_string = f'{col_code[2]}) / {col_code[1]}' if col_code else '0'
         title = f'(({row_string}) + ({col_string})) / {mean_count} = {score}'
-    elif method == 2: # geomeetriline keskmine
-        row_score = row_code[0] ** (1/row_code[1]) if row_code else 1
-        col_score = col_code[0] ** (1/col_code[1]) if col_code else 1
-        mean_count = 2 if all([row_code, col_code]) else 1
-        score = round(
-            (row_score * col_score) ** (1/mean_count),
-            1
-        )
-        row_string = f'{row_code[2]}) ** 1/{row_code[1]}' if row_code else '1'
-        col_string = f'{col_code[2]}) ** 1/{col_code[1]}' if col_code else '1'
-        title = f'(({row_string} * ({col_string}) ** 1/{mean_count} = {score}'
-    elif method == 3: # ruutkeskmine
+    elif method == 2: # ruutkeskmine
         row_score = math.sqrt(row_code[0] / row_code[1]) if row_code else 0
         col_score = math.sqrt(col_code[0] / col_code[1]) if col_code else 0
         mean_count = 2 if all([row_code, col_code]) else 1
@@ -226,10 +243,32 @@ def calc_score(row_code, col_code, method=1):
             1
         )
         title = f'sqrt((({row_code[2]})/{row_code[1]}) + ({col_code[2]})/{col_code[1]})) / {mean_count}) = {score}'
+    elif method == 3: # geomeetriline keskmine NB! 0 -> 1
+        row_score = row_code[0] ** (1/row_code[1]) if row_code else 1
+        col_score = col_code[0] ** (1/col_code[1]) if col_code else 1
+        mean_count = 2 # if all([row_code, col_code]) else 1
+        score = round(
+            (row_score * col_score) ** (1/mean_count),
+            1
+        )
+        row_string = f'{row_code[2]}) ** 1/{row_code[1]}' if row_code else '1'
+        col_string = f'{col_code[2]}) ** 1/{col_code[1]}' if col_code else '1'
+        title = f'(({row_string} * ({col_string}) ** 1/{mean_count} = {score}'
+    elif method == 4:  # geomeetriline keskmine NB! ignoreeritakse 0-väärtusi
+        row_score = row_code[0] ** (1 / row_code[1]) if row_code else 1
+        col_score = col_code[0] ** (1 / col_code[1]) if col_code else 1
+        mean_count = 2  # if all([row_code, col_code]) else 1
+        score = round(
+            (row_score * col_score) ** (1 / mean_count),
+            1
+        )
+        row_string = f'{row_code[2]}) ** 1/{row_code[1]}' if row_code else '1'
+        col_string = f'{col_code[2]}) ** 1/{col_code[1]}' if col_code else '1'
+        title = f'(({row_string} * ({col_string}) ** 1/{mean_count} = {score}'
     score = int(score)
     return score, title
 
-def make_icf_matrix(rfk_set, rows=['d'], columns=['b'], ignore=['s', 'e'], level=1, method=1):
+def make_icf_matrix(rfk_set, rows=ROWS, columns=COLUMNS, ignore=IGNORE, level=1, method=1):
     #
     # level=1 kahekohaline nt b2
     # level=2 neljakohaline nt b230
@@ -327,7 +366,7 @@ def make_icf_matrix(rfk_set, rows=['d'], columns=['b'], ignore=['s', 'e'], level
                 else:
                     score = ''
             if score:
-                score_class = SCRORE_CLASSES[score]
+                score_class = SCORE_CLASSES[score]
             else:
                 score_class = ''
             el = str(score)
@@ -336,15 +375,108 @@ def make_icf_matrix(rfk_set, rows=['d'], columns=['b'], ignore=['s', 'e'], level
         trs.append(tr(row))
     return table(border="1", class_="w3-table-all w3-small w3-card-4")(header, trs).render()
 
+def make_icf_verbose(rfk_set, rows=ROWS, columns=COLUMNS, ignore=IGNORE, level=1, method=1):
+    #
+    # level=1 kahekohaline nt b2
+    # level=2 neljakohaline nt b230
+    # level=3 koodigrupp nt b230-b239
+    #
+    # method=1 aritmeetiline keskmine
+    # method=2 geomeetriline keskmine
+    # method=3 ruutkeskmine
+    #
+    parts = dict()
+    for code in rfk_set:
+        if level == 0 or level == 1:
+            part = code[:2] # kahekohaline nt b2
+        elif level == 2:
+            part = code[:4] # neljakohaline nt b230
+        else: # level == 3
+            part = rfk_set[code][2] # koodigrupp nt b230-b239
+        if code[0] not in ignore:
+            parts = calc_mean(rfk_set, parts, part, code, method)
+
+    if level == 0: # võetakse kõik kahekohalised klassifikaatorikoodid (b1, b2, ..., d1, d2 jne)
+        vect_rows = [
+            code
+            for code
+            in icf_eng.keys()
+            if (code[0] in rows and len(code) == 2)
+        ]
+        columns_exist = any((code[0] in columns) for code in rfk_set) # kas on func või strukt koode?
+        if columns_exist:
+            vect_columns = [
+                code
+                for code
+                in icf_eng.keys()
+                if (code[0] in columns and len(code) == 2)
+            ]
+        else:
+            vect_columns = ['TTa']  # kui func või struct piiranguid pole, siis Täpsustamata (TTa)
+    else:
+        vect_rows = [
+            code_block
+            for code_block
+            in parts.keys()
+            if code_block[0] in rows
+            ]
+        if vect_rows:
+            vect_rows.sort()
+        else:
+            vect_rows = ['TTa']  # kui tegevus/osalus piiranguid pole, siis Täpsustamata (TTa)
+
+        vect_columns = [
+            code_block
+            for code_block
+            in parts.keys()
+            if code_block[0] in columns
+            ]
+        if vect_columns:
+            vect_columns.sort()
+        else:
+            vect_columns = ['TTa'] # kui func või struct piiranguid pole, siis Täpsustamata (TTa)
+
+    header = tr(th('kategooria'), th('määraja'))
+    trs = []
+
+    for r in [*vect_rows, *vect_columns]:
+        if method == 1:
+            score = parts[r][0] / parts[r][1]
+        elif method == 2:
+            score = math.sqrt(parts[r][0] / parts[r][1])
+        elif method == 3:
+            score = parts[r][0] ** (1 / parts[r][1]) if parts[r][0] else 0
+        elif method == 4:
+            score = parts[r][0] ** (1 / parts[r][1])
+        else:
+            score = 9
+        score = int(round(score, 1))
+        title = get_rfk_title(r)
+        qualifier = get_rfk_qualifier(code=r, score=score)
+        try:
+            score_class = SCORE_CLASSES[score]
+        except IndexError:
+            score_class = ''
+        print(title, qualifier, f'({r}.{score})') # row = [td(get_rfk_title(r))]
+        row = tr([
+            td(class_=f"{score_class}", title=title)(f'{title[:30]} ({r}.{score})'),
+            td(class_=f"{score_class}", title=title)(f'{qualifier} ({score})')
+        ])
+        trs.append(row)
+    return table(border="1", class_="w3-table-all w3-small w3-card-4")(header, trs).render()
+
 # Vue küsib siit andmeid valdkondade jaoks
 def get_icf_calcs(request):
     content = request.GET.get('content', '')
-    rfk_set = read_content_to_rfk(icf_eng, content)
+    method = int(request.GET.get('method', 1))
+    rfk_set = read_content_to_rfk(icf_eng, content, method)
     # icf_table_html = make_icf_table(rfk_set)
-    method = 1
     icf_table_matrix_level1 = make_icf_matrix(rfk_set, level=1, method=method)
     icf_table_matrix_level2 = make_icf_matrix(rfk_set, level=2, method=method)
     icf_table_matrix_level3 = make_icf_matrix(rfk_set, level=3, method=method)
+    make_icf_verbose(rfk_set, level=1, method=method)
+    make_icf_verbose(rfk_set, level=2, method=method)
+    make_icf_verbose(rfk_set, level=3, method=method)
     return JsonResponse(
         {
             # 'icf_table_html': icf_table_html,
@@ -359,13 +491,15 @@ def get_icf_calcs(request):
 # Vue küsib siit andmeid kokkuvõtte jaoks
 def get_icf_summary(request):
     content = request.GET.get('content', '')
-    rfk_set = read_content_to_rfk(icf_eng, content)
+    method = int(request.GET.get('method', 1))
+    rfk_set = read_content_to_rfk(icf_eng, content, method)
     icf_table_html = make_icf_table(rfk_set)
-    method = 1
     icf_table_matrix_level0 = make_icf_matrix(rfk_set, level=0, method=method)
     icf_table_matrix_level1 = make_icf_matrix(rfk_set, level=1, method=method)
     icf_table_matrix_level2 = make_icf_matrix(rfk_set, level=2, method=method)
     icf_table_matrix_level3 = make_icf_matrix(rfk_set, level=3, method=method)
+
+    icf_table_verbose_level2 = make_icf_verbose(rfk_set, level=2, method=method)
     return JsonResponse(
         {
             'icf_table_html': icf_table_html,
@@ -373,6 +507,7 @@ def get_icf_summary(request):
             'icf_table_matrix_level1': icf_table_matrix_level1,
             'icf_table_matrix_level2': icf_table_matrix_level2,
             'icf_table_matrix_level3': icf_table_matrix_level3,
+            'icf_table_verbose_level2': icf_table_verbose_level2
         },
         safe=False
     )
@@ -385,7 +520,7 @@ def test(method=1):
         'b4553': ('b4', 'b455', 'b450-b469', 2),
     }
     rfk_set_d = {
-        'd4551': ('d4', 'd455', 'd450-b469', 2),
+        'd4551': ('d4', 'd455', 'd450-b469', 0),
         'd4552': ('d4', 'd455', 'd450-b469', 3),
         'd4553': ('d4', 'd455', 'd450-b469', 2),
     }
@@ -426,6 +561,8 @@ def test(method=1):
 
     for r in vect_rows:
         for c in vect_columns:
+            score = ''
+            title = ''
             try:
                 score, title = calc_score(parts[r], parts[c], method=method)
             except:
@@ -433,15 +570,13 @@ def test(method=1):
                     try:
                         score, title = calc_score(parts[r], None, method=method)
                     except KeyError:
-                        score = ''
+                        pass
                 elif r == 'TTa': # kui tegevus/osalus t2psustamata, siis ainult b/s keskmine
                     score, title = calc_score(None, parts[c], method=method)
-                else:
-                    score = ''
             print(score, title)
 
 if __name__ == '__main__':
-    for i in range(1, 4):
+    for i in range(1, 5):
         test(i)
 else:
     icf_eng = ICF_Eng().df
