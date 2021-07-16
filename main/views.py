@@ -440,29 +440,32 @@ def make_icf_verbose(rfk_set, rows=ROWS, columns=COLUMNS, ignore=IGNORE, level=1
     trs = []
 
     for r in [*vect_rows, *vect_columns]:
-        if method == 1:
-            score = parts[r][0] / parts[r][1]
-        elif method == 2:
-            score = math.sqrt(parts[r][0] / parts[r][1])
-        elif method == 3:
-            score = parts[r][0] ** (1 / parts[r][1]) if parts[r][0] else 0
-        elif method == 4:
-            score = parts[r][0] ** (1 / parts[r][1])
+        if r == 'TTa':
+            continue
         else:
-            score = 9
-        score = int(round(score, 1))
-        title = get_rfk_title(r)
-        qualifier = get_rfk_qualifier(code=r, score=score)
-        try:
-            score_class = SCORE_CLASSES[score]
-        except IndexError:
-            score_class = ''
-        print(title, qualifier, f'({r}.{score})') # row = [td(get_rfk_title(r))]
-        row = tr([
-            td(class_=f"{score_class}", title=title)(f'{title[:30]} ({r}.{score})'),
-            td(class_=f"{score_class}", title=title)(f'{qualifier} ({score})')
-        ])
-        trs.append(row)
+            if method == 1:
+                score = parts[r][0] / parts[r][1]
+            elif method == 2:
+                score = math.sqrt(parts[r][0] / parts[r][1])
+            elif method == 3:
+                score = parts[r][0] ** (1 / parts[r][1]) if parts[r][0] else 0
+            elif method == 4:
+                score = parts[r][0] ** (1 / parts[r][1])
+            else:
+                score = 9
+            score = int(round(score, 1))
+            title = get_rfk_title(r)
+            qualifier = get_rfk_qualifier(code=r, score=score)
+            try:
+                score_class = SCORE_CLASSES[score]
+            except IndexError:
+                score_class = ''
+            # print(title, qualifier, f'({r}.{score})') # row = [td(get_rfk_title(r))]
+            row = tr([
+                td(class_=f"{score_class}", title=title)(f'{title[:30]} ({r}.{score})'),
+                td(class_=f"{score_class}", title=title)(f'{qualifier} ({score})')
+            ])
+            trs.append(row)
     return table(border="1", class_="w3-table-all w3-small w3-card-4")(header, trs).render()
 
 # Vue küsib siit andmeid valdkondade jaoks
