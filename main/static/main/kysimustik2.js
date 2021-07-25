@@ -167,25 +167,31 @@ var mainVM = new Vue({
   methods: {
     showBodyFunctions: function (disability) {
       let array = disability.basicActivities;
-      return array && Math.max.apply(Math, array.map(function(o) { return o.value; }));
+      return array && Math.max.apply(Math, array.map(function(o) { return o.value; }))>=levelSevere;
     },
     showExtraActivities: function (disability) {
       let array = disability.bodyFunctions;
-      return array && Math.max.apply(Math, array.map(function(o) { return o.value; }));
+      return array && Math.max.apply(Math, array.map(function(o) { return o.value; }))>=levelSevere;
     },
     showExtraQuestion: function (disability) {
-      let arrayBasicActivities = disability.basicActivities;
-      let arrayExtraActivities = disability.extraActivities;
-      return (
-        (
-          arrayBasicActivities &&
-          Math.max.apply(Math, arrayBasicActivities.map(function(o) { return o.value; }))===this.levelExtreme
-        ) ||
-        (
-          arrayExtraActivities &&
-          Math.max.apply(Math, arrayExtraActivities.map(function(o) { return o.value; }))===this.levelExtreme
-        )
-      );
+      if (this.showBodyFunctions(disability)) {
+        let arrayBasicActivities = disability.basicActivities;
+        let arrayExtraActivities = disability.extraActivities;
+        return (
+          (
+            arrayBasicActivities &&
+            Math.max.apply(Math, arrayBasicActivities.map(function (o) {
+              return o.value;
+            })) === this.levelExtreme
+          ) ||
+          (
+            arrayExtraActivities &&
+            Math.max.apply(Math, arrayExtraActivities.map(function (o) {
+              return o.value;
+            })) === this.levelExtreme
+          )
+        );
+      }
     },
     listFullRestrictions: function (disability) {
       let arrayBasicActivities = disability.basicActivities;

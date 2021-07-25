@@ -93,7 +93,7 @@
           </div>
         </div>
         <div class="w3-row">
-          <div v-show="disability.value && showBodyFunctions(disability)>=levelSevere">
+          <div v-show="disability.value && showBodyFunctions(disability)">
             <h5>[[ questions['bodyFunctions'] ]]</h5>
             <div v-for="(bodyFunction, index) in disability.bodyFunctions">
               <div>
@@ -109,7 +109,7 @@
           </div>
         </div>
         <div class="w3-row">
-          <div v-show="disability.value && showBodyFunctions(disability)>=levelSevere && showExtraActivities(disability)>=levelSevere">
+          <div v-show="disability.value && showBodyFunctions(disability) && showExtraActivities(disability)">
             <h5>[[ questions['extraActivities'] ]]</h5>
             <div v-for="(extraActivity, index) in disability.extraActivities">
               <div>
