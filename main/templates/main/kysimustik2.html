@@ -1,0 +1,171 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block title %}{{ block.super }} küsimustiku proto{% endblock %}
+
+{% block src %}
+  <script type="text/javascript">
+    // Muutujad vue jaoks
+    // var host = 'http://3.136.97.151:8000'
+    var levelSevere = {{ levelSevere }}
+    var levelExtreme = {{ levelExtreme }}
+    var urlGetKysimustik2Results = "{% url 'main:get_kysimustik2_results' %}"
+  </script>
+{% endblock %}
+
+{% block css %}
+  <style>
+    .accordion {
+      background-color: #eee;
+      color: #444;
+      cursor: pointer;
+      padding: 18px;
+      width: 100%;
+      border: none;
+      text-align: left;
+      outline: none;
+      font-size: 15px;
+      transition: 0.4s;
+    }
+
+    .active, .accordion:hover {
+      background-color: #ccc;
+    }
+
+    .panel {
+      padding: 0 18px;
+      display: none;
+      background-color: white;
+      overflow: hidden;
+    }
+
+    h5 {
+      font-weight: bold;
+    }
+
+    ul {
+      list-style-type: none;
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+  <div class="w3-container" id="kysimustik2">
+    <h4>[[ questions['disabilities'] ]]</h4>
+    <div
+            class="w3-row w3-margin-bottom"
+            v-for="(disability, index) in disabilities"
+    >
+      <div class="w3-col l1">
+        <div>
+          <input
+            :id="'disability-'+disability.id"
+            type="checkbox"
+            v-model="disability.value"
+          >
+          <label :for="'disability-'+disability.id">
+            [[ disability.text ]]
+          </label>
+        </div>
+        <div class="w3-small" v-show="disability.value">
+            <ul v-if="results">
+              <li v-for="result in results[disability.id]">
+                [[ result.join('.') ]]
+              </li>
+            </ul>
+        </div>
+      </div>
+      <div class="w3-col l7">
+        <div class="w3-row">
+          <div v-show="disability.value">
+            <h5>[[ questions['basicActivities'] ]]</h5>
+            <div v-for="(basicActivity, index) in disability.basicActivities">
+              <div v-if="basicActivity">
+                [[ disability.id ]].[[ basicActivity.id ]] [[ basicActivity.text ]]
+                <select v-model="basicActivity.value">
+                  <option v-for="option in options" v-bind:value="option.value">
+                    [[ option.text ]]
+                  </option>
+                </select>
+                <span>[[ basicActivity.rfk ]].[[ basicActivity.value ]]</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="w3-row">
+          <div v-show="disability.value && showBodyFunctions(disability)>=levelSevere">
+            <h5>[[ questions['bodyFunctions'] ]]</h5>
+            <div v-for="(bodyFunction, index) in disability.bodyFunctions">
+              <div>
+                [[ disability.id ]].[[ bodyFunction.id ]] [[ bodyFunction.text ]]
+                <select v-model="bodyFunction.value">
+                  <option v-for="option in options" v-bind:value="option.value">
+                    [[ option.text ]]
+                  </option>
+                </select>
+                <span>[[ bodyFunction.rfk ]].[[ bodyFunction.value ]]</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="w3-row">
+          <div v-show="disability.value && showBodyFunctions(disability)>=levelSevere && showExtraActivities(disability)>=levelSevere">
+            <h5>[[ questions['extraActivities'] ]]</h5>
+            <div v-for="(extraActivity, index) in disability.extraActivities">
+              <div>
+                [[ disability.id ]].[[ extraActivity.id ]] [[ extraActivity.text ]]
+                <select v-model="extraActivity.value">
+                  <option v-for="option in options" v-bind:value="option.value">
+                    [[ option.text ]]
+                  </option>
+                </select>
+                <span>[[ extraActivity.rfk ]].[[ extraActivity.value ]]</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="w3-row">
+          <div v-show="disability.value && showExtraQuestion(disability)">
+            <h5>[[ questions['extraQuestion'][0] ]]</h5>
+            <ul>
+              <li v-for="(bodyFunction, index) in listFullRestrictions(disability)">
+                [[ bodyFunction.text ]]
+              </li>
+            </ul>
+            <p>[[ questions['extraQuestion'][1] ]]</p>
+            <textarea v-model="disability.extraQuestion" placeholder="siia saab kirjutada pika jutu..."></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button class="accordion w3-small">Tehniline info</button>
+      <div class="panel">
+        <div class="w3-small">
+          <p>[[ results ]]</p>
+          <p>[[ disabilities ]]</p>
+          <p>[[ checkedDisabilities ]]</p>
+        </div>
+      </div>
+  </div>
+{% endblock %}
+
+{% block javascript %}
+  <script src="{% static 'main/kysimustik2.js' %}?ver=2021.07.23"></script>
+
+  <script>
+  // w3 accordion
+  var acc = document.getElementsByClassName("accordion");
+  var i;
+  for (i = 0; i < acc.length; i++) {
+    acc[i].addEventListener("click", function() {
+      this.classList.toggle("active");
+      var panel = this.nextElementSibling;
+      if (panel.style.display === "block") {
+        panel.style.display = "none";
+      } else {
+        panel.style.display = "block";
+      }
+    });
+  }
+  </script>
+{% endblock %}

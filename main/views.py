@@ -1,3 +1,4 @@
+import json
 from collections import Counter, deque
 import csv
 import math
@@ -15,7 +16,18 @@ RFK_REGEX = r"[bdes](?:\d{3,}\.\d+)"
 SCORE_CLASSES = ['', 'w3-pale-yellow', 'w3-yellow', 'w3-pale-red', 'w3-red']
 SCORE_SCALE = [5, 25, 50, 95, 100]
 ROWS, COLUMNS, IGNORE = (('d'), ('b'), ('s', 'e')) # Milliseid koodigruppe ja kus arvesse v6tta
+LEVEL_MILD, LEVEL_MODERATE, LEVEL_SEVERE, LEVEL_EXTREME = range(1, 5) # RFK määrajad
 
+"""
+Terminoloogia:
+Level of functioning                Parallel level of disability
+Body functions and structures       Impairments
+Activities                          Activity limitations
+Participation                       Participation restrictions
+
+polytomous (multiple-level) scale:
+“mild”, “moderate”, “severe” or “extreme"
+"""
 #
 # Kooditabelite import ja töötlus
 #
@@ -577,6 +589,53 @@ def test(method=1):
                 elif r == 'TTa': # kui tegevus/osalus t2psustamata, siis ainult b/s keskmine
                     score, title = calc_score(None, parts[c], method=method)
             print(score, title)
+
+#
+# Küsimustiku vaade ver 1
+#
+def kysimustik1(request):
+    return render(
+        request,
+        'main/kysimustik1.html',
+        {}
+    )
+
+#
+# Küsimustiku vaade ver 2
+#
+def kysimustik2(request):
+    context = {
+        'levelSevere': LEVEL_SEVERE,
+        'levelExtreme': LEVEL_EXTREME
+    }
+    return render(
+        request,
+        'main/kysimustik2.html',
+        context
+    )
+
+def get_kysimustik2_results(request):
+    content = request.GET.get('content', '')
+    categories = json.loads(content)
+    rfk_sets = dict()
+    for category in categories:
+        if category['value']:
+            rfk_sets[category['id']] = [(activity['rfk'], activity['value']) for activity in category['basicActivities']]
+            if max([activity['value'] for activity in category['basicActivities']]) >= LEVEL_SEVERE:
+                rfk_sets[category['id']].extend(
+                    [(activity['rfk'], activity['value']) for activity in category['bodyFunctions']]
+                )
+                if max([bodyFunction['value'] for bodyFunction in category['bodyFunctions']]) >= LEVEL_SEVERE:
+                    rfk_sets[category['id']].extend(
+                        [(activity['rfk'], activity['value']) for activity in category['extraActivities']]
+                    )
+    print(rfk_sets)
+    return JsonResponse(
+        {
+            'rfk_sets': rfk_sets
+        },
+        safe=False
+    )
 
 if __name__ == '__main__':
     for i in range(1, 5):
