@@ -591,16 +591,6 @@ def test(method=1):
             print(score, title)
 
 #
-# Küsimustiku vaade ver 1
-#
-def kysimustik1(request):
-    return render(
-        request,
-        'main/kysimustik1.html',
-        {}
-    )
-
-#
 # Küsimustiku vaade ver 2
 #
 def kysimustik2(request):

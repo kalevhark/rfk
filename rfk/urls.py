@@ -21,7 +21,6 @@ from main import views
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('kysimustik1/', views.kysimustik1, name='kysimustik1'),
     path('kysimustik2/', views.kysimustik2, name='kysimustik2'),
     path('main/', include('main.urls')),
     path('admin/', admin.site.urls),
