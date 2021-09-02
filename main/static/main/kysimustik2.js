@@ -4,19 +4,28 @@ var mainVM = new Vue({
   data: {
     levelSevere: 3,
     levelExtreme: 4,
-    options: [
-      { text: 'Pole piirangut', value: 0 },
-      { text: 'Kerge piirang', value: 1 },
-      { text: 'Mõõdukas piirang', value: 2 },
-      { text: 'Raske piirang', value: 3 },
-      { text: 'Täielik piirang', value: 4 },
-    ],
+    options: {
+      'restrictions': [
+        { text: 'Pole piirangut', value: 0 },
+        { text: 'Kerge piirang', value: 1 },
+        { text: 'Mõõdukas piirang', value: 2 },
+        { text: 'Raske piirang', value: 3 },
+        { text: 'Täielik piirang', value: 4 },
+      ],
+      'impairments': [
+        { text: 'Pole häiret', value: 0 },
+        { text: 'Kerge häire', value: 1 },
+        { text: 'Mõõdukas häire', value: 2 },
+        { text: 'Raske häire', value: 3 },
+        { text: 'Täielik häire', value: 4 },
+      ],
+    },
     questions: {
       disabilities: 'Millise funktsioonihäirega puude raskusastet taotlete?',
-      basicActivities: 'Milles piirang peamiselt avaldub?',
-      bodyFunctions: 'Mis on piirangu peamine põhjus?',
-      extraActivities: 'Palun täpsustage, kas piirang esineb ka:',
-      extraQuestion: ['Märkisite täieliku piirangu valdkondades:', 'palun täpsustage']
+      basicActivities:  ['Märkiste probleemi valdkonnas', 'Millistes tegevustes see peamiselt avaldub?'],
+      bodyFunctions: ['Märkisite raske või täieliku piirangu valdkondades:', 'Mis on piirangu(te) peamine põhjus?'],
+      extraActivities: 'Palun täpsustage, kuidas saate hakkame järgmiste tegevustega:',
+      extraQuestion: ['Märkisite täieliku piirangu tegevustes:', 'palun täpsustage, kuidas see avaldub']
     },
     disabilities: [
       {
@@ -192,6 +201,13 @@ var mainVM = new Vue({
           )
         );
       }
+    },
+    listSevereRestrictions: function (disability) {
+      // let arrayBasicActivities = disability.basicActivities;
+      // let arrayExtraActivities = disability.extraActivities;
+      // let array = arrayBasicActivities ? arrayBasicActivities.concat(arrayExtraActivities) : arrayExtraActivities;
+      let array = disability.basicActivities;
+      return array && array.filter(basicActivity => basicActivity.value >= this.levelSevere);
     },
     listFullRestrictions: function (disability) {
       let arrayBasicActivities = disability.basicActivities;

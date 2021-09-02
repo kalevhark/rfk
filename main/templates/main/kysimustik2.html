@@ -78,12 +78,12 @@
       <div class="w3-col l7">
         <div class="w3-row">
           <div v-show="disability.value">
-            <h5>[[ questions['basicActivities'] ]]</h5>
+            <h5>[[ questions['basicActivities'][0] ]] [[ disability.text ]]. [[ questions['basicActivities'][1] ]]</h5>
             <div v-for="(basicActivity, index) in disability.basicActivities">
               <div v-if="basicActivity">
                 [[ disability.id ]].[[ basicActivity.id ]] [[ basicActivity.text ]]
                 <select v-model="basicActivity.value">
-                  <option v-for="option in options" v-bind:value="option.value">
+                  <option v-for="option in options.restrictions" v-bind:value="option.value">
                     [[ option.text ]]
                   </option>
                 </select>
@@ -94,12 +94,18 @@
         </div>
         <div class="w3-row">
           <div v-show="disability.value && showBodyFunctions(disability)">
-            <h5>[[ questions['bodyFunctions'] ]]</h5>
+            <h5>[[ questions['bodyFunctions'][0] ]]</h5>
+            <ul>
+              <li v-for="(bodyFunction, index) in listSevereRestrictions(disability)">
+                [[ bodyFunction.text ]]
+              </li>
+            </ul>
+            <h5>[[ questions['bodyFunctions'][1] ]]</h5>
             <div v-for="(bodyFunction, index) in disability.bodyFunctions">
               <div>
                 [[ disability.id ]].[[ bodyFunction.id ]] [[ bodyFunction.text ]]
                 <select v-model="bodyFunction.value">
-                  <option v-for="option in options" v-bind:value="option.value">
+                  <option v-for="option in options.impairments" v-bind:value="option.value">
                     [[ option.text ]]
                   </option>
                 </select>
@@ -115,7 +121,7 @@
               <div>
                 [[ disability.id ]].[[ extraActivity.id ]] [[ extraActivity.text ]]
                 <select v-model="extraActivity.value">
-                  <option v-for="option in options" v-bind:value="option.value">
+                  <option v-for="option in options.restrictions" v-bind:value="option.value">
                     [[ option.text ]]
                   </option>
                 </select>
