@@ -4,8 +4,10 @@ var mainVM = new Vue({
   data: {
     levelSevere: 3,
     levelExtreme: 4,
+    levelTTa: 9,
     options: {
       'restrictions': [
+        { text: '', value: 9 },
         { text: 'Pole piirangut', value: 0 },
         { text: 'Kerge piirang', value: 1 },
         { text: 'Mõõdukas piirang', value: 2 },
@@ -13,6 +15,7 @@ var mainVM = new Vue({
         { text: 'Täielik piirang', value: 4 },
       ],
       'impairments': [
+        // { text: '', value: 9 },
         { text: 'Pole häiret', value: 0 },
         { text: 'Kerge häire', value: 1 },
         { text: 'Mõõdukas häire', value: 2 },
@@ -31,7 +34,7 @@ var mainVM = new Vue({
       {
         id: 1, text: 'Liikumine', value: false, rfk: 'd4',
         basicActivities: [
-          {id: 1, text: 'Istumine', rfk: 'd4103', value: 0},
+          {id: 1, text: 'Istumine', rfk: 'd4103', value: 9},
           {id: 2, text: 'Püstiasendi säilitamine', rfk: 'd4154', value: 0},
           {id: 3, text: 'Kodus liikumine', rfk: 'd4600', value: 0},
           {id: 4, text: 'Pikkade vahemaade käimine', rfk: 'd4501', value: 0},
@@ -176,16 +179,20 @@ var mainVM = new Vue({
   methods: {
     showBodyFunctions: function (disability) {
       let array = disability.basicActivities;
+      array = array.map(function(o) { if (o.value !== 9) {return o.value; } })
       return array && Math.max.apply(Math, array.map(function(o) { return o.value; }))>=levelSevere;
     },
     showExtraActivities: function (disability) {
       let array = disability.bodyFunctions;
+      array = array.map(function(o) { if (o.value !== 9) {return o.value; } })
       return array && Math.max.apply(Math, array.map(function(o) { return o.value; }))>=levelSevere;
     },
     showExtraQuestion: function (disability) {
       if (this.showBodyFunctions(disability)) {
         let arrayBasicActivities = disability.basicActivities;
+        // arrayBasicActivities = arrayBasicActivities.map(function(o) { if (o.value !== 9) {return o.value; } });
         let arrayExtraActivities = disability.extraActivities;
+        // arrayExtraActivities = arrayExtraActivities.map(function(o) { if (o.value !== 9) {return o.value; } });
         return (
           (
             arrayBasicActivities &&

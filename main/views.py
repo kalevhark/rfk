@@ -68,6 +68,21 @@ class ICF_Est():
                     n += 1
         print(n, len(self.df))
 
+
+class ICF_Est_New():
+
+    def __init__(self):
+        self.df = dict()
+        with open(STATIC_DIR / 'icf2017_est_v20210901.csv', newline='', encoding='windows-1252') as csvfile:
+            reader = csv.DictReader(csvfile, delimiter=';', quotechar='"')
+            n = 0
+            for row in reader:
+                if row['code']:
+                    self.df[row['code']] = row
+                    n += 1
+        print(n, len(self.df))
+
+
 def icf_add_translations(icf_eng_set, icf_est_set):
     # Lisame eestikeelsed tõlked
     for key in icf_est_set.keys():
@@ -611,11 +626,11 @@ def get_kysimustik2_results(request):
     for category in categories:
         if category['value']:
             rfk_sets[category['id']] = [(activity['rfk'], activity['value']) for activity in category['basicActivities']]
-            if max([activity['value'] for activity in category['basicActivities']]) >= LEVEL_SEVERE:
+            if max([activity['value'] for activity in category['basicActivities'] if activity['value'] != 9]) >= LEVEL_SEVERE:
                 rfk_sets[category['id']].extend(
                     [(activity['rfk'], activity['value']) for activity in category['bodyFunctions']]
                 )
-                if max([bodyFunction['value'] for bodyFunction in category['bodyFunctions']]) >= LEVEL_SEVERE:
+                if max([bodyFunction['value'] for bodyFunction in category['bodyFunctions'] if bodyFunction['value'] != 9]) >= LEVEL_SEVERE:
                     rfk_sets[category['id']].extend(
                         [(activity['rfk'], activity['value']) for activity in category['extraActivities']]
                     )
@@ -631,6 +646,7 @@ if __name__ == '__main__':
     for i in range(1, 5):
         test(i)
 else:
-    icf_eng = ICF_Eng().df
-    icf_est = ICF_Est().df
-    icf_eng = icf_add_translations(icf_eng, icf_est)
+    # icf_eng = ICF_Eng().df
+    # icf_est = ICF_Est().df
+    # icf_eng = icf_add_translations(icf_eng, icf_est)
+    icf_eng = ICF_Est_New().df

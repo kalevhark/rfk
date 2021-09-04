@@ -20,10 +20,12 @@ var mainVM = new Vue({
         answer: 'Pole veel midagi analüüsida...',
         inputs: [
             {id: 1, category: 'Liikumine', question: '', result1: '', result2: '', result3: '', len: 0},
-            {id: 2, category: 'Nägemine', question: '', result1: '', result2: '', result3: '', len: 0},
-            {id: 3, category: 'Kuulmine', question: '', result1: '', result2: '', result3: '', len: 0},
-            {id: 4, category: 'Keel ja kõne', question: '', result1: '', result2: '', result3: '', len: 0},
-            {id: 5, category: 'Vaimne', question: '', result1: '', result2: '', result3: '', len: 0},
+            {id: 2, category: 'Käeline tegevus', question: '', result1: '', result2: '', result3: '', len: 0},
+            {id: 3, category: 'Suhtlemine', question: '', result1: '', result2: '', result3: '', len: 0},
+            {id: 4, category: 'Enesehooldus', question: '', result1: '', result2: '', result3: '', len: 0},
+            {id: 5, category: 'Õppimine', question: '', result1: '', result2: '', result3: '', len: 0},
+            {id: 6, category: 'Muutustega toimetulek', question: '', result1: '', result2: '', result3: '', len: 0},
+            {id: 7, category: 'Suhted', question: '', result1: '', result2: '', result3: '', len: 0},
         ]
     },
     watch: {

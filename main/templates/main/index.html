@@ -102,7 +102,7 @@
           v-for="input in inputs"
           v-on:click="openTab($event, 'valdkond_' + input.id)"
       >
-        Valdkond [[ input.id ]]: [[ input.category ]] <span class="w3-text-red" v-if="input.len">([[ input.len ]])</span>
+        TVH[[ input.id ]]: [[ input.category ]] <span class="w3-text-red" v-if="input.len">([[ input.len ]])</span>
       </button>
     </div>
     <div
