@@ -151,14 +151,17 @@
         </div>
       </div>
     </div>
+    <p>[[ questions['description'] ]]</p>
+    <textarea v-model="description" placeholder="siia saab kirjutada pika jutu..."></textarea>
+
     <button class="accordion w3-small">Tehniline info</button>
-      <div class="panel">
-        <div class="w3-small">
-          <p>[[ results ]]</p>
-          <p>[[ disabilities ]]</p>
-          <p>[[ checkedDisabilities ]]</p>
-        </div>
+    <div class="panel">
+      <div class="w3-small">
+        <p>[[ results ]]</p>
+        <p>[[ disabilities ]]</p>
+        <p>[[ checkedDisabilities ]]</p>
       </div>
+    </div>
   </div>
 {% endblock %}
 

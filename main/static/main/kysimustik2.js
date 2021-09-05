@@ -28,8 +28,10 @@ var mainVM = new Vue({
       basicActivities:  ['Märkiste probleemi valdkonnas', 'Millistes tegevustes see peamiselt avaldub?'],
       bodyFunctions: ['Märkisite raske või täieliku piirangu valdkondades:', 'Mis on piirangu(te) peamine põhjus?'],
       extraActivities: 'Palun täpsustage, kuidas saate hakkame järgmiste tegevustega:',
-      extraQuestion: ['Märkisite täieliku piirangu tegevustes:', 'palun täpsustage, kuidas see avaldub']
+      extraQuestion: ['Märkisite täieliku piirangu tegevustes:', 'palun täpsustage, kuidas see avaldub'],
+      description: 'Kas tahate midagi lisada selgituseks?',
     },
+    description: '', // kasutaja kirjeldus probleemide kohta
     disabilities: [
       {
         id: 1, text: 'Liikumine', value: false, rfk: 'd4',
