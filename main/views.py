@@ -635,11 +635,11 @@ def get_kysimustik2_results(request):
     for category in categories:
         if category['value']:
             rfk_sets[category['id']] = [(activity['rfk'], activity['value']) for activity in category['basicActivities']]
-            if max([activity['value'] for activity in category['basicActivities'] if activity['value'] != 9]) >= LEVEL_SEVERE:
+            if max([activity['value'] for activity in category['basicActivities']]) >= LEVEL_SEVERE:
                 rfk_sets[category['id']].extend(
                     [(activity['rfk'], activity['value']) for activity in category['bodyFunctions']]
                 )
-                if max([bodyFunction['value'] for bodyFunction in category['bodyFunctions'] if bodyFunction['value'] != 9]) >= LEVEL_SEVERE:
+                if max([bodyFunction['value'] for bodyFunction in category['bodyFunctions']]) >= LEVEL_SEVERE:
                     rfk_sets[category['id']].extend(
                         [(activity['rfk'], activity['value']) for activity in category['extraActivities']]
                     )

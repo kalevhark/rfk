@@ -104,7 +104,7 @@
             <h5>[[ questions['bodyFunctions'][0] ]]</h5>
             <ul>
               <li v-for="(bodyFunction, index) in listSevereRestrictions(disability)">
-                [[ bodyFunction.text ]]
+                [[ disability.id ]].[[ bodyFunction.id ]] [[ bodyFunction.text ]]
               </li>
             </ul>
             <h5>[[ questions['bodyFunctions'][1] ]]</h5>
@@ -142,7 +142,7 @@
             <h5>[[ questions['extraQuestion'][0] ]]</h5>
             <ul>
               <li v-for="(bodyFunction, index) in listFullRestrictions(disability)">
-                [[ bodyFunction.text ]]
+                [[ disability.id ]].[[ bodyFunction.id ]] [[ bodyFunction.text ]]
               </li>
             </ul>
             <p>[[ questions['extraQuestion'][1] ]]</p>

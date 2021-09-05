@@ -166,12 +166,12 @@ var mainVM = new Vue({
   methods: {
     showBodyFunctions: function (disability) {
       let array = disability.basicActivities;
-      array = array.map(function(o) { if (o.value !== 9) {return o.value; } })
+      // array = array.map(function(o) { if (o.value !== 9) {return o.value; } })
       return array && Math.max.apply(Math, array.map(function(o) { return o.value; }))>=levelSevere;
     },
     showExtraActivities: function (disability) {
       let array = disability.bodyFunctions;
-      array = array.map(function(o) { if (o.value !== 9) {return o.value; } })
+      // array = array.map(function(o) { if (o.value !== 9) {return o.value; } })
       return array && Math.max.apply(Math, array.map(function(o) { return o.value; }))>=levelSevere;
     },
     showExtraQuestion: function (disability) {
