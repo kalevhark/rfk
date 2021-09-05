@@ -24,7 +24,7 @@ var mainVM = new Vue({
       ],
     },
     questions: {
-      disabilities: 'Millise funktsioonihäirega puude raskusastet taotlete?',
+      disabilities: 'Millises valdkonnas Teil igapäevases elus probleeme esineb?',
       basicActivities:  ['Märkiste probleemi valdkonnas', 'Millistes tegevustes see peamiselt avaldub?'],
       bodyFunctions: ['Märkisite raske või täieliku piirangu valdkondades:', 'Mis on piirangu(te) peamine põhjus?'],
       extraActivities: 'Palun täpsustage, kuidas saate hakkame järgmiste tegevustega:',
@@ -34,7 +34,7 @@ var mainVM = new Vue({
       {
         id: 1, text: 'Liikumine', value: false, rfk: 'd4',
         basicActivities: [
-          {id: 1, text: 'Istumine', rfk: 'd4103', value: 9},
+          {id: 1, text: 'Istumine', rfk: 'd4103', value: 0},
           {id: 2, text: 'Püstiasendi säilitamine', rfk: 'd4154', value: 0},
           {id: 3, text: 'Kodus liikumine', rfk: 'd4600', value: 0},
           {id: 4, text: 'Pikkade vahemaade käimine', rfk: 'd4501', value: 0},
@@ -93,20 +93,7 @@ var mainVM = new Vue({
         extraQuestion: '',
       },
       {
-        id: 5, text: 'Psüühikahäire', value: false, rfk: 'd4',
-        basicActivities: [
-          {id: 1, text: 'Null', rfk: '', value: 0},
-        ],
-        bodyFunctions: [
-          // {id: 1, text: 'Lihasjõu häire', rfk: 'b730', value: 1},
-        ],
-        extraActivities: [
-          // {id: 1, text: 'Tualettruumi toimingud', rfk: 'd530', value: 0},
-        ],
-        extraQuestion: '',
-      },
-      {
-        id: 6, text: 'Vaimne alaareng', value: false, rfk: 'd4',
+        id: 5, text: 'Vaimne tervis', value: false, rfk: 'd4',
         basicActivities: [
           {id: 1, text: 'Põhioskuste omandamine', rfk: 'd1550', value: 0},
           {id: 2, text: 'Keeruliste oskuste omandamine', rfk: 'd1551', value: 0},
@@ -128,7 +115,7 @@ var mainVM = new Vue({
         extraQuestion: '',
       },
       {
-        id: 7, text: 'Muu', value: false, rfk: 'd4',
+        id: 6, text: 'Muu', value: false, rfk: 'd4',
         basicActivities: [
           {id: 1, text: 'Null', rfk: '', value: 0},
         ],

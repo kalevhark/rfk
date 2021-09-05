@@ -168,11 +168,17 @@ def get_icf_path(request=None, code=None):
 #
 # Vaated
 #
-
 def index(request):
     return render(
         request,
         'main/index.html',
+        {}
+    )
+
+def sandbox(request):
+    return render(
+        request,
+        'main/sandbox.html',
         {}
     )
 
@@ -489,7 +495,7 @@ def make_icf_verbose(rfk_set, rows=ROWS, columns=COLUMNS, ignore=IGNORE, level=1
                 score_class = ''
             # print(title, qualifier, f'({r}.{score})') # row = [td(get_rfk_title(r))]
             row = tr([
-                td(class_=f"{score_class}", title=title)(f'{title[:30]} ({r}.{score})'),
+                td(class_=f"{score_class}", title=title)(f'{title[:30]} ({r})'),
                 td(class_=f"{score_class}", title=title)(f'{qualifier} ({score})')
             ])
             trs.append(row)
@@ -530,6 +536,8 @@ def get_icf_summary(request):
     icf_table_matrix_level3 = make_icf_matrix(rfk_set, level=3, method=method)
 
     icf_table_verbose_level2 = make_icf_verbose(rfk_set, level=2, method=method)
+    icf_table_verbose_level3 = make_icf_verbose(rfk_set, level=3, method=method)
+
     return JsonResponse(
         {
             'icf_table_html': icf_table_html,
@@ -537,7 +545,8 @@ def get_icf_summary(request):
             'icf_table_matrix_level1': icf_table_matrix_level1,
             'icf_table_matrix_level2': icf_table_matrix_level2,
             'icf_table_matrix_level3': icf_table_matrix_level3,
-            'icf_table_verbose_level2': icf_table_verbose_level2
+            'icf_table_verbose_level2': icf_table_verbose_level2,
+            'icf_table_verbose_level3': icf_table_verbose_level3
         },
         safe=False
     )

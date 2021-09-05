@@ -17,6 +17,7 @@ var mainVM = new Vue({
         resultSummary2: '',
         resultSummary3: '',
         resultVerbose2: '',
+        resultVerbose3: '',
         answer: 'Pole veel midagi analüüsida...',
         inputs: [
             {id: 1, category: 'Liikumine', question: '', result1: '', result2: '', result3: '', len: 0},
@@ -113,6 +114,7 @@ var mainVM = new Vue({
                 this.resultSummary2 = ''
                 this.resultSummary3 = ''
                 this.resultVerbose2 = ''
+                this.resultVerbose3 = ''
                 for (const property in this.inputs) {
                     this.inputs[property].result1 = ''
                     this.inputs[property].result2 = ''
@@ -168,6 +170,7 @@ var mainVM = new Vue({
                     vm.resultSummary2 = response.data.icf_table_matrix_level2
                     vm.resultSummary3 = response.data.icf_table_matrix_level3
                     vm.resultVerbose2 = response.data.icf_table_verbose_level2
+                    vm.resultVerbose3 = response.data.icf_table_verbose_level3
                 })
                 .catch(function (error) {
                     vm.answer = 'Error! Could not reach the API. ' + error
