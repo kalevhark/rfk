@@ -17,6 +17,7 @@ SCORE_CLASSES = ['', 'w3-pale-yellow', 'w3-yellow', 'w3-pale-red', 'w3-red']
 SCORE_SCALE = [5, 25, 50, 95, 100]
 ROWS, COLUMNS, IGNORE = (('d'), ('b'), ('s', 'e')) # Milliseid koodigruppe ja kus arvesse v6tta
 LEVEL_MILD, LEVEL_MODERATE, LEVEL_SEVERE, LEVEL_EXTREME = range(1, 5) # RFK määrajad
+LEVEL_TTA = 9 # RFK määraja TTa e Täpsustama
 
 """
 Terminoloogia:
@@ -620,7 +621,8 @@ def test(method=1):
 def kysimustik2(request):
     context = {
         'levelSevere': LEVEL_SEVERE,
-        'levelExtreme': LEVEL_EXTREME
+        'levelExtreme': LEVEL_EXTREME,
+        'levelTTa': LEVEL_TTA
     }
     return render(
         request,
@@ -635,11 +637,15 @@ def get_kysimustik2_results(request):
     for category in categories:
         if category['value']:
             rfk_sets[category['id']] = [(activity['rfk'], activity['value']) for activity in category['basicActivities']]
-            if max([activity['value'] for activity in category['basicActivities']]) >= LEVEL_SEVERE:
+            if max(
+                    [activity['value'] for activity in category['basicActivities'] if activity['value'] != LEVEL_TTA]
+            ) >= LEVEL_SEVERE:
                 rfk_sets[category['id']].extend(
                     [(activity['rfk'], activity['value']) for activity in category['bodyFunctions']]
                 )
-                if max([bodyFunction['value'] for bodyFunction in category['bodyFunctions']]) >= LEVEL_SEVERE:
+                if max(
+                        [bodyFunction['value'] for bodyFunction in category['bodyFunctions'] if bodyFunction['value'] != LEVEL_TTA]
+                ) >= LEVEL_SEVERE:
                     rfk_sets[category['id']].extend(
                         [(activity['rfk'], activity['value']) for activity in category['extraActivities']]
                     )

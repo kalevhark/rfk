@@ -7,7 +7,7 @@ var mainVM = new Vue({
     levelTTa: 9,
     options: {
       'restrictions': [
-        { text: '', value: 9 },
+        // { text: '', value: 9 },
         { text: 'Pole piirangut', value: 0 },
         { text: 'Kerge piirang', value: 1 },
         { text: 'Mõõdukas piirang', value: 2 },
@@ -168,20 +168,20 @@ var mainVM = new Vue({
   methods: {
     showBodyFunctions: function (disability) {
       let array = disability.basicActivities;
-      // array = array.map(function(o) { if (o.value !== 9) {return o.value; } })
-      return array && Math.max.apply(Math, array.map(function(o) { return o.value; }))>=levelSevere;
+      array = array.filter(function(o) { if (o.value !== this.levelTTa) {return o; } });
+      return array && Math.max.apply(Math, array.map(function(o) { return o.value; })) >= levelSevere;
     },
     showExtraActivities: function (disability) {
       let array = disability.bodyFunctions;
-      // array = array.map(function(o) { if (o.value !== 9) {return o.value; } })
-      return array && Math.max.apply(Math, array.map(function(o) { return o.value; }))>=levelSevere;
+      array = array.filter(function(o) { if (o.value !== this.levelTTa) {return o; } });
+      return array && Math.max.apply(Math, array.map(function(o) { return o.value; })) >= levelSevere;
     },
     showExtraQuestion: function (disability) {
       if (this.showBodyFunctions(disability)) {
         let arrayBasicActivities = disability.basicActivities;
-        // arrayBasicActivities = arrayBasicActivities.map(function(o) { if (o.value !== 9) {return o.value; } });
+        arrayBasicActivities = arrayBasicActivities.filter(function(o) { if (o.value !== this.levelTTa) {return o; } });
         let arrayExtraActivities = disability.extraActivities;
-        // arrayExtraActivities = arrayExtraActivities.map(function(o) { if (o.value !== 9) {return o.value; } });
+        arrayExtraActivities = arrayExtraActivities.filter(function(o) { if (o.value !== this.levelTTa) {return o; } });
         return (
           (
             arrayBasicActivities &&
@@ -199,10 +199,10 @@ var mainVM = new Vue({
       }
     },
     listSevereRestrictions: function (disability) {
-      // let arrayBasicActivities = disability.basicActivities;
-      // let arrayExtraActivities = disability.extraActivities;
-      // let array = arrayBasicActivities ? arrayBasicActivities.concat(arrayExtraActivities) : arrayExtraActivities;
-      let array = disability.basicActivities;
+      let arrayBasicActivities = disability.basicActivities;
+      let arrayExtraActivities = disability.extraActivities;
+      let array = arrayBasicActivities ? arrayBasicActivities.concat(arrayExtraActivities) : arrayExtraActivities;
+      // let array = disability.basicActivities;
       return array && array.filter(basicActivity => basicActivity.value >= this.levelSevere);
     },
     listFullRestrictions: function (disability) {

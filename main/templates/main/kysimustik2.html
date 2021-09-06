@@ -152,7 +152,7 @@
       </div>
     </div>
     <p>[[ questions['description'] ]]</p>
-    <textarea v-model="description" placeholder="siia saab kirjutada pika jutu..."></textarea>
+    <textarea v-if="checkedDisabilities" v-model="description" placeholder="siia saab kirjutada pika jutu..."></textarea>
 
     <button class="accordion w3-small">Tehniline info</button>
     <div class="panel">
