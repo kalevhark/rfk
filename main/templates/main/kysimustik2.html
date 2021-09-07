@@ -151,9 +151,10 @@
         </div>
       </div>
     </div>
-    <p>[[ questions['description'] ]]</p>
-    <textarea v-if="checkedDisabilities" v-model="description" placeholder="siia saab kirjutada pika jutu..."></textarea>
-
+    <div v-show="checkedDisabilities.length > 0">
+      <p>[[ questions['description'] ]]</p>
+      <textarea v-model="description" placeholder="siia saab kirjutada pika jutu..."></textarea>
+    </div>
     <button class="accordion w3-small">Tehniline info</button>
     <div class="panel">
       <div class="w3-small">

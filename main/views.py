@@ -552,6 +552,40 @@ def get_icf_summary(request):
         safe=False
     )
 
+def make_prt_matrix(rfk_set, rows=ROWS, columns=COLUMNS, ignore=IGNORE, level=1, method=1):
+    #
+    # level=1 kahekohaline nt b2
+    # level=2 neljakohaline nt b230
+    # level=3 koodigrupp nt b230-b239
+    #
+    # method=1 aritmeetiline keskmine
+    # method=2 geomeetriline keskmine
+    # method=3 ruutkeskmine
+    #
+    PRT_VALDKONNAD = [
+        {
+            'title': 'Liikumine',
+            'rfk_set': ['d4', 'b280-b289', 'b4'],
+        },
+        {
+            'title': 'Keel-kõne',
+            'rfk_set': ['d3', 'b3'],
+        },
+        {
+            'title': 'Nägemine',
+            'rfk_set': ['d3', 'b210-b229'],
+        },
+        {
+            'title': 'Kuulmine',
+            'rfk_set': ['d3', 'b230-b249'],
+        },
+        {
+            'title': 'Vaimne',
+            'rfk_set': ['d1', 'd7', 'b1'],
+        },
+    ]
+    return
+
 def test(method=1):
     level = 1
     rfk_set_b = {
