@@ -11,6 +11,10 @@ if __name__ != '__main__':
     from pyhtml import *
 
     STATIC_DIR = settings.BASE_DIR / 'main' / 'static' / 'main'
+else:
+    from pathlib import Path
+    BASE_DIR = Path(__file__).resolve().parent.parent
+    STATIC_DIR = BASE_DIR / 'main' / 'static' / 'main'
 
 RFK_REGEX = r"[bdes](?:\d{3,}\.\d+)"
 SCORE_CLASSES = ['', 'w3-pale-yellow', 'w3-yellow', 'w3-pale-red', 'w3-red']
@@ -33,7 +37,44 @@ polytomous (multiple-level) scale:
 # Kooditabelite import ja töötlus
 #
 
-class ICF_Eng():
+# class ICF_Eng():
+#     # Loeb ICF kooditabeli sõnastikuks:
+#     # keys = code
+#     # element.keys:
+#     # 'version',
+#     # 'Dimension', 'Chapter',
+#     # 'Block', 'SecondLevel', 'ThirdLevel', 'FourthLevel', 'levelno',
+#     # 'code', 'parent', 'mlsort', 'leafnode',
+#     # 'Title', 'Description', 'Inclusions', 'Exclusions', 'selected',
+#     # 'Translated_title', 'Translated_description', 'Translated_inclusions', 'Translated_exclusions']
+#
+#     def __init__(self):
+#         self.df = dict()
+#         with open(STATIC_DIR / 'icf2017_eng_v20210601.csv', newline='', encoding='windows-1252') as csvfile:
+#             reader = csv.DictReader(csvfile, delimiter=';', quotechar='"')
+#             n = 0
+#             for row in reader:
+#                 self.df[row['code']] = row
+#                 n += 1
+#         print(n, len(self.df))
+#
+#
+#
+# class ICF_Est():
+#
+#     def __init__(self):
+#         self.df = dict()
+#         with open(STATIC_DIR / 'icf2017_est_v20210513.csv', newline='', encoding='windows-1252') as csvfile:
+#             reader = csv.DictReader(csvfile, delimiter=';', quotechar='"')
+#             n = 0
+#             for row in reader:
+#                 if row['Kood']:
+#                     self.df[row['Kood']] = row
+#                     n += 1
+#         print(n, len(self.df))
+
+
+class ICF_Est_New():
     # Loeb ICF kooditabeli sõnastikuks:
     # keys = code
     # element.keys:
@@ -43,34 +84,6 @@ class ICF_Eng():
     # 'code', 'parent', 'mlsort', 'leafnode',
     # 'Title', 'Description', 'Inclusions', 'Exclusions', 'selected',
     # 'Translated_title', 'Translated_description', 'Translated_inclusions', 'Translated_exclusions']
-
-    def __init__(self):
-        self.df = dict()
-        with open(STATIC_DIR / 'icf2017_eng_v20210601.csv', newline='', encoding='windows-1252') as csvfile:
-            reader = csv.DictReader(csvfile, delimiter=';', quotechar='"')
-            n = 0
-            for row in reader:
-                self.df[row['code']] = row
-                n += 1
-        print(n, len(self.df))
-
-
-
-class ICF_Est():
-
-    def __init__(self):
-        self.df = dict()
-        with open(STATIC_DIR / 'icf2017_est_v20210513.csv', newline='', encoding='windows-1252') as csvfile:
-            reader = csv.DictReader(csvfile, delimiter=';', quotechar='"')
-            n = 0
-            for row in reader:
-                if row['Kood']:
-                    self.df[row['Kood']] = row
-                    n += 1
-        print(n, len(self.df))
-
-
-class ICF_Est_New():
 
     def __init__(self):
         self.df = dict()
@@ -84,34 +97,34 @@ class ICF_Est_New():
         print(n, len(self.df))
 
 
-def icf_add_translations(icf_eng_set, icf_est_set):
-    # Lisame eestikeelsed tõlked
-    for key in icf_est_set.keys():
-        try:
-            _ = icf_eng_set[key]
-        except:
-            # print(key)
-            continue
-        icf_eng_set[key]['Translated_title'] = icf_est_set[key]['Kirjeldus'].strip()
-        icf_eng_set[key]['Translated_description'] = icf_est_set[key]['Selgitus'].strip()
-        icf_eng_set[key]['Translated_inclusions'] = icf_est_set[key]['KA']
-        icf_eng_set[key]['Translated_exclusions'] = icf_est_set[key]['VA']
-    # Kontrollime settide sisalduvust
-    print('Missing EST: ', end='')
-    n = ''
-    for key in icf_eng_set.keys():
-        if key not in icf_est_set.keys():
-            # print(key)
-            n += key[0]
-    print(Counter(n))
-    print('Missing ENG: ', end='')
-    n = ''
-    for key in icf_est_set.keys():
-        if key not in icf_eng_set.keys():
-            # print(key)
-            n += key[0]
-    print(Counter(n))
-    return icf_eng_set
+# def icf_add_translations(icf_eng_set, icf_est_set):
+#     # Lisame eestikeelsed tõlked
+#     for key in icf_est_set.keys():
+#         try:
+#             _ = icf_eng_set[key]
+#         except:
+#             # print(key)
+#             continue
+#         icf_eng_set[key]['Translated_title'] = icf_est_set[key]['Kirjeldus'].strip()
+#         icf_eng_set[key]['Translated_description'] = icf_est_set[key]['Selgitus'].strip()
+#         icf_eng_set[key]['Translated_inclusions'] = icf_est_set[key]['KA']
+#         icf_eng_set[key]['Translated_exclusions'] = icf_est_set[key]['VA']
+#     # Kontrollime settide sisalduvust
+#     print('Missing EST: ', end='')
+#     n = ''
+#     for key in icf_eng_set.keys():
+#         if key not in icf_est_set.keys():
+#             # print(key)
+#             n += key[0]
+#     print(Counter(n))
+#     print('Missing ENG: ', end='')
+#     n = ''
+#     for key in icf_est_set.keys():
+#         if key not in icf_eng_set.keys():
+#             # print(key)
+#             n += key[0]
+#     print(Counter(n))
+#     return icf_eng_set
 
 def get_icf_group(code):
     # Tagastab valitud koodi koodigrupi vahemiku d4105 -> d410-d429
@@ -539,6 +552,8 @@ def get_icf_summary(request):
     icf_table_verbose_level2 = make_icf_verbose(rfk_set, level=2, method=method)
     icf_table_verbose_level3 = make_icf_verbose(rfk_set, level=3, method=method)
 
+    prt_table = make_prt_matrix(rfk_set)
+
     return JsonResponse(
         {
             'icf_table_html': icf_table_html,
@@ -551,6 +566,13 @@ def get_icf_summary(request):
         },
         safe=False
     )
+
+def is_code_in_group(code, group):
+    while icf_eng[code] and int(icf_eng[code]['levelno']) > 1 and icf_eng[code]['parent']:
+        if (code == group) or (code == icf_eng[code]['parent']):
+            return True
+        code = icf_eng[code]['parent']
+    return False
 
 def make_prt_matrix(rfk_set, rows=ROWS, columns=COLUMNS, ignore=IGNORE, level=1, method=1):
     #
@@ -583,7 +605,21 @@ def make_prt_matrix(rfk_set, rows=ROWS, columns=COLUMNS, ignore=IGNORE, level=1,
             'title': 'Vaimne',
             'rfk_set': ['d1', 'd7', 'b1'],
         },
+        {
+            'title': 'Muu',
+            'rfk_set': []
+        }
     ]
+    prt_set = dict()
+    for code in rfk_set:
+        for valdkond in PRT_VALDKONNAD:
+            for group in valdkond['rfk_set']:
+                if is_code_in_group(code, group):
+                    try:
+                        prt_set[valdkond['title']].append(rfk_set[code])
+                    except:
+                        prt_set[valdkond['title']] = [rfk_set[code]]
+    print(prt_set)
     return
 
 def test(method=1):
@@ -691,11 +727,40 @@ def get_kysimustik2_results(request):
         safe=False
     )
 
+#
+# Küsimustiku vaade ver 3
+#
+def kysimustik3(request):
+    context = {
+        'levelSevere': LEVEL_SEVERE,
+        'levelExtreme': LEVEL_EXTREME,
+        'levelTTa': LEVEL_TTA
+    }
+    return render(
+        request,
+        'main/kysimustik3.html',
+        context
+    )
+
+def get_kysimustik3_results(request):
+    content = request.GET.get('content', '')
+    categories = json.loads(content)
+    rfk_sets = dict()
+    for category in categories:
+        if category['value']:
+            rfk_sets[category['id']] = [(activity['rfk'], activity['value']) for activity in category['basicActivities']]
+
+    print(rfk_sets)
+    return JsonResponse(
+        {
+            'rfk_sets': rfk_sets
+        },
+        safe=False
+    )
+
+icf_eng = ICF_Est_New().df
+
 if __name__ == '__main__':
-    for i in range(1, 5):
-        test(i)
-else:
-    # icf_eng = ICF_Eng().df
-    # icf_est = ICF_Est().df
-    # icf_eng = icf_add_translations(icf_eng, icf_est)
-    icf_eng = ICF_Est_New().df
+    # for i in range(1, 5):
+    #     test(i)
+    pass
