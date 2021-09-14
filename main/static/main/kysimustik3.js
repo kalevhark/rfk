@@ -34,36 +34,36 @@ var mainVM = new Vue({
         id: 1, text: 'Liikumine', value: false, rfk: 'd4',
         basicActivities: [
           {
-            id: 1, text: 'Kõndimise ja liikumise piirang', rfk: 'd450-d469', value: 0,
+            id: 1, text: 'Kui palju suudate kõndida raskusteta:', rfk: 'd450', value: 0,
             options: [
               // { text: '', value: 9 },
-              { text: 'Vastus 0', value: 0 },
-              { text: 'Vastus 1', value: 1 },
-              { text: 'Vastus 2', value: 2 },
-              { text: 'Vastus 3', value: 3 },
-              { text: 'Vastus 4', value: 4 },
+              { text: 'Üle kilomeetri', value: 0 },
+              { text: 'Ühe kilomeetri', value: 1 },
+              { text: 'Pool kilomeetrit', value: 2 },
+              { text: '100 meetrit', value: 3 },
+              { text: 'Ei saa üldse kõndida', value: 4 },
             ]
           },
           {
-            id: 2, text: 'Liigeste ja luude funktsiooni häire', rfk: 'b710-b729', value: 0,
+            id: 2, text: 'Kas liikumisraskused on seotud liigeste ja luude funktsiooni häirega?', rfk: 'b710-729', value: 0,
             options: [
               // { text: '', value: 9 },
-              { text: 'Vastus 0', value: 0 },
-              { text: 'Vastus 1', value: 1 },
-              { text: 'Vastus 2', value: 2 },
-              { text: 'Vastus 3', value: 3 },
-              { text: 'Vastus 4', value: 4 },
+              { text: 'Ei', value: 0 },
+              // { text: 'Vastus 1', value: 1 },
+              { text: 'Mõõdukalt', value: 2 },
+              // { text: 'Vastus 3', value: 3 },
+              { text: 'Täielikult ei lase liikuda', value: 4 },
             ]
           },
           {
-            id: 3, text: 'Lihaste funktsiooni häire', rfk: 'b730-b749', value: 0,
+            id: 3, text: 'Kas liikumisraskused on seotud lihaste funktsiooni häirega?', rfk: 'b730-b749', value: 0,
             options: [
               // { text: '', value: 9 },
-              { text: 'Vastus 0', value: 0 },
-              { text: 'Vastus 1', value: 1 },
-              { text: 'Vastus 2', value: 2 },
-              { text: 'Vastus 3', value: 3 },
-              { text: 'Vastus 4', value: 4 },
+              { text: 'Ei', value: 0 },
+              // { text: 'Vastus 1', value: 1 },
+              { text: 'Mõõdukalt', value: 2 },
+              // { text: 'Vastus 3', value: 3 },
+              { text: 'Täielikult ei lase liikuda', value: 4 },
             ]
           },
         ],
@@ -72,74 +72,74 @@ var mainVM = new Vue({
       {
         id: 2, text: 'Käeline tegevus. Enesehooldus', value: false, rfk: 'd4',
         basicActivities: [
+          // {
+          //   id: 1, text: 'Kehaasendi muutmise ja säilitamise piirang', rfk: 'd410-d429', value: 0,
+          //   options: [
+              // { text: '', value: 9 },
+          //     { text: 'Vastus 0', value: 0 },
+          //     { text: 'Vastus 1', value: 1 },
+          //     { text: 'Vastus 2', value: 2 },
+          //     { text: 'Vastus 3', value: 3 },
+          //     { text: 'Vastus 4', value: 4 },
+          //   ]
+          // },
           {
-            id: 1, text: 'Kehaasendi muutmise ja säilitamise piirang', rfk: 'd410-d429', value: 0,
+            id: 2, text: 'Kas esemete kandmine või käsitsemine on raskendatud?', rfk: 'd430-d449', value: 0,
             options: [
               // { text: '', value: 9 },
-              { text: 'Vastus 0', value: 0 },
-              { text: 'Vastus 1', value: 1 },
-              { text: 'Vastus 2', value: 2 },
-              { text: 'Vastus 3', value: 3 },
-              { text: 'Vastus 4', value: 4 },
+              { text: 'Ei ole', value: 0 },
+              { text: 'Natuke', value: 1 },
+              { text: 'Mõõdukalt', value: 2 },
+              { text: 'Jah, väga tihti', value: 3 },
+              { text: 'Ei ole üldse võimalik', value: 4 },
             ]
           },
           {
-            id: 2, text: 'Esemete kandmise, liigutamise ja käsitsemise piirang', rfk: 'd430-d449', value: 0,
+            id: 3, text: 'Kas käeline tegevus on põhjustatud liigutuste funktsiooni häirega?', rfk: 'b750-b789', value: 0,
             options: [
-              // { text: '', value: 9 },
-              { text: 'Vastus 0', value: 0 },
-              { text: 'Vastus 1', value: 1 },
-              { text: 'Vastus 2', value: 2 },
-              { text: 'Vastus 3', value: 3 },
-              { text: 'Vastus 4', value: 4 },
-            ]
-          },
-          {
-            id: 3, text: 'Liigutuste funktsiooni häire', rfk: 'b750-b789', value: 0,
-            options: [
-              // { text: '', value: 9 },
-              { text: 'Vastus 0', value: 0 },
-              { text: 'Vastus 1', value: 1 },
-              { text: 'Vastus 2', value: 2 },
-              { text: 'Vastus 3', value: 3 },
-              { text: 'Vastus 4', value: 4 },
+              { text: 'Nii ja naa', value: 9 },
+              { text: 'Ei', value: 0 },
+              // { text: 'Vastus 1', value: 1 },
+              // { text: 'Vastus 2', value: 2 },
+              { text: 'See on oluline põhjus', value: 3 },
+              { text: 'Jah, selle tõttu on käeline tegevus täielikult võimatu', value: 4 },
             ]
           },
         ],
         extraQuestion: '',
       },
       {
-        id: 3, text: 'Suhtlemine', value: false, rfk: 'd4',
+        id: 3, text: 'Teadmiste edastamine ja vastuvõtmine. Suhtlemine', value: false, rfk: 'd4',
         basicActivities: [
           {
-            id: 1, text: 'Nägemine', rfk: 'b210-b229', value: 0,
+            id: 1, text: 'Kas teie nägemine on', rfk: 'b210', value: 0,
             options: [
               // { text: '', value: 9 },
-              { text: 'Vastus 0', value: 0 },
-              { text: 'Vastus 1', value: 1 },
-              { text: 'Vastus 2', value: 2 },
-              { text: 'Vastus 3', value: 3 },
-              { text: 'Vastus 4', value: 4 },
+              { text: 'Väga hea', value: 0 },
+              { text: 'Pigem hea', value: 1 },
+              { text: 'Keskpärane', value: 2 },
+              { text: 'Väga halb', value: 3 },
+              { text: 'Ma ei näe üldse', value: 4 },
             ]
           },
-          {id: 2, text: 'Kuulmine', rfk: 'b230-b249', value: 0,
+          {id: 2, text: 'Kas teie kuulmine on', rfk: 'b230', value: 0,
             options: [
               // { text: '', value: 9 },
-              { text: 'Vastus 0', value: 0 },
-              { text: 'Vastus 1', value: 1 },
-              { text: 'Vastus 2', value: 2 },
-              { text: 'Vastus 3', value: 3 },
-              { text: 'Vastus 4', value: 4 },
+              { text: 'Väga hea', value: 0 },
+              { text: 'Pigem hea', value: 1 },
+              { text: 'Keskpärane', value: 2 },
+              { text: 'Väga halb', value: 3 },
+              { text: 'Ma ei näe üldse', value: 4 },
             ]
           },
-          {id: 3, text: 'Keel-kõne', rfk: 'b3', value: 0,
+          {id: 3, text: 'Kas teil on probleem kõnelemisega?', rfk: 'b3', value: 0,
             options: [
               // { text: '', value: 9 },
-              { text: 'Vastus 0', value: 0 },
-              { text: 'Vastus 1', value: 1 },
-              { text: 'Vastus 2', value: 2 },
-              { text: 'Vastus 3', value: 3 },
-              { text: 'Vastus 4', value: 4 },
+              { text: 'Kõne on ladus', value: 0 },
+              { text: 'Natuke ', value: 1 },
+              { text: 'Saan kõneleda väikeste raskustega', value: 2 },
+              { text: 'Kõnelemine on väga raske', value: 3 },
+              { text: 'Ei saa üldse kõneleda', value: 4 },
             ]
           },
         ],
@@ -149,25 +149,25 @@ var mainVM = new Vue({
         id: 4, text: 'Vaimne tervis', value: false, rfk: 'd4',
         basicActivities: [
           {
-            id: 1, text: 'Põhioskuste omandamine', rfk: 'd1550', value: 0,
+            id: 1, text: 'Kas on probleeme põhioskuste omandamisel?', rfk: 'd1550', value: 0,
             options: [
               // { text: '', value: 9 },
-              { text: 'Vastus 0', value: 0 },
-              { text: 'Vastus 1', value: 1 },
-              { text: 'Vastus 2', value: 2 },
-              { text: 'Vastus 3', value: 3 },
-              { text: 'Vastus 4', value: 4 },
+              { text: 'Ei ole', value: 0 },
+              { text: 'Natuke', value: 1 },
+              { text: 'Mõõdukalt', value: 2 },
+              { text: 'Jah, väga tihti', value: 3 },
+              { text: 'Ei suuda üldse', value: 4 },
             ]
           },
           {
-            id: 2, text: 'Keeruliste oskuste omandamine', rfk: 'd1551', value: 0,
+            id: 2, text: 'Kas on probleeme enesevalitsemisel?', rfk: 'd1551', value: 0,
             options: [
               // { text: '', value: 9 },
-              { text: 'Vastus 0', value: 0 },
-              { text: 'Vastus 1', value: 1 },
-              { text: 'Vastus 2', value: 2 },
-              { text: 'Vastus 3', value: 3 },
-              { text: 'Vastus 4', value: 4 },
+              { text: 'Ei ole', value: 0 },
+              { text: 'Natuke', value: 1 },
+              { text: 'Mõõdukalt', value: 2 },
+              { text: 'Jah, väga tihti', value: 3 },
+              { text: 'Ei suuda üldse ennast valitseda', value: 4 },
             ]
           },
         ],
