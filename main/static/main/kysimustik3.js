@@ -160,7 +160,7 @@ var mainVM = new Vue({
             ]
           },
           {
-            id: 2, text: 'Kas on probleeme enesevalitsemisel?', rfk: 'd1551', value: 0,
+            id: 2, text: 'Kas on probleeme enesevalitsemisel?', rfk: 'b152', value: 0,
             options: [
               // { text: '', value: 9 },
               { text: 'Ei ole', value: 0 },
