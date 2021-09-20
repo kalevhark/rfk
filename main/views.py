@@ -19,7 +19,8 @@ else:
 RFK_REGEX = r"[bdes](?:\d{3,}\.\d+)"
 SCORE_CLASSES = ['', 'w3-pale-yellow', 'w3-yellow', 'w3-pale-red', 'w3-red']
 SCORE_SCALE = [5, 25, 50, 95, 100]
-ROWS, COLUMNS, IGNORE = (('d'), ('b'), ('s', 'e')) # Milliseid koodigruppe ja kus arvesse v6tta
+ROWS, COLUMNS, IGNORE = (('d'), ('b'), ('s', 'e')) # Milliseid koodigruppe ja kus arvesse v6tta arvutamisel
+COLUMNS_VERBOSE, IGNORE_VERBOSE = (('b', 's'), ('e')) # Milliseid koodigruppe ja kus arvesse v6tta verbaalsel esitusel
 LEVEL_MILD, LEVEL_MODERATE, LEVEL_SEVERE, LEVEL_EXTREME = range(1, 5) # RFK määrajad
 LEVEL_TTA = 9 # RFK määraja TTa e Täpsustama
 
@@ -147,10 +148,16 @@ def get_rfk_title(code):
     return title
 
 def get_rfk_qualifier(code, score):
-    qualifiers = ['ei ole probleemi', 'kerge probleem', 'mõõdukas probleem', 'raske probleem', 'täielik probleem']
+    # qualifiers = ['ei ole probleemi', 'kerge probleem', 'mõõdukas probleem', 'raske probleem', 'täielik probleem']
+    qualifiers = {
+        'y': ['ei ole probleemi', 'kerge probleem', 'mõõdukas probleem', 'raske probleem', 'täielik probleem'],
+        'd': ['ei ole piirangut', 'kerge piirang', 'mõõdukas piirang', 'raske piirang', 'täielik piirang'],
+        'b': ['ei ole häiret', 'kerge häire', 'mõõdukas häire', 'raske häire', 'täielik häire'],
+        's': ['ei ole kahjustust', 'kerge kahjustus', 'mõõdukas kahjustus', 'raske kahjustus', 'täielik kahjustus'],
+    }
     # qualifier = code[1]
     try:
-        qualifier = qualifiers[score]
+        qualifier = qualifiers[code[0][0]][score]
     except IndexError:
         qualifier = score
     return qualifier
@@ -422,7 +429,7 @@ def make_icf_matrix(rfk_set, rows=ROWS, columns=COLUMNS, ignore=IGNORE, level=1,
         trs.append(tr(row))
     return table(border="1", class_="w3-table-all w3-small w3-card-4")(header, trs).render()
 
-def make_icf_verbose(rfk_set, rows=ROWS, columns=COLUMNS, ignore=IGNORE, level=1, method=1):
+def make_icf_verbose(rfk_set, rows=ROWS, columns=COLUMNS_VERBOSE, ignore=IGNORE_VERBOSE, level=1, method=1):
     #
     # level=1 kahekohaline nt b2
     # level=2 neljakohaline nt b230
@@ -438,8 +445,10 @@ def make_icf_verbose(rfk_set, rows=ROWS, columns=COLUMNS, ignore=IGNORE, level=1
             part = code[:2] # kahekohaline nt b2
         elif level == 2:
             part = code[:4] # neljakohaline nt b230
-        else: # level == 3
+        elif level == 3:
             part = rfk_set[code][2] # koodigrupp nt b230-b239
+        else:
+            part = code # kood t2ielikult nt b2301
         if code[0] not in ignore:
             parts = calc_mean(rfk_set, parts, part, code, method)
 
@@ -524,15 +533,16 @@ def get_icf_calcs(request):
     icf_table_matrix_level1 = make_icf_matrix(rfk_set, level=1, method=method)
     icf_table_matrix_level2 = make_icf_matrix(rfk_set, level=2, method=method)
     icf_table_matrix_level3 = make_icf_matrix(rfk_set, level=3, method=method)
-    make_icf_verbose(rfk_set, level=1, method=method)
-    make_icf_verbose(rfk_set, level=2, method=method)
-    make_icf_verbose(rfk_set, level=3, method=method)
+
+    icf_table_verbose_level4 = make_icf_verbose(rfk_set, level=4, method=method)
+
     return JsonResponse(
         {
             # 'icf_table_html': icf_table_html,
             'icf_table_matrix_level1': icf_table_matrix_level1,
             'icf_table_matrix_level2': icf_table_matrix_level2,
             'icf_table_matrix_level3': icf_table_matrix_level3,
+            'icf_table_verbose_level4': icf_table_verbose_level4,
             'rfk_codeset_count': len(rfk_set.keys())
         },
         safe=False
@@ -551,8 +561,7 @@ def get_icf_summary(request):
 
     icf_table_verbose_level2 = make_icf_verbose(rfk_set, level=2, method=method)
     icf_table_verbose_level3 = make_icf_verbose(rfk_set, level=3, method=method)
-
-    prt_table = make_prt_matrix(rfk_set)
+    icf_table_verbose_level4 = make_icf_verbose(rfk_set, level=4, method=method)
 
     return JsonResponse(
         {
@@ -562,7 +571,8 @@ def get_icf_summary(request):
             'icf_table_matrix_level2': icf_table_matrix_level2,
             'icf_table_matrix_level3': icf_table_matrix_level3,
             'icf_table_verbose_level2': icf_table_verbose_level2,
-            'icf_table_verbose_level3': icf_table_verbose_level3
+            'icf_table_verbose_level3': icf_table_verbose_level3,
+            'icf_table_verbose_level4': icf_table_verbose_level4
         },
         safe=False
     )
@@ -574,53 +584,7 @@ def is_code_in_group(code, group):
         code = icf_eng[code]['parent']
     return False
 
-def make_prt_matrix(rfk_set, rows=ROWS, columns=COLUMNS, ignore=IGNORE, level=1, method=1):
-    #
-    # level=1 kahekohaline nt b2
-    # level=2 neljakohaline nt b230
-    # level=3 koodigrupp nt b230-b239
-    #
-    # method=1 aritmeetiline keskmine
-    # method=2 geomeetriline keskmine
-    # method=3 ruutkeskmine
-    #
-    PRT_VALDKONNAD = [
-        {
-            'title': 'Liikumine',
-            'rfk_set': ['d4', 'b280-b289', 'b4'],
-        },
-        {
-            'title': 'Keel-kõne',
-            'rfk_set': ['d3', 'b3'],
-        },
-        {
-            'title': 'Nägemine',
-            'rfk_set': ['d3', 'b210-b229'],
-        },
-        {
-            'title': 'Kuulmine',
-            'rfk_set': ['d3', 'b230-b249'],
-        },
-        {
-            'title': 'Vaimne',
-            'rfk_set': ['d1', 'd7', 'b1'],
-        },
-        {
-            'title': 'Muu',
-            'rfk_set': []
-        }
-    ]
-    prt_set = dict()
-    for code in rfk_set:
-        for valdkond in PRT_VALDKONNAD:
-            for group in valdkond['rfk_set']:
-                if is_code_in_group(code, group):
-                    try:
-                        prt_set[valdkond['title']].append(rfk_set[code])
-                    except:
-                        prt_set[valdkond['title']] = [rfk_set[code]]
-    print(prt_set)
-    return
+
 
 def test(method=1):
     level = 1

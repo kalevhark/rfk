@@ -18,6 +18,7 @@ var mainVM = new Vue({
         resultSummary3: '',
         resultVerbose2: '',
         resultVerbose3: '',
+        resultVerbose4: '',
         answer: 'Pole veel midagi analüüsida...',
         inputs: [
             {id: 1, category: 'Liikumine', question: '', result1: '', result2: '', result3: '', len: 0},
@@ -27,6 +28,44 @@ var mainVM = new Vue({
             {id: 5, category: 'Õppimine', question: '', result1: '', result2: '', result3: '', len: 0},
             {id: 6, category: 'Muutustega toimetulek', question: '', result1: '', result2: '', result3: '', len: 0},
             {id: 7, category: 'Suhted', question: '', result1: '', result2: '', result3: '', len: 0},
+        ],
+        prt_categories: [
+            {
+                id: 1, category: 'Liikumine',
+                tvh_categories: [1], rfk_set: '',
+                result1: '', result2: '', result3: '', len: 0,
+                resultVerbose4: ''
+            },
+            {
+                id: 2, category: 'Käeline tegevus ja enesehooldus',
+                tvh_categories: [2, 4], rfk_set: '',
+                result1: '', result2: '', result3: '', len: 0,
+                resultVerbose4: ''
+            },
+            {
+                id: 3, category: 'Nägemine',
+                tvh_categories: [3], rfk_set: '',
+                result1: '', result2: '', result3: '', len: 0,
+                resultVerbose4: ''
+            },
+            {
+                id: 4, category: 'Kuulmine',
+                tvh_categories: [3], rfk_set: '',
+                result1: '', result2: '', result3: '', len: 0,
+                resultVerbose4: ''
+            },
+            {
+                id: 5, category: 'Keel-kõne',
+                tvh_categories: [3], rfk_set: '',
+                result1: '', result2: '', result3: '', len: 0,
+                resultVerbose4: ''
+            },
+            {
+                id: 6, category: 'Vaimne tervis',
+                tvh_categories: [5, 6, 7], rfk_set: '',
+                result1: '', result2: '', result3: '', len: 0,
+                resultVerbose4: ''
+            },
         ]
     },
     watch: {
@@ -115,6 +154,7 @@ var mainVM = new Vue({
                 this.resultSummary3 = ''
                 this.resultVerbose2 = ''
                 this.resultVerbose3 = ''
+                this.resultVerbose4 = ''
                 for (const property in this.inputs) {
                     this.inputs[property].result1 = ''
                     this.inputs[property].result2 = ''
@@ -125,13 +165,13 @@ var mainVM = new Vue({
             }
             this.answer = 'Arvutame...'
             var vm = this
+            // TVH maatriksite arvutamine
             for (const property in vm.inputs) {
                 if (vm.inputs[property].question.length > 3) {
                     params = {
                         method: vm.selected,
                         content: JSON.stringify(vm.inputs[property].question)
                     }
-                    // var querystring = ['?method=' + method, 'content=' + content].join('&')
                     axios.get(urlICFCalcs, {params: params}) // '?content=' + JSON.stringify(vm.inputs[property].question))
                         .then(function (response) {
                             vm.inputs[property].result1 = response.data.icf_table_matrix_level1
@@ -157,6 +197,43 @@ var mainVM = new Vue({
                         this.inputs[property].len = 0
                     }
             }
+            // PRT maatriksite arvutamine
+            for (const prt_category of vm.prt_categories) {
+                prt_category.rfk_set = '';
+                for (const tvh_category of vm.inputs) {
+                    if (tvh_category.question && prt_category.tvh_categories.includes(tvh_category.id)) {
+                        prt_category.rfk_set += ('\n' + tvh_category.question);
+                    }
+                }
+                if (prt_category.rfk_set.length > 3) {
+                    params = {
+                        method: vm.selected,
+                        content: JSON.stringify(prt_category.rfk_set)
+                    }
+                    axios.get(urlICFCalcs, {params: params}) // '?content=' + JSON.stringify(vm.inputs[property].question))
+                        .then(function (response) {
+                            prt_category.result1 = response.data.icf_table_matrix_level1
+                            prt_category.result2 = response.data.icf_table_matrix_level2
+                            prt_category.result3 = response.data.icf_table_matrix_level3
+                            prt_category.resultVerbose4 = response.data.icf_table_verbose_level4
+                            prt_category.len = response.data.rfk_codeset_count
+                        })
+                        .catch(function (error) {
+                            prt_category.result1 = ''
+                            prt_category.result2 = ''
+                            prt_category.result3 = ''
+                            prt_category.resultVerbose4 = ''
+                            prt_category.len = 0
+                            // vm.answer = 'Error! Could not reach the API. ' + error
+                        })
+                    } else {
+                        prt_category.result1 = ''
+                        prt_category.result2 = ''
+                        prt_category.result3 = ''
+                        prt_category.resultVerbose4 = ''
+                        prt_category.len = 0
+                    }
+            }
         },
         getRFKSummary: function () {
             var vm = this
@@ -171,20 +248,23 @@ var mainVM = new Vue({
                     vm.resultSummary3 = response.data.icf_table_matrix_level3
                     vm.resultVerbose2 = response.data.icf_table_verbose_level2
                     vm.resultVerbose3 = response.data.icf_table_verbose_level3
+                    vm.resultVerbose4 = response.data.icf_table_verbose_level4
                 })
                 .catch(function (error) {
                     vm.answer = 'Error! Could not reach the API. ' + error
                 })
         },
-        makeDemo: function () {
-            this.rfkCode = 'b230'
+        makeDemo1: function () {
+            this.rfkCode = 'd450'
+            for (input of this.inputs) {
+                input.question = ''
+            }
             this.inputs[0].question = 'b28011.3\n' +
                 'd4104.2\n' +
                 'd4501.3\n' +
                 's6302.3\n' +
                 's4301.3\n' +
                 'd4154.2\n' +
-                'd8451.4\n' +
                 'b4402.2\n' +
                 'b4551.3\n' +
                 'b4552.2\n' +
@@ -195,6 +275,15 @@ var mainVM = new Vue({
                 's4201.3\n' +
                 's4301.3\n' +
                 'b4552.2'
+        },
+        makeDemo2: function () {
+            this.rfkCode = 'b230'
+            for (input of this.inputs) {
+                input.question = ''
+            }
+            this.inputs[2].question = 'd350.3\n' +
+                's110.3\n' +
+                'b230.3'
         }
     }
 })

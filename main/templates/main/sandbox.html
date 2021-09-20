@@ -37,7 +37,8 @@
             RFK mängunurk
           </a>
           <button onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-black">Mis värk on?</button>
-          <button v-on:click="makeDemo" class="w3-button w3-black">Demo</button>
+          <button v-on:click="makeDemo1" class="w3-button w3-black">Demo 1</button>
+          <button v-on:click="makeDemo2" class="w3-button w3-black">Demo 2</button>
         </div>
       </div>
       <div id="id01" class="w3-modal">
@@ -92,6 +93,7 @@
         [[ rfkPath ]]
       </p>
     </div>
+
     <div class="w3-container">
       <select v-model="selected">
         <option v-for="option in options" v-bind:value="option.value">
@@ -100,11 +102,13 @@
       </select>
       <span>Meetod: [[ selected ]]</span>
     </div>
+
+    <h4>Töövõime hindamise andmed</h4>
     <div class="w3-bar">
       <button
           class="w3-bar-item w3-button tablink"
           v-for="input in inputs"
-          v-on:click="openTab($event, 'valdkond_' + input.id)"
+          v-on:click="openTab($event, 'tvh_' + input.id)"
       >
         TVH[[ input.id ]]: [[ input.category ]] <span class="w3-text-red" v-if="input.len">([[ input.len ]])</span>
       </button>
@@ -113,8 +117,8 @@
         class="w3-row w3-padding-16 w3-border tab"
         v-for="input in inputs"
         v-bind:style="[(input.id===1) ?  {'display': ''}: {'display': 'none'}]"
-        v-bind:key="input.id"
-				v-bind:id="'valdkond_' + input.id"
+        v-bind:key="'tvh_' + input.id"
+				v-bind:id="'tvh_' + input.id"
     >
       <div class="w3-container w3-padding">
         <strong>[[ input.category ]]</strong>
@@ -146,6 +150,52 @@
       </div>
     </div>
 
+    <h4>Puude raskusaste andmed</h4>
+    <div class="w3-bar">
+      <button
+          class="w3-bar-item w3-button tablink"
+          v-for="input in prt_categories"
+          v-on:click="openTab($event, 'prt_' + input.id)"
+      >
+        TVH[[ input.id ]]: [[ input.category ]] <span class="w3-text-red" v-if="input.len">([[ input.len ]])</span>
+      </button>
+    </div>
+
+    <div
+        class="w3-row w3-padding-16 w3-border tab"
+        v-for="input in prt_categories"
+        v-bind:style="[(input.id===1) ?  {'display': ''}: {'display': 'none'}]"
+        v-bind:key="'prt_' + input.id"
+				v-bind:id="'prt_' + input.id"
+    >
+      <div class="w3-container w3-padding">
+        <strong>[[ input.category ]]</strong>
+      </div>
+      <div class="w3-col l1">
+        <div class="w3-container">
+          <span v-html="input.rfk_set"></span>
+        </div>
+      </div>
+      <div class="w3-col l2">
+        <div class="w3-container">
+          <span v-html="input.result1"></span>
+        </div>
+      </div>
+      <div class="w3-col l4">
+        <div class="w3-container">
+          <span v-html="input.result2"></span>
+        </div>
+        <div class="w3-row w3-padding-16">
+          <span v-html="input.resultVerbose4"></span>
+        </div>
+      </div>
+      <div class="w3-col l4">
+        <div class="w3-container">
+          <span v-html="input.result3"></span>
+        </div>
+      </div>
+    </div>
+
     <div class="w3-row">
       <div class="w3-container w3-padding">
         <strong>Kokkuvõte</strong>
@@ -160,7 +210,7 @@
           <span v-html="resultSummary2"></span>
         </div>
         <div class="w3-row w3-padding-16">
-          <span v-html="resultVerbose2"></span>
+          <span v-html="resultVerbose4"></span>
         </div>
       </div>
       <div class="w3-col l4 w3-container">
