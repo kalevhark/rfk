@@ -147,17 +147,24 @@ def get_rfk_title(code):
         title = 'Täpsustamata'
     return title
 
-def get_rfk_qualifier(code, score):
-    # qualifiers = ['ei ole probleemi', 'kerge probleem', 'mõõdukas probleem', 'raske probleem', 'täielik probleem']
-    qualifiers = {
-        'y': ['ei ole probleemi', 'kerge probleem', 'mõõdukas probleem', 'raske probleem', 'täielik probleem'],
-        'd': ['ei ole piirangut', 'kerge piirang', 'mõõdukas piirang', 'raske piirang', 'täielik piirang'],
-        'b': ['ei ole häiret', 'kerge häire', 'mõõdukas häire', 'raske häire', 'täielik häire'],
-        's': ['ei ole kahjustust', 'kerge kahjustus', 'mõõdukas kahjustus', 'raske kahjustus', 'täielik kahjustus'],
-    }
-    # qualifier = code[1]
+def get_rfk_qualifier(code, score, score_level=1):
+    qualifiers = [
+        { # 1. määraja
+            'y': ['ei ole probleemi', 'kerge probleem', 'mõõdukas probleem', 'raske probleem', 'täielik probleem'],
+            'd': ['ei ole piirangut', 'kerge piirang', 'mõõdukas piirang', 'raske piirang', 'täielik piirang'],
+            'b': ['ei ole häiret', 'kerge häire', 'mõõdukas häire', 'raske häire', 'täielik häire'],
+            's': ['ei ole kahjustust', 'kerge kahjustus', 'mõõdukas kahjustus', 'raske kahjustus', 'täielik kahjustus'],
+        },
+        { # 2. määraja
+            'd': ['ei ole piirangut', 'kerge piirang', 'mõõdukas piirang', 'raske piirang', 'täielik piirang'],
+            's': ['0', '1', '2', '3', '4'],
+        },
+        { # 3. määraja
+            's': ['ei ole kahjustust', 'kerge kahjustus', 'mõõdukas kahjustus', 'raske kahjustus', 'täielik kahjustus'],
+        }
+    ]
     try:
-        qualifier = qualifiers[code[0][0]][score]
+        qualifier = qualifiers[score_level-1][code[0][0]][score]
     except IndexError:
         qualifier = score
     return qualifier
