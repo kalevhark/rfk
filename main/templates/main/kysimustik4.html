@@ -30,7 +30,6 @@
       <h4>Enesehinnangu küsimustik</h4>
       <p>Palun hinda oma hakkamasaamist järgmiste tegevuste puhul 10-pallilisel skaalal, kus:</p>
       <p>1  = Hakkamasaamisega ei ole probleemi ja 10 = Ei saa selle tegevusega üldse hakkama</p>
-      <p>Palun hinda ...</p>
       <button @click="show = !show">
         <span v-if="show">Ära näita valdkondi/võtmetegevusi</span>
         <span v-else>Näita  valdkondi/võtmetegevusi</span>
@@ -38,11 +37,12 @@
       <table>
         <tr>
           <th class="question"></th>
+          <th>Jätan vastamata</th>
           <th class="poll" v-for="n in 10" :key="n">
             [[ n ]]
           </th>
-          <th class="result">MM18</th>
-          <th class="result">RFK</th>
+          <th class="result" title="Skoor 0-4 PISTS kord arvutamise metoodika alusel">MM18</th>
+          <th class="result" title="Skoor 0-4 RFK määraja arvutamise metoodika alusel">RFK</th>
         </tr>
 
         <tr v-show="show">
@@ -53,6 +53,10 @@
         </tr>
         <tr v-for="m in 3" :key="m">
           <td>Kysimus [[ m ]]</td>
+          <td class="poll">
+            <input type="radio" :id="0" :value="0" v-model.number="picked[m]"/>
+            <label :for="0"></label>
+          </td>
           <td class="poll" v-for="n in 10" :key="n">
             <input type="radio" :id="n" :value="n" v-model.number="picked[m]"/>
             <label :for="n"></label>
@@ -69,6 +73,10 @@
         </tr>
         <tr v-for="m in 3" :key="m">
           <td>Kysimus [[ m+3 ]]</td>
+          <td class="poll">
+            <input type="radio" :id="0" :value="0" v-model.number="picked[m+3]"/>
+            <label :for="0"></label>
+          </td>
           <td class="poll" v-for="n in 10" :key="n">
             <input type="radio" :id="n" :value="n" v-model.number="picked[m+3]"/>
             <label :for="n"></label>
@@ -85,6 +93,10 @@
         </tr>
         <tr v-for="m in 3" :key="m">
           <td>Kysimus [[ m+6 ]]</td>
+          <td class="poll">
+            <input type="radio" :id="0" :value="0" v-model.number="picked[m+6]"/>
+            <label :for="0"></label>
+          </td>
           <td class="poll" v-for="n in 10" :key="n">
             <input type="radio" :id="n" :value="n" v-model.number="picked[m+6]"/>
             <label :for="n"></label>
@@ -97,6 +109,10 @@
         </tr>
         <tr v-for="m in 3" :key="m">
           <td>Kysimus [[ m+9 ]]</td>
+          <td class="poll">
+            <input type="radio" :id="0" :value="0" v-model.number="picked[m+9]"/>
+            <label :for="0"></label>
+          </td>
           <td class="poll" v-for="n in 10" :key="n">
             <input type="radio" :id="n" :value="n" v-model.number="picked[m+9]"/>
             <label :for="n"></label>

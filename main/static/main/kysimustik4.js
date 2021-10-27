@@ -14,6 +14,9 @@ Vue.createApp({
     score2(n) {
       // `this` points to the vm instance
       return function (n) {
+        if (!this.picked[n]) {
+          return ''
+        }
         var result = 4/10*this.picked[n]
         if (result < 2) {
           return 0
@@ -33,6 +36,9 @@ Vue.createApp({
     score3(n) {
       // `this` points to the vm instance
       return function (n) {
+        if (!this.picked[n]) {
+          return ''
+        }
         var result = this.picked[n] / 10 * 100
         if (result <= 5) {
           return 0
