@@ -26,83 +26,92 @@
 
 {% block content %}
   <div class="w3-container" id="kysimustik4">
-    <button @click="show = !show"><span v-if="show">Ära näita</span><span v-else>Näita</span></button>
-    <table>
-      <tr>
-        <th class="question"></th>
-        <th class="poll" v-for="n in 10" :key="n">
-          [[ n ]]
-        </th>
-<!--        <th>V</th>-->
-        <th class="result">Lin</th>
-        <th class="result">MM18</th>
-        <th class="result">RFK</th>
-      </tr>
+    <div class="w3-panel w3-padding w3-card">
+      <h4>Enesehinnangu küsimustik</h4>
+      <p>Palun hinda oma hakkamasaamist järgmiste tegevuste puhul 10-pallilisel skaalal, kus:</p>
+      <p>1  = Hakkamasaamisega ei ole probleemi ja 10 = Ei saa selle tegevusega üldse hakkama</p>
+      <p>Palun hinda ...</p>
+      <button @click="show = !show">
+        <span v-if="show">Ära näita valdkondi/võtmetegevusi</span>
+        <span v-else>Näita  valdkondi/võtmetegevusi</span>
+      </button>
+      <table>
+        <tr>
+          <th class="question"></th>
+          <th class="poll" v-for="n in 10" :key="n">
+            [[ n ]]
+          </th>
+          <th class="result">MM18</th>
+          <th class="result">RFK</th>
+        </tr>
 
-      <tr v-show="show">
-        <td><strong>Liikumine</strong></td>
-      </tr>
-      <tr v-show="show">
-        <td>Võtmetegevus 1</td>
-      </tr>
-      <tr v-for="m in 3" :key="m">
-        <td>Kysimus [[ m ]]</td>
-        <td class="poll" v-for="n in 10" :key="n">
-          <input type="radio" :id="n" :value="n" v-model.number="picked[m]" />
-          <label :for="n"></label>
-        </td>
-<!--        <td>[[ picked[m] ]]</td>-->
-        <td class="result">[[ score1(m) ]]</td>
-        <td class="result">[[ score2(m) ]]</td>
-        <td class="result">[[ score3(m) ]]</td>
-      </tr>
-      <tr v-show="show">
-        <td>Võtmetegevus 2</td>
-      </tr>
-      <tr v-for="m in 3" :key="m">
-        <td>Kysimus [[ m+3 ]]</td>
-        <td class="poll" v-for="n in 10" :key="n">
-          <input type="radio" :id="n" :value="n" v-model.number="picked[m+3]" />
-          <label :for="n"></label>
-        </td>
-<!--        <td>[[ picked[m+3] ]]</td>-->
-        <td class="result">[[ score1(m+3) ]]</td>
-        <td class="result">[[ score2(m+3) ]]</td>
-        <td class="result">[[ score3(m+3) ]]</td>
-      </tr>
-      <tr><br></tr>
-      <tr v-show="show">
-        <td><strong>Käeline tegevus ja enesehooldus</strong></td>
-      </tr>
-      <tr v-show="show">
-        <td>Võtmetegevus 1</td>
-      </tr>
-      <tr v-for="m in 3" :key="m">
-        <td>Kysimus [[ m+6 ]]</td>
-        <td class="poll"  v-for="n in 10" :key="n">
-          <input type="radio" :id="n" :value="n" v-model.number="picked[m+6]" />
-          <label :for="n"></label>
-        </td>
-        <!--        <td>[[ picked[m] ]]</td>-->
-        <td class="result">[[ score1(m+6) ]]</td>
-        <td class="result">[[ score2(m+6) ]]</td>
-        <td class="result">[[ score3(m+6) ]]</td>
-      </tr>
-      <tr v-show="show">
-        <td>Võtmetegevus 2</td>
-      </tr>
-      <tr v-for="m in 3" :key="m">
-        <td>Kysimus [[ m+9 ]]</td>
-        <td class="poll" v-for="n in 10" :key="n">
-          <input type="radio" :id="n" :value="n" v-model.number="picked[m+9]" />
-          <label :for="n"></label>
-        </td>
-        <!--        <td>[[ picked[m+3] ]]</td>-->
-        <td class="result">[[ score1(m+9) ]]</td>
-        <td class="result">[[ score2(m+9) ]]</td>
-        <td class="result">[[ score3(m+9) ]]</td>
-      </tr>
-    </table>
+        <tr v-show="show">
+          <td><strong>Liikumine</strong></td>
+        </tr>
+        <tr v-show="show">
+          <td>Võtmetegevus 1</td>
+        </tr>
+        <tr v-for="m in 3" :key="m">
+          <td>Kysimus [[ m ]]</td>
+          <td class="poll" v-for="n in 10" :key="n">
+            <input type="radio" :id="n" :value="n" v-model.number="picked[m]"/>
+            <label :for="n"></label>
+          </td>
+          <td class="result">[[ score2(m) ]]</td>
+          <td class="result">[[ score3(m) ]]</td>
+          <td v-show="picked[m] > 4">
+            <p>Palun täpsusta mis piirangut põhjustab</p>
+            <textarea placeholder="siia saab kirjutada pika jutu..."></textarea>
+          </td>
+        </tr>
+        <tr v-show="show">
+          <td>Võtmetegevus 2</td>
+        </tr>
+        <tr v-for="m in 3" :key="m">
+          <td>Kysimus [[ m+3 ]]</td>
+          <td class="poll" v-for="n in 10" :key="n">
+            <input type="radio" :id="n" :value="n" v-model.number="picked[m+3]"/>
+            <label :for="n"></label>
+          </td>
+          <td class="result">[[ score2(m+3) ]]</td>
+          <td class="result">[[ score3(m+3) ]]</td>
+        </tr>
+        <tr><br></tr>
+        <tr v-show="show">
+          <td><strong>Käeline tegevus ja enesehooldus</strong></td>
+        </tr>
+        <tr v-show="show">
+          <td>Võtmetegevus 1</td>
+        </tr>
+        <tr v-for="m in 3" :key="m">
+          <td>Kysimus [[ m+6 ]]</td>
+          <td class="poll" v-for="n in 10" :key="n">
+            <input type="radio" :id="n" :value="n" v-model.number="picked[m+6]"/>
+            <label :for="n"></label>
+          </td>
+          <td class="result">[[ score2(m+6) ]]</td>
+          <td class="result">[[ score3(m+6) ]]</td>
+        </tr>
+        <tr v-show="show">
+          <td>Võtmetegevus 2</td>
+        </tr>
+        <tr v-for="m in 3" :key="m">
+          <td>Kysimus [[ m+9 ]]</td>
+          <td class="poll" v-for="n in 10" :key="n">
+            <input type="radio" :id="n" :value="n" v-model.number="picked[m+9]"/>
+            <label :for="n"></label>
+          </td>
+          <td class="result">[[ score2(m+9) ]]</td>
+          <td class="result">[[ score3(m+9) ]]</td>
+        </tr>
+      </table>
+    </div>
+    <div class="w3-panel w3-padding w3-card">
+      <div v-for="n in 3" :key="n">
+        <p>Vabateksti küsimus [[ n ]]</p>
+        <textarea placeholder="siia saab kirjutada pika jutu..."></textarea>
+      </div>
+    </div>
   </div>
 {% endblock %}
 
