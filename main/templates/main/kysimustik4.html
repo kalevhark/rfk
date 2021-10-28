@@ -64,7 +64,7 @@
           <td class="result">[[ score2(m) ]]</td>
           <td class="result">[[ score3(m) ]]</td>
           <td v-show="picked[m] > 4">
-            <p>Palun täpsusta mis piirangut põhjustab</p>
+            <p>Palun täpsusta, mis piirangut põhjustab</p>
             <textarea placeholder="siia saab kirjutada pika jutu..."></textarea>
           </td>
         </tr>
@@ -83,6 +83,10 @@
           </td>
           <td class="result">[[ score2(m+3) ]]</td>
           <td class="result">[[ score3(m+3) ]]</td>
+          <td v-show="picked[m+3] > 4">
+            <p>Palun täpsusta, mis piirangut põhjustab</p>
+            <textarea placeholder="siia saab kirjutada pika jutu..."></textarea>
+          </td>
         </tr>
         <tr><br></tr>
         <tr v-show="show">
@@ -103,6 +107,10 @@
           </td>
           <td class="result">[[ score2(m+6) ]]</td>
           <td class="result">[[ score3(m+6) ]]</td>
+          <td v-show="picked[m+6] > 4">
+            <p>Palun täpsusta, mis piirangut põhjustab</p>
+            <textarea placeholder="siia saab kirjutada pika jutu..."></textarea>
+          </td>
         </tr>
         <tr v-show="show">
           <td>Võtmetegevus 2</td>
@@ -119,6 +127,10 @@
           </td>
           <td class="result">[[ score2(m+9) ]]</td>
           <td class="result">[[ score3(m+9) ]]</td>
+          <td v-show="picked[m+9] > 4">
+            <p>Palun täpsusta, mis piirangut põhjustab</p>
+            <textarea placeholder="siia saab kirjutada pika jutu..."></textarea>
+          </td>
         </tr>
       </table>
     </div>
