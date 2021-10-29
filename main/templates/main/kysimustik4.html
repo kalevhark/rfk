@@ -28,6 +28,13 @@
   <div class="w3-container" id="kysimustik4">
     <div class="w3-panel w3-padding w3-card">
       <h4>Enesehinnangu küsimustik</h4>
+      <span>Kas on mõni küsimustiku täitmist lihtsustav seisund?</span>
+      <select v-model="selected">
+        <option v-for="option in options" v-bind:value="option.value">
+          [[ option.text ]]
+        </option>
+      </select>
+      <span v-if="simplified">Võid järgneva küsimustiku täitmise vahele jätta </span>
       <p>Palun hinda oma hakkamasaamist järgmiste tegevuste puhul 10-pallilisel skaalal, kus:</p>
       <p>1  = Hakkamasaamisega ei ole probleemi ja 10 = Ei saa selle tegevusega üldse hakkama</p>
       <button @click="show = !show">

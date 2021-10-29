@@ -3,7 +3,13 @@ Vue.createApp({
   data() {
     return {
       picked: ['','','','','','','','','','','','','','','','','',''],
-      show: true
+      show: true,
+      selected: '',
+      options: [
+        { text: '---', value: '' },
+        { text: 'Jah', value: 'A' },
+        { text: 'Ei', value: 'B' },
+      ]
     }
   },
   computed: {
@@ -57,6 +63,9 @@ Vue.createApp({
         }
         return ''
       }
+    },
+    simplified() {
+      return this.selected === 'A'
     }
   }
 }).mount('#kysimustik4')
