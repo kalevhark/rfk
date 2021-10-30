@@ -26,6 +26,25 @@
 
 {% block content %}
   <div class="w3-container" id="kysimustik4">
+    <button onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-black">
+      Mis värk on?
+    </button>
+    <div id="id01" class="w3-modal">
+      <div class="w3-modal-content">
+        <div class="w3-container">
+          <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+          <p>Enesehinnangust piirangu määraja arvutamine inimese valiku järgi</p>
+          <ul>
+            <li>inimene teeb valiku skaalal 1-10 -> valik</li>
+            <li>skoor = 4 / 10 * valik (arvutatakse kahe komakoha täpsusega)</li>
+            <li>määraja = 0, kui skoor < 2,00</li>
+            <li>määraja = 2, kui 2,00 <= skoor < 2,76</li>
+            <li>määraja = 3, kui 2,76 <= skoor < 3,50</li>
+            <li>määraja = 4, kui 3,50 <= skoor</li>
+          </ul>
+        </div>
+      </div>
+    </div>
     <div class="w3-panel w3-padding w3-card">
       <h4>Enesehinnangu küsimustik</h4>
       <span>Kas on mõni küsimustiku täitmist lihtsustav seisund?</span>
@@ -48,8 +67,7 @@
           <th class="poll" v-for="n in 10" :key="n">
             [[ n ]]
           </th>
-          <th class="result" title="Skoor 0-4 PISTS kord arvutamise metoodika alusel">MM18</th>
-          <th class="result" title="Skoor 0-4 RFK määraja arvutamise metoodika alusel">RFK</th>
+          <th v-show="show" class="result" title="Skoor 0-4 PISTS kord arvutamise metoodika alusel">MM18</th>
         </tr>
 
         <tr v-show="show">
@@ -68,8 +86,7 @@
             <input type="radio" :id="n" :value="n" v-model.number="picked[m]"/>
             <label :for="n"></label>
           </td>
-          <td class="result">[[ score2(m) ]]</td>
-          <td class="result">[[ score3(m) ]]</td>
+          <td  v-show="show" class="result">[[ score2(m) ]]</td>
           <td v-show="picked[m] > 4">
             <p>Palun täpsusta, mis piirangut põhjustab</p>
             <textarea placeholder="siia saab kirjutada pika jutu..."></textarea>
@@ -88,8 +105,7 @@
             <input type="radio" :id="n" :value="n" v-model.number="picked[m+3]"/>
             <label :for="n"></label>
           </td>
-          <td class="result">[[ score2(m+3) ]]</td>
-          <td class="result">[[ score3(m+3) ]]</td>
+          <td  v-show="show" class="result">[[ score2(m+3) ]]</td>
           <td v-show="picked[m+3] > 4">
             <p>Palun täpsusta, mis piirangut põhjustab</p>
             <textarea placeholder="siia saab kirjutada pika jutu..."></textarea>
@@ -112,8 +128,7 @@
             <input type="radio" :id="n" :value="n" v-model.number="picked[m+6]"/>
             <label :for="n"></label>
           </td>
-          <td class="result">[[ score2(m+6) ]]</td>
-          <td class="result">[[ score3(m+6) ]]</td>
+          <td  v-show="show" class="result">[[ score2(m+6) ]]</td>
           <td v-show="picked[m+6] > 4">
             <p>Palun täpsusta, mis piirangut põhjustab</p>
             <textarea placeholder="siia saab kirjutada pika jutu..."></textarea>
@@ -132,8 +147,7 @@
             <input type="radio" :id="n" :value="n" v-model.number="picked[m+9]"/>
             <label :for="n"></label>
           </td>
-          <td class="result">[[ score2(m+9) ]]</td>
-          <td class="result">[[ score3(m+9) ]]</td>
+          <td  v-show="show" class="result">[[ score2(m+9) ]]</td>
           <td v-show="picked[m+9] > 4">
             <p>Palun täpsusta, mis piirangut põhjustab</p>
             <textarea placeholder="siia saab kirjutada pika jutu..."></textarea>
