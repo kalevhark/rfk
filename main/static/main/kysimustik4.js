@@ -3,26 +3,26 @@ Vue.createApp({
   data() {
     return {
       picked: ['','','','','','','','','','','','','','','','','',''],
-      show: true,
+      show: false,
       selected: '',
       valdkonnad: [
         [
           'Liikumine',
           [
             [
-              'Võtmevaldkond 1',
+              'Liikumine eri tasapindadel',
               [
                 ['Küsimus 1', ''], ['Küsimus 2', ''], ['Küsimus 3', '']
               ]
             ],
             [
-              'Võtmevaldkond 2',
+              'Ohutu ja takistusteta ringiliikumine',
               [
                 ['Küsimus 1', ''], ['Küsimus 2', '']
               ]
             ],
             [
-              'Võtmevaldkond 3',
+              'Seismine ja istumine',
               [
                 ['Küsimus 1', ''], ['Küsimus 2', ''], ['Küsimus 3', '']
               ]
@@ -30,20 +30,135 @@ Vue.createApp({
           ]
         ],
         [
-          'Käeline tegevus ja enesehooldus',
+          'Käeline tegevus',
           [
             [
-              'Võtmevaldkond 1',
+              'Käte sirutamine',
               [
                 ['Küsimus 1', ''], ['Küsimus 2', ''], ['Küsimus 3', '']
               ]
             ],
             [
-              'Võtmevaldkond 2',
+              'Asjade ülestõstmine ja liigutamine',
               [
                 ['Küsimus 1', ''], ['Küsimus 2', '']
               ]
             ],
+            [
+              'Käteosavus',
+              [
+                ['Küsimus 1', ''], ['Küsimus 2', '']
+              ]
+            ]
+          ],
+        ],
+        [
+          'Suhtlemine',
+          [
+            [
+              'Nägemine',
+              [
+                ['Küsimus 1', ''], ['Küsimus 2', ''], ['Küsimus 3', '']
+              ]
+            ],
+            [
+              'Kuulmine',
+              [
+                ['Küsimus 1', ''], ['Küsimus 2', '']
+              ]
+            ],
+            [
+              'Kõnelemine',
+              [
+                ['Küsimus 1', ''], ['Küsimus 2', '']
+              ]
+            ],
+            [
+              'Teiste inimestega suhtlemine',
+              [
+                ['Küsimus 1', ''], ['Küsimus 2', '']
+              ]
+            ]
+          ],
+        ],
+        [
+          'Teadvusel püsimine ja enesehooldus',
+          [
+            [
+              'Teadvusel püsimine ärkveloleku ajal',
+              [
+                ['Küsimus 1', ''], ['Küsimus 2', ''], ['Küsimus 3', '']
+              ]
+            ],
+            [
+              'Soole ja põie kontrollimine',
+              [
+                ['Küsimus 1', ''], ['Küsimus 2', '']
+              ]
+            ],
+            [
+              'Söömine ja joomine',
+              [
+                ['Küsimus 1', ''], ['Küsimus 2', '']
+              ]
+            ]
+          ],
+        ],
+        [
+          'Õppimine ja tegevuste elluviimine',
+          [
+            [
+              'Tegevuste õppimine',
+              [
+                // ['Küsimus 1', ''], ['Küsimus 2', ''], ['Küsimus 3', '']
+              ]
+            ],
+            [
+              'Tegevuste alustamine ja lõpetamine',
+              [
+                ['Küsimus 1', ''], ['Küsimus 2', '']
+              ]
+            ]
+          ],
+        ],
+        [
+          'Muutustega kohanemine ja ohu tajumine',
+          [
+            [
+              'Väljaskäimine',
+              [
+                ['Küsimus 1', ''], ['Küsimus 2', ''], ['Küsimus 3', '']
+              ]
+            ],
+            [
+              'Ohu tajumine',
+              [
+                ['Küsimus 1', ''], ['Küsimus 2', '']
+              ]
+            ],
+            [
+              'Toimetulek muutustega',
+              [
+                ['Küsimus 1', ''], ['Küsimus 2', '']
+              ]
+            ]
+          ],
+        ],
+        [
+          'Inimestevaheline lävimine ja suhted',
+          [
+            [
+              'Sotsiaalsete olukordadega hakkamasaamine',
+              [
+                ['Küsimus 1', ''], ['Küsimus 2', ''], ['Küsimus 3', '']
+              ]
+            ],
+            [
+              'Olukorrale kohane käitumine',
+              [
+                ['Küsimus 1', ''], ['Küsimus 2', '']
+              ]
+            ]
           ],
         ]
       ],

@@ -62,8 +62,8 @@
       <p>Palun hinda oma hakkamasaamist järgmiste tegevuste puhul 10-pallilisel skaalal, kus:</p>
       <p>1  = Hakkamasaamisega ei ole probleemi ja 10 = Ei saa selle tegevusega üldse hakkama</p>
       <button @click="show = !show">
-        <span v-if="show">Ära näita valdkondi/võtmetegevusi</span>
-        <span v-else>Näita  valdkondi/võtmetegevusi</span>
+        <span v-if="show">Ära näita valdkondi/võtmetegevusi/skoori</span>
+        <span v-else>Näita  valdkondi/võtmetegevusi/skoori</span>
       </button>
       <div>
         <table>
@@ -77,9 +77,9 @@
           </tr>
         </table>
         <div v-for="(valdkond, valdkondIndex) in valdkonnad">
-          <span v-show="show">[[ valdkond[0] ]]</span>
-          <div v-for="(v6tmetegevus, v6tmetegevusIndex) in valdkond[1]">
-            <span v-show="show">[[ v6tmetegevus[0] ]]</span>
+          <p v-show="show">[[ valdkondIndex+1 ]]. [[ valdkond[0] ]]</p>
+          <div v-show="valdkond[1].length>0" v-for="(v6tmetegevus, v6tmetegevusIndex) in valdkond[1]">
+            <p v-show="show">[[ valdkondIndex+1 ]].[[ v6tmetegevusIndex+1 ]]. [[ v6tmetegevus[0] ]]</p>
             <div v-for="(kysimus, kysimusIndex) in v6tmetegevus[1]">
               [[ valdkondIndex+1 ]].[[ v6tmetegevusIndex+1 ]].[[ kysimusIndex+1 ]] [[ kysimus[0] ]]<br>
               <table>
