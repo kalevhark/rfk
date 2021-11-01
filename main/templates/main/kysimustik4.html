@@ -12,6 +12,11 @@
       width: 300px;
     }
 
+    .unanswered {
+      width: 100px;
+      text-align: center;
+    }
+
     .poll {
       width: 30px;
       text-align: center;
@@ -60,6 +65,45 @@
         <span v-if="show">Ära näita valdkondi/võtmetegevusi</span>
         <span v-else>Näita  valdkondi/võtmetegevusi</span>
       </button>
+      <div>
+        <table>
+          <tr>
+            <th class="question"></th>
+            <th class="unanswered">Jätan vastamata</th>
+            <th class="poll" v-for="n in 10" :key="n">
+              [[ n ]]
+            </th>
+            <th v-show="show" class="result" title="Skoor 0-4 PISTS kord arvutamise metoodika alusel">MM18</th>
+          </tr>
+        </table>
+        <div v-for="(valdkond, valdkondIndex) in valdkonnad">
+          <span v-show="show">[[ valdkond[0] ]]</span>
+          <div v-for="(v6tmetegevus, v6tmetegevusIndex) in valdkond[1]">
+            <span v-show="show">[[ v6tmetegevus[0] ]]</span>
+            <div v-for="(kysimus, kysimusIndex) in v6tmetegevus[1]">
+              [[ valdkondIndex+1 ]].[[ v6tmetegevusIndex+1 ]].[[ kysimusIndex+1 ]] [[ kysimus[0] ]]<br>
+              <table>
+                <tr>
+                  <td class="question"></td>
+                  <td class="unanswered">
+                    <input type="radio" :id="0" :value="0" v-model.number="kysimus[1]"/>
+                    <label :for="0"></label>
+                  </td>
+                  <td class="poll" v-for="n in 10" :key="n">
+                    <input type="radio" :id="n" :value="n" v-model.number="kysimus[1]"/>
+                    <label :for="n"></label>
+                  </td>
+                  <td v-show="show" class="result">[[ score2_uus(valdkondIndex, v6tmetegevusIndex, kysimusIndex) ]]</td>
+                </tr>
+              </table>
+              <p v-show="kysimus[1] > 4">
+                Palun täpsusta, mis piirangut põhjustab:<br>
+                <textarea placeholder="siia saab kirjutada pika jutu..."></textarea>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
       <table>
         <tr>
           <th class="question"></th>
