@@ -18,13 +18,13 @@ Vue.createApp({
             [
               'Ohutu ja takistusteta ringiliikumine',
               [
-                ['Oma kodus ringi liikumisel?', ''], ['Oma kodust väljas käimisel?', '']
+                ['Oma kodus toa piires ringi liikumisel?', ''], ['Oma kodust väljas käimisel?', '']
               ]
             ],
             [
               'Seismine ja istumine',
               [
-                ['Istest püsti tõusmisel?', ''],
+                ['Istumast püsti tõusmisel?', ''],
               ]
             ],
           ]
@@ -53,7 +53,7 @@ Vue.createApp({
             [
               'Muud käelise tegevuse piirangud',
               [
-                ['Oma koduste töödega hakkama saamisel?', '']
+                ['Majapidamiskohustustega hakkama saamisel?', '']
               ]
             ]
           ],
@@ -82,7 +82,7 @@ Vue.createApp({
             [
               'Teiste inimestega suhtlemine',
               [
-                ['Suhtlemise alustamisel ja edasises osalemises?', ''],
+                ['Suhtluse alustamisel ja vestluses osalemisel?', ''],
               ]
             ]
           ],
@@ -111,7 +111,10 @@ Vue.createApp({
             [
               'Muud teadvusel püsimise ja enesehoolduse piirangud',
               [
-                ['Üle keha pesemisel?', ''], ['Riietumisel?', ''], ['Paar päeva iseseisvalt hakkama saamisel?', '']
+                ['Üle keha pesemisel?', ''],
+                ['Riietumisel?', ''],
+                ['Igapäevategevustel (nt söömisel, riietumisel, pesemisel, tualetitoimingutel)?', ''],
+                ['Mõned päevad iseseisvalt hakkama saamisel?', ''],
               ]
             ]
           ],
@@ -134,7 +137,7 @@ Vue.createApp({
             [
               'Muud õppimise ja tegevuste elluviimise piirangud',
               [
-                ['Oma igapäevase lasteaias/koolis/tööl käimisega?', '']
+                ['Lasteaias/koolis/tööl käimisega?', '']
               ]
             ]
           ],
@@ -157,7 +160,7 @@ Vue.createApp({
             [
               'Toimetulek muutustega',
               [
-                ['Igapäevaelu probleemidega hakkama saamisel?', '']
+                ['Igapäevaelu korraldamisel ja tegevustega hakkama saamisel?', '']
               ]
             ]
           ],
@@ -180,7 +183,7 @@ Vue.createApp({
             [
               'Muud inimestevahelise lävimise ja suhete piirangud',
               [
-                ['Võõraste inimestega hakkama saamisel?', ''], ['Lähedastega koos olemisel?', '']
+                ['Suhtlemisel inimestega, keda te ei tunne?', ''], ['Lähedaste inimestega läbisaamisel?', '']
               ]
             ]
           ],
@@ -190,6 +193,11 @@ Vue.createApp({
         { text: '---', value: '' },
         { text: 'Jah', value: 'A' },
         { text: 'Ei', value: 'B' },
+      ],
+      yldkysimused: [
+        'Kirjeldage oma sõnadega, millist abi ja hoolitsust vajate oma terviseseisundist enam võrreldes teiste eakaaslastega?',
+        'Kui sageli olete kogenud takistusi ja piiranguid tulenevalt ümbritsevast keskkonnast?',
+        'Kui palju on olnud teie lähedastel probleeme teie terviseseisundi tõttu?/Kas lähedased on pidanud teie terviseseisundi tõttu pidanud elukorraldust muutma?',
       ]
     }
   },

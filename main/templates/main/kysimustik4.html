@@ -42,7 +42,8 @@
           <ul>
             <li>inimene teeb valiku skaalal 1-10 -> valik</li>
             <li>skoor = 4 / 10 * valik (arvutatakse kahe komakoha täpsusega)</li>
-            <li>määraja = 0, kui skoor < 2,00</li>
+            <li>määraja = 0, kui skoor < 1,00</li>
+            <li>määraja = 1, kui 1,00 <= skoor < 2,00</li>
             <li>määraja = 2, kui 2,00 <= skoor < 2,76</li>
             <li>määraja = 3, kui 2,76 <= skoor < 3,50</li>
             <li>määraja = 4, kui 3,50 <= skoor</li>
@@ -50,8 +51,13 @@
         </div>
       </div>
     </div>
+    <button @click="show = !show" class="w3-button">
+      <span v-if="show">Ära näita valdkondi/võtmetegevusi/skoori</span>
+      <span v-else>Näita  valdkondi/võtmetegevusi/skoori</span>
+    </button>
     <div class="w3-panel w3-padding w3-card">
       <h4>Enesehinnangu küsimustik</h4>
+
       <span>Kas on mõni küsimustiku täitmist lihtsustav seisund?</span>
       <select v-model="selected">
         <option v-for="option in options" v-bind:value="option.value">
@@ -59,11 +65,7 @@
         </option>
       </select>
       <span v-if="simplified">Võid järgneva küsimustiku täitmise vahele jätta </span>
-      <p>Kui palju raskusi on teil olnud viimase 30 päeva jooksul:</p>
-      <button @click="show = !show">
-        <span v-if="show">Ära näita valdkondi/võtmetegevusi/skoori</span>
-        <span v-else>Näita  valdkondi/võtmetegevusi/skoori</span>
-      </button>
+      <p>Kui palju raskusi on teil olnud viimase 30 päeva jooksul (1 = probleeme ei olnud, 10 = probleeme on olnud iga päev):</p>
       <div>
         <table>
           <tr>
@@ -96,111 +98,17 @@
                 </tr>
               </table>
               <p v-show="kysimus[1] > 4">
-                Täpsustage palun, millised terviseseisundist tulenevad piirangud selle tegevuse puhul probleeme põhjustavad?<br>
+                Täpsustage palun, milline tervisehäire peamiselt piiranguid põhjustab?<br>
                 <textarea placeholder="siia saab kirjutada pika jutu..."></textarea>
               </p>
             </div>
           </div>
         </div>
       </div>
-      <table>
-        <tr>
-          <th class="question"></th>
-          <th>Jätan vastamata</th>
-          <th class="poll" v-for="n in 10" :key="n">
-            [[ n ]]
-          </th>
-          <th v-show="show" class="result" title="Skoor 0-4 PISTS kord arvutamise metoodika alusel">MM18</th>
-        </tr>
-
-        <tr v-show="show">
-          <td><strong>Liikumine</strong></td>
-        </tr>
-        <tr v-show="show">
-          <td>Võtmetegevus 1</td>
-        </tr>
-        <tr v-for="m in 3" :key="m">
-          <td>Kysimus [[ m ]]</td>
-          <td class="poll">
-            <input type="radio" :id="0" :value="0" v-model.number="picked[m]"/>
-            <label :for="0"></label>
-          </td>
-          <td class="poll" v-for="n in 10" :key="n">
-            <input type="radio" :id="n" :value="n" v-model.number="picked[m]"/>
-            <label :for="n"></label>
-          </td>
-          <td  v-show="show" class="result">[[ score2(m) ]]</td>
-          <td v-show="picked[m] > 4">
-            <p>Palun täpsusta, mis piirangut põhjustab</p>
-            <textarea placeholder="siia saab kirjutada pika jutu..."></textarea>
-          </td>
-        </tr>
-        <tr v-show="show">
-          <td>Võtmetegevus 2</td>
-        </tr>
-        <tr v-for="m in 3" :key="m">
-          <td>Kysimus [[ m+3 ]]</td>
-          <td class="poll">
-            <input type="radio" :id="0" :value="0" v-model.number="picked[m+3]"/>
-            <label :for="0"></label>
-          </td>
-          <td class="poll" v-for="n in 10" :key="n">
-            <input type="radio" :id="n" :value="n" v-model.number="picked[m+3]"/>
-            <label :for="n"></label>
-          </td>
-          <td  v-show="show" class="result">[[ score2(m+3) ]]</td>
-          <td v-show="picked[m+3] > 4">
-            <p>Palun täpsusta, mis piirangut põhjustab</p>
-            <textarea placeholder="siia saab kirjutada pika jutu..."></textarea>
-          </td>
-        </tr>
-        <tr><br></tr>
-        <tr v-show="show">
-          <td><strong>Käeline tegevus ja enesehooldus</strong></td>
-        </tr>
-        <tr v-show="show">
-          <td>Võtmetegevus 1</td>
-        </tr>
-        <tr v-for="m in 3" :key="m">
-          <td>Kysimus [[ m+6 ]]</td>
-          <td class="poll">
-            <input type="radio" :id="0" :value="0" v-model.number="picked[m+6]"/>
-            <label :for="0"></label>
-          </td>
-          <td class="poll" v-for="n in 10" :key="n">
-            <input type="radio" :id="n" :value="n" v-model.number="picked[m+6]"/>
-            <label :for="n"></label>
-          </td>
-          <td  v-show="show" class="result">[[ score2(m+6) ]]</td>
-          <td v-show="picked[m+6] > 4">
-            <p>Palun täpsusta, mis piirangut põhjustab</p>
-            <textarea placeholder="siia saab kirjutada pika jutu..."></textarea>
-          </td>
-        </tr>
-        <tr v-show="show">
-          <td>Võtmetegevus 2</td>
-        </tr>
-        <tr v-for="m in 3" :key="m">
-          <td>Kysimus [[ m+9 ]]</td>
-          <td class="poll">
-            <input type="radio" :id="0" :value="0" v-model.number="picked[m+9]"/>
-            <label :for="0"></label>
-          </td>
-          <td class="poll" v-for="n in 10" :key="n">
-            <input type="radio" :id="n" :value="n" v-model.number="picked[m+9]"/>
-            <label :for="n"></label>
-          </td>
-          <td  v-show="show" class="result">[[ score2(m+9) ]]</td>
-          <td v-show="picked[m+9] > 4">
-            <p>Palun täpsusta, mis piirangut põhjustab</p>
-            <textarea placeholder="siia saab kirjutada pika jutu..."></textarea>
-          </td>
-        </tr>
-      </table>
     </div>
     <div class="w3-panel w3-padding w3-card">
-      <div v-for="n in 3" :key="n">
-        <p>Vabateksti küsimus [[ n ]]</p>
+      <div v-for="(kysimus, kysimusIndex) in yldkysimused" :key="kysimusIndex">
+        <p>[[ kysimus ]]</p>
         <textarea placeholder="siia saab kirjutada pika jutu..."></textarea>
       </div>
     </div>
