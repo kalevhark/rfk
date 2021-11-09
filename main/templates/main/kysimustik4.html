@@ -59,8 +59,7 @@
         </option>
       </select>
       <span v-if="simplified">Võid järgneva küsimustiku täitmise vahele jätta </span>
-      <p>Palun hinda oma hakkamasaamist järgmiste tegevuste puhul 10-pallilisel skaalal, kus:</p>
-      <p>1  = Hakkamasaamisega ei ole probleemi ja 10 = Ei saa selle tegevusega üldse hakkama</p>
+      <p>Kui palju raskusi on teil olnud viimase 30 päeva jooksul:</p>
       <button @click="show = !show">
         <span v-if="show">Ära näita valdkondi/võtmetegevusi/skoori</span>
         <span v-else>Näita  valdkondi/võtmetegevusi/skoori</span>
@@ -97,7 +96,7 @@
                 </tr>
               </table>
               <p v-show="kysimus[1] > 4">
-                Palun täpsusta, mis piirangut põhjustab:<br>
+                Täpsustage palun, millised terviseseisundist tulenevad piirangud selle tegevuse puhul probleeme põhjustavad?<br>
                 <textarea placeholder="siia saab kirjutada pika jutu..."></textarea>
               </p>
             </div>

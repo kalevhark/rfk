@@ -12,19 +12,19 @@ Vue.createApp({
             [
               'Liikumine eri tasapindadel',
               [
-                ['Küsimus 1', ''], ['Küsimus 2', ''], ['Küsimus 3', '']
+                // ['Küsimus 1', ''], ['Küsimus 2', ''], ['Küsimus 3', '']
               ]
             ],
             [
               'Ohutu ja takistusteta ringiliikumine',
               [
-                ['Küsimus 1', ''], ['Küsimus 2', '']
+                ['Oma kodus ringi liikumisel?', ''], ['Oma kodust väljas käimisel?', '']
               ]
             ],
             [
               'Seismine ja istumine',
               [
-                ['Küsimus 1', ''], ['Küsimus 2', ''], ['Küsimus 3', '']
+                ['Istest püsti tõusmisel?', ''],
               ]
             ],
           ]
@@ -35,19 +35,25 @@ Vue.createApp({
             [
               'Käte sirutamine',
               [
-                ['Küsimus 1', ''], ['Küsimus 2', ''], ['Küsimus 3', '']
+                // ['Küsimus 1', ''], ['Küsimus 2', ''], ['Küsimus 3', '']
               ]
             ],
             [
               'Asjade ülestõstmine ja liigutamine',
               [
-                ['Küsimus 1', ''], ['Küsimus 2', '']
+                // ['Küsimus 1', ''], ['Küsimus 2', '']
               ]
             ],
             [
               'Käteosavus',
               [
-                ['Küsimus 1', ''], ['Küsimus 2', '']
+                // ['Küsimus 1', ''], ['Küsimus 2', '']
+              ]
+            ],
+            [
+              'Muud käelise tegevuse piirangud',
+              [
+                ['Oma koduste töödega hakkama saamisel?', '']
               ]
             ]
           ],
@@ -58,25 +64,25 @@ Vue.createApp({
             [
               'Nägemine',
               [
-                ['Küsimus 1', ''], ['Küsimus 2', ''], ['Küsimus 3', '']
+                // ['Küsimus 1', ''], ['Küsimus 2', ''], ['Küsimus 3', '']
               ]
             ],
             [
               'Kuulmine',
               [
-                ['Küsimus 1', ''], ['Küsimus 2', '']
+                // ['Küsimus 1', ''], ['Küsimus 2', '']
               ]
             ],
             [
               'Kõnelemine',
               [
-                ['Küsimus 1', ''], ['Küsimus 2', '']
+                // ['Küsimus 1', ''], ['Küsimus 2', '']
               ]
             ],
             [
               'Teiste inimestega suhtlemine',
               [
-                ['Küsimus 1', ''], ['Küsimus 2', '']
+                ['Suhtlemise alustamisel ja edasises osalemises?', ''],
               ]
             ]
           ],
@@ -87,19 +93,25 @@ Vue.createApp({
             [
               'Teadvusel püsimine ärkveloleku ajal',
               [
-                ['Küsimus 1', ''], ['Küsimus 2', ''], ['Küsimus 3', '']
+                // ['Küsimus 1', ''], ['Küsimus 2', ''], ['Küsimus 3', '']
               ]
             ],
             [
               'Soole ja põie kontrollimine',
               [
-                ['Küsimus 1', ''], ['Küsimus 2', '']
+                // ['Küsimus 1', ''], ['Küsimus 2', '']
               ]
             ],
             [
               'Söömine ja joomine',
               [
-                ['Küsimus 1', ''], ['Küsimus 2', '']
+                ['Söömisel?', '']
+              ]
+            ],
+            [
+              'Muud teadvusel püsimise ja enesehoolduse piirangud',
+              [
+                ['Üle keha pesemisel?', ''], ['Riietumisel?', ''], ['Paar päeva iseseisvalt hakkama saamisel?', '']
               ]
             ]
           ],
@@ -116,7 +128,13 @@ Vue.createApp({
             [
               'Tegevuste alustamine ja lõpetamine',
               [
-                ['Küsimus 1', ''], ['Küsimus 2', '']
+                ['Oluliste tegemiste meeldejätmisega?', '']
+              ]
+            ],
+            [
+              'Muud õppimise ja tegevuste elluviimise piirangud',
+              [
+                ['Oma igapäevase lasteaias/koolis/tööl käimisega?', '']
               ]
             ]
           ],
@@ -127,19 +145,19 @@ Vue.createApp({
             [
               'Väljaskäimine',
               [
-                ['Küsimus 1', ''], ['Küsimus 2', ''], ['Küsimus 3', '']
+                // ['Küsimus 1', ''], ['Küsimus 2', ''], ['Küsimus 3', '']
               ]
             ],
             [
               'Ohu tajumine',
               [
-                ['Küsimus 1', ''], ['Küsimus 2', '']
+                // ['Küsimus 1', ''], ['Küsimus 2', '']
               ]
             ],
             [
               'Toimetulek muutustega',
               [
-                ['Küsimus 1', ''], ['Küsimus 2', '']
+                ['Igapäevaelu probleemidega hakkama saamisel?', '']
               ]
             ]
           ],
@@ -150,13 +168,19 @@ Vue.createApp({
             [
               'Sotsiaalsete olukordadega hakkamasaamine',
               [
-                ['Küsimus 1', ''], ['Küsimus 2', ''], ['Küsimus 3', '']
+                // ['Küsimus 1', ''], ['Küsimus 2', ''], ['Küsimus 3', '']
               ]
             ],
             [
               'Olukorrale kohane käitumine',
               [
-                ['Küsimus 1', ''], ['Küsimus 2', '']
+                // ['Küsimus 1', ''], ['Küsimus 2', '']
+              ]
+            ],
+            [
+              'Muud inimestevahelise lävimise ja suhete piirangud',
+              [
+                ['Võõraste inimestega hakkama saamisel?', ''], ['Lähedastega koos olemisel?', '']
               ]
             ]
           ],
