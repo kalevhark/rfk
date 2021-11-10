@@ -1,0 +1,117 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block title %}{{ block.super }} küsimustiku proto 5{% endblock %}
+
+{% block src %}
+{% endblock %}
+
+{% block css %}
+  <style>
+    .question {
+      width: 300px;
+    }
+
+    .unanswered {
+      width: 100px;
+      text-align: center;
+    }
+
+    .poll {
+      width: 30px;
+      text-align: center;
+    }
+
+    .result {
+      width: 80px;
+      text-align: center;
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+  <div class="w3-container" id="kysimustik4">
+    <button onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-black">
+      Mis värk on?
+    </button>
+    <div id="id01" class="w3-modal">
+      <div class="w3-modal-content">
+        <div class="w3-container">
+          <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+          <p>Enesehinnangust piirangu määraja arvutamine inimese valiku järgi</p>
+          <ul>
+            <li>inimene teeb valiku skaalal 1-10 -> valik</li>
+            <li>skoor = 4 / 10 * valik (arvutatakse kahe komakoha täpsusega)</li>
+            <li>määraja = 0, kui skoor < 1,00</li>
+            <li>määraja = 1, kui 1,00 <= skoor < 2,00</li>
+            <li>määraja = 2, kui 2,00 <= skoor < 2,76</li>
+            <li>määraja = 3, kui 2,76 <= skoor < 3,50</li>
+            <li>määraja = 4, kui 3,50 <= skoor</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <button @click="show = !show" class="w3-button">
+      <span v-if="show">Ära näita valdkondi/võtmetegevusi/skoori</span>
+      <span v-else>Näita  valdkondi/võtmetegevusi/skoori</span>
+    </button>
+    <div class="w3-panel w3-padding w3-card">
+      <h4>Enesehinnangu küsimustik</h4>
+
+      <span>Kas on mõni küsimustiku täitmist lihtsustav seisund?</span>
+      <select v-model="selected">
+        <option v-for="option in options" v-bind:value="option.value">
+          [[ option.text ]]
+        </option>
+      </select>
+      <span v-if="simplified">Võid järgneva küsimustiku täitmise vahele jätta </span>
+      <p>Palun hinnake 10-palli skaalal (1 = probleeme ei olnud, 10 = täielikult takistatud),<br>kui suuri raskusi on teil olnud viimase kuu aja jooksul:</p>
+      <div>
+        <table>
+          <tr>
+            <th class="question"></th>
+            <th class="poll" v-for="n in 10" :key="n">
+              [[ n ]]
+            </th>
+            <th v-show="show" class="result" title="Skoor 0-4 PISTS kord arvutamise metoodika alusel">MM18</th>
+          </tr>
+        </table>
+        <div v-for="(valdkond, valdkondIndex) in valdkonnad">
+          <p v-show="show">[[ valdkondIndex+1 ]]. [[ valdkond[0] ]]</p>
+          <div v-show="valdkond[1].length>0" v-for="(v6tmetegevus, v6tmetegevusIndex) in valdkond[1]">
+            <p v-show="show">[[ valdkondIndex+1 ]].[[ v6tmetegevusIndex+1 ]]. [[ v6tmetegevus[0] ]]</p>
+            <div v-for="(kysimus, kysimusIndex) in v6tmetegevus[1]">
+              [[ valdkondIndex+1 ]].[[ v6tmetegevusIndex+1 ]].[[ kysimusIndex+1 ]] <span v-html="kysimus[0]"></span><br>
+              <table>
+                <tr>
+                  <td class="question"></td>
+                  <td class="poll" v-for="n in 10" :key="n">
+                    <input type="radio" :id="n" :value="n" v-model.number="kysimus[1]"/>
+                    <label :for="n"></label>
+                  </td>
+                  <td v-show="show" class="result">[[ score2_uus(valdkondIndex, v6tmetegevusIndex, kysimusIndex) ]]</td>
+                </tr>
+                <tr v-show="kysimus[1] > 4">
+                  <td class="question"></td>
+                  <td colspan="10">Täpsustage palun, milline tervisehäire peamiselt piiranguid põhjustab?</td>
+                  <td><textarea placeholder="siia saab kirjutada pika jutu..."></textarea></td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="w3-panel w3-padding w3-card">
+      <div v-for="(kysimus, kysimusIndex) in yldkysimused" :key="kysimusIndex">
+        <p><span v-html="kysimus"></span></p>
+        <textarea placeholder="siia saab kirjutada pika jutu..."></textarea>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block javascript %}
+  <script src="https://unpkg.com/vue@next"></script>
+  <script src="{% static 'main/kysimustik5.js' %}?ver=2021.10.26"></script>
+{% endblock %}

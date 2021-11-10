@@ -725,6 +725,18 @@ def kysimustik4(request):
         context
     )
 
+#
+# Küsimustiku vaade ver 5
+#
+def kysimustik5(request):
+    context = {
+    }
+    return render(
+        request,
+        'main/kysimustik5.html',
+        context
+    )
+
 def get_kysimustik3_results(request):
     content = request.GET.get('content', '')
     categories = json.loads(content)
