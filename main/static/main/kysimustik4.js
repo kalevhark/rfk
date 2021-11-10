@@ -213,8 +213,11 @@ Vue.createApp({
           return ''
         }
         var result = 4/10*this.picked[n]
-        if (result < 2) {
+        if (result < 1) {
           return 0
+        }
+        if (result < 2) {
+          return 1
         }
         if (result < 2.76) {
           return 2
@@ -236,8 +239,11 @@ Vue.createApp({
           return ''
         }
         var result = 4/10*selected
-        if (result < 2) {
+        if (result < 1) {
           return 0
+        }
+        if (result < 2) {
+          return 1
         }
         if (result < 2.76) {
           return 2
