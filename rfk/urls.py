@@ -26,6 +26,7 @@ urlpatterns = [
     path('kysimustik3/', views.kysimustik3, name='kysimustik3'),
     path('kysimustik4/', views.kysimustik4, name='kysimustik4'),
     path('kysimustik5/', views.kysimustik5, name='kysimustik5'),
+    path('some_view/', views.some_view, name='some_view'),
     path('main/', include('main.urls')),
     path('admin/', admin.site.urls),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

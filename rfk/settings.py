@@ -34,7 +34,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     'localhost', '127.0.0.1',
-    '18.217.179.154'
+    'test.valgalinn.ee', '18.217.179.154'
 ]
 
 

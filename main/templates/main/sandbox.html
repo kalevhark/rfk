@@ -39,6 +39,11 @@
           <button onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-black">Mis värk on?</button>
           <button v-on:click="makeDemo1" class="w3-button w3-black">Demo 1</button>
           <button v-on:click="makeDemo2" class="w3-button w3-black">Demo 2</button>
+          <a
+              href="{% url 'some_view' %}"
+              class="w3-bar-item w3-button w3-theme-d4 w3-hover-white">
+            PDF
+          </a>
         </div>
       </div>
       <div id="id01" class="w3-modal">

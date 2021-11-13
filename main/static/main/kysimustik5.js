@@ -113,7 +113,7 @@ Vue.createApp({
               [
                 // ['Üle keha pesemisel?', ''],
                 // ['Riietumisel?', ''],
-                ['Igapäevategevustel (nt söömisel, riietumisel, pesemisel, tualetitoimingutel)?', ''],
+                ['Igapäevategevustel (nt riietumisel, pesemisel, tualetitoimingutel)?', ''],
                 ['Paar päeva järjest iseseisvalt hakkama saamisel?', ''],
               ]
             ]
