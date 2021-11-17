@@ -58,14 +58,22 @@
     <div class="w3-panel w3-padding w3-card">
       <h4>Enesehinnangu küsimustik</h4>
 
-      <span>Kas on mõni küsimustiku täitmist lihtsustav seisund?</span>
-      <select v-model="selected">
-        <option v-for="option in options" v-bind:value="option.value">
+{#      <span>Kas on mõni küsimustiku täitmist lihtsustav seisund?</span>#}
+{#      <select v-model="selected">#}
+{#        <option v-for="option in options" v-bind:value="option.value">#}
+{#          [[ option.text ]]#}
+{#        </option>#}
+{#      </select>#}
+{#      <span v-if="simplified">Võid järgneva küsimustiku täitmise vahele jätta </span>#}
+{#      <br>#}
+      <span>Vanusgrupp?</span>
+      <select v-model="selected_agegroup">
+        <option v-for="option in vanusgrupid" v-bind:value="option.value">
           [[ option.text ]]
         </option>
       </select>
-      <span v-if="simplified">Võid järgneva küsimustiku täitmise vahele jätta </span>
-      <p>Palun hinnake 10-palli skaalal (1 = probleeme ei olnud, 10 = täielikult takistatud),<br>kui suuri piiranguid on teil terviseseisundi tõttu olnud viimase kuu aja jooksul:</p>
+      <span> [[ agegroup ]] </span>
+      <p>Palun hinnake 10-palli skaalal (1 = probleeme ei olnud, 10 = täielikult takistatud),<br>kui suuri piiranguid on TAOTLEJAL terviseseisundi tõttu olnud viimase kuu aja jooksul:</p>
       <div>
         <table>
           <tr>
@@ -81,7 +89,7 @@
           <div v-show="valdkond[1].length>0" v-for="(v6tmetegevus, v6tmetegevusIndex) in valdkond[1]">
             <p v-show="show">[[ valdkondIndex+1 ]].[[ v6tmetegevusIndex+1 ]]. [[ v6tmetegevus[0] ]]</p>
             <div v-for="(kysimus, kysimusIndex) in v6tmetegevus[1]">
-              [[ valdkondIndex+1 ]].[[ v6tmetegevusIndex+1 ]].[[ kysimusIndex+1 ]] <span v-html="kysimus[0]"></span><br>
+              <span v-show="show">[[ valdkondIndex+1 ]].[[ v6tmetegevusIndex+1 ]].[[ kysimusIndex+1 ]]</span> <span v-html="kysimus[0]"></span><br>
               <table>
                 <tr>
                   <td class="question"></td>

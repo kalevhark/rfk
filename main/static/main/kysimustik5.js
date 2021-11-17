@@ -5,201 +5,588 @@ Vue.createApp({
       picked: ['','','','','','','','','','','','','','','','','',''],
       show: false,
       selected: '',
-      valdkonnad: [
-        [
-          'Liikumine',
+      selected_agegroup: '',
+      valdkonnad: [],
+      valdkonnad_list: {
+        0: [
           [
+            'VPI Liikumine',
             [
-              'Liikumine eri tasapindadel',
               [
-                // ['Küsimus 1', ''], ['Küsimus 2', ''], ['Küsimus 3', '']
+                'Liikumine eri tasapindadel',
+                [
+                  // ['Küsimus 1', ''], ['Küsimus 2', ''], ['Küsimus 3', '']
+                ]
+              ],
+              [
+                'Ohutu ja takistusteta ringiliikumine',
+                [
+                  ['Kodus ringi liikumisel?', ''], ['Kodust väljas käimisel?', '']
+                ]
+              ],
+              [
+                'Seismine ja istumine',
+                [
+                  ['Istumast püsti tõusmisel?', ''],
+                ]
+              ],
+            ]
+          ],
+          [
+            'Käeline tegevus',
+            [
+              [
+                'Käte sirutamine',
+                [
+                  // ['Küsimus 1', ''], ['Küsimus 2', ''], ['Küsimus 3', '']
+                ]
+              ],
+              [
+                'Asjade ülestõstmine ja liigutamine',
+                [
+                  // ['Küsimus 1', ''], ['Küsimus 2', '']
+                ]
+              ],
+              [
+                'Käteosavus',
+                [
+                  // ['Küsimus 1', ''], ['Küsimus 2', '']
+                ]
+              ],
+              [
+                'Muud käelise tegevuse piirangud',
+                [
+                  // ['Koduste toimetustega hakkama saamisel (näiteks koristamine, toidu valmistamine)?', '']
+                ]
               ]
             ],
+          ],
+          [
+            'Suhtlemine',
             [
-              'Ohutu ja takistusteta ringiliikumine',
               [
-                ['Kodus toa piires ringi liikumisel?', ''], ['Kodust väljas käimisel?', '']
+                'Nägemine',
+                [
+                  // ['Küsimus 1', ''], ['Küsimus 2', ''], ['Küsimus 3', '']
+                ]
+              ],
+              [
+                'Kuulmine',
+                [
+                  // ['Küsimus 1', ''], ['Küsimus 2', '']
+                ]
+              ],
+              [
+                'Kõnelemine',
+                [
+                  // ['Küsimus 1', ''], ['Küsimus 2', '']
+                ]
+              ],
+              [
+                'Teiste inimestega suhtlemine',
+                [
+                  ['Suhtlemisel ja vestluses osalemisel?', ''],
+                ]
               ]
             ],
+          ],
+          [
+            'Teadvusel püsimine ja enesehooldus',
             [
-              'Seismine ja istumine',
               [
-                ['Istumast püsti tõusmisel?', ''],
+                'Teadvusel püsimine ärkveloleku ajal',
+                [
+                  // ['Küsimus 1', ''], ['Küsimus 2', ''], ['Küsimus 3', '']
+                ]
+              ],
+              [
+                'Soole ja põie kontrollimine',
+                [
+                  // ['Küsimus 1', ''], ['Küsimus 2', '']
+                ]
+              ],
+              [
+                'Söömine ja joomine',
+                [
+                  ['Söömisel?', '']
+                ]
+              ],
+              [
+                'Muud teadvusel püsimise ja enesehoolduse piirangud',
+                [
+                  // ['Üle keha pesemisel?', ''],
+                  // ['Riietumisel?', ''],
+                  ['Igapäevategevustel (nt riietumisel, pesemisel, tualetitoimingutel)?', ''],
+                  // ['Iseseisvalt hakkama saamisel?', ''],
+                ]
+              ]
+            ],
+          ],
+          [
+            'Õppimine ja tegevuste elluviimine',
+            [
+              [
+                'Tegevuste õppimine',
+                [
+                  // ['Küsimus 1', ''], ['Küsimus 2', ''], ['Küsimus 3', '']
+                ]
+              ],
+              [
+                'Tegevuste alustamine ja lõpetamine',
+                [
+                  // ['Oluliste tegemiste meelespidamisega?', '']
+                ]
+              ],
+              [
+                'Muud õppimise ja tegevuste elluviimise piirangud',
+                [
+                  ['Lasteaias või koolis käimisega ja huvitegevuses osalemisel?', '']
+                ]
+              ]
+            ],
+          ],
+          [
+            'Muutustega kohanemine ja ohu tajumine',
+            [
+              [
+                'Väljaskäimine',
+                [
+                  // ['Küsimus 1', ''], ['Küsimus 2', ''], ['Küsimus 3', '']
+                ]
+              ],
+              [
+                'Ohu tajumine',
+                [
+                  // ['Küsimus 1', ''], ['Küsimus 2', '']
+                ]
+              ],
+              [
+                'Toimetulek muutustega',
+                [
+                  // ['Igapäevaelu korraldamisel ja muutustega kohanemisel?', '']
+                ]
+              ]
+            ],
+          ],
+          [
+            'Inimestevaheline lävimine ja suhted',
+            [
+              [
+                'Sotsiaalsete olukordadega hakkamasaamine',
+                [
+                  // ['Küsimus 1', ''], ['Küsimus 2', ''], ['Küsimus 3', '']
+                ]
+              ],
+              [
+                'Olukorrale kohane käitumine',
+                [
+                  // ['Küsimus 1', ''], ['Küsimus 2', '']
+                ]
+              ],
+              [
+                'Muud inimestevahelise lävimise ja suhete piirangud',
+                [
+                  ['Eakaaslastega lävimisel?', ''],
+                  ['Lähedaste inimestega lävimisel?', '']
+                ]
               ]
             ],
           ]
         ],
-        [
-          'Käeline tegevus',
+        1: [
           [
+            'L08 Liikumine',
             [
-              'Käte sirutamine',
               [
-                // ['Küsimus 1', ''], ['Küsimus 2', ''], ['Küsimus 3', '']
-              ]
-            ],
-            [
-              'Asjade ülestõstmine ja liigutamine',
+                'Liikumine eri tasapindadel',
+                [
+                  // ['Küsimus 1', ''], ['Küsimus 2', ''], ['Küsimus 3', '']
+                ]
+              ],
               [
-                // ['Küsimus 1', ''], ['Küsimus 2', '']
-              ]
-            ],
-            [
-              'Käteosavus',
+                'Ohutu ja takistusteta ringiliikumine',
+                [
+                  ['Kodus ringi liikumisel?', ''], ['Kodust väljas käimisel?', '']
+                ]
+              ],
               [
-                // ['Küsimus 1', ''], ['Küsimus 2', '']
-              ]
-            ],
-            [
-              'Muud käelise tegevuse piirangud',
-              [
-                ['Koduste toimetustega hakkama saamisel?', '']
-              ]
+                'Seismine ja istumine',
+                [
+                  ['Istumast püsti tõusmisel?', ''],
+                ]
+              ],
             ]
           ],
+          [
+            'Käeline tegevus',
+            [
+              [
+                'Käte sirutamine',
+                [
+                  // ['Küsimus 1', ''], ['Küsimus 2', ''], ['Küsimus 3', '']
+                ]
+              ],
+              [
+                'Asjade ülestõstmine ja liigutamine',
+                [
+                  // ['Küsimus 1', ''], ['Küsimus 2', '']
+                ]
+              ],
+              [
+                'Käteosavus',
+                [
+                  // ['Küsimus 1', ''], ['Küsimus 2', '']
+                ]
+              ],
+              [
+                'Muud käelise tegevuse piirangud',
+                [
+                  ['Koduste toimetustega hakkama saamisel (näiteks koristamine, toidu valmistamine)?', '']
+                ]
+              ]
+            ],
+          ],
+          [
+            'Suhtlemine',
+            [
+              [
+                'Nägemine',
+                [
+                  // ['Küsimus 1', ''], ['Küsimus 2', ''], ['Küsimus 3', '']
+                ]
+              ],
+              [
+                'Kuulmine',
+                [
+                  // ['Küsimus 1', ''], ['Küsimus 2', '']
+                ]
+              ],
+              [
+                'Kõnelemine',
+                [
+                  // ['Küsimus 1', ''], ['Küsimus 2', '']
+                ]
+              ],
+              [
+                'Teiste inimestega suhtlemine',
+                [
+                  ['Suhtlemisel ja vestluses osalemisel?', ''],
+                ]
+              ]
+            ],
+          ],
+          [
+            'Teadvusel püsimine ja enesehooldus',
+            [
+              [
+                'Teadvusel püsimine ärkveloleku ajal',
+                [
+                  // ['Küsimus 1', ''], ['Küsimus 2', ''], ['Küsimus 3', '']
+                ]
+              ],
+              [
+                'Soole ja põie kontrollimine',
+                [
+                  // ['Küsimus 1', ''], ['Küsimus 2', '']
+                ]
+              ],
+              [
+                'Söömine ja joomine',
+                [
+                  ['Söömisel?', '']
+                ]
+              ],
+              [
+                'Muud teadvusel püsimise ja enesehoolduse piirangud',
+                [
+                  // ['Üle keha pesemisel?', ''],
+                  // ['Riietumisel?', ''],
+                  ['Igapäevategevustel (nt riietumisel, pesemisel, tualetitoimingutel)?', ''],
+                  // ['Iseseisvalt hakkama saamisel?', ''],
+                ]
+              ]
+            ],
+          ],
+          [
+            'Õppimine ja tegevuste elluviimine',
+            [
+              [
+                'Tegevuste õppimine',
+                [
+                  // ['Küsimus 1', ''], ['Küsimus 2', ''], ['Küsimus 3', '']
+                ]
+              ],
+              [
+                'Tegevuste alustamine ja lõpetamine',
+                [
+                  ['Oluliste tegemiste meelespidamisega?', '']
+                ]
+              ],
+              [
+                'Muud õppimise ja tegevuste elluviimise piirangud',
+                [
+                  ['Koolis käimisega ja huvitegevuses osalemisel?', '']
+                ]
+              ]
+            ],
+          ],
+          [
+            'Muutustega kohanemine ja ohu tajumine',
+            [
+              [
+                'Väljaskäimine',
+                [
+                  // ['Küsimus 1', ''], ['Küsimus 2', ''], ['Küsimus 3', '']
+                ]
+              ],
+              [
+                'Ohu tajumine',
+                [
+                  // ['Küsimus 1', ''], ['Küsimus 2', '']
+                ]
+              ],
+              [
+                'Toimetulek muutustega',
+                [
+                  ['Igapäevaelu korraldamisel ja muutustega kohanemisel?', '']
+                ]
+              ]
+            ],
+          ],
+          [
+            'Inimestevaheline lävimine ja suhted',
+            [
+              [
+                'Sotsiaalsete olukordadega hakkamasaamine',
+                [
+                  // ['Küsimus 1', ''], ['Küsimus 2', ''], ['Küsimus 3', '']
+                ]
+              ],
+              [
+                'Olukorrale kohane käitumine',
+                [
+                  // ['Küsimus 1', ''], ['Küsimus 2', '']
+                ]
+              ],
+              [
+                'Muud inimestevahelise lävimise ja suhete piirangud',
+                [
+                  ['Eakaaslastega lävimisel?', ''], ['Lähedaste inimestega lävimisel?', '']
+                ]
+              ]
+            ],
+          ]
         ],
-        [
-          'Suhtlemine',
+        2: [
           [
+            'Liikumine',
             [
-              'Nägemine',
               [
-                // ['Küsimus 1', ''], ['Küsimus 2', ''], ['Küsimus 3', '']
-              ]
-            ],
-            [
-              'Kuulmine',
+                'Liikumine eri tasapindadel',
+                [
+                  // ['Küsimus 1', ''], ['Küsimus 2', ''], ['Küsimus 3', '']
+                ]
+              ],
               [
-                // ['Küsimus 1', ''], ['Küsimus 2', '']
-              ]
-            ],
-            [
-              'Kõnelemine',
+                'Ohutu ja takistusteta ringiliikumine',
+                [
+                  ['Kodus ringi liikumisel?', ''], ['Kodust väljas käimisel?', '']
+                ]
+              ],
               [
-                // ['Küsimus 1', ''], ['Küsimus 2', '']
-              ]
-            ],
-            [
-              'Teiste inimestega suhtlemine',
-              [
-                ['Suhtluse alustamisel ja vestluses osalemisel?', ''],
-              ]
+                'Seismine ja istumine',
+                [
+                  ['Istumast püsti tõusmisel?', ''],
+                ]
+              ],
             ]
           ],
-        ],
-        [
-          'Teadvusel püsimine ja enesehooldus',
           [
+            'Käeline tegevus',
             [
-              'Teadvusel püsimine ärkveloleku ajal',
               [
-                // ['Küsimus 1', ''], ['Küsimus 2', ''], ['Küsimus 3', '']
+                'Käte sirutamine',
+                [
+                  // ['Küsimus 1', ''], ['Küsimus 2', ''], ['Küsimus 3', '']
+                ]
+              ],
+              [
+                'Asjade ülestõstmine ja liigutamine',
+                [
+                  // ['Küsimus 1', ''], ['Küsimus 2', '']
+                ]
+              ],
+              [
+                'Käteosavus',
+                [
+                  // ['Küsimus 1', ''], ['Küsimus 2', '']
+                ]
+              ],
+              [
+                'Muud käelise tegevuse piirangud',
+                [
+                  ['Koduste toimetustega hakkama saamisel (näiteks koristamine, toidu valmistamine)?', '']
+                ]
               ]
             ],
-            [
-              'Soole ja põie kontrollimine',
-              [
-                // ['Küsimus 1', ''], ['Küsimus 2', '']
-              ]
-            ],
-            [
-              'Söömine ja joomine',
-              [
-                ['Söömisel?', '']
-              ]
-            ],
-            [
-              'Muud teadvusel püsimise ja enesehoolduse piirangud',
-              [
-                // ['Üle keha pesemisel?', ''],
-                // ['Riietumisel?', ''],
-                ['Igapäevategevustel (nt riietumisel, pesemisel, tualetitoimingutel)?', ''],
-                ['Paar päeva järjest iseseisvalt hakkama saamisel?', ''],
-              ]
-            ]
           ],
-        ],
-        [
-          'Õppimine ja tegevuste elluviimine',
           [
+            'Suhtlemine',
             [
-              'Tegevuste õppimine',
               [
-                // ['Küsimus 1', ''], ['Küsimus 2', ''], ['Küsimus 3', '']
+                'Nägemine',
+                [
+                  // ['Küsimus 1', ''], ['Küsimus 2', ''], ['Küsimus 3', '']
+                ]
+              ],
+              [
+                'Kuulmine',
+                [
+                  // ['Küsimus 1', ''], ['Küsimus 2', '']
+                ]
+              ],
+              [
+                'Kõnelemine',
+                [
+                  // ['Küsimus 1', ''], ['Küsimus 2', '']
+                ]
+              ],
+              [
+                'Teiste inimestega suhtlemine',
+                [
+                  ['Suhtlemisel ja vestluses osalemisel?', ''],
+                ]
               ]
             ],
-            [
-              'Tegevuste alustamine ja lõpetamine',
-              [
-                ['Oluliste tegemiste meeldejätmisega?', '']
-              ]
-            ],
-            [
-              'Muud õppimise ja tegevuste elluviimise piirangud',
-              [
-                ['Lasteaias/koolis/tööl käimisega?', '']
-              ]
-            ]
           ],
-        ],
-        [
-          'Muutustega kohanemine ja ohu tajumine',
           [
+            'Teadvusel püsimine ja enesehooldus',
             [
-              'Väljaskäimine',
               [
-                // ['Küsimus 1', ''], ['Küsimus 2', ''], ['Küsimus 3', '']
+                'Teadvusel püsimine ärkveloleku ajal',
+                [
+                  // ['Küsimus 1', ''], ['Küsimus 2', ''], ['Küsimus 3', '']
+                ]
+              ],
+              [
+                'Soole ja põie kontrollimine',
+                [
+                  // ['Küsimus 1', ''], ['Küsimus 2', '']
+                ]
+              ],
+              [
+                'Söömine ja joomine',
+                [
+                  ['Söömisel?', '']
+                ]
+              ],
+              [
+                'Muud teadvusel püsimise ja enesehoolduse piirangud',
+                [
+                  // ['Üle keha pesemisel?', ''],
+                  // ['Riietumisel?', ''],
+                  ['Igapäevategevustel (nt riietumisel, pesemisel, tualetitoimingutel)?', ''],
+                  ['Iseseisvalt hakkama saamisel?', ''],
+                ]
               ]
             ],
-            [
-              'Ohu tajumine',
-              [
-                // ['Küsimus 1', ''], ['Küsimus 2', '']
-              ]
-            ],
-            [
-              'Toimetulek muutustega',
-              [
-                ['Igapäevaelu korraldamisel ja tegevustega hakkama saamisel?', '']
-              ]
-            ]
           ],
-        ],
-        [
-          'Inimestevaheline lävimine ja suhted',
           [
+            'Õppimine ja tegevuste elluviimine',
             [
-              'Sotsiaalsete olukordadega hakkamasaamine',
               [
-                // ['Küsimus 1', ''], ['Küsimus 2', ''], ['Küsimus 3', '']
+                'Tegevuste õppimine',
+                [
+                  // ['Küsimus 1', ''], ['Küsimus 2', ''], ['Küsimus 3', '']
+                ]
+              ],
+              [
+                'Tegevuste alustamine ja lõpetamine',
+                [
+                  ['Oluliste tegemiste meelespidamisega?', '']
+                ]
+              ],
+              [
+                'Muud õppimise ja tegevuste elluviimise piirangud',
+                [
+                  ['Tööl käimisega ja/või huvitegevuses osalemisel?', '']
+                ]
               ]
             ],
-            [
-              'Olukorrale kohane käitumine',
-              [
-                // ['Küsimus 1', ''], ['Küsimus 2', '']
-              ]
-            ],
-            [
-              'Muud inimestevahelise lävimise ja suhete piirangud',
-              [
-                ['Suhtlemisel inimestega, keda te ei tunne?', ''], ['Lähedaste inimestega läbisaamisel?', '']
-              ]
-            ]
           ],
+          [
+            'Muutustega kohanemine ja ohu tajumine',
+            [
+              [
+                'Väljaskäimine',
+                [
+                  // ['Küsimus 1', ''], ['Küsimus 2', ''], ['Küsimus 3', '']
+                ]
+              ],
+              [
+                'Ohu tajumine',
+                [
+                  // ['Küsimus 1', ''], ['Küsimus 2', '']
+                ]
+              ],
+              [
+                'Toimetulek muutustega',
+                [
+                  ['Igapäevaelu korraldamisel ja muutustega kohanemisel?', '']
+                ]
+              ]
+            ],
+          ],
+          [
+            'Inimestevaheline lävimine ja suhted',
+            [
+              [
+                'Sotsiaalsete olukordadega hakkamasaamine',
+                [
+                  // ['Küsimus 1', ''], ['Küsimus 2', ''], ['Küsimus 3', '']
+                ]
+              ],
+              [
+                'Olukorrale kohane käitumine',
+                [
+                  // ['Küsimus 1', ''], ['Küsimus 2', '']
+                ]
+              ],
+              [
+                'Muud inimestevahelise lävimise ja suhete piirangud',
+                [
+                  // ['Eakaaslastega lävimisel?', ''],
+                  ['Lähedaste inimestega lävimisel?', '']
+                ]
+              ]
+            ],
+          ]
         ]
-      ],
+      },
       options: [
         { text: '---', value: '' },
         { text: 'Jah', value: 'A' },
         { text: 'Ei', value: 'B' },
       ],
+      vanusgrupid: [
+        { text: 'LAPS 3-8', value: 0},
+        { text: 'LAPS 9-15', value: 1},
+        { text: 'VPI', value: 2},
+      ],
       yldkysimused: [
-        'Kirjeldage oma sõnadega, millist abi ja hoolitsust vajate terviseseisundi tõttu enam võrreldes teiste eakaaslastega?',
-        'Kui sageli olete kogenud takistusi ja piiranguid ümbritseva keskkonna tõttu?',
-        'Kui palju on olnud lähedastel probleeme teie terviseseisundi tõttu?<br>Kas lähedased on pidanud teie terviseseisundi tõttu pidanud elukorraldust muutma?',
+        'Kirjeldage oma sõnadega, millist abi ja hoolitsust vajab TAOTLEJA terviseseisundi tõttu enam võrreldes teiste eakaaslastega?',
+        'Kui sageli on TAOTLEJA kogenud takistusi ja piiranguid ümbritseva keskkonna tõttu?',
+        'Kui palju on olnud lähedastel probleeme TAOTLEJA terviseseisundi tõttu?<br>Kas lähedased on pidanud TAOTLEJA terviseseisundi tõttu pidanud elukorraldust muutma?',
       ]
     }
+  },
+  mounted() {
+    this.$nextTick(function () {
+      // Code that will run only after the
+      // entire view has been rendered
+      this.selected_agegroup = 0;
+      this.valdkonnad = this.valdkonnad_list[0];
+    })
   },
   computed: {
     score1(n) {
@@ -284,6 +671,11 @@ Vue.createApp({
     },
     simplified() {
       return this.selected === 'A'
+    },
+    agegroup() {
+      console.log(this.selected_agegroup);
+      this.valdkonnad = this.valdkonnad_list[this.selected_agegroup];
+      return this.selected_agegroup;
     }
   }
 }).mount('#kysimustik4')
