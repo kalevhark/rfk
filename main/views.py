@@ -203,6 +203,12 @@ def index(request):
         {}
     )
 
+def covidpass_s9a(request):
+    return render(
+        request,
+        'main/covidpass_s9a.html',
+        {}
+    )
 def sandbox(request):
     return render(
         request,

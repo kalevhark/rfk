@@ -22,6 +22,7 @@ from main import views
 urlpatterns = [
     path('', views.index, name='index'),
     path('sandbox/', views.sandbox, name='sandbox'),
+    path('covidpass_s9a/', views.covidpass_s9a, name='covidpass_s9a'),
     path('kysimustik2/', views.kysimustik2, name='kysimustik2'),
     path('kysimustik3/', views.kysimustik3, name='kysimustik3'),
     path('kysimustik4/', views.kysimustik4, name='kysimustik4'),

@@ -1,0 +1,47 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block title %}{{ block.super }} COVID pass Sulevi 9a külastamiseks{% endblock %}
+
+{% block css %}
+<style>
+  div.image-wrapper {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+}
+
+.image-wrapper img {
+  display: block;
+}
+</style>
+{% endblock %}
+
+{% block src %}
+{% endblock %}
+
+{% block content %}
+  <div class="w3-container image-wrapper w3-center">
+    <h2>COVID pass Sulevi 9a külastamiseks</h2>
+        <img
+        src="{% static 'main/covidpass_S9a.png' %}"
+        alt="COVID pass Sulevi 9a külastamiseks"
+        style="width:100%"
+    >
+    <br>
+     <a
+              href="{% url 'covidpass_s9a' %}"
+              class="w3-bar-item w3-button w3-theme-d4 w3-hover-white">
+        Tee veel üks COVID pass
+      </a>
+    <br>
+
+  </div>
+{% endblock %}
+
+{% block javascript %}{% endblock %}
