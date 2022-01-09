@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 {% load static %}
+{% load cookielaw_tags %}
+
 <html lang="et">
   <head>
     <meta charset="UTF-8">
@@ -7,6 +9,9 @@
     <title>
       {% block title %}test.valgalinn.ee{% endblock %}
     </title>
+
+    <script type="text/javascript" src="{% static 'cookielaw/js/cookielaw.js' %}"></script>
+
 
     <!--  Laetavad moodulid-->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
@@ -17,12 +22,16 @@
     {% block src %}{% endblock %}
 
     <!-- CSS -->
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="{% static 'main/main.css' %}?ver=2021.06">
+    <link rel="stylesheet" href="{% static 'cookielaw/css/cookielaw.css' %}">
     {% block css %}{% endblock %}
 
   </head>
   <body class="Site w3-light-grey">
+{#    {% include "main/cookie-consent.html" %}#}
+    {{ cookielaw }}
+    {% rejectable_cookielaw_banner %}
     <main class="Site-content">
       {% block content %}{% endblock %}
     </main>

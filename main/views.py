@@ -203,7 +203,10 @@ def index(request):
         {}
     )
 
+from cookie_consent.util import get_cookie_value_from_request
 def covidpass_s9a(request):
+    cc = get_cookie_value_from_request(request, "mycookies")
+    print(cc)
     return render(
         request,
         'main/covidpass_s9a.html',
