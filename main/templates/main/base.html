@@ -77,7 +77,7 @@
         function closeCookie(){
           var cookieExpire = new Date();
           cookieExpire.setFullYear(cookieExpire.getFullYear() +2);
-          document.cookie="OKCookie=1; expires=" + cookieExpire.toGMTString() + ";";
+          document.cookie="OKCookie=1; expires=" + cookieExpire.toGMTString() + "; SameSite=None; Secure";
           docRoot.removeChild(okC);
         }
 
