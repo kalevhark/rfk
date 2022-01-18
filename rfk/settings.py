@@ -49,7 +49,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'corsheaders', # https://github.com/adamchainz/django-cors-headers
     'cookie_consent', # https://github.com/bmihelac/django-cookie-consent/
-    'cookielaw', # https://github.com/TyMaszWeb/django-cookie-law
     'main',
 ]
 
@@ -78,7 +77,6 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'cookielaw.context_processors.cookielaw',
             ],
         },
     },

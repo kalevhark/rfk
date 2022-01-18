@@ -4,22 +4,23 @@
 {% block title %}{{ block.super }} COVID pass Sulevi 9a külastamiseks{% endblock %}
 
 {% block css %}
-<style>
-  div.image-wrapper {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  -moz-transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  -o-transform: translate(-50%, -50%);
-  -webkit-transform: translate(-50%, -50%);
-}
+  <style>
+    div.image-wrapper {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      -moz-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      -o-transform: translate(-50%, -50%);
+      -webkit-transform: translate(-50%, -50%);
+    }
 
-.image-wrapper img {
-  display: block;
-}
-</style>
+    .image-wrapper img {
+      display: block;
+    }
+  </style>
+
 {% endblock %}
 
 {% block src %}
@@ -44,4 +45,6 @@
   </div>
 {% endblock %}
 
-{% block javascript %}{% endblock %}
+{% block javascript %}
+
+{% endblock %}

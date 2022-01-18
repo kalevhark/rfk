@@ -21,7 +21,7 @@ from main import views
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('cookies/', include('cookie_consent.urls')),
+    path('privacy/', views.privacy, name='privacy'),
     path('sandbox/', views.sandbox, name='sandbox'),
     path('covidpass_s9a/', views.covidpass_s9a, name='covidpass_s9a'),
     path('kysimustik2/', views.kysimustik2, name='kysimustik2'),
