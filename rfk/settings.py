@@ -48,7 +48,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'corsheaders', # https://github.com/adamchainz/django-cors-headers
-    'cookie_consent', # https://github.com/bmihelac/django-cookie-consent/
     'main',
 ]
 
