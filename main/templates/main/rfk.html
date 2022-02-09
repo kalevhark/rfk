@@ -1,0 +1,61 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block title %}{{ block.super }} koodiotsija{% endblock %}
+
+{% block src %}
+  <script type="text/javascript">
+    // Muutujad vue jaoks
+    // var host = 'http://3.136.97.151:8000'
+    var urlICFMatches = "{% url 'main:get_icf_matches' %}"
+  </script>
+{% endblock %}
+
+{% block css %}
+  <style>
+    .result {
+      line-height:1.5em;
+      min-height:3.5em;
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+  <div class="w3-container" id="watch-example">
+    <div class="w3-row">
+      <p>
+        Sõna või sõnaosad:
+        <input
+                v-model="rfkCode"
+                placeholder="näiteks 'lihas käe'"
+        >
+        <span v-if="rfkPath.items>100"> Leiti [[ rfkPath.items ]] vastet. Näidatakse 100 esimest.</span>
+      </p>
+    </div>
+
+    <div
+            class="w3-row result"
+            v-for="item in rfkPath.matches"
+    >
+      <div
+              class="w3-col l1"
+              v-html="item[0]"
+      >
+      </div>
+      <div
+              class="w3-col l3"
+              v-html="item[1]"
+      >
+      </div>
+      <div
+              class="w3-col l8"
+              v-html="item[2]"
+      >
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block javascript %}
+  <script src="{% static 'main/rfk.js'%}?ver=2022"></script>
+{% endblock %}

@@ -23,6 +23,7 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('privacy/', views.privacy, name='privacy'),
     path('sandbox/', views.sandbox, name='sandbox'),
+    path('rfk/', views.rfk, name='rfk'),
     path('covidpass_s9a/', views.covidpass_s9a, name='covidpass_s9a'),
     path('kysimustik2/', views.kysimustik2, name='kysimustik2'),
     path('kysimustik3/', views.kysimustik3, name='kysimustik3'),

@@ -8,13 +8,14 @@ if __name__ != '__main__':
     from django.conf import settings
     from django.http import HttpResponse, JsonResponse
     from django.shortcuts import render
-    from pyhtml import *
 
     STATIC_DIR = settings.BASE_DIR / 'main' / 'static' / 'main'
 else:
     from pathlib import Path
     BASE_DIR = Path(__file__).resolve().parent.parent
     STATIC_DIR = BASE_DIR / 'main' / 'static' / 'main'
+
+from pyhtml import *
 
 RFK_REGEX = r"[bdes](?:\d{3,}\.\d+)"
 SCORE_CLASSES = ['', 'w3-pale-yellow', 'w3-yellow', 'w3-pale-red', 'w3-red']
@@ -97,35 +98,8 @@ class ICF_Est_New():
                     n += 1
         print(n, len(self.df))
 
+icf_eng = ICF_Est_New().df
 
-# def icf_add_translations(icf_eng_set, icf_est_set):
-#     # Lisame eestikeelsed tõlked
-#     for key in icf_est_set.keys():
-#         try:
-#             _ = icf_eng_set[key]
-#         except:
-#             # print(key)
-#             continue
-#         icf_eng_set[key]['Translated_title'] = icf_est_set[key]['Kirjeldus'].strip()
-#         icf_eng_set[key]['Translated_description'] = icf_est_set[key]['Selgitus'].strip()
-#         icf_eng_set[key]['Translated_inclusions'] = icf_est_set[key]['KA']
-#         icf_eng_set[key]['Translated_exclusions'] = icf_est_set[key]['VA']
-#     # Kontrollime settide sisalduvust
-#     print('Missing EST: ', end='')
-#     n = ''
-#     for key in icf_eng_set.keys():
-#         if key not in icf_est_set.keys():
-#             # print(key)
-#             n += key[0]
-#     print(Counter(n))
-#     print('Missing ENG: ', end='')
-#     n = ''
-#     for key in icf_est_set.keys():
-#         if key not in icf_eng_set.keys():
-#             # print(key)
-#             n += key[0]
-#     print(Counter(n))
-#     return icf_eng_set
 
 def get_icf_group(code):
     # Tagastab valitud koodi koodigrupi vahemiku d4105 -> d410-d429
@@ -168,6 +142,63 @@ def get_rfk_qualifier(code, score, score_level=1):
     except IndexError:
         qualifier = score
     return qualifier
+
+def highlight_matches(phrases, string):
+    pattern = '|'.join(phrases)
+    junks = re.finditer(pattern, string.lower())
+    string_formatted = ''
+    lastposition = 0
+    while True:
+        try:
+            junk = next(junks)
+            string_formatted += string[lastposition:junk.start()]
+            string_formatted += f'<span class="w3-pale-green">{string[junk.start():junk.end()]}</span>'
+            lastposition = junk.end()
+        except StopIteration:
+            string_formatted += string[lastposition:]
+            break
+    return string_formatted
+
+# Tagastab otsingufraaside alusel kõik sobivad RFK koodid
+def get_icf_matches(request=None, q=''):
+    # Otsib v2ljadelt:
+    # "code": "b2301"
+    # "Translated_title": "Helide eristamine",
+    # "Translated_description": pikk kirjeldus
+    if request:
+        q = request.GET.get('q', '')
+    phrases = q.lower().split(' ')
+    matches = []
+    for key in icf_eng.keys():
+        slug = ' '.join([icf_eng[key][field].lower() for field in ['code', 'Translated_title', 'Translated_description']])
+        if all([(slug.find(phrase) > -1) for phrase in phrases]):
+            code = icf_eng[key]['code']
+            code_translated = highlight_matches(phrases, code)
+            translated_title = icf_eng[key]['Translated_title']
+            translated_title_formatted = highlight_matches(phrases, translated_title)
+            translated_description = icf_eng[key]['Translated_description']
+            translated_description_formatted = highlight_matches(phrases, translated_description)
+            matches.append(
+                (
+                    f"<strong>{code_translated}</strong>",
+                    translated_title_formatted,
+                    translated_description_formatted,
+                )
+            )
+    if request:
+        return JsonResponse(
+            {
+                'result': {
+                    'items': len(matches),
+                    'matches': matches[:100]
+                },
+            },
+            safe=False
+        )
+    else:
+        return matches
+
+
 
 def get_icf_path(request=None, code=None):
     if request:
@@ -226,6 +257,13 @@ def sandbox(request):
         {}
     )
 
+def rfk(request):
+    return render(
+        request,
+        'main/rfk.html',
+        {}
+    )
+
 # Loeb textareast kõik RFK koodid koos määrajatega listi ja eraldab komponentideks
 def read_content_to_rfk(icf_eng_set, content, method=1):
     data = re.findall(RFK_REGEX, content)
@@ -250,10 +288,12 @@ def read_content_to_rfk(icf_eng_set, content, method=1):
             print('Viga: pole koodi: ', code)
     return codeset
 
+from pyhtml import register_all
+
 def make_icf_table(rfk_set):
     trs = []
     for el in rfk_set:
-        trs.append(tr(td(f'{el}:{rfk_set[el]}')))
+        trs.append(tags.tr(td(f'{el}:{rfk_set[el]}')))
     icf_table_html = table(trs)
     return icf_table_html.render()
 
@@ -794,8 +834,6 @@ def some_view(request):
     buffer.seek(0)
     return FileResponse(buffer, as_attachment=True, filename='hello.pdf')
 
-
-icf_eng = ICF_Est_New().df
 
 if __name__ == '__main__':
     # for i in range(1, 5):
