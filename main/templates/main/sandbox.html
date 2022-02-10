@@ -114,6 +114,7 @@
           class="w3-bar-item w3-button tablink"
           v-for="input in inputs"
           v-on:click="openTab($event, 'tvh_' + input.id)"
+          v-bind:id="'tvh_button_' + input.id"
       >
         TVH[[ input.id ]]: [[ input.category ]] <span class="w3-text-red" v-if="input.len">([[ input.len ]])</span>
       </button>
@@ -161,8 +162,9 @@
           class="w3-bar-item w3-button tablink"
           v-for="input in prt_categories"
           v-on:click="openTab($event, 'prt_' + input.id)"
+          v-bind:id="'prt_button_' + input.id"
       >
-        TVH[[ input.id ]]: [[ input.category ]] <span class="w3-text-red" v-if="input.len">([[ input.len ]])</span>
+        Funkts[[ input.id ]]: [[ input.category ]] <span class="w3-text-red" v-if="input.len">([[ input.len ]])</span>
       </button>
     </div>
 

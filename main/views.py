@@ -288,8 +288,6 @@ def read_content_to_rfk(icf_eng_set, content, method=1):
             print('Viga: pole koodi: ', code)
     return codeset
 
-from pyhtml import register_all
-
 def make_icf_table(rfk_set):
     trs = []
     for el in rfk_set:

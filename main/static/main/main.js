@@ -61,7 +61,7 @@ var mainVM = new Vue({
                 resultVerbose4: ''
             },
             {
-                id: 6, category: 'Vaimne tervis',
+                id: 6, category: 'Vaimne',
                 tvh_categories: [5, 6, 7], rfk_set: '',
                 result1: '', result2: '', result3: '', len: 0,
                 resultVerbose4: ''
@@ -104,9 +104,13 @@ var mainVM = new Vue({
         // finished typing before making the ajax request. To learn
         // more about the _.debounce function (and its cousin
         // _.throttle), visit: https://lodash.com/docs#debounce
-        this.debouncedGetTables = _.debounce(this.getTables, 500)
-        this.debouncedGetRFKPath = _.debounce(this.getRFKPath, 500)
-        this.debouncedGetRFKSummary = _.debounce(this.getRFKSummary, 500)
+        this.debouncedGetTables = _.debounce(this.getTables, 500);
+        this.debouncedGetRFKPath = _.debounce(this.getRFKPath, 500);
+        this.debouncedGetRFKSummary = _.debounce(this.getRFKSummary, 500);
+    },
+    mounted: function () {
+        document.getElementById('tvh_button_1').className += " w3-pale-green";
+        document.getElementById('prt_button_1').className += " w3-pale-green";
     },
     methods: {
         openTab: function (evt, tabName) {
@@ -118,10 +122,10 @@ var mainVM = new Vue({
             }
             tablinks = document.getElementsByClassName("tablink");
             for (i = 0; i < x.length; i++) {
-                tablinks[i].className = tablinks[i].className.replace(" w3-red", "");
+                tablinks[i].className = tablinks[i].className.replace(" w3-pale-green", "");
             }
             document.getElementById(tabName).style.display = "block";
-            evt.currentTarget.className += " w3-red";
+            evt.currentTarget.className += " w3-pale-green";
         },
         getRFKPath: function () {
             if (this.rfkCode.length < 1) {
