@@ -133,7 +133,7 @@ var mainVM = new Vue({
           axios.get(urlICFPath + '?code=' + vm.rfkCode)
             .then(function (response) {
                 if ( response.data ) {
-                    vm.rfkPath = responsemenetlused.py.data.rfkPath
+                    vm.rfkPath = response.data.rfkPath
                 } else {
                     vm.rfkPath = vm.rfkCode + ': sellist koodi ei ole'
                 }
