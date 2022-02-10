@@ -293,7 +293,7 @@ from pyhtml import register_all
 def make_icf_table(rfk_set):
     trs = []
     for el in rfk_set:
-        trs.append(tags.tr(td(f'{el}:{rfk_set[el]}')))
+        trs.append(tr(td(f'{el}:{rfk_set[el]}')))
     icf_table_html = table(trs)
     return icf_table_html.render()
 
