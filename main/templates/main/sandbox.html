@@ -31,19 +31,28 @@
     <div class="w3-container">
       <div class="w3-row w3-padding-16">
         <div class="w3-col l6">
-          <a
-              href="{% url 'index' %}"
-              class="w3-bar-item w3-button w3-theme-d4 w3-hover-white">
-            RFK mängunurk
-          </a>
-          <button onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-black">Mis värk on?</button>
-          <button v-on:click="makeDemo1" class="w3-button w3-black">Demo 1</button>
-          <button v-on:click="makeDemo2" class="w3-button w3-black">Demo 2</button>
-          <a
-              href="{% url 'some_view' %}"
-              class="w3-bar-item w3-button w3-theme-d4 w3-hover-white">
-            PDF
-          </a>
+          <div class="w3-row">
+            <a
+                  href="{% url 'index' %}"
+                  class="w3-bar-item w3-button w3-theme-d4 w3-hover-white">
+              RFK mängunurk
+            </a>
+            <button onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-black">Mis värk
+              on?
+            </button>
+          </div>
+          <div class="w3-row w3-padding-16">
+            <button v-on:click="makeDemo1" class="w3-button w3-black">D1: L</button>
+            <button v-on:click="makeDemo2" class="w3-button w3-black">D2: N</button>
+            <button v-on:click="makeDemo3" class="w3-button w3-black">D3: K</button>
+            <button v-on:click="makeDemo4" class="w3-button w3-black">D4: KK</button>
+            <button v-on:click="makeDemo5" class="w3-button w3-black">D5: P</button>
+          </div>
+{#          <a#}
+{#              href="{% url 'some_view' %}"#}
+{#              class="w3-bar-item w3-button w3-theme-d4 w3-hover-white">#}
+{#            PDF#}
+{#          </a>#}
         </div>
       </div>
       <div id="id01" class="w3-modal">

@@ -273,21 +273,59 @@ var mainVM = new Vue({
                 'b4551.3\n' +
                 'b4552.2\n' +
                 'b28014.2'
-            this.inputs[1].question = 'd4452.3\n' +
-                'd430.3\n' +
-                's6302.3\n' +
-                's4201.3\n' +
-                's4301.3\n' +
-                'b4552.2'
         },
         makeDemo2: function () {
+            this.rfkCode = 'b210'
+            for (input of this.inputs) {
+                input.question = ''
+            }
+            this.inputs[2].question = 'd350.3\n' +
+                'd138.3\n' +
+                'd310.2\n' +
+                'b210.2'
+        },
+        makeDemo3: function () {
             this.rfkCode = 'b230'
             for (input of this.inputs) {
                 input.question = ''
             }
             this.inputs[2].question = 'd350.3\n' +
-                's110.3\n' +
-                'b230.3'
+                'd138.3\n' +
+                'd310.3\n' +
+                'b230.2'
+        },
+        makeDemo4: function () {
+            this.rfkCode = 'b330'
+            for (input of this.inputs) {
+                input.question = ''
+            }
+            this.inputs[2].question = 'd350.3\n' +
+                'd138.2\n' +
+                'd310.1\n' +
+                'b330.2'
+        },
+        makeDemo5: function () {
+            this.rfkCode = 'b152'
+            for (input of this.inputs) {
+                input.question = ''
+            }
+            this.inputs[4].question = 'd230.3\n' +
+                'b152.2\n' +
+                'b130.2\n' +
+                'd175.3\n' +
+                'd160.3\n' +
+                'd155.2'
+            this.inputs[5].question = 'd240.3\n' +
+                'b152.2\n' +
+                'b126.2\n' +
+                'd175.3\n' +
+                'd230.3\n' +
+                'b164.2'
+            this.inputs[6].question = 'd730.3\n' +
+                'b152.2\n' +
+                'b130.2\n' +
+                'd720.3\n' +
+                'b126.3\n'
         }
     }
 })

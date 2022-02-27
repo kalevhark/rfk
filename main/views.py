@@ -246,9 +246,101 @@ def covidpass_s9a(request):
     html = render(
         request,
         'main/covidpass_s9a.html',
-        {}
+        {
+            # 'object': 'Seda saab jagada!'
+        }
     )
     return HttpResponse(html)
+
+import qrcode
+import qrcode.image.svg
+import io
+from io import BytesIO
+from qrcode.image.styledpil import StyledPilImage
+import base64
+# import modules
+from PIL import Image, ImageOps
+
+def covidpass_s9a_3(request):
+    context = {}
+    if request.method == "POST":
+        factory = qrcode.image.svg.SvgImage
+        img = qrcode.make(
+            request.POST.get("qr_text", ""),
+            image_factory=factory,
+            box_size=20,
+            # embeded_image_path = "main/covidpass_S9a.png"
+        )
+        stream = BytesIO()
+        img.save(stream)
+        context["svg"] = stream.getvalue().decode()
+
+        qr = qrcode.QRCode(error_correction=qrcode.constants.ERROR_CORRECT_L)
+        qr.add_data(request.POST.get("qr_text", ""))
+
+        # img_1 = qr.make_image(image_factory=StyledPilImage, module_drawer=RoundedModuleDrawer())
+        # img_2 = qr.make_image(image_factory=StyledPilImage, color_mask=RadialGradiantColorMask())
+
+    return render(request, "main/covidpass_s9a_2.html", context=context)
+
+def covidpass_s9a_2(request):
+    # taking image which user wants
+    # in the QR code center
+    Logo_link = 'main/static/main/android-chrome-192x192.png'
+
+    logo = Image.open(Logo_link)
+    new_image = Image.new("RGBA", logo.size, "WHITE")  # Create a white rgba background
+    new_image.paste(logo, (0, 0), logo)  # Paste the image on the background. Go to the links given below for details.
+    # new_image.convert('RGB').save('test.jpg', "JPEG")  # Save as JPEG
+    logo = new_image
+
+    # taking base width
+    basewidth = 100
+
+    # adjust image size
+    wpercent = (basewidth / float(logo.size[0]))
+    hsize = int((float(logo.size[1]) * float(wpercent)))
+    logo = logo.resize((basewidth-30, hsize-30), Image.ANTIALIAS)
+    logo = ImageOps.expand(logo, border=10, fill='white')
+    QRcode = qrcode.QRCode(
+        error_correction=qrcode.constants.ERROR_CORRECT_H
+    )
+
+    # taking url or text
+    url = 'https://valgalinn.ee/wiki/isik/62-johan-m%C3%BCllerson/'
+
+    # adding URL or text to QRcode
+    QRcode.add_data(url)
+
+    # generating QR code
+    QRcode.make()
+
+    # taking color name from user
+    QRcolor = 'Green'
+
+    # adding color to QR code
+    QRimg = QRcode.make_image(
+        fill_color=QRcolor, back_color="white").convert('RGB')
+
+    # set size of QR code
+    pos = ((QRimg.size[0] - logo.size[0]) // 2,
+           (QRimg.size[1] - logo.size[1]) // 2)
+    QRimg.paste(logo, pos)
+
+    # save the QR code generated
+    # QRimg.save('gfg_QR.png')
+
+    # print('QR code generated!')
+    stream = BytesIO()
+    QRimg.save(stream, "PNG")
+
+    image_data = base64.b64encode(stream.getvalue()).decode('utf-8')
+
+    # return HttpResponse(f'<img id="plt" src="data:image/png;base64, {image_data}"></img>')
+    context = {'img': f'<img id="plt" src="data:image/png;base64, {image_data}"></img>'}
+    return render(request, "main/covidpass_s9a_2.html", context=context)
+
+
 
 def sandbox(request):
     return render(
