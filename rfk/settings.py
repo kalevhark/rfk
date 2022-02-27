@@ -49,7 +49,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'corsheaders', # https://github.com/adamchainz/django-cors-headers
     'main',
-    'django_social_share'
 ]
 
 MIDDLEWARE = [
