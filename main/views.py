@@ -24,6 +24,7 @@ ROWS, COLUMNS, IGNORE = (('d'), ('b'), ('s', 'e')) # Milliseid koodigruppe ja ku
 COLUMNS_VERBOSE, IGNORE_VERBOSE = (('b', 's'), ('e')) # Milliseid koodigruppe ja kus arvesse v6tta verbaalsel esitusel
 LEVEL_MILD, LEVEL_MODERATE, LEVEL_SEVERE, LEVEL_EXTREME = range(1, 5) # RFK määrajad
 LEVEL_TTA = 9 # RFK määraja TTa e Täpsustama
+FILE_VER = 'icf2017_est_v03_03_22'
 
 """
 Terminoloogia:
@@ -89,7 +90,7 @@ class ICF_Est_New():
 
     def __init__(self):
         self.df = dict()
-        with open(STATIC_DIR / 'icf2017_est_v20210901.csv', newline='', encoding='windows-1252') as csvfile:
+        with open(STATIC_DIR / f'{FILE_VER}.csv', newline='', encoding='windows-1252') as csvfile:
             reader = csv.DictReader(csvfile, delimiter=';', quotechar='"')
             n = 0
             for row in reader:
