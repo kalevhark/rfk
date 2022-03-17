@@ -57,7 +57,7 @@
     </button>
 
     <span>Vanusgrupp?</span>
-    <select v-model="selected_vanusgrupp">
+    <select v-model="selectedVanusgrupp">
       <option v-for="option in vanusgrupid" v-bind:value="option.value">
         [[ option.text ]]
       </option>
@@ -67,7 +67,7 @@
 
     <div class="w3-panel w3-padding w3-card w3-pale-blue">
       <p>Kas Teil on mõni all nimetatud terviseseisunditest?</p>
-      <div>Valitud seisundid: [[ checkedMuutumatudSeisundid ]]</div>
+{#      <div>Valitud seisundid: [[ checkedMuutumatudSeisundid ]]</div>#}
       <ul>
         <li v-for="item in muutumatudSeisundid">
           <input type="checkbox" :id="item.id" :value="item.text" v-model="checkedMuutumatudSeisundid">
@@ -97,7 +97,7 @@
           <th v-show="show" class="result" title="Skoor 0-4 PISTS kord arvutamise metoodika alusel">MM18</th>
         </tr>
       </table>
-      <div v-for="(kysimus, kysimusIndex) in kysimused">
+      <div v-for="(kysimus, kysimusIndex) in kysimustik">
         <span v-html="kysimus.text"></span><br>
         <table>
           <tr>
@@ -117,9 +117,8 @@
     </div>
 
     <div class="w3-panel w3-padding w3-card w3-pale-blue">
-      <p>üldküsimused</p>
       <div v-for="(kysimus, kysimusIndex) in yldkysimused" :key="kysimusIndex">
-        <p><span v-html="kysimus"></span></p>
+        <p><span v-html="kysimus.text"></span></p>
         <textarea placeholder="siia saab kirjutada pika jutu..."></textarea>
       </div>
     </div>

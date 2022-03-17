@@ -3,10 +3,10 @@ Vue.createApp({
   data() {
     return {
       vanusgrupid: [
-        { text: 'LAPS 0-2', value: 0},
-        { text: 'LAPS 3-8', value: 1},
-        { text: 'LAPS 9-15', value: 2},
-        { text: 'VPI', value: 3},
+        { kysimustik: false, text: 'LAPS 0-2', value: 0},
+        { kysimustik: true, text: 'LAPS 3-8', value: 1},
+        { kysimustik: true, text: 'LAPS 9-15', value: 2},
+        { kysimustik: true, text: 'VPI', value: 3},
       ],
       selectedVanusgrupp: 0,
       options: [
@@ -22,25 +22,57 @@ Vue.createApp({
       ],
       checkedMuutumatudSeisundid: [],
       toggleShowForm: 'yes',
-      kysimused: [
-        { text: 'Kysimus', score: '' },
-        { text: 'Kysimus', score: '' },
-        { text: 'Kysimus', score: '' },
-        { text: 'Kysimus', score: '' },
-        { text: 'Kysimus', score: '' },
-      ],
-      yldkysimused: [
-        'Küsimus?',
-        'Küsimus?',
-        'Küsimus?',
-      ]
+      kysimustik: [],
+      vanusgruppideKysimused: {
+        0: [],
+        1: [
+          { text: '3-8 Kysimus', score: '' },
+          { text: 'Kysimus', score: '' },
+          { text: 'Kysimus', score: '' }
+        ],
+        2: [
+          { text: '9-15 Kysimus', score: '' },
+          { text: 'Kysimus', score: '' },
+          { text: 'Kysimus', score: '' }
+        ],
+        3: [
+          { text: 'VPI Küsimus', score: '' },
+          { text: 'Kysimus', score: '' },
+          { text: 'Kysimus', score: '' }
+        ]
+      },
+      yldkysimused: [],
+      vanusgruppideYldKysimused: {
+        0: [
+          { text: '0-2 ÜldKüsimus', score: '' },
+          { text: 'Kysimus', score: '' },
+          { text: 'Kysimus', score: '' }
+        ],
+        1: [
+          { text: '3-8 ÜldKüsimus', score: '' },
+          { text: 'Kysimus', score: '' },
+          { text: 'Kysimus', score: '' }
+        ],
+        2: [
+          { text: '9-15 ÜldKüsimus', score: '' },
+          { text: 'Kysimus', score: '' },
+          { text: 'Kysimus', score: '' }
+        ],
+        3: [
+          { text: 'VPI ÜldKysimus', score: '' },
+          { text: 'Kysimus', score: '' },
+          { text: 'Kysimus', score: '' }
+        ]
+      }
     }
   },
   mounted() {
     this.$nextTick(function () {
       // Code that will run only after the
       // entire view has been rendered
-      this.selected_vanusgrupp = 0;
+      this.selectedVanusgrupp = 0;
+      this.kysimustik = this.vanusgruppideKysimused[this.selectedVanusgrupp];
+      this.yldkysimused = this.vanusgruppideYldKysimused[this.selectedVanusgrupp];
     })
   },
   watch: {
@@ -52,14 +84,20 @@ Vue.createApp({
           this.toggleShowForm = 'yes';
         }
       },
+    },
+    selectedVanusgrupp: {
+      handler(newQuestion, oldQuestion) {
+        this.kysimustik = this.vanusgruppideKysimused[this.selectedVanusgrupp];
+        this.yldkysimused = this.vanusgruppideYldKysimused[this.selectedVanusgrupp];
+      },
     }
   },
   computed: {
     showKysimusVorm() {
-      return this.checkedMuutumatudSeisundid.length > 0;
+      return this.vanusgrupid[this.selectedVanusgrupp].kysimustik && this.checkedMuutumatudSeisundid.length > 0;
     },
     showKysimustik() {
-      return this.toggleShowForm === 'yes';
+      return this.vanusgrupid[this.selectedVanusgrupp].kysimustik && this.toggleShowForm === 'yes';
     }
   }
 }).mount('#kysimustik6')
