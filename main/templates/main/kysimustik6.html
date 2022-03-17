@@ -65,7 +65,7 @@
 
     <h4>Enesehinnangu küsimustik</h4>
 
-    <div class="w3-panel w3-padding w3-card">
+    <div class="w3-panel w3-padding w3-card w3-pale-blue">
       <p>Kas Teil on mõni all nimetatud terviseseisunditest?</p>
       <div>Valitud seisundid: [[ checkedMuutumatudSeisundid ]]</div>
       <ul>
@@ -76,7 +76,7 @@
       </ul>
     </div>
 
-    <div v-show="showKysimusVorm" class="w3-panel w3-padding w3-card">
+    <div v-show="showKysimusVorm" class="w3-panel w3-padding w3-card w3-pale-yellow">
       <p>Märkisite, et Teil esineb mõni eeltoodud seisunditest.</p>
       <input
         type="checkbox"
@@ -87,7 +87,7 @@
       <label for="toggleShowForm">Olen nõus vastama lisaküsimustele</label>
     </div>
 
-    <div v-show="showKysimustik" class="w3-panel w3-padding w3-card">
+    <div v-show="showKysimustik" class="w3-panel w3-padding w3-card  w3-pale-green">
       <table>
         <tr>
           <th class="question"></th>
@@ -116,7 +116,7 @@
       </div>
     </div>
 
-    <div class="w3-panel w3-padding w3-card">
+    <div class="w3-panel w3-padding w3-card w3-pale-blue">
       <p>üldküsimused</p>
       <div v-for="(kysimus, kysimusIndex) in yldkysimused" :key="kysimusIndex">
         <p><span v-html="kysimus"></span></p>
