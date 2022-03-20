@@ -8,6 +8,10 @@
 
 {% block css %}
   <style>
+    label {
+     padding-left: 0.4em;
+    }
+
     .question {
       width: 300px;
     }
@@ -24,7 +28,7 @@
 
     .result {
       width: 80px;
-      text-align: center;
+      text-align: left;
     }
   </style>
 {% endblock %}
@@ -51,10 +55,17 @@
         </div>
       </div>
     </div>
-    <button @click="show = !show" class="w3-button">
-      <span v-if="show">Ära näita valdkondi/võtmetegevusi/skoori</span>
+    <button @click="showBackgroundInfo = !showBackgroundInfo" class="w3-button">
+      <span v-if="showBackgroundInfo">Ära näita valdkondi/võtmetegevusi/skoori</span>
       <span v-else>Näita  valdkondi/võtmetegevusi/skoori</span>
     </button>
+
+    <span>Skaala?</span>
+    <select v-model="selectedSkaala">
+      <option v-for="option in skaalad" v-bind:value="option.value">
+        [[ option.text ]]
+      </option>
+    </select>
 
     <span>Vanusgrupp?</span>
     <select v-model="selectedVanusgrupp">
@@ -69,7 +80,7 @@
       <p>Kas Teil on mõni all nimetatud terviseseisunditest?</p>
 {#      <div>Valitud seisundid: [[ checkedMuutumatudSeisundid ]]</div>#}
       <ul>
-        <li v-for="item in muutumatudSeisundid">
+        <li v-for="item in muutumatudSeisundid" style="list-style-type:none;">
           <input type="checkbox" :id="item.id" :value="item.text" v-model="checkedMuutumatudSeisundid">
           <label for="item.id">[[ item.text ]]</label>
         </li>
@@ -91,23 +102,25 @@
       <table>
         <tr>
           <th class="question"></th>
-          <th class="poll" v-for="n in 10" :key="n">
+          <th class="poll" v-for="n in skaalad[selectedSkaala].skaalaMax" :key="n">
             [[ n ]]
           </th>
-          <th v-show="show" class="result" title="Skoor 0-4 PISTS kord arvutamise metoodika alusel">MM18</th>
+          <th v-show="showBackgroundInfo" class="result" title="Skoor 0-4 PISTS kord arvutamise metoodika alusel">MM18</th>
         </tr>
       </table>
       <div v-for="(kysimus, kysimusIndex) in kysimustik">
+        <span v-show="showBackgroundInfo">[[ kysimus.valdkond ]] </span>
         <span v-html="kysimus.text"></span><br>
         <table>
           <tr>
             <td class="question"></td>
-            <td class="poll" v-for="n in 10" :key="n">
+            <td class="poll" v-for="n in skaalad[selectedSkaala].skaalaMax" :key="n">
               <input type="radio" :id="n" :value="n" v-model.number="kysimus.score"/>
               <label :for="n"></label>
             </td>
+            <td v-show="showBackgroundInfo" class="result">[[ getScore(kysimusIndex) ]]</td>
           </tr>
-          <tr v-show="kysimus.score > 4">
+          <tr v-show="kysimus.score > skaalad[selectedSkaala].extraKysimus">
             <td class="question"></td>
             <td colspan="10">Täpsustage palun, milline tervisehäire peamiselt piiranguid põhjustab?</td>
             <td><textarea placeholder="siia saab kirjutada pika jutu..."></textarea></td>
