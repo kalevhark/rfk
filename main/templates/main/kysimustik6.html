@@ -44,8 +44,8 @@
           <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-display-topright">&times;</span>
           <p>Enesehinnangust piirangu määraja arvutamine inimese valiku järgi</p>
           <ul>
-            <li>inimene teeb valiku skaalal 1-10 -> valik</li>
-            <li>skoor = 4 / 10 * valik (arvutatakse kahe komakoha täpsusega)</li>
+            <li>inimene teeb valiku skaalal 1-[[skaalad[selectedSkaala].skaalaMax]] -> valik</li>
+            <li>skoor = 4 / [[skaalad[selectedSkaala].skaalaMax]] * valik (arvutatakse kahe komakoha täpsusega)</li>
             <li>määraja = 0, kui skoor < 1,00</li>
             <li>määraja = 1, kui 1,00 <= skoor < 2,00</li>
             <li>määraja = 2, kui 2,00 <= skoor < 2,76</li>
