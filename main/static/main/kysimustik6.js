@@ -20,12 +20,36 @@ Vue.createApp({
         { text: 'Jah', value: 'A' },
         { text: 'Ei', value: 'B' },
       ],
-      muutumatudSeisundid: [
-        { text: 'Seisund0', id: 0},
-        { text: 'Seisund1', id: 1},
-        { text: 'Seisund2', id: 2},
-        { text: 'Seisund3', id: 3},
-      ],
+      muutumatudSeisundid: [],
+      vanusgruppideMuutumatudSeisundid: {
+        0: [
+          {text: '0-2 seisund', id: 0},
+          {text: 'Seisund1', id: 1},
+          {text: 'Seisund2', id: 2},
+          {text: 'Seisund3', id: 3},
+        ],
+        1: [
+          {text: '3-8 seisund', id: 0},
+          {text: 'Seisund1', id: 1},
+          {text: 'Seisund2', id: 2},
+          {text: 'Seisund3', id: 3},
+        ],
+        2: [
+          {text: '9-15 seisund', id: 0},
+          {text: 'Seisund1', id: 1},
+          {text: 'Seisund2', id: 2},
+          {text: 'Seisund3', id: 3},
+        ],
+        3: [
+          {text: 'Väljakujunenud dementsus', id: 0},
+          {text: 'Pahaloomuline kasvaja parimal võimalikul toetusravil', id: 1},
+          {text: 'Juhitav hingamine või pidev hapnikravi (va uneapnoe)', id: 2},
+          {text: 'Vaimne alaareng (mõõdukas/raske/sügav)', id: 3},
+          {text: 'Püsivalt voodihaige', id: 4},
+          {text: 'Kurttummus', id: 5},
+          {text: 'Mõlema silma pimedus', id: 6},
+        ]
+      },
       checkedMuutumatudSeisundid: [],
       toggleShowForm: 'yes',
       kysimustik: [],
@@ -77,6 +101,7 @@ Vue.createApp({
       // Code that will run only after the
       // entire view has been rendered
       this.selectedVanusgrupp = 1;
+      this.muutumatudSeisundid = this.vanusgruppideMuutumatudSeisundid[this.selectedVanusgrupp];
       this.kysimustik = this.vanusgruppideKysimused[this.selectedVanusgrupp];
       this.yldkysimused = this.vanusgruppideYldKysimused[this.selectedVanusgrupp];
     })
@@ -93,6 +118,7 @@ Vue.createApp({
     },
     selectedVanusgrupp: {
       handler(newQuestion, oldQuestion) {
+        this.muutumatudSeisundid = this.vanusgruppideMuutumatudSeisundid[this.selectedVanusgrupp];
         this.kysimustik = this.vanusgruppideKysimused[this.selectedVanusgrupp];
         this.yldkysimused = this.vanusgruppideYldKysimused[this.selectedVanusgrupp];
       },

@@ -74,9 +74,10 @@
       </option>
     </select>
 
-    <h4>Enesehinnangu küsimustik</h4>
+    <h3>Terviseseisund</h3>
 
     <div class="w3-panel w3-padding w3-card w3-pale-blue">
+      <h3>Progresseeruv või muutumatu seisund</h3>
       <p>Kas Teil on mõni all nimetatud terviseseisunditest?</p>
 {#      <div>Valitud seisundid: [[ checkedMuutumatudSeisundid ]]</div>#}
       <ul>
@@ -89,16 +90,21 @@
 
     <div v-show="showKysimusVorm" class="w3-panel w3-padding w3-card w3-pale-yellow">
       <p>Märkisite, et Teil esineb mõni eeltoodud seisunditest.</p>
+      <p>Kui Teil täiendavaid kaebusi ei ole, võite jätta vahele terviseseisundi enesehindamise osa.</p>
       <input
         type="checkbox"
         id="toggleShowForm"
         v-model="toggleShowForm"
         true-value="yes"
         false-value="no" />
-      <label for="toggleShowForm">Olen nõus vastama lisaküsimustele</label>
+      <label for="toggleShowForm">Olen nõus täitma terviseseisundi enesehindamise osa</label>
     </div>
 
     <div v-show="showKysimustik" class="w3-panel w3-padding w3-card  w3-pale-green">
+      <h3>Enesehindamine</h3>
+      <p>Järgnevalt palume hinnata oma hakkamasaamist järgnevate tegevuste juures.</p>
+      <p>1 = piiranguid ega takistusi ei ole</p>
+      <p>[[ skaalad[selectedSkaala].skaalaMax ]] = täielikult võimatu või takistatud</p>
       <table>
         <tr>
           <th class="question"></th>
@@ -130,6 +136,7 @@
     </div>
 
     <div class="w3-panel w3-padding w3-card w3-pale-blue">
+      <h3>Üldküsimused</h3>
       <div v-for="(kysimus, kysimusIndex) in yldkysimused" :key="kysimusIndex">
         <p><span v-html="kysimus.text"></span></p>
         <textarea placeholder="siia saab kirjutada pika jutu..."></textarea>
