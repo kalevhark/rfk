@@ -60,14 +60,14 @@
       <span v-else>Näita  valdkondi/võtmetegevusi/skoori</span>
     </button>
 
-    <span>Skaala?</span>
+    &NonBreakingSpace;<span>Skaala?</span>&NonBreakingSpace;
     <select v-model="selectedSkaala">
       <option v-for="option in skaalad" v-bind:value="option.value">
         [[ option.text ]]
       </option>
     </select>
 
-    <span>Vanusgrupp?</span>
+    &NonBreakingSpace;<span>Vanusgrupp?</span>&NonBreakingSpace;
     <select v-model="selectedVanusgrupp">
       <option v-for="option in vanusgrupid" v-bind:value="option.value">
         [[ option.text ]]
@@ -102,7 +102,7 @@
 
     <div v-show="showKysimustik" class="w3-panel w3-padding w3-card  w3-pale-green">
       <h3>Enesehindamise küsimustik</h3>
-      <p>Järgnevalt palume hinnata oma hakkamasaamist järgnevate tegevuste juures.</p>
+      <p>Palume hinnata oma hakkamasaamist järgnevate tegevuste juures.</p>
       <p>1 = piiranguid ega takistusi ei ole</p>
       <p>[[ skaalad[selectedSkaala].skaalaMax ]] = tegevus on võimatu või täielikult takistatud</p>
       <table>
