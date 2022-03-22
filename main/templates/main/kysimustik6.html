@@ -74,10 +74,10 @@
       </option>
     </select>
 
-    <h3>Terviseseisund</h3>
+    <h3>Terviseseisundi kirjeldus</h3>
 
     <div class="w3-panel w3-padding w3-card w3-pale-blue">
-      <h3>Progresseeruv või muutumatu seisund</h3>
+      <h3>Progresseeruv või muutumatu terviseseisund</h3>
       <p>Kas Teil on mõni all nimetatud terviseseisunditest?</p>
 {#      <div>Valitud seisundid: [[ checkedMuutumatudSeisundid ]]</div>#}
       <ul>
@@ -97,14 +97,14 @@
         v-model="toggleShowForm"
         true-value="yes"
         false-value="no" />
-      <label for="toggleShowForm">Olen nõus täitma terviseseisundi enesehindamise osa</label>
+      <label for="toggleShowForm">Soovin vastata ka enesehindamise küsimustikule</label>
     </div>
 
     <div v-show="showKysimustik" class="w3-panel w3-padding w3-card  w3-pale-green">
-      <h3>Enesehindamine</h3>
+      <h3>Enesehindamise küsimustik</h3>
       <p>Järgnevalt palume hinnata oma hakkamasaamist järgnevate tegevuste juures.</p>
       <p>1 = piiranguid ega takistusi ei ole</p>
-      <p>[[ skaalad[selectedSkaala].skaalaMax ]] = täielikult võimatu või takistatud</p>
+      <p>[[ skaalad[selectedSkaala].skaalaMax ]] = tegevus on võimatu või täielikult takistatud</p>
       <table>
         <tr>
           <th class="question"></th>
@@ -115,7 +115,7 @@
         </tr>
       </table>
       <div v-for="(kysimus, kysimusIndex) in kysimustik">
-        <span v-show="showBackgroundInfo">[[ kysimus.valdkond ]] </span>
+        <span v-show="showBackgroundInfo">[[ kysimus.valdkond ]]</span>&NonBreakingSpace;
         <span v-html="kysimus.text"></span><br>
         <table>
           <tr>
@@ -137,6 +137,16 @@
 
     <div class="w3-panel w3-padding w3-card w3-pale-blue">
       <h3>Üldküsimused</h3>
+      <div>
+        <p><span>Kui soovite midagi lisada või täpsustada, palun märkige see siia:</span></p>
+        <textarea placeholder="siia saab kirjutada pika jutu..."></textarea>
+        <br>
+        <a
+            href="#"
+            class="w3-button">
+          Lisa fail
+        </a>
+      </div>
       <div v-for="(kysimus, kysimusIndex) in yldkysimused" :key="kysimusIndex">
         <p><span v-html="kysimus.text"></span></p>
         <textarea placeholder="siia saab kirjutada pika jutu..."></textarea>

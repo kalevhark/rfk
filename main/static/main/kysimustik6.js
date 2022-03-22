@@ -66,9 +66,20 @@ Vue.createApp({
           { text: 'Kysimus', valdkond: '', score: '' }
         ],
         3: [
-          { text: 'VPI Küsimus', valdkond: '1.', score: '' },
-          { text: 'Kysimus', valdkond: '', score: '' },
-          { text: 'Kysimus', valdkond: '', score: '' }
+          { text: 'Kodus liikumisega', valdkond: '1.2.1', score: '' },
+          { text: 'Kodust väljas liikumisega', valdkond: '1.2.2', score: '' },
+          { text: 'Istumast püsti tõusmisega', valdkond: '1.3.1', score: '' },
+          { text: 'Koduste toimetustega hakkama saamisel (näiteks koristamine, toidu valmistamine)', valdkond: '2.4.1', score: '' },
+          { text: 'Nägemisega', valdkond: '3.1', score: '' },
+          { text: 'Kuulmisega', valdkond: '3.2', score: '' },
+          { text: 'Kõnelemisega', valdkond: '3.3', score: '' },
+          { text: 'Söömisega', valdkond: '4.3.1', score: '' },
+          { text: 'Igapäevategevustega (nt riietumisega, pesemisega, tualetitoimingutega)', valdkond: '4.4.1', score: '' },
+          { text: 'Oluliste igapäevategevuste meelespidamisega', valdkond: '5.2.1', score: '' },
+          { text: 'Tööl käimisega ja/või huvitegevuses osalemisega', valdkond: '5.3.1', score: '' },
+          { text: 'Muutuvate olukordadega kohanemisega (nt igapäeva rutiini muutus)', valdkond: '6.3.1', score: '' },
+          { text: 'Lähedaste inimestega lävimisega', valdkond: '7.3.1', score: '' },
+          { text: 'Võõrastega lävimisega', valdkond: '7.3.2', score: '' },
         ]
       },
       yldkysimused: [],
@@ -89,9 +100,10 @@ Vue.createApp({
           { text: 'Kysimus', score: '' }
         ],
         3: [
-          { text: 'VPI ÜldKysimus', score: '' },
-          { text: 'Kysimus', score: '' },
-          { text: 'Kysimus', score: '' }
+          { text: 'Nimetage igapäevategevused, mille juures vajate abi?', score: '' },
+          { text: 'Kes Teid nende tegevuste juures abistab ja kui sageli?', score: '' },
+          { text: 'Kas ja milliseid abivahendeid kasutate? Kas abivahendi(te)st on abi?', score: '' },
+          { text: 'Millist abi olete kohalikust omavalitsusest saanud?', score: '' }
         ]
       }
     }
@@ -100,7 +112,7 @@ Vue.createApp({
     this.$nextTick(function () {
       // Code that will run only after the
       // entire view has been rendered
-      this.selectedVanusgrupp = 1;
+      this.selectedVanusgrupp = 3;
       this.muutumatudSeisundid = this.vanusgruppideMuutumatudSeisundid[this.selectedVanusgrupp];
       this.kysimustik = this.vanusgruppideKysimused[this.selectedVanusgrupp];
       this.yldkysimused = this.vanusgruppideYldKysimused[this.selectedVanusgrupp];
