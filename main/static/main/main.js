@@ -1,72 +1,74 @@
-var mainVM = new Vue({
-    el: '#watch-example',
+Vue.createApp({
+    // el: '#watch-example',
     delimiters: ['[[', ']]'],
-    data: {
-        rfkCode: '',
-        rfkPath: '',
-        selected: 1,
-        options: [
-          { text: 'Aritmeetiline keskmine', value: 1 },
-          { text: 'Ruutkeskmine', value: 2 },
-          { text: 'Geomeetriline keskmine (0-määraja->1)', value: 3 },
-          { text: 'Geomeetriline keskmine (0-määrajaid ignoreeritakse)', value: 4 },
-        ],
-        rfkSummary: '',
-        resultSummary0: '',
-        // resultSummary1: '',
-        resultSummary2: '',
-        resultSummary3: '',
-        resultVerbose2: '',
-        resultVerbose3: '',
-        resultVerbose4: '',
-        answer: 'Pole veel midagi analüüsida...',
-        inputs: [
-            {id: 1, category: 'Liikumine', question: '', result1: '', result2: '', result3: '', len: 0},
-            {id: 2, category: 'Käeline tegevus', question: '', result1: '', result2: '', result3: '', len: 0},
-            {id: 3, category: 'Suhtlemine', question: '', result1: '', result2: '', result3: '', len: 0},
-            {id: 4, category: 'Enesehooldus', question: '', result1: '', result2: '', result3: '', len: 0},
-            {id: 5, category: 'Õppimine', question: '', result1: '', result2: '', result3: '', len: 0},
-            {id: 6, category: 'Muutustega toimetulek', question: '', result1: '', result2: '', result3: '', len: 0},
-            {id: 7, category: 'Suhted', question: '', result1: '', result2: '', result3: '', len: 0},
-        ],
-        prt_categories: [
-            {
-                id: 1, category: 'Liikumine',
-                tvh_categories: [1], rfk_set: '',
-                result1: '', result2: '', result3: '', len: 0,
-                resultVerbose4: ''
-            },
-            {
-                id: 2, category: 'Käeline tegevus ja enesehooldus',
-                tvh_categories: [2, 4], rfk_set: '',
-                result1: '', result2: '', result3: '', len: 0,
-                resultVerbose4: ''
-            },
-            {
-                id: 3, category: 'Nägemine',
-                tvh_categories: [3], rfk_set: '',
-                result1: '', result2: '', result3: '', len: 0,
-                resultVerbose4: ''
-            },
-            {
-                id: 4, category: 'Kuulmine',
-                tvh_categories: [3], rfk_set: '',
-                result1: '', result2: '', result3: '', len: 0,
-                resultVerbose4: ''
-            },
-            {
-                id: 5, category: 'Keel-kõne',
-                tvh_categories: [3], rfk_set: '',
-                result1: '', result2: '', result3: '', len: 0,
-                resultVerbose4: ''
-            },
-            {
-                id: 6, category: 'Vaimne',
-                tvh_categories: [5, 6, 7], rfk_set: '',
-                result1: '', result2: '', result3: '', len: 0,
-                resultVerbose4: ''
-            },
-        ]
+    data() {
+        return {
+            rfkCode: '',
+            rfkPath: '',
+            selected: 1,
+            options: [
+                {text: 'Aritmeetiline keskmine', value: 1},
+                {text: 'Ruutkeskmine', value: 2},
+                {text: 'Geomeetriline keskmine (0-määraja->1)', value: 3},
+                {text: 'Geomeetriline keskmine (0-määrajaid ignoreeritakse)', value: 4},
+            ],
+            rfkSummary: '',
+            resultSummary0: '',
+            // resultSummary1: '',
+            resultSummary2: '',
+            resultSummary3: '',
+            resultVerbose2: '',
+            resultVerbose3: '',
+            resultVerbose4: '',
+            answer: 'Pole veel midagi analüüsida...',
+            inputs: [
+                {id: 1, category: 'Liikumine', question: '', result1: '', result2: '', result3: '', len: 0},
+                {id: 2, category: 'Käeline tegevus', question: '', result1: '', result2: '', result3: '', len: 0},
+                {id: 3, category: 'Suhtlemine', question: '', result1: '', result2: '', result3: '', len: 0},
+                {id: 4, category: 'Enesehooldus', question: '', result1: '', result2: '', result3: '', len: 0},
+                {id: 5, category: 'Õppimine', question: '', result1: '', result2: '', result3: '', len: 0},
+                {id: 6, category: 'Muutustega toimetulek', question: '', result1: '', result2: '', result3: '', len: 0},
+                {id: 7, category: 'Suhted', question: '', result1: '', result2: '', result3: '', len: 0},
+            ],
+            prt_categories: [
+                {
+                    id: 1, category: 'Liikumine',
+                    tvh_categories: [1], rfk_set: '',
+                    result1: '', result2: '', result3: '', len: 0,
+                    resultVerbose4: ''
+                },
+                {
+                    id: 2, category: 'Käeline tegevus ja enesehooldus',
+                    tvh_categories: [2, 4], rfk_set: '',
+                    result1: '', result2: '', result3: '', len: 0,
+                    resultVerbose4: ''
+                },
+                {
+                    id: 3, category: 'Nägemine',
+                    tvh_categories: [3], rfk_set: '',
+                    result1: '', result2: '', result3: '', len: 0,
+                    resultVerbose4: ''
+                },
+                {
+                    id: 4, category: 'Kuulmine',
+                    tvh_categories: [3], rfk_set: '',
+                    result1: '', result2: '', result3: '', len: 0,
+                    resultVerbose4: ''
+                },
+                {
+                    id: 5, category: 'Keel-kõne',
+                    tvh_categories: [3], rfk_set: '',
+                    result1: '', result2: '', result3: '', len: 0,
+                    resultVerbose4: ''
+                },
+                {
+                    id: 6, category: 'Vaimne',
+                    tvh_categories: [5, 6, 7], rfk_set: '',
+                    result1: '', result2: '', result3: '', len: 0,
+                    resultVerbose4: ''
+                },
+            ]
+        }
     },
     watch: {
         // whenever variables changes, this functions will run
@@ -328,4 +330,4 @@ var mainVM = new Vue({
                 'b126.3\n'
         }
     }
-})
+}).mount('#watch-example')

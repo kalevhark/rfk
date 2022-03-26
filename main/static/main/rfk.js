@@ -1,10 +1,12 @@
-var mainVM = new Vue({
-    el: '#watch-example',
+Vue.createApp({
+    // el: '#watch-example',
     delimiters: ['[[', ']]'],
-    data: {
+    data() {
+      return {
         rfkCode: '',
         rfkPath: '',
         answer: 'Pole veel midagi otsida...',
+      }
     },
     watch: {
         rfkCode: {
@@ -45,4 +47,4 @@ var mainVM = new Vue({
             })
         }
     }
-})
+}).mount('#codesearch')
