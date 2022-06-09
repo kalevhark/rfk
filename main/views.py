@@ -897,7 +897,7 @@ def kysimustik6(request):
 
 def get_client_ip(request):
     remote_address = request.META.get('HTTP_X_FORWARDED_FOR') or request.META.get('REMOTE_ADDR')
-    ip = remote_address
+    ip = request.META.get('REMOTE_ADDR')
     # x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
     # if x_forwarded_for:
     #     proxies = x_forwarded_for.split(',')
