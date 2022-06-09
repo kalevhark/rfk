@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vanusgrupid>
+    <vanusgrupp name="Laps 0-2" kysimustik="false">
+        <muutumatudSeisundid>
+            Laps 0-2 muutumatu 1
+            Laps 0-2 muutumatu 2
+            Laps 0-2 muutumatu 3
+        </muutumatudSeisundid>
+        <vanusgrupiKysimused></vanusgrupiKysimused>
+        <vanusgrupiYldKysimused>
+            Laps 0-2 üldküsimus 1
+            Laps 0-2 üldküsimus 2
+            Laps 0-2 üldküsimus 3
+        </vanusgrupiYldKysimused>
+    </vanusgrupp>
+
+    <vanusgrupp name="Laps 3-8" kysimustik="true">
+        <muutumatudSeisundid>
+            Laps 3-8 muutumatu 1
+            Laps 3-8 muutumatu 2
+            Laps 3-8 muutumatu 3
+        </muutumatudSeisundid>
+        <vanusgrupiKysimused>
+            <kysimus valdkond_nr="1" rfk_kategooria="tyhi">
+                Laps 3-8 küsimus 1
+            </kysimus>
+            <kysimus valdkond_nr="2" rfk_kategooria="tyhi">
+                Laps 3-8 küsimus 2
+            </kysimus>
+            <kysimus valdkond_nr="3.1" rfk_kategooria="tyhi">
+                Laps 3-8 küsimus 3
+            </kysimus>
+        </vanusgrupiKysimused>
+        <vanusgrupiYldKysimused>
+            Laps 3-8 üldküsimus 1
+            Laps 3-8 üldküsimus 2
+            Laps 3-8 üldküsimus 3
+        </vanusgrupiYldKysimused>
+    </vanusgrupp>
+
+    <vanusgrupp name="Laps 9-15" kysimustik="true">
+        <muutumatudSeisundid>
+            Laps 9-15 muutumatu 1
+            Laps 9-15 muutumatu 2
+            Laps 9-15 muutumatu 3
+        </muutumatudSeisundid>
+        <vanusgrupiKysimused>
+            <kysimus valdkond_nr="1" rfk_kategooria="tyhi">
+                Laps 9-15 küsimus 1
+            </kysimus>
+            <kysimus valdkond_nr="2" rfk_kategooria="tyhi">
+                Laps 9-15 küsimus 2
+            </kysimus>
+            <kysimus valdkond_nr="3.1" rfk_kategooria="tyhi">
+                Laps 9-15 küsimus 3
+            </kysimus>
+        </vanusgrupiKysimused>
+        <vanusgrupiYldKysimused>
+            Laps 9-15 üldküsimus 1
+            Laps 9-15 üldküsimus 2
+            Laps 9-15 üldküsimus 3
+        </vanusgrupiYldKysimused>
+    </vanusgrupp>
+
+    <vanusgrupp name="Vanaduspensioniealine" kysimustik="true">
+        <muutumatudSeisundid>
+            Vanaduspensioniealine muutumatu 1
+            Vanaduspensioniealine muutumatu 2
+            Vanaduspensioniealine muutumatu 3
+        </muutumatudSeisundid>
+        <vanusgrupiKysimused>
+            <kysimus valdkond_nr="1" rfk_kategooria="tyhi">
+                Vanaduspensioniealine küsimus 1
+            </kysimus>
+            <kysimus valdkond_nr="2" rfk_kategooria="tyhi">
+                Vanaduspensioniealine küsimus 2
+            </kysimus>
+            <kysimus valdkond_nr="3.1" rfk_kategooria="tyhi">
+                Vanaduspensioniealine küsimus 3
+            </kysimus>
+        </vanusgrupiKysimused>
+        <vanusgrupiYldKysimused>
+            Vanaduspensioniealine üldküsimus 1
+            Vanaduspensioniealine üldküsimus 2
+            Vanaduspensioniealine üldküsimus 3
+        </vanusgrupiYldKysimused>
+    </vanusgrupp>
+</vanusgrupid>

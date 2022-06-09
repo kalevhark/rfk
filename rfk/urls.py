@@ -31,6 +31,7 @@ urlpatterns = [
     path('kysimustik4/', views.kysimustik4, name='kysimustik4'),
     path('kysimustik5/', views.kysimustik5, name='kysimustik5'),
     path('kysimustik6/', views.kysimustik6, name='kysimustik6'),
+    path('kysimustik7/', views.kysimustik7, name='kysimustik7'),
     path('some_view/', views.some_view, name='some_view'),
     path('main/', include('main.urls')),
     path('admin/', admin.site.urls),

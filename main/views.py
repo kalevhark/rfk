@@ -888,11 +888,225 @@ def kysimustik5(request):
 # Küsimustiku vaade ver 6
 #
 def kysimustik6(request):
-    context = {
-    }
+    context = {}
     return render(
         request,
         'main/kysimustik6.html',
+        context
+    )
+
+def get_client_ip(request):
+    remote_address = request.META.get('HTTP_X_FORWARDED_FOR') or request.META.get('REMOTE_ADDR')
+    ip = remote_address
+    # x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    # if x_forwarded_for:
+    #     proxies = x_forwarded_for.split(',')
+    #     while (len(proxies) > 0 and proxies[0].startswith(PRIVATE_IPS_PREFIX)):
+    #         proxies.pop(0)
+    #         if len(proxies) > 0:
+    #             ip = proxies[0]
+    return ip
+
+import itertools
+import xml.etree.ElementTree as ET
+def get_kysimustik():
+    file = STATIC_DIR / 'data' / 'kysimustik_v1.xml'
+    with open(file, 'r', encoding='utf8') as f:
+        tree = ET.parse(f)
+        root = tree.getroot()
+
+    vanusgrupid = []
+    vanusgruppideMuutumatudSeisundid = {}
+    vanusgruppideKysimused = {}
+    vanusgruppideYldKysimused = {}
+
+    n = 0
+    for child in root:
+        print(child.tag, child.attrib, child.find('muutumatudSeisundid').text.split('\n'))
+        # vanusgruppide nimetused
+        vanusgrupp = {
+            'kysimustik': True if child.attrib['kysimustik'] == 'true' else False,
+            'text': child.attrib['name'],
+            'value': n
+        }
+        vanusgrupid.append(vanusgrupp)
+
+        # vanusgruppide muutumatute seisundite loetelud
+        i = itertools.count(0)
+        muutumatudSeisundid = [
+            {'text': seisund.strip(), 'id': next(i)}
+            for seisund
+            in child.find('muutumatudSeisundid').text.split('\n')
+            if len(seisund.strip()) > 0
+        ]
+        vanusgruppideMuutumatudSeisundid[n] = muutumatudSeisundid
+
+        # vanusgrupi kysimused
+        if child.attrib['kysimustik'] == 'true':
+            vanusgrupiKysimused = [
+                {'text': kysimus.text.strip(), 'valdkond': kysimus.attrib['valdkond_nr'], 'score': '', 'answer': '' }
+                for kysimus
+                in child.find('vanusgrupiKysimused').findall('kysimus')
+                if len(kysimus.text.strip()) > 0
+            ]
+        else:
+            vanusgrupiKysimused = []
+        vanusgruppideKysimused[n] = vanusgrupiKysimused
+
+        # vanusgrupi yldkysimused
+        vanusgrupiYldKysimused = [
+            {'text': kysimus.strip(), 'answer': ''}
+            for kysimus
+            in child.find('vanusgrupiYldKysimused').text.split('\n')
+            if len(kysimus.strip()) > 0
+        ]
+        vanusgruppideYldKysimused[n] = vanusgrupiYldKysimused
+        n += 1
+
+    kysimustik = {
+        'vanusgrupid': vanusgrupid,
+        'vanusgruppideMuutumatudSeisundid': vanusgruppideMuutumatudSeisundid,
+        'vanusgruppideKysimused': vanusgruppideKysimused,
+        'vanusgruppideYldKysimused': vanusgruppideYldKysimused
+    }
+    return kysimustik
+
+# Vue kysimustik7 tulemuste salvestamiseks
+def save_kysimustik7_results(request):
+    kysimustik7_results = {
+        'ipAddress': request.GET.get('ipAddress', ''),
+        'vanusgrupp': request.GET.get('vanusgrupp', ''),
+        'checkedMuutumatudSeisundid': request.GET.get('checkedMuutumatudSeisundid', ''),
+        'toggleShowForm': request.GET.get('toggleShowForm', ''),
+        'kysimustik': request.GET.get('kysimustik', ''),
+        # 'vanusgruppideKysimused': request.GET.get('vanusgruppideKysimused', ''),
+        'yldkysimused': request.GET.get('yldkysimused', ''),
+        # 'vanusgruppideYldKysimused': request.GET.get('vanusgruppideYldKysimused', ''),
+        'feedback': request.GET.get('feedback', '')
+    }
+    print(kysimustik7_results)
+    return JsonResponse(
+        {},
+        safe=False
+    )
+
+#
+# Küsimustiku vaade ver 7
+#
+def kysimustik7(request):
+    kysimustik = get_kysimustik()
+
+    vanusgrupid = [
+        {'kysimustik': False, 'text': 'LAPS 0-2', 'value': 0},
+        {'kysimustik': True, 'text': 'LAPS 3-8', 'value': 1},
+        {'kysimustik': True, 'text': 'LAPS 9-15', 'value': 2},
+        {'kysimustik': True, 'text': 'VPI', 'value': 3},
+    ]
+    vanusgrupid = kysimustik['vanusgrupid']
+
+    vanusgruppideMuutumatudSeisundid = {
+        0: [
+            {'text': '0-2 seisund', 'id': 0},
+            {'text': 'Seisund1', 'id': 1},
+            {'text': 'Seisund2', 'id': 2},
+            {'text': 'Seisund3', 'id': 3},
+        ],
+        1: [
+            {'text': '3-8 seisund', 'id': 0},
+            {'text': 'Seisund1', 'id': 1},
+            {'text': 'Seisund2', 'id': 2},
+            {'text': 'Seisund3', 'id': 3},
+        ],
+        2: [
+            {'text': '9-15 seisund', 'id': 0},
+            {'text': 'Seisund1', 'id': 1},
+            {'text': 'Seisund2', 'id': 2},
+            {'text': 'Seisund3', 'id': 3},
+        ],
+        3: [
+            {'text': 'Väljakujunenud dementsus', 'id': 0},
+            {'text': 'Pahaloomuline kasvaja parimal võimalikul toetusravil', 'id': 1},
+            {'text': 'Juhitav hingamine või pidev hapnikravi (va uneapnoe)', 'id': 2},
+            {'text': 'Vaimne alaareng (mõõdukas/raske/sügav)', 'id': 3},
+            {'text': 'Püsivalt voodihaige', 'id': 4},
+            {'text': 'Kurttummus', 'id': 5},
+            {'text': 'Mõlema silma pimedus', 'id': 6},
+        ]
+    }
+    vanusgruppideMuutumatudSeisundid = kysimustik['vanusgruppideMuutumatudSeisundid']
+
+    vanusgruppideKysimused = {
+        0: [],
+        1: [
+            {'text': '3-8 Kysimus', 'valdkond': '1.', 'score': ''},
+            {'text': 'Kysimus', 'valdkond': '', 'score': ''},
+            {'text': 'Kysimus', 'valdkond': '', 'score': ''}
+        ],
+        2: [
+            {'text': '9-15 Kysimus', 'valdkond': '1.', 'score': ''},
+            {'text': 'Kysimus', 'valdkond': '', 'score': ''},
+            {'text': 'Kysimus', 'valdkond': '', 'score': ''}
+        ],
+        3: [
+            {'text': 'Kodus liikumisega', 'valdkond': '1.2.1', 'score': ''},
+            {'text': 'Kodust väljas liikumisega', 'valdkond': '1.2.2', 'score': ''},
+            {'text': 'Istumast püsti tõusmisega', 'valdkond': '1.3.1', 'score': ''},
+            {'text': 'Koduste toimetustega hakkama saamisel (näiteks koristamine, toidu valmistamine)', 'valdkond': '2.4.1',
+             'score': ''},
+            {'text': 'Nägemisega', 'valdkond': '3.1', 'score': ''},
+            {'text': 'Kuulmisega', 'valdkond': '3.2', 'score': ''},
+            {'text': 'Kõnelemisega', 'valdkond': '3.3', 'score': ''},
+            {'text': 'Söömisega', 'valdkond': '4.3.1', 'score': ''},
+            {'text': 'Igapäevategevustega (nt riietumisega, pesemisega, tualetitoimingutega)', 'valdkond': '4.4.1',
+             'score': ''},
+            {'text': 'Oluliste igapäevategevuste meelespidamisega', 'valdkond': '5.2.1', 'score': ''},
+            {'text': 'Tööl käimisega ja/või huvitegevuses osalemisega', 'valdkond': '5.3.1', 'score': ''},
+            {'text': 'Muutuvate olukordadega kohanemisega (nt igapäeva rutiini muutus)', 'valdkond': '6.3.1', 'score': ''},
+            {'text': 'Lähedaste inimestega lävimisega', 'valdkond': '7.3.1', 'score': ''},
+            {'text': 'Võõrastega lävimisega', 'valdkond': '7.3.2', 'score': ''},
+        ]
+    }
+    vanusgruppideKysimused = kysimustik['vanusgruppideKysimused']
+
+    text = 'text'
+    score = 'score'
+
+    vanusgruppideYldKysimused = {
+        0: [
+            {text: '0-2 ÜldKüsimus', score: ''},
+            {text: 'Kysimus', score: ''},
+            {text: 'Kysimus', score: ''}
+        ],
+        1: [
+            {text: '3-8 ÜldKüsimus', score: ''},
+            {text: 'Kysimus', score: ''},
+            {text: 'Kysimus', score: ''}
+        ],
+        2: [
+            {text: '9-15 ÜldKüsimus', score: ''},
+            {text: 'Kysimus', score: ''},
+            {text: 'Kysimus', score: ''}
+        ],
+        3: [
+            {text: 'Nimetage igapäevategevused, mille juures vajate abi?', score: ''},
+            {text: 'Kes Teid nende tegevuste juures abistab ja kui sageli?', score: ''},
+            {text: 'Kas ja milliseid abivahendeid kasutate? Kas abivahendi(te)st on abi?', score: ''},
+            {text: 'Millist abi olete kohalikust omavalitsusest saanud?', score: ''}
+        ]
+    }
+    vanusgruppideYldKysimused = kysimustik['vanusgruppideYldKysimused']
+
+    context = {
+        'selectedSkaala': 1,
+        'vanusgrupid': json.dumps(vanusgrupid),
+        'vanusgruppideMuutumatudSeisundid': json.dumps(vanusgruppideMuutumatudSeisundid),
+        'vanusgruppideKysimused': json.dumps(vanusgruppideKysimused),
+        'vanusgruppideYldKysimused': json.dumps(vanusgruppideYldKysimused),
+        'ip': get_client_ip(request)
+    }
+    return render(
+        request,
+        'main/kysimustik7.html',
         context
     )
 

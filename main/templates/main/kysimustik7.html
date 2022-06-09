@@ -1,0 +1,175 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block title %}{{ block.super }} küsimustiku proto 7{% endblock %}
+
+{% block src %}
+  <script type="text/javascript">
+    // Muutujad vue jaoks
+    var urlSaveResults = "{% url 'main:save_kysimustik7_results' %}";
+    var selectedSkaala = {{ selectedSkaala }};
+    var vanusgrupid = {{ vanusgrupid | safe }};
+    var vanusgruppideMuutumatudSeisundid = {{ vanusgruppideMuutumatudSeisundid | safe }};
+    var vanusgruppideKysimused = {{ vanusgruppideKysimused | safe }};
+    var vanusgruppideYldKysimused = {{ vanusgruppideYldKysimused | safe }};
+    var ipAddress = {{ ip }};
+  </script>
+{% endblock %}
+
+{% block css %}
+  <style>
+    label {
+     padding-left: 0.4em;
+    }
+
+    .question {
+      width: 300px;
+    }
+
+    .unanswered {
+      width: 100px;
+      text-align: center;
+    }
+
+    .poll {
+      width: 30px;
+      text-align: center;
+    }
+
+    .result {
+      width: 80px;
+      text-align: left;
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+  <div class="w3-container" id="kysimustik7">
+    <button onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-black">
+      Mis värk on?
+    </button>
+    <div id="id01" class="w3-modal">
+      <div class="w3-modal-content">
+        <div class="w3-container">
+          <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+          <p>Enesehinnangust piirangu määraja arvutamine inimese valiku järgi</p>
+          <ul>
+            <li>inimene teeb valiku skaalal 1-[[skaalad[selectedSkaala].skaalaMax]] -> valik</li>
+            <li>skoor = 4 / [[skaalad[selectedSkaala].skaalaMax]] * valik (arvutatakse kahe komakoha täpsusega)</li>
+            <li>määraja = 0, kui skoor < 1,00</li>
+            <li>määraja = 1, kui 1,00 <= skoor < 2,00</li>
+            <li>määraja = 2, kui 2,00 <= skoor < 2,76</li>
+            <li>määraja = 3, kui 2,76 <= skoor < 3,50</li>
+            <li>määraja = 4, kui 3,50 <= skoor</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <button @click="showBackgroundInfo = !showBackgroundInfo" class="w3-button">
+      <span v-if="showBackgroundInfo">Ära näita valdkondi/võtmetegevusi/skoori</span>
+      <span v-else>Näita  valdkondi/võtmetegevusi/skoori</span>
+    </button>
+
+    &NonBreakingSpace;<span>Skaala?</span>&NonBreakingSpace;
+    <select v-model="selectedSkaala">
+      <option v-for="option in skaalad" v-bind:value="option.value">
+        [[ option.text ]]
+      </option>
+    </select>
+
+    &NonBreakingSpace;<span>Vanusgrupp?</span>&NonBreakingSpace;
+    <select v-model="selectedVanusgrupp">
+      <option v-for="option in vanusgrupid" v-bind:value="option.value">
+        [[ option.text ]]
+      </option>
+    </select>
+
+    <h3>Terviseseisundi kirjeldus</h3>
+    <div class="w3-panel w3-padding w3-card w3-pale-blue">
+      <h3>Progresseeruv või muutumatu terviseseisund</h3>
+      <p>Kas Teil on mõni all nimetatud terviseseisunditest?</p>
+{#      <div>Valitud seisundid: [[ checkedMuutumatudSeisundid ]]</div>#}
+      <ul>
+        <li v-for="item in muutumatudSeisundid" style="list-style-type:none;">
+          <input type="checkbox" :id="item.id" :value="item.text" v-model="checkedMuutumatudSeisundid">
+          <label for="item.id">[[ item.text ]]</label>
+        </li>
+      </ul>
+    </div>
+
+    <div v-show="showKysimusVorm" class="w3-panel w3-padding w3-card w3-pale-yellow">
+      <p>Märkisite, et Teil esineb mõni eeltoodud seisunditest.</p>
+      <p>Kui Teil täiendavaid kaebusi ei ole, võite jätta vahele terviseseisundi enesehindamise osa.</p>
+      <input
+        type="checkbox"
+        id="toggleShowForm"
+        v-model="toggleShowForm"
+        true-value="yes"
+        false-value="no" />
+      <label for="toggleShowForm">Soovin vastata ka enesehindamise küsimustikule</label>
+    </div>
+
+    <div v-show="showKysimustik" class="w3-panel w3-padding w3-card  w3-pale-green">
+      <h3>Enesehindamise küsimustik</h3>
+      <p>Palume hinnata oma hakkamasaamist järgnevate tegevuste juures.</p>
+      <p>[[ skaalad[selectedSkaala].skaala[0] ]] = piiranguid ega takistusi ei ole</p>
+      <p>[[ skaalad[selectedSkaala].skaala.slice(-1)[0] ]] = tegevus on võimatu või täielikult takistatud</p>
+      <table>
+        <tr>
+          <th class="question"></th>
+          <th class="poll" v-for="n in skaalad[selectedSkaala].skaala" :key="n">
+            [[ n ]]
+          </th>
+          <th v-show="showBackgroundInfo" class="result" title="Skoor 0-4 PISTS kord arvutamise metoodika alusel">MM18</th>
+        </tr>
+      </table>
+      <div v-for="(kysimus, kysimusIndex) in kysimustik">
+        <span v-show="showBackgroundInfo">[[ kysimus.valdkond ]]</span>&NonBreakingSpace;
+        <span v-html="kysimus.text"></span><br>
+        <table>
+          <tr>
+            <td class="question"></td>
+            <td class="poll" v-for="n in skaalad[selectedSkaala].skaala" :key="n">
+              <input type="radio" :id="n" :value="n" v-model.number="kysimus.score"/>
+              <label :for="n"></label>
+            </td>
+            <td v-show="showBackgroundInfo" class="result">[[ getScore(kysimusIndex) ]]</td>
+          </tr>
+          <tr v-show="kysimus.score > skaalad[selectedSkaala].extraKysimus">
+            <td class="question"></td>
+            <td colspan="10">Täpsustage palun, milline tervisehäire peamiselt piiranguid põhjustab?</td>
+            <td><textarea v-model="kysimus.answer" placeholder="siia saab kirjutada pika jutu..."></textarea></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="w3-panel w3-padding w3-card w3-pale-blue">
+      <h3>Üldküsimused</h3>
+      <div v-for="(kysimus, kysimusIndex) in yldkysimused" :key="kysimusIndex">
+        <p><span v-html="kysimus.text"></span></p>
+        <textarea v-model="kysimus.answer" placeholder="siia saab kirjutada pika jutu..."></textarea>
+      </div>
+      <br>
+      <a
+          href="#"
+          class="w3-button">
+        Lisa fail
+      </a>
+    </div>
+    <div class="w3-panel w3-padding w3-card w3-light-grey">
+      <h3>Tagasiside</h3>
+      <div>
+        <p><span>Nimi ja kommentaar küsimustiku kohta:</span></p>
+        <textarea v-model="feedback" placeholder="siia saab kirjutada pika jutu..."></textarea>
+        <br>
+        <button id='saveButton' @click="saveResults">Saada</button>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block javascript %}
+  {#  <script src="https://unpkg.com/vue@next"></script>#}
+  <script src="{% static 'main/kysimustik7.js' %}?ver=2022"></script>
+{% endblock %}
