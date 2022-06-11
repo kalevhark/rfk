@@ -91,6 +91,9 @@ Vue.createApp({
     }
   },
   methods: {
+    saveFile: function () {
+      alert('Faili lisamine pole veel prototüübis võimalik.')
+    },
     saveResults: function () {
       var vm = this
       params = {
@@ -106,9 +109,9 @@ Vue.createApp({
       }
       axios.get(urlSaveResults, {params: params})
         .then(function (response) {
-          console.log(response);
+          console.log(response.data.filename);
           var btn = document.getElementById('saveButton')
-          btn.innerHTML = 'Salvestatud';
+          btn.innerHTML = 'Salvestatud serverisse: ' + response.data.filename;
           btn.classList.add('w3-pale-green');
 
           setTimeout(function(){

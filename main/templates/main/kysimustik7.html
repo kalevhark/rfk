@@ -86,7 +86,7 @@
 
     <h3>Terviseseisundi kirjeldus</h3>
     <div class="w3-panel w3-padding w3-card w3-pale-blue">
-      <h3>Progresseeruv või muutumatu terviseseisund</h3>
+      <h3 v-show="showBackgroundInfo">Progresseeruv või muutumatu terviseseisund</h3>
       <p>Kas Teil on mõni all nimetatud terviseseisunditest?</p>
 {#      <div>Valitud seisundid: [[ checkedMuutumatudSeisundid ]]</div>#}
       <ul>
@@ -110,10 +110,23 @@
     </div>
 
     <div v-show="showKysimustik" class="w3-panel w3-padding w3-card  w3-pale-green">
-      <h3>Enesehindamise küsimustik</h3>
+      <h3 v-show="showBackgroundInfo">Enesehindamise küsimustik</h3>
       <p>Palume hinnata oma hakkamasaamist järgnevate tegevuste juures.</p>
-      <p>[[ skaalad[selectedSkaala].skaala[0] ]] = piiranguid ega takistusi ei ole</p>
-      <p>[[ skaalad[selectedSkaala].skaala.slice(-1)[0] ]] = tegevus on võimatu või täielikult takistatud</p>
+      <div v-if="selectedSkaala == 1">
+        <p>0 - PIIRANGUID ei ole</p>
+        <p>1 - KERGE PIIRANG - ei sega väga igapäevaelu, on esinenud üksikutel juhtudel viimase kuu aja jooksul</p>
+        <p>2 - MÕÕDUKAS PIIRANG - häirib sageli igapäevaelu (1-2 korda nädalas), tegevus on ilmselgelt raskemini teostatav, kui
+          haigusteta inimesel, nõuab rohkem aega ja/või pingutust</p>
+        <p>3 - RASKE PIIRANG - piirab olulisel määral igapäevaelu tegevuste teostamist, esineb väga sageli või pidevalt (peaaegu iga
+          päev), tegevuse sooritamine on peaaegu võimatu või ainult osaliselt teostatav, vajalik võib olla abivahend või
+          kõrvalabi</p>
+        <p>4 - TÄIELIK PIIRANG - takistab igapäevaselt hakkama saamist, esineb pidevalt, tegevust ei ole üldse võimalik teostada</p>
+      </div>
+      <div v-else>
+        <p>[[ skaalad[selectedSkaala].skaala[0] ]] = piiranguid ega takistusi ei ole</p>
+        <p>[[ skaalad[selectedSkaala].skaala.slice(-1)[0] ]] = tegevus on võimatu või täielikult takistatud</p>
+      </div>
+
       <table>
         <tr>
           <th class="question"></th>
@@ -145,20 +158,16 @@
     </div>
 
     <div class="w3-panel w3-padding w3-card w3-pale-blue">
-      <h3>Üldküsimused</h3>
+      <h3 v-show="showBackgroundInfo">Üldküsimused</h3>
       <div v-for="(kysimus, kysimusIndex) in yldkysimused" :key="kysimusIndex">
         <p><span v-html="kysimus.text"></span></p>
         <textarea v-model="kysimus.answer" placeholder="siia saab kirjutada pika jutu..."></textarea>
       </div>
       <br>
-      <a
-          href="#"
-          class="w3-button">
-        Lisa fail
-      </a>
+      <button id='saveFile' @click="saveFile">Lisa fail</button>
     </div>
     <div class="w3-panel w3-padding w3-card w3-light-grey">
-      <h3>Tagasiside</h3>
+      <h3 v-show="showBackgroundInfo">Tagasiside</h3>
       <div>
         <p><span>Nimi ja kommentaar küsimustiku kohta:</span></p>
         <textarea v-model="feedback" placeholder="siia saab kirjutada pika jutu..."></textarea>

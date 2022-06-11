@@ -907,6 +907,7 @@ def get_client_ip(request):
     #             ip = proxies[0]
     return ip
 
+from datetime import  datetime
 import itertools
 import xml.etree.ElementTree as ET
 def get_kysimustik():
@@ -973,20 +974,28 @@ def get_kysimustik():
 
 # Vue kysimustik7 tulemuste salvestamiseks
 def save_kysimustik7_results(request):
-    kysimustik7_results = {
+    kysimustik_results = {
+        'version': '7',
         'ipAddress': request.GET.get('ipAddress', ''),
-        'vanusgrupp': request.GET.get('vanusgrupp', ''),
+        'vanusgrupp': json.loads(request.GET.get('vanusgrupp', '')),
         'checkedMuutumatudSeisundid': request.GET.get('checkedMuutumatudSeisundid', ''),
         'toggleShowForm': request.GET.get('toggleShowForm', ''),
-        'kysimustik': request.GET.get('kysimustik', ''),
+        'kysimustik': json.loads(request.GET.get('kysimustik', '')),
         # 'vanusgruppideKysimused': request.GET.get('vanusgruppideKysimused', ''),
-        'yldkysimused': request.GET.get('yldkysimused', ''),
+        'yldkysimused': json.loads(request.GET.get('yldkysimused', '')),
         # 'vanusgruppideYldKysimused': request.GET.get('vanusgruppideYldKysimused', ''),
         'feedback': request.GET.get('feedback', '')
     }
-    print(kysimustik7_results)
+    print(kysimustik_results)
+    versioon = kysimustik_results['version']
+    vanusgrupp = kysimustik_results['vanusgrupp']['text']
+    timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+    filename = f'eneseHinnang_v{versioon}_{vanusgrupp}_{timestamp}.json'
+    with open(filename, 'w', encoding='utf8') as f:
+        json.dump(kysimustik_results, f)
+
     return JsonResponse(
-        {},
+        {'filename': filename},
         safe=False
     )
 
