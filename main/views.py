@@ -981,9 +981,7 @@ def save_kysimustik7_results(request):
         'checkedMuutumatudSeisundid': request.GET.get('checkedMuutumatudSeisundid', ''),
         'toggleShowForm': request.GET.get('toggleShowForm', ''),
         'kysimustik': json.loads(request.GET.get('kysimustik', '')),
-        # 'vanusgruppideKysimused': request.GET.get('vanusgruppideKysimused', ''),
         'yldkysimused': json.loads(request.GET.get('yldkysimused', '')),
-        # 'vanusgruppideYldKysimused': request.GET.get('vanusgruppideYldKysimused', ''),
         'feedback': request.GET.get('feedback', '')
     }
     print(kysimustik_results)

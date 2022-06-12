@@ -8,10 +8,10 @@
     // Muutujad vue jaoks
     var urlSaveResults = "{% url 'main:save_kysimustik7_results' %}";
     var selectedSkaala = {{ selectedSkaala }};
-    var vanusgrupid = {{ vanusgrupid | safe }};
-    var vanusgruppideMuutumatudSeisundid = {{ vanusgruppideMuutumatudSeisundid | safe }};
-    var vanusgruppideKysimused = {{ vanusgruppideKysimused | safe }};
-    var vanusgruppideYldKysimused = {{ vanusgruppideYldKysimused | safe }};
+    const vanusgrupid = {{ vanusgrupid | safe }};
+    const vanusgruppideMuutumatudSeisundid = {{ vanusgruppideMuutumatudSeisundid | safe }};
+    const vanusgruppideKysimused = {{ vanusgruppideKysimused | safe }};
+    const vanusgruppideYldKysimused = {{ vanusgruppideYldKysimused | safe }};
     var ipAddress = "{{ ip }}";
   </script>
 {% endblock %}
@@ -173,6 +173,7 @@
         <textarea v-model="feedback" placeholder="siia saab kirjutada pika jutu..."></textarea>
         <br>
         <button id='saveButton' @click="saveResults">Saada</button>
+        <button id='resetForm' @click="resetForm">Täida uuesti</button>
       </div>
     </div>
   </div>

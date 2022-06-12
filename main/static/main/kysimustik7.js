@@ -1,6 +1,4 @@
-Vue.createApp({
-  delimiters: ['[[', ']]'],
-  data() {
+function initialState() {
     return {
       ipAddress: ipAddress,
       showBackgroundInfo: false,
@@ -26,6 +24,12 @@ Vue.createApp({
       vanusgruppideYldKysimused: vanusgruppideYldKysimused,
       feedback: ''
     }
+}
+
+Vue.createApp({
+  delimiters: ['[[', ']]'],
+  data() {
+    return initialState()
   },
   mounted() {
     this.$nextTick(function () {
@@ -52,6 +56,9 @@ Vue.createApp({
         this.muutumatudSeisundid = this.vanusgruppideMuutumatudSeisundid[this.selectedVanusgrupp];
         this.kysimustik = this.vanusgruppideKysimused[this.selectedVanusgrupp];
         this.yldkysimused = this.vanusgruppideYldKysimused[this.selectedVanusgrupp];
+        // this.checkedMuutumatudSeisundid = [];
+        // this.toggleShowForm = 'yes';
+        this.resetForm();
       },
     }
   },
@@ -94,6 +101,24 @@ Vue.createApp({
     saveFile: function () {
       alert('Faili lisamine pole veel prototüübis võimalik.')
     },
+    resetForm: function () {
+      var vm = this;
+      vm.checkedMuutumatudSeisundid = [];
+      vm.toggleShowForm = 'yes';
+      // vm.vanusgruppideKysimused = vanusgruppideKysimused;
+      // vm.vanusgruppideYldKysimused = vanusgruppideYldKysimused;
+      // vm.kysimustik = vm.vanusgruppideKysimused[vm.selectedVanusgrupp];
+      // vm.yldkysimused = vm.vanusgruppideYldKysimused[vm.selectedVanusgrupp];
+      vm.kysimustik.forEach((element) => {
+        element['score'] = '';
+        element['answer'] = '';
+      });
+      vm.yldkysimused.forEach((element) => {
+        element['answer'] = '';
+      });
+      vm.feedback = '';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    },
     saveResults: function () {
       var vm = this
       params = {
@@ -113,10 +138,10 @@ Vue.createApp({
           var btn = document.getElementById('saveButton')
           btn.innerHTML = 'Salvestatud serverisse: ' + response.data.filename;
           btn.classList.add('w3-pale-green');
-
           setTimeout(function(){
             btn.innerHTML = 'Saada';
             btn.classList.remove('w3-pale-green');
+            vm.resetForm();
           }, 3000);
         })
         .catch(function (error) {
