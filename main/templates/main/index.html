@@ -59,7 +59,23 @@
         class="w3-bar-item w3-button w3-theme-d4 w3-hover-white">
       LAVA küsimustiku proto 7
     </a>
+{#    <div id="app">#}
+{#      Vue testnupp: <button @click="count++">[[ count ]]</button>#}
+{#    </div>#}
   </div>
 {% endblock %}
 
-{% block javascript %}{% endblock %}
+{% block javascript %}
+{#  <script>#}
+{#    const { createApp } = Vue#}
+{##}
+{#    createApp({#}
+{#      delimiters: ['[[', ']]'],#}
+{#      data() {#}
+{#        return {#}
+{#          count: 0#}
+{#        }#}
+{#      }#}
+{#    }).mount('#app')#}
+{#  </script>#}
+{% endblock %}
