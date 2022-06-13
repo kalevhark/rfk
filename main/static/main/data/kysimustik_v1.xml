@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <vanusgrupid>
 	<vanusgrupp name="Laps 0-2" kysimustik="false">
-		<muutumatudSeisundid>
+		<muutumatudSeisundid question="Kas Teie lapsel on mõni all nimetatud terviseseisunditest?">
             juhitav hingamine või pidev hapnikuravi
             sondiga toitmine
             iseseisvalt liikumisvõimetu
@@ -15,25 +15,25 @@
 		</vanusgrupiYldKysimused>
 	</vanusgrupp>
 	<vanusgrupp name="Laps 3-8" kysimustik="true">
-		<muutumatudSeisundid>
+		<muutumatudSeisundid question="Kas Teie lapsel on mõni all nimetatud terviseseisunditest?">
             juhitav hingamine või pidev hapnikuravi
             vaimne alaareng (mõõdukas/ raske/ sügav)
             iseseisvalt liikumisvõimetu
             kurttummus
             mõlema silma pimedus
 		</muutumatudSeisundid>
-		<vanusgrupiKysimused>
+		<vanusgrupiKysimused question="Palume hinnata Teie lapse hakkamasaamist järgnevate tegevuste juures.">
 			<kysimus valdkond_nr="1" rfk_kategooria="tyhi">
-                1.2.1 liikumisega tubastes tingimustes
+                liikumisega tubastes tingimustes
 			</kysimus>
 			<kysimus valdkond_nr="1" rfk_kategooria="tyhi">
-				1.2.2 liikumisega õuetingimustes
+				liikumisega õuetingimustes
 			</kysimus>
 			<kysimus valdkond_nr="1" rfk_kategooria="tyhi">
-				1.3.1 istumast püsti tõusmisega
+				istumast püsti tõusmisega
 			</kysimus>
 			<kysimus valdkond_nr="2" rfk_kategooria="tyhi">
-                2.4.1 käeliste tegevustega hakkama saamisel (nt. joonistamine, söögiriistade kasutamine jm. täppisliigutused)
+                käeliste tegevustega hakkama saamisel (nt. joonistamine, söögiriistade kasutamine jm. täppisliigutused)
 			</kysimus>
 			<kysimus valdkond_nr="3.1" rfk_kategooria="tyhi">
                 nägemisega
@@ -45,34 +45,34 @@
                 kõneleimisega
 			</kysimus>
 			<kysimus valdkond_nr="4" rfk_kategooria="tyhi">
-                4.2 soole ja põie kontrollimisega
+                soole ja põie kontrollimisega
 			</kysimus>
 			<kysimus valdkond_nr="4" rfk_kategooria="tyhi">
-				4.3.1 söömisega
+				söömisega
 			</kysimus>
 			<kysimus valdkond_nr="4" rfk_kategooria="tyhi">
-				4.4.1 igapäevategevustega (nt. riietumisega, käte pesemise ja eakohaste hügieenitoimingutega)
+				igapäevategevustega (nt. riietumisega, käte pesemise ja eakohaste hügieenitoimingutega)
 			</kysimus>
 			<kysimus valdkond_nr="5" rfk_kategooria="tyhi">
-                5.2 tegevuste alustamise ja tegevuses püsimisega
+                tegevuste alustamise ja tegevuses püsimisega
 			</kysimus>
 			<kysimus valdkond_nr="5" rfk_kategooria="tyhi">
-				5.3.1 lasteaias või koolis käimise ja huvitegevuses osalemisega
+				lasteaias või koolis käimise ja huvitegevuses osalemisega
 			</kysimus>
 			<kysimus valdkond_nr="5" rfk_kategooria="tyhi">
-				5.3.2 uute teadmiste omandamisega
+				uute teadmiste omandamisega
 			</kysimus>
 			<kysimus valdkond_nr="6" rfk_kategooria="tyhi">
-                6.2 eakohase võimega ohtu tajuda
+                eakohase võimega ohtu tajuda
 			</kysimus>
 			<kysimus valdkond_nr="7" rfk_kategooria="tyhi">
-                7.3.1 eakohase lävimisega
+                eakohase lävimisega
 			</kysimus>
 			<kysimus valdkond_nr="7" rfk_kategooria="tyhi">
-				7.3.2 lähedaste inimestega lävimisega
+				lähedaste inimestega lävimisega
 			</kysimus>
 			<kysimus valdkond_nr="7" rfk_kategooria="tyhi">
-				3.4.1 eakohase vastastikuse suhtlemisega
+				eakohase vastastikuse suhtlemisega
 			</kysimus>
 		</vanusgrupiKysimused>
 		<vanusgrupiYldKysimused>
@@ -83,67 +83,67 @@
 		</vanusgrupiYldKysimused>
 	</vanusgrupp>
 	<vanusgrupp name="Laps 9-15" kysimustik="true">
-		<muutumatudSeisundid>
-            juhitav hingamine või pidev hapmikuravi
+		<muutumatudSeisundid question="Kas Teie lapsel on mõni all nimetatud terviseseisunditest?">
+            juhitav hingamine või pidev hapnikuravi
 			vaimne alaareng (mõõdukas/ raske/ sügav)
             iseseisvalt liikumisvõimetu
             kurttummus
 			mõlema silma pimedus
 		</muutumatudSeisundid>
-		<vanusgrupiKysimused>
+		<vanusgrupiKysimused question="Palume hinnata Teie lapse hakkamasaamist järgnevate tegevuste juures.">
 			<kysimus valdkond_nr="1" rfk_kategooria="tyhi">
-				1.2.1 kodus liikumisega
+				kodus liikumisega
 			</kysimus>
 			<kysimus valdkond_nr="1" rfk_kategooria="tyhi">
-				1.2.2 kodust väljas liikumisega
+				kodust väljas liikumisega
 			</kysimus>
 			<kysimus valdkond_nr="1" rfk_kategooria="tyhi">
-				1.3.1 istumast püsti tõusmisega
+				istumast püsti tõusmisega
 			</kysimus>
 			<kysimus valdkond_nr="2" rfk_kategooria="tyhi">
-                2.4.1 käeliste tegevustega hakkama saamisel (nt. klaviatuuri kasutamine, telefoni käsitsemine, eseme haaramine/ asetamine)
+                käeliste tegevustega hakkama saamisel (nt. klaviatuuri kasutamine, telefoni käsitsemine, eseme haaramine/ asetamine)
 			</kysimus>
 			<kysimus valdkond_nr="3.1" rfk_kategooria="tyhi">
-                3.1 nägemisega
+                nägemisega
 			</kysimus>
 			<kysimus valdkond_nr="3.1" rfk_kategooria="tyhi">
-				3.2 kuulmisega
+				kuulmisega
 			</kysimus>
 			<kysimus valdkond_nr="3.1" rfk_kategooria="tyhi">
-				3.3 kõnelemisega
+				kõnelemisega
 			</kysimus>
 			<kysimus valdkond_nr="4" rfk_kategooria="tyhi">
-                4.2 soole ja põie kontrollimisega
+				soole ja põie kontrollimisega
 			</kysimus>
 			<kysimus valdkond_nr="4" rfk_kategooria="tyhi">
-				4.3.1 söömisega
+				söömisega
 			</kysimus>
 			<kysimus valdkond_nr="4" rfk_kategooria="tyhi">
-				4.4.1 igapäevategevustega (nt. riietumisega, pesemise ja hügieenitoimingutega)
+				igapäevategevustega (nt. riietumisega, pesemise ja hügieenitoimingutega)
 			</kysimus>
 			<kysimus valdkond_nr="5" rfk_kategooria="tyhi">
-                5.2 tegevuste alustamise ja alustatud tegevuste lõpuni viimisega
+                tegevuste alustamise ja alustatud tegevuste lõpuni viimisega
 			</kysimus>
 			<kysimus valdkond_nr="5" rfk_kategooria="tyhi">
-				5.3.1 koolis käimise ja huvitegevuses osalemisega
+				koolis käimise ja huvitegevuses osalemisega
 			</kysimus>
 			<kysimus valdkond_nr="5" rfk_kategooria="tyhi">
-				5.3.2 tavaõppel hakkama saamisega
+				tavaõppel hakkama saamisega
 			</kysimus>
 			<kysimus valdkond_nr="6" rfk_kategooria="tyhi">
-                6.2 ohu tajumisega (nt. liikluses)
+                ohu tajumisega (nt. liikluses)
 			</kysimus>
 			<kysimus valdkond_nr="6" rfk_kategooria="tyhi">
-				6.3.1 muutuvate olukordadega kohanemisega (nt. muutus päevakavas, harjumuspärases tegevuses)
+				muutuvate olukordadega kohanemisega (nt. muutus päevakavas, harjumuspärases tegevuses)
 			</kysimus>
 			<kysimus valdkond_nr="7" rfk_kategooria="tyhi">
-                7.3.1 eakaaslastega lävimisega
+                eakaaslastega lävimisega
 			</kysimus>
 			<kysimus valdkond_nr="7" rfk_kategooria="tyhi">
-				7.3.2 lähedaste inimestega lävimisega
+				lähedaste inimestega lävimisega
 			</kysimus>
 			<kysimus valdkond_nr="7" rfk_kategooria="tyhi">
-				3.4.1 Suhtlemisel ja vestluses osalemisel
+				suhtlemisel ja vestluses osalemisel
 			</kysimus>
 		</vanusgrupiKysimused>
 		<vanusgrupiYldKysimused>
@@ -154,7 +154,7 @@
 		</vanusgrupiYldKysimused>
 	</vanusgrupp>
 	<vanusgrupp name="Vanaduspensioniealine" kysimustik="true">
-		<muutumatudSeisundid>
+		<muutumatudSeisundid question="Kas Teil on mõni all nimetatud terviseseisunditest?">
             väljakujunenud dementsus
             pahaloomuline kasvaja parimal võimalikul toetusravil
             juhitav hingamine või pidev hapnikuravi (va uneapnoe)
@@ -163,18 +163,18 @@
 			kurttummus
 			mõlema silma pimedus
 		</muutumatudSeisundid>
-		<vanusgrupiKysimused>
+		<vanusgrupiKysimused question="Palume hinnata oma hakkamasaamist järgnevate tegevuste juures.">
 			<kysimus valdkond_nr="1" rfk_kategooria="tyhi">
-				1.2.1 kodus liikumisega
+				kodus liikumisega
 			</kysimus>
 			<kysimus valdkond_nr="1" rfk_kategooria="tyhi">
-				1.2.2 kodust väljas liikumisega
+				kodust väljas liikumisega
 			</kysimus>
 			<kysimus valdkond_nr="1" rfk_kategooria="tyhi">
-				1.3.1 istumast püsti tõusmisega
+				istumast püsti tõusmisega
 			</kysimus>
 			<kysimus valdkond_nr="2" rfk_kategooria="tyhi">
-				2.4.1 koduste toimetustega hakkama saamisel (näiteks koristamine, toidu valmistamine?)
+				koduste toimetustega hakkama saamisel (näiteks koristamine, toidu valmistamine?)
 			</kysimus>
 			<kysimus valdkond_nr="3.1" rfk_kategooria="tyhi">
                 nägemisega
@@ -186,25 +186,25 @@
                 kõnelemisega
 			</kysimus>
 			<kysimus valdkond_nr="4" rfk_kategooria="tyhi">
-                4.3.1 söömisega
+                söömisega
 			</kysimus>
 			<kysimus valdkond_nr="4" rfk_kategooria="tyhi">
-				4.4.1 igapäevategevustega (nt riietumisega, pesemisega, tualetitoimingutega?)
+				igapäevategevustega (nt riietumisega, pesemisega, tualetitoimingutega?)
 			</kysimus>
 			<kysimus valdkond_nr="5" rfk_kategooria="tyhi">
-                5.2.1 oluliste igapäevategevuste silmaspidamisega
+                oluliste igapäevategevuste meelespidamisega
 			</kysimus>
 			<kysimus valdkond_nr="5" rfk_kategooria="tyhi">
-				5.3.1 tööl käimisega ja/või huvitegevuses osalemisega
+				tööl käimisega ja/või huvitegevuses osalemisega
 			</kysimus>
 			<kysimus valdkond_nr="6" rfk_kategooria="tyhi">
-                6.3.1 muutuvate olukordadega kohanemisega (nt igapäeva rutiini muutus)
+                muutuvate olukordadega kohanemisega (nt igapäeva rutiini muutus)
 			</kysimus>
 			<kysimus valdkond_nr="7" rfk_kategooria="tyhi">
-                7.3.1 lähedaste inimestega lävimisega
+                lähedaste inimestega lävimisega
 			</kysimus>
 			<kysimus valdkond_nr="7" rfk_kategooria="tyhi">
-				7.3.2 võõrastega lävimisega
+				võõrastega lävimisega
 			</kysimus>
 		</vanusgrupiKysimused>
 		<vanusgrupiYldKysimused>

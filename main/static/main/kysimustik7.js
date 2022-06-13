@@ -14,11 +14,13 @@ function initialState() {
       ],
       vanusgrupid: vanusgrupid,
       selectedVanusgrupp: 0,
-      muutumatudSeisundid: [],
+      muutumatudSeisundidQuestion: '',
+      muutumatudSeisundidList: [],
       vanusgruppideMuutumatudSeisundid: vanusgruppideMuutumatudSeisundid,
       checkedMuutumatudSeisundid: [],
       toggleShowForm: 'yes',
-      kysimustik: [],
+      kysimustikQuestion: '',
+      kysimustikList: [],
       vanusgruppideKysimused: vanusgruppideKysimused,
       yldkysimused: [],
       vanusgruppideYldKysimused: vanusgruppideYldKysimused,
@@ -36,8 +38,10 @@ Vue.createApp({
       // Code that will run only after the
       // entire view has been rendered
       this.selectedVanusgrupp = 3;
-      this.muutumatudSeisundid = this.vanusgruppideMuutumatudSeisundid[this.selectedVanusgrupp];
-      this.kysimustik = this.vanusgruppideKysimused[this.selectedVanusgrupp];
+      this.muutumatudSeisundidQuestion = this.vanusgruppideMuutumatudSeisundid[this.selectedVanusgrupp]['muutumatudSeisundidQuestion'];
+      this.muutumatudSeisundidList = this.vanusgruppideMuutumatudSeisundid[this.selectedVanusgrupp]['muutumatudSeisundidList'];
+      this.kysimustikQuestion = this.vanusgruppideKysimused[this.selectedVanusgrupp]['vanusgrupiKysimusedQuestion'];
+      this.kysimustikList = this.vanusgruppideKysimused[this.selectedVanusgrupp]['vanusgrupiKysimusedList'];
       this.yldkysimused = this.vanusgruppideYldKysimused[this.selectedVanusgrupp];
     })
   },
@@ -53,8 +57,12 @@ Vue.createApp({
     },
     selectedVanusgrupp: {
       handler(newQuestion, oldQuestion) {
-        this.muutumatudSeisundid = this.vanusgruppideMuutumatudSeisundid[this.selectedVanusgrupp];
-        this.kysimustik = this.vanusgruppideKysimused[this.selectedVanusgrupp];
+        // this.muutumatudSeisundid = this.vanusgruppideMuutumatudSeisundid[this.selectedVanusgrupp];
+        this.muutumatudSeisundidQuestion = this.vanusgruppideMuutumatudSeisundid[this.selectedVanusgrupp]['muutumatudSeisundidQuestion'];
+        this.muutumatudSeisundidList = this.vanusgruppideMuutumatudSeisundid[this.selectedVanusgrupp]['muutumatudSeisundidList'];
+        // this.kysimustik = this.vanusgruppideKysimused[this.selectedVanusgrupp];
+        this.kysimustikQuestion = this.vanusgruppideKysimused[this.selectedVanusgrupp]['vanusgrupiKysimusedQuestion'];
+        this.kysimustikList = this.vanusgruppideKysimused[this.selectedVanusgrupp]['vanusgrupiKysimusedList'];
         this.yldkysimused = this.vanusgruppideYldKysimused[this.selectedVanusgrupp];
         // this.checkedMuutumatudSeisundid = [];
         // this.toggleShowForm = 'yes';
@@ -72,7 +80,7 @@ Vue.createApp({
     getScore(kysimusIndex) {
       // `this` points to the vm instance
       return function (kysimusIndex) {
-        var selected = this.kysimustik[kysimusIndex]['score'];
+        var selected = this.kysimustikList[kysimusIndex]['score'];
         var skaalaMax = this.skaalad[this.selectedSkaala]['skaalaMax'];
         if (!selected) {
           return ''
@@ -109,7 +117,7 @@ Vue.createApp({
       // vm.vanusgruppideYldKysimused = vanusgruppideYldKysimused;
       // vm.kysimustik = vm.vanusgruppideKysimused[vm.selectedVanusgrupp];
       // vm.yldkysimused = vm.vanusgruppideYldKysimused[vm.selectedVanusgrupp];
-      vm.kysimustik.forEach((element) => {
+      vm.kysimustikList.forEach((element) => {
         element['score'] = '';
         element['answer'] = '';
       });
@@ -126,7 +134,7 @@ Vue.createApp({
         vanusgrupp: JSON.stringify(vm.vanusgrupid[vm.selectedVanusgrupp]),
         checkedMuutumatudSeisundid: JSON.stringify(vm.checkedMuutumatudSeisundid),
         toggleShowForm: vm.toggleShowForm,
-        kysimustik: JSON.stringify(vm.kysimustik),
+        kysimustikList: JSON.stringify(vm.kysimustikList),
         // vanusgruppideKysimused: JSON.stringify(vm.vanusgruppideKysimused),
         yldkysimused: JSON.stringify(vm.yldkysimused),
         // vanusgruppideYldKysimused: JSON.stringify(vm.vanusgruppideYldKysimused),

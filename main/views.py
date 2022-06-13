@@ -907,7 +907,7 @@ def get_client_ip(request):
     #             ip = proxies[0]
     return ip
 
-from datetime import  datetime
+from datetime import datetime
 import itertools
 import xml.etree.ElementTree as ET
 def get_kysimustik():
@@ -934,25 +934,37 @@ def get_kysimustik():
 
         # vanusgruppide muutumatute seisundite loetelud
         i = itertools.count(0)
-        muutumatudSeisundid = [
+        muutumatudSeisundidData = child.find('muutumatudSeisundid')
+        muutumatudSeisundidQuestion = muutumatudSeisundidData.attrib['question']
+        muutumatudSeisundidList = [
             {'text': seisund.strip(), 'id': next(i)}
             for seisund
-            in child.find('muutumatudSeisundid').text.split('\n')
+            in muutumatudSeisundidData.text.split('\n')
             if len(seisund.strip()) > 0
         ]
-        vanusgruppideMuutumatudSeisundid[n] = muutumatudSeisundid
+        vanusgruppideMuutumatudSeisundid[n] = {
+            'muutumatudSeisundidQuestion': muutumatudSeisundidQuestion,
+            'muutumatudSeisundidList': muutumatudSeisundidList
+        }
 
         # vanusgrupi kysimused
         if child.attrib['kysimustik'] == 'true':
-            vanusgrupiKysimused = [
+            vanusgrupiKysimusedData = child.find('vanusgrupiKysimused')
+            vanusgrupiKysimusedQuestion = vanusgrupiKysimusedData.attrib['question']
+            vanusgrupiKysimusedList = [
                 {'text': kysimus.text.strip(), 'valdkond': kysimus.attrib['valdkond_nr'], 'score': '', 'answer': '' }
                 for kysimus
-                in child.find('vanusgrupiKysimused').findall('kysimus')
+                in vanusgrupiKysimusedData.findall('kysimus')
                 if len(kysimus.text.strip()) > 0
             ]
         else:
-            vanusgrupiKysimused = []
-        vanusgruppideKysimused[n] = vanusgrupiKysimused
+            vanusgrupiKysimusedQuestion = ''
+            vanusgrupiKysimusedList = []
+
+        vanusgruppideKysimused[n] = {
+            'vanusgrupiKysimusedQuestion': vanusgrupiKysimusedQuestion,
+            'vanusgrupiKysimusedList': vanusgrupiKysimusedList
+        }
 
         # vanusgrupi yldkysimused
         vanusgrupiYldKysimused = [
@@ -980,7 +992,7 @@ def save_kysimustik7_results(request):
         'vanusgrupp': json.loads(request.GET.get('vanusgrupp', '')),
         'checkedMuutumatudSeisundid': request.GET.get('checkedMuutumatudSeisundid', ''),
         'toggleShowForm': request.GET.get('toggleShowForm', ''),
-        'kysimustik': json.loads(request.GET.get('kysimustik', '')),
+        'kysimustikList': json.loads(request.GET.get('kysimustikList', '')),
         'yldkysimused': json.loads(request.GET.get('yldkysimused', '')),
         'feedback': request.GET.get('feedback', '')
     }
