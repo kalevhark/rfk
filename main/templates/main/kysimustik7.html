@@ -40,6 +40,33 @@
       width: 80px;
       text-align: left;
     }
+
+    /*
+    Enter and leave animations can use different
+    durations and timing functions.
+    */
+    .slide-fade-enter-active {
+      transition: all 0.5s ease-out;
+    }
+
+    .slide-fade-leave-active {
+      transition: all 0.5s cubic-bezier(1, 0.5, 0.8, 1);
+    }
+
+    .slide-fade-enter-from,
+    .slide-fade-leave-to {
+      opacity: 0;
+    }
+
+    .fade-enter-active,
+    .fade-leave-active {
+      transition: opacity 0.5s ease;
+    }
+
+    .fade-enter-from,
+    .fade-leave-to {
+      opacity: 0;
+    }
   </style>
 {% endblock %}
 
@@ -96,6 +123,7 @@
       </ul>
     </div>
 
+    <transition name="slide-fade">
     <div v-show="showKysimusVorm" class="w3-panel w3-padding w3-card w3-pale-yellow">
       <p>Märkisite, et esineb mõni eeltoodud seisunditest.</p>
       <p>Kui täiendavaid kaebusi ei ole, võite jätta vahele terviseseisundi enesehindamise osa.</p>
@@ -107,7 +135,9 @@
         false-value="no" />
       <label for="toggleShowForm">Soovin vastata ka piiranguid iseloomustavatele küsimustikule</label>
     </div>
+    </transition>
 
+    <transition name="slide-fade">
     <div v-show="showKysimustik" class="w3-panel w3-padding w3-card  w3-pale-green">
       <h3 v-show="showBackgroundInfo">Enesehindamise küsimustik</h3>
       <p>[[ kysimustikQuestion ]]</p>
@@ -147,20 +177,23 @@
             </td>
             <td v-show="showBackgroundInfo" class="result">[[ getScore(kysimusIndex) ]]</td>
           </tr>
+          <transition name="slide-fade">
           <tr v-show="kysimus.score > skaalad[selectedSkaala].extraKysimus">
             <td class="question"></td>
             <td colspan="10">Täpsustage palun, milline tervisehäire peamiselt piiranguid põhjustab?</td>
-            <td><textarea v-model="kysimus.answer" placeholder="siia saab kirjutada pika jutu..."></textarea></td>
+            <td><textarea rows="3" cols="40" v-model="kysimus.answer" placeholder="siia saab kirjutada pika jutu..."></textarea></td>
           </tr>
+          </transition>
         </table>
       </div>
     </div>
+    </transition>
 
     <div class="w3-panel w3-padding w3-card w3-pale-blue">
       <h3 v-show="showBackgroundInfo">Üldküsimused</h3>
       <div v-for="(kysimus, kysimusIndex) in yldkysimused" :key="kysimusIndex">
         <p><span v-html="kysimus.text"></span></p>
-        <textarea v-model="kysimus.answer" placeholder="siia saab kirjutada pika jutu..."></textarea>
+        <textarea rows="3" cols="80" v-model="kysimus.answer" placeholder="siia saab kirjutada pika jutu..."></textarea>
       </div>
       <br>
       <button id='saveFile' @click="saveFile">Lisa fail</button>
@@ -169,7 +202,7 @@
       <h3 v-show="showBackgroundInfo">Tagasiside</h3>
       <div>
         <p><span>Nimi ja kommentaar küsimustiku kohta:</span></p>
-        <textarea v-model="feedback" placeholder="siia saab kirjutada pika jutu..."></textarea>
+        <textarea rows="5" cols="80" v-model="feedback" placeholder="siia saab kirjutada pika jutu..."></textarea>
         <br>
         <button id='saveButton' @click="saveResults">Saada</button>
         <button id='resetForm' @click="resetForm">Täida uuesti</button>
