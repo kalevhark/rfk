@@ -3,8 +3,22 @@ function initialState() {
       ipAddress: ipAddress,
       showBackgroundInfo: false,
       skaalad: [
-        { text: '1-10', skaala: [1,2,3,4,5,6,7,8,9,10], skaalaMax: 10, extraKysimus: 4, value: 0},
-        { text: '0-4', skaala: [0,1,2,3,4], skaalaMax: 4, extraKysimus: 2, value: 1},
+        { text: '1-10', skaala: [1,2,3,4,5,6,7,8,9,10], extraKysimus: 4,
+          legend: [
+            '1 = piiranguid ega takistusi ei ole',
+            '10 = tegevus on võimatu või täielikult takistatud'
+          ],
+          value: 0
+        },
+        { text: '0-4', skaala: [0,1,2,3,4], extraKysimus: 1,
+          legend: [
+            '0 - PIIRANGUID ei ole',
+            '1 - KERGE PIIRANG',
+            '2 - MÕÕDUKAS PIIRANG',
+            '3 - RASKE PIIRANG',
+            '4 - TÄIELIK PIIRANG'
+          ],
+          value: 1},
       ],
       selectedSkaala: selectedSkaala,
       options: [
