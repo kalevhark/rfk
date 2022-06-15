@@ -132,6 +132,73 @@ def make_table_ekspertiis_toos_avgtime(df):
     print(df_filter.shape, 'menetlusi:', len(df_filter.MEN_ID.unique()))
 
     # Kes teevad ekspertiise
+    ska_arstid_ekspertiise = [df_filter.mean()['TD_MINUTES'], df_filter.median()['TD_MINUTES']]
+    ska_arstid_ekspertiise_vanusgrupiti = pd.pivot_table(
+        df_filter,
+        values=['TD_MINUTES'],
+        columns=['HYVITIS'],
+        # index=['MENETLEJA'],
+        aggfunc={
+            'TD_MINUTES': [np.mean, np.median]
+        }
+    )
+    ska_arstid_ekspertiise_vanusgrupiti.columns = [
+        'LA',
+        'VPI',
+        'TÖE'
+    ]
+    frame = {
+        'Keskmine aeg (min)': ska_arstid_ekspertiise,
+        'LA': ska_arstid_ekspertiise_vanusgrupiti['LA'],
+        'TÖE': ska_arstid_ekspertiise_vanusgrupiti['TÖE'],
+        'VPI': ska_arstid_ekspertiise_vanusgrupiti['VPI'],
+    }
+    result = pd.DataFrame(frame).fillna(0).astype('int32')
+    print(result)
+    return result
+
+def make_table_ekspertiis_toos_lte_120minutes_all_avgtime(df):
+    print('Ekspertiisid töös')
+    filter = (df['S_OLEK'] == 'Töös') & \
+             (df['TD_MINUTES'] <= 120) & \
+             (df['O_TYYP'] != 'Läbi vaatamata jätmise otsus')
+
+    df_filter = df[filter]
+    print(df_filter.shape, 'menetlusi:', len(df_filter.MEN_ID.unique()))
+
+    # Kes teevad ekspertiise
+    ska_arstid_ekspertiise = [df_filter.mean()['TD_MINUTES'], df_filter.median()['TD_MINUTES']]
+    ska_arstid_ekspertiise_vanusgrupiti = pd.pivot_table(
+        df_filter,
+        values=['TD_MINUTES'],
+        columns=['HYVITIS'],
+        # index=['MENETLEJA'],
+        aggfunc={'TD_MINUTES': [np.mean, np.median]}
+    )
+    ska_arstid_ekspertiise_vanusgrupiti.columns = [
+        'LA',
+        'VPI',
+        'TÖE'
+    ]
+    frame = {
+        'Keskmine aeg (min)': ska_arstid_ekspertiise,
+        'LA': ska_arstid_ekspertiise_vanusgrupiti['LA'],
+        'TÖE': ska_arstid_ekspertiise_vanusgrupiti['TÖE'],
+        'VPI': ska_arstid_ekspertiise_vanusgrupiti['VPI'],
+    }
+    result = pd.DataFrame(frame).fillna(0).astype('int32')
+    print(result)
+    return result
+
+def make_table_ekspertiis_toos_avgtime_ekspertarstid(df):
+    print('Ekspertiisid töös')
+    filter = (df['S_OLEK'] == 'Töös') & \
+            (df['O_TYYP'] != 'Läbi vaatamata jätmise otsus')
+
+    df_filter = df[filter]
+    print(df_filter.shape, 'menetlusi:', len(df_filter.MEN_ID.unique()))
+
+    # Kes teevad ekspertiise
     ska_arstid_ekspertiise = df_filter.groupby(['MENETLEJA']).mean()['TD_MINUTES'].sort_values(ascending=False)
     ska_arstid_ekspertiise_vanusgrupiti = pd.pivot_table(
         df_filter,
@@ -152,10 +219,10 @@ def make_table_ekspertiis_toos_avgtime(df):
         'VPI': ska_arstid_ekspertiise_vanusgrupiti['VPI'],
     }
     result = pd.DataFrame(frame).fillna(0).astype('int32').sort_values(['Keskmine aeg (min)'], ascending=False)
-    print(result)
+    # print(result)
     return result
 
-def make_table_ekspertiis_toos_count(df):
+def make_table_ekspertiis_toos_count_ekspertarstid(df):
     print('Ekspertiisid töös')
     filter = (df['S_OLEK'] == 'Töös') & \
             (df['O_TYYP'] != 'Läbi vaatamata jätmise otsus')
@@ -217,7 +284,7 @@ def make_table_ekspertiis_toos_lte_120minutes_avgtime(df):
         'VPI': ska_arstid_ekspertiise_vanusgrupiti['VPI'],
     }
     result = pd.DataFrame(frame).fillna(0).astype('int32').sort_values(['Keskmine aeg (min)'], ascending=False)
-    print(result)
+    # print(result)
     return result
 
 def make_table_ekspertiis_toos_lte_120minutes_count(df):
@@ -369,7 +436,7 @@ def make_table_ekspertiis_toos_timeperiods_count(df):
         aggfunc={'TD_MINUTES': 'count'}
     ).fillna(0).astype('int32')
 
-    print(ska_arstid_ekspertiise_vanusgrupiti)
+    # print(ska_arstid_ekspertiise_vanusgrupiti)
     return ska_arstid_ekspertiise_vanusgrupiti
 
 
@@ -384,10 +451,16 @@ if __name__ == "__main__":
     print('Menetlusi:', len(menetlused))
 
     result = make_table_ekspertiis_toos_avgtime(df)
-    salvestamiseks['Töös ajakulu'] = result
+    salvestamiseks['Töös ajakulu keskmine'] = result
 
-    result = make_table_ekspertiis_toos_count(df)
-    salvestamiseks['Töös kordi'] = result
+    result = make_table_ekspertiis_toos_lte_120minutes_all_avgtime(df)
+    salvestamiseks['Töös kuni 120min keskmine'] = result
+
+    result = make_table_ekspertiis_toos_avgtime_ekspertarstid(df)
+    salvestamiseks['Töös ajakulu EAd'] = result
+
+    result = make_table_ekspertiis_toos_count_ekspertarstid(df)
+    salvestamiseks['Töös kordi EAd'] = result
 
     result = make_table_ekspertiis_toos_lte_120minutes_avgtime(df)
     salvestamiseks['Töös kuni 120min aeg'] = result

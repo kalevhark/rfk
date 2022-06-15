@@ -1006,7 +1006,7 @@ def save_kysimustik7_results(request):
     vanusgrupp = kysimustik_results['vanusgrupp']['text']
     timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
     filename = f'eneseHinnang_v{versioon}_{vanusgrupp}_{timestamp}.json'
-    with open(filename, 'w', encoding='utf8') as f:
+    with open(STATIC_DIR / 'data' / filename, 'w', encoding='utf8') as f:
         json.dump(kysimustik_results, f)
 
     return JsonResponse(
