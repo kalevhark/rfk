@@ -9,7 +9,7 @@
             mõlema silma pimedus
 		</muutumatudSeisundid>
 		<vanusgrupiKysimused/>
-		<vanusgrupiYldKysimused question="Test">
+		<vanusgrupiYldKysimused question="">
             Palun kirjeldage oma lapsel esinevaid probleeme
             Kas ja milliseid abivahendeid laps kasutab? Kas abivahenditest on abi?
 		</vanusgrupiYldKysimused>
