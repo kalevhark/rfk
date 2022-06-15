@@ -9,7 +9,7 @@
             mõlema silma pimedus
 		</muutumatudSeisundid>
 		<vanusgrupiKysimused/>
-		<vanusgrupiYldKysimused>
+		<vanusgrupiYldKysimused question="Test">
             Palun kirjeldage oma lapsel esinevaid probleeme
             Kas ja milliseid abivahendeid laps kasutab? Kas abivahenditest on abi?
 		</vanusgrupiYldKysimused>
@@ -75,7 +75,7 @@
 				eakohase vastastikuse suhtlemisega
 			</kysimus>
 		</vanusgrupiKysimused>
-		<vanusgrupiYldKysimused>
+		<vanusgrupiYldKysimused question="">
             Nimetage igapäevategevused, mille juures vajab teie laps abi?
 			Kes last nende tegevuste juures abistab ja kui sageli
 			Kas ja milliseid abivahendeid laps kasutab? Kas abivahenditest on abi?
@@ -146,7 +146,7 @@
 				suhtlemisel ja vestluses osalemisel
 			</kysimus>
 		</vanusgrupiKysimused>
-		<vanusgrupiYldKysimused>
+		<vanusgrupiYldKysimused question="">
             Nimetage igapäevategevused, mille juures vajab teie laps abi?
             Kes last nende tegevuste juures abistab ja kui sageli?
             Kas ja milliseid abivahendeid laps kasutab? Kas abivahendi(te)st on abi?
@@ -207,7 +207,7 @@
 				võõrastega lävimisega
 			</kysimus>
 		</vanusgrupiKysimused>
-		<vanusgrupiYldKysimused>
+		<vanusgrupiYldKysimused question="">
             Nimetage igapäevategevused, mille juures vajate abi?
 			Kes Teid nende tegevuste juures abistab ja kui sageli?
 			Kas ja milliseid abivahendeid kasutate? Kas abivahendi(te)st on abi?

@@ -967,13 +967,18 @@ def get_kysimustik():
         }
 
         # vanusgrupi yldkysimused
-        vanusgrupiYldKysimused = [
+        vanusgrupiYldKysimusedData = child.find('vanusgrupiYldKysimused')
+        vanusgrupiYldKysimusedQuestion = vanusgrupiYldKysimusedData.attrib['question']
+        vanusgrupiYldKysimusedList = [
             {'text': kysimus.strip(), 'answer': ''}
             for kysimus
-            in child.find('vanusgrupiYldKysimused').text.split('\n')
+            in vanusgrupiYldKysimusedData.text.split('\n')
             if len(kysimus.strip()) > 0
         ]
-        vanusgruppideYldKysimused[n] = vanusgrupiYldKysimused
+        vanusgruppideYldKysimused[n] = {
+            'vanusgrupiYldKysimusedQuestion': vanusgrupiYldKysimusedQuestion,
+            'vanusgrupiYldKysimusedList': vanusgrupiYldKysimusedList
+        }
         n += 1
 
     kysimustik = {
@@ -993,7 +998,7 @@ def save_kysimustik7_results(request):
         'checkedMuutumatudSeisundid': request.GET.get('checkedMuutumatudSeisundid', ''),
         'toggleShowForm': request.GET.get('toggleShowForm', ''),
         'kysimustikList': json.loads(request.GET.get('kysimustikList', '')),
-        'yldkysimused': json.loads(request.GET.get('yldkysimused', '')),
+        'yldkysimusedList': json.loads(request.GET.get('yldkysimusedList', '')),
         'feedback': request.GET.get('feedback', '')
     }
     print(kysimustik_results)

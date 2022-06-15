@@ -36,7 +36,8 @@ function initialState() {
       kysimustikQuestion: '',
       kysimustikList: [],
       vanusgruppideKysimused: vanusgruppideKysimused,
-      yldkysimused: [],
+      yldkysimusedQuestion: '',
+      yldkysimusedList: [],
       vanusgruppideYldKysimused: vanusgruppideYldKysimused,
       feedback: ''
     }
@@ -56,7 +57,8 @@ Vue.createApp({
       this.muutumatudSeisundidList = this.vanusgruppideMuutumatudSeisundid[this.selectedVanusgrupp]['muutumatudSeisundidList'];
       this.kysimustikQuestion = this.vanusgruppideKysimused[this.selectedVanusgrupp]['vanusgrupiKysimusedQuestion'];
       this.kysimustikList = this.vanusgruppideKysimused[this.selectedVanusgrupp]['vanusgrupiKysimusedList'];
-      this.yldkysimused = this.vanusgruppideYldKysimused[this.selectedVanusgrupp];
+      this.yldkysimusedQuestion = this.vanusgruppideYldKysimused[this.selectedVanusgrupp]['vanusgrupiYldKysimusedQuestion'];
+      this.yldkysimusedList = this.vanusgruppideYldKysimused[this.selectedVanusgrupp]['vanusgrupiYldKysimusedList'];
     })
   },
   watch: {
@@ -77,7 +79,8 @@ Vue.createApp({
         // this.kysimustik = this.vanusgruppideKysimused[this.selectedVanusgrupp];
         this.kysimustikQuestion = this.vanusgruppideKysimused[this.selectedVanusgrupp]['vanusgrupiKysimusedQuestion'];
         this.kysimustikList = this.vanusgruppideKysimused[this.selectedVanusgrupp]['vanusgrupiKysimusedList'];
-        this.yldkysimused = this.vanusgruppideYldKysimused[this.selectedVanusgrupp];
+        this.yldkysimusedQuestion = this.vanusgruppideYldKysimused[this.selectedVanusgrupp]['vanusgrupiYldKysimusedQuestion'];
+        this.yldkysimusedList = this.vanusgruppideYldKysimused[this.selectedVanusgrupp]['vanusgrupiYldKysimusedList'];
         // this.checkedMuutumatudSeisundid = [];
         // this.toggleShowForm = 'yes';
         this.resetForm();
@@ -135,7 +138,7 @@ Vue.createApp({
         element['score'] = '';
         element['answer'] = '';
       });
-      vm.yldkysimused.forEach((element) => {
+      vm.yldkysimusedList.forEach((element) => {
         element['answer'] = '';
       });
       vm.feedback = '';
@@ -150,7 +153,7 @@ Vue.createApp({
         toggleShowForm: vm.toggleShowForm,
         kysimustikList: JSON.stringify(vm.kysimustikList),
         // vanusgruppideKysimused: JSON.stringify(vm.vanusgruppideKysimused),
-        yldkysimused: JSON.stringify(vm.yldkysimused),
+        yldkysimusedList: JSON.stringify(vm.yldkysimusedList),
         // vanusgruppideYldKysimused: JSON.stringify(vm.vanusgruppideYldKysimused),
         feedback: vm.feedback
       }

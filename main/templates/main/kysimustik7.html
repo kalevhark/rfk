@@ -193,7 +193,8 @@
 
     <div class="w3-panel w3-padding w3-card w3-pale-blue">
       <h3 v-show="showBackgroundInfo">Üldküsimused</h3>
-      <div v-for="(kysimus, kysimusIndex) in yldkysimused" :key="kysimusIndex">
+      <p>[[ yldkysimusedQuestion ]]</p>
+      <div v-for="(kysimus, kysimusIndex) in yldkysimusedList" :key="kysimusIndex">
         <p><span v-html="kysimus.text"></span></p>
         <textarea rows="3" cols="80" v-model="kysimus.answer" placeholder="siia saab kirjutada pika jutu..."></textarea>
       </div>
