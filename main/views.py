@@ -24,7 +24,8 @@ ROWS, COLUMNS, IGNORE = (('d'), ('b'), ('s', 'e')) # Milliseid koodigruppe ja ku
 COLUMNS_VERBOSE, IGNORE_VERBOSE = (('b', 's'), ('e')) # Milliseid koodigruppe ja kus arvesse v6tta verbaalsel esitusel
 LEVEL_MILD, LEVEL_MODERATE, LEVEL_SEVERE, LEVEL_EXTREME = range(1, 5) # RFK määrajad
 LEVEL_TTA = 9 # RFK määraja TTa e Täpsustama
-FILE_VER = 'icf2017_est_v03_03_22'
+# FILE_VER = 'icf2017_est_v03_03_22'
+FILE_VER = 'icf2017_est_2022_v2'
 
 """
 Terminoloogia:

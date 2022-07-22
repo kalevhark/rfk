@@ -4,7 +4,6 @@
 		<muutumatudSeisundid question="Kas Teie lapsel on mõni all nimetatud terviseseisunditest?">
             juhitav hingamine või pidev hapnikuravi
             sondiga toitmine
-            iseseisvalt liikumisvõimetu
             mõlema kõrva kurtus
             mõlema silma pimedus
 		</muutumatudSeisundid>
@@ -18,7 +17,7 @@
 		<muutumatudSeisundid question="Kas Teie lapsel on mõni all nimetatud terviseseisunditest?">
             juhitav hingamine või pidev hapnikuravi
             vaimne alaareng (mõõdukas/ raske/ sügav)
-            iseseisvalt liikumisvõimetu
+            iseseisvalt liikumisvõimetu ja/või püsivalt ratastoolis
             kurttummus
             mõlema silma pimedus
 		</muutumatudSeisundid>
@@ -86,7 +85,7 @@
 		<muutumatudSeisundid question="Kas Teie lapsel on mõni all nimetatud terviseseisunditest?">
             juhitav hingamine või pidev hapnikuravi
 			vaimne alaareng (mõõdukas/ raske/ sügav)
-            iseseisvalt liikumisvõimetu
+            iseseisvalt liikumisvõimetu ja/või püsivalt ratastoolis
             kurttummus
 			mõlema silma pimedus
 		</muutumatudSeisundid>
@@ -159,7 +158,7 @@
             pahaloomuline kasvaja parimal võimalikul toetusravil
             juhitav hingamine või pidev hapnikuravi (va uneapnoe)
 			vaimne alaareng (mõõdukas/ raske/ sügav)
-			püsivalt voodihaige
+			püsivalt voodihaige ja/või püsivalt ratastoolis
 			kurttummus
 			mõlema silma pimedus
 		</muutumatudSeisundid>
