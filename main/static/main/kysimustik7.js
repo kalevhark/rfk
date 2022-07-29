@@ -39,6 +39,8 @@ function initialState() {
       yldkysimusedQuestion: '',
       yldkysimusedList: [],
       vanusgruppideYldKysimused: vanusgruppideYldKysimused,
+      vanusgruppideFailiTekstid: vanusgruppideFailiTekstid,
+      vanusgrupiFailiTekst: '',
       feedback: ''
     }
 }
@@ -59,6 +61,7 @@ Vue.createApp({
       this.kysimustikList = this.vanusgruppideKysimused[this.selectedVanusgrupp]['vanusgrupiKysimusedList'];
       this.yldkysimusedQuestion = this.vanusgruppideYldKysimused[this.selectedVanusgrupp]['vanusgrupiYldKysimusedQuestion'];
       this.yldkysimusedList = this.vanusgruppideYldKysimused[this.selectedVanusgrupp]['vanusgrupiYldKysimusedList'];
+      this.vanusgrupiFailiTekst = this.vanusgruppideFailiTekstid[this.selectedVanusgrupp];
     })
   },
   watch: {
@@ -81,6 +84,7 @@ Vue.createApp({
         this.kysimustikList = this.vanusgruppideKysimused[this.selectedVanusgrupp]['vanusgrupiKysimusedList'];
         this.yldkysimusedQuestion = this.vanusgruppideYldKysimused[this.selectedVanusgrupp]['vanusgrupiYldKysimusedQuestion'];
         this.yldkysimusedList = this.vanusgruppideYldKysimused[this.selectedVanusgrupp]['vanusgrupiYldKysimusedList'];
+        this.vanusgrupiFailiTekst = this.vanusgruppideFailiTekstid[this.selectedVanusgrupp];
         // this.checkedMuutumatudSeisundid = [];
         // this.toggleShowForm = 'yes';
         this.resetForm();

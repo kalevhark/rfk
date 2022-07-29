@@ -911,7 +911,7 @@ def get_client_ip(request):
 from datetime import datetime
 import itertools
 import xml.etree.ElementTree as ET
-def get_kysimustik():
+def get_kysimustik7():
     filename = 'kysimustik_v2.xml'
     file = STATIC_DIR / 'data' / filename
     with open(file, 'r', encoding='utf8') as f:
@@ -922,6 +922,7 @@ def get_kysimustik():
     vanusgruppideMuutumatudSeisundid = {}
     vanusgruppideKysimused = {}
     vanusgruppideYldKysimused = {}
+    vanusgruppideFailiTekstid = {}
 
     n = 0
     for child in root:
@@ -981,13 +982,16 @@ def get_kysimustik():
             'vanusgrupiYldKysimusedQuestion': vanusgrupiYldKysimusedQuestion,
             'vanusgrupiYldKysimusedList': vanusgrupiYldKysimusedList
         }
+        vanusgrupiFailiTekst = child.find('vanusgrupiFailiTekst')
+        vanusgruppideFailiTekstid[n] = vanusgrupiFailiTekst.text.strip()
         n += 1
 
     kysimustik = {
         'vanusgrupid': vanusgrupid,
         'vanusgruppideMuutumatudSeisundid': vanusgruppideMuutumatudSeisundid,
         'vanusgruppideKysimused': vanusgruppideKysimused,
-        'vanusgruppideYldKysimused': vanusgruppideYldKysimused
+        'vanusgruppideYldKysimused': vanusgruppideYldKysimused,
+        'vanusgruppideFailiTekstid': vanusgruppideFailiTekstid
     }
     return kysimustik
 
@@ -1020,7 +1024,7 @@ def save_kysimustik7_results(request):
 # Küsimustiku vaade ver 7
 #
 def kysimustik7(request):
-    kysimustik = get_kysimustik()
+    kysimustik = get_kysimustik7()
 
     vanusgrupid = [
         {'kysimustik': False, 'text': 'LAPS 0-2', 'value': 0},
@@ -1121,6 +1125,7 @@ def kysimustik7(request):
         ]
     }
     vanusgruppideYldKysimused = kysimustik['vanusgruppideYldKysimused']
+    vanusgruppideFailiTekstid = kysimustik['vanusgruppideFailiTekstid']
 
     context = {
         'selectedSkaala': 1,
@@ -1128,6 +1133,7 @@ def kysimustik7(request):
         'vanusgruppideMuutumatudSeisundid': json.dumps(vanusgruppideMuutumatudSeisundid),
         'vanusgruppideKysimused': json.dumps(vanusgruppideKysimused),
         'vanusgruppideYldKysimused': json.dumps(vanusgruppideYldKysimused),
+        'vanusgruppideFailiTekstid': json.dumps(vanusgruppideFailiTekstid),
         'ip': get_client_ip(request)
     }
     return render(

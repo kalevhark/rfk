@@ -13,6 +13,9 @@
 			Kas ja milliseid abivahendeid laps kasutab? Kas abivahendi(te)st on abi?
 			Kui lapsele osutatakse sotsiaalteenuseid (tugiisik, sotsiaaltransport jms) kohalikust omavalitsusest, siis kirjeldage millistes olukordades ja kui sageli.
 		</vanusgrupiYldKysimused>
+        <vanusgrupiFailiTekst>
+            Faili lisamise kaastekst 0-2
+        </vanusgrupiFailiTekst>
 	</vanusgrupp>
 	<vanusgrupp name="Laps 3-8" kysimustik="true">
 		<muutumatudSeisundid question="Kas Teie lapsel on mõni all nimetatud terviseseisunditest?">
@@ -81,6 +84,9 @@
 			Kui lapsele osutatakse sotsiaalteenuseid (tugiisik, sotsiaaltransport jms) kohalikust omavalitsusest, siis kirjeldage millistes olukordades ja kui sageli.
 			Kirjeldage kas laps saab lasteaias individuaalset abi (tugiisik, logopeed, eripedagoog) või koolis kohandatud õpet (näiteks lihtsustatud või individuaalset õppekava)
 		</vanusgrupiYldKysimused>
+        <vanusgrupiFailiTekst>
+            Faili lisamise kaastekst 3-8
+        </vanusgrupiFailiTekst>
 	</vanusgrupp>
 	<vanusgrupp name="Laps 9-15" kysimustik="true">
 		<muutumatudSeisundid question="Kas Teie lapsel on mõni all nimetatud terviseseisunditest?">
@@ -152,6 +158,9 @@
 			Kui lapsele osutatakse sotsiaalteenuseid (tugiisik, sotsiaaltransport jms) kohalikust omavalitsusest, siis kirjeldage millistes olukordades ja kui sageli.
 			Kirjeldage kas laps saab lasteaias individuaalset abi (tugiisik, logopeed, eripedagoog) või koolis kohandatud õpet (näiteks lihtsustatud või individuaalset õppekava)
 		</vanusgrupiYldKysimused>
+        <vanusgrupiFailiTekst>
+            Faili lisamise kaastekst 9-15
+        </vanusgrupiFailiTekst>
 	</vanusgrupp>
 	<vanusgrupp name="Vanaduspensioniealine" kysimustik="true">
 		<muutumatudSeisundid question="Kas Teil on mõni all nimetatud terviseseisunditest?">
@@ -212,5 +221,8 @@
 			Kas ja milliseid abivahendeid kasutate? Kas abivahendi(te)st on abi?
 			Millist abi olete kohalikust omavalitsusest saanud?
 		</vanusgrupiYldKysimused>
+        <vanusgrupiFailiTekst>
+            Faili lisamise kaastekst VPI
+        </vanusgrupiFailiTekst>
 	</vanusgrupp>
 </vanusgrupid>

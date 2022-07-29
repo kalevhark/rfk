@@ -12,6 +12,7 @@
     const vanusgruppideMuutumatudSeisundid = {{ vanusgruppideMuutumatudSeisundid | safe }};
     const vanusgruppideKysimused = {{ vanusgruppideKysimused | safe }};
     const vanusgruppideYldKysimused = {{ vanusgruppideYldKysimused | safe }};
+    const vanusgruppideFailiTekstid = {{ vanusgruppideFailiTekstid | safe }};
     var ipAddress = "{{ ip }}";
   </script>
 {% endblock %}
@@ -155,9 +156,11 @@
 {#        <p>[[ skaalad[selectedSkaala].skaala[0] ]] = piiranguid ega takistusi ei ole</p>#}
 {#        <p>[[ skaalad[selectedSkaala].skaala.slice(-1)[0] ]] = tegevus on võimatu või täielikult takistatud</p>#}
 {#      </div>#}
-      <p v-for="rida in skaalad[selectedSkaala].legend">
-        [[ rida ]]
-      </p>
+      <ul>
+        <li v-for="rida in skaalad[selectedSkaala].legend">
+          [[ rida ]]
+        </li>
+      </ul>
       <table>
         <tr>
           <th class="question"></th>
@@ -198,8 +201,10 @@
         <p><span v-html="kysimus.text"></span></p>
         <textarea rows="3" cols="80" v-model="kysimus.answer" placeholder="siia saab kirjutada pika jutu..."></textarea>
       </div>
-      <br>
-      <button id='saveFile' @click="saveFile">Lisa fail</button>
+      <div class="w3-row">
+        [[ vanusgrupiFailiTekst ]]<br>
+        <button id='saveFile' @click="saveFile">Lisa fail</button>
+      </div>
     </div>
     <div class="w3-panel w3-padding w3-card w3-light-grey">
       <h3 v-show="showBackgroundInfo">Tagasiside</h3>
