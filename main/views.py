@@ -912,7 +912,8 @@ from datetime import datetime
 import itertools
 import xml.etree.ElementTree as ET
 def get_kysimustik():
-    file = STATIC_DIR / 'data' / 'kysimustik_v1.xml'
+    filename = 'kysimustik_v2.xml'
+    file = STATIC_DIR / 'data' / filename
     with open(file, 'r', encoding='utf8') as f:
         tree = ET.parse(f)
         root = tree.getroot()
