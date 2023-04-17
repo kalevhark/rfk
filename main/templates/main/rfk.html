@@ -1,0 +1,88 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block title %}{{ block.super }} - RFK koodiotsija{% endblock %}
+
+{% block src %}
+  <script type="text/javascript">
+    // Muutujad vue jaoks
+    // var host = 'http://3.136.97.151:8000'
+    var urlICFMatches = "{% url 'main:get_icf_matches' %}"
+    var urlICFCodeVerbose = "{% url 'main:get_icf_code_verbose' %}"
+  </script>
+{% endblock %}
+
+{% block css %}
+  <style>
+    .result {
+      line-height:1.5em;
+      min-height:3.5em;
+    }
+
+    .result-icf-code-verbose {
+      font-size: 1.5em;
+    }
+
+    .icf-category {
+      color: black;
+    }
+
+    .icf-qualifier-1 {
+      color: lightcoral;
+    }
+
+    .icf-qualifier-2 {
+      color: green;
+    }
+
+    .icf-qualifier-3 {
+      color: blue;
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+  <div class="w3-container" id="codesearch">
+    <div class="w3-row">
+      <p>
+        otsitav(ad) sõnaosa(d) või RFK-kood:
+        <input
+                v-model="rfkCode"
+                size="30"
+                placeholder="näit 'lihas käe' või 'b230' või 'e130+1'"
+        >
+        <button v-on:click="resetForm" class="w3-light-blue">X</button>
+        <span v-if="rfkPath.items>100"> Leiti [[ rfkPath.items ]] vastet. Näidatakse 100 esimest.</span>
+      </p>
+    </div>
+    <div
+            class="w3-row result-icf-code-verbose"
+            v-html="rfkCodeVerbose"
+    >
+    </div>
+    <div
+            class="w3-row result"
+            v-for="item in rfkPath.matches"
+    >
+      <div
+              class="w3-col l1"
+              v-html="item[0]"
+      >
+      </div>
+      <div
+              class="w3-col l3"
+              v-html="item[1]"
+      >
+      </div>
+      <div
+              class="w3-col l8"
+              v-html="item[2]"
+      >
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block javascript %}
+  <script src="{% static 'main/rfk.js'%}?ver=2022"></script>
+{% endblock %}

@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vanusgrupid>
+	<vanusgrupp name="Laps 0-2" kysimustik="false">
+		<muutumatudSeisundid question="Kas lapsel on mõni nimetatud terviseseisunditest?">
+            jäseme osaline või täielik puudumine
+			juhitav hingamine või pidev hapnikuravi
+			mõlema silma pimedus
+			sondiga toitmine
+			mõlema kõrva kurtus
+		</muutumatudSeisundid>
+        <vanusgrupiV6tmetegevused>
+            <v6tmetegevus valdkond_nr="1" v6tmetegevus_nr="1">Liikumine eri tasapindadel</v6tmetegevus>
+            <v6tmetegevus valdkond_nr="1" v6tmetegevus_nr="3">Seismine ja istumine</v6tmetegevus>
+            <v6tmetegevus valdkond_nr="1" v6tmetegevus_nr="4">Liikumisega seotud muud piirangud</v6tmetegevus>
+            <v6tmetegevus valdkond_nr="2" v6tmetegevus_nr="2">Asjade ülestõstmine ja liigutamine</v6tmetegevus>
+            <v6tmetegevus valdkond_nr="2" v6tmetegevus_nr="3">Käteosavus</v6tmetegevus>
+            <v6tmetegevus valdkond_nr="2" v6tmetegevus_nr="4">Käelise tegevusega seotud muud piirangud</v6tmetegevus>
+            <v6tmetegevus valdkond_nr="3" v6tmetegevus_nr="1">Suhtlemine: nägemine</v6tmetegevus>
+            <v6tmetegevus valdkond_nr="3" v6tmetegevus_nr="2">Suhtlemine: kuulmine</v6tmetegevus>
+            <v6tmetegevus valdkond_nr="3" v6tmetegevus_nr="3">Suhtlemine: keel ja kõne</v6tmetegevus>
+            <v6tmetegevus valdkond_nr="4" v6tmetegevus_nr="3">Söömine ja joomine</v6tmetegevus>
+            <v6tmetegevus valdkond_nr="4" v6tmetegevus_nr="4">Teadvusel püsimise ja enesehooldusega seotud muud piirangud</v6tmetegevus>
+            <v6tmetegevus valdkond_nr="5" v6tmetegevus_nr="3">Õppimise ja tegevuste sooritamisega seotud muud piirangud</v6tmetegevus>
+        </vanusgrupiV6tmetegevused>
+		<vanusgrupiKysimused/>
+		<vanusgrupiYldKysimused question="">
+            		Palun kirjeldage lühidalt lapsel terviseseisundi tõttu esinevaid probleeme
+			Kui lapsele osutatakse sotsiaalteenuseid kohalikust omavalitsusest, siis kirjeldage milliseid teenuseid osutati ja kui sageli.
+		</vanusgrupiYldKysimused>
+        <vanusgrupiFailiTekst>
+            Juhul, kui soovite lapse tervisliku seisundi kohta lisada täiendavaid dokumente, siis saate seda teha siin.
+        </vanusgrupiFailiTekst>
+	</vanusgrupp>
+	<vanusgrupp name="Laps 3-8" kysimustik="true">
+		<muutumatudSeisundid question="Kas lapsel on mõni nimetatud terviseseisunditest?">
+            jäseme osaline või täielik puudumine
+			iseseisvalt liikumisvõimetu ja/või püsivalt ratastoolis
+			juhitav hingamine või pidev hapnikuravi
+			diagnoositud vaimne alaareng (mõõdukas/raske/sügav)
+			mõlema silma pimedus
+		</muutumatudSeisundid>
+        <vanusgrupiV6tmetegevused>
+            <v6tmetegevus valdkond_nr="1" v6tmetegevus_nr="1">Liikumine eri tasapindadel</v6tmetegevus>
+            <v6tmetegevus valdkond_nr="1" v6tmetegevus_nr="2">Ohutu ja takistuseta ringiliikumine</v6tmetegevus>
+            <v6tmetegevus valdkond_nr="1" v6tmetegevus_nr="3">Seismine ja istumine</v6tmetegevus>
+            <v6tmetegevus valdkond_nr="1" v6tmetegevus_nr="4">Liikumisega seotud muud piirangud</v6tmetegevus>
+            <v6tmetegevus valdkond_nr="2" v6tmetegevus_nr="1">Käte sirutamine</v6tmetegevus>
+            <v6tmetegevus valdkond_nr="2" v6tmetegevus_nr="2">Asjade ülestõstmine ja liigutamine</v6tmetegevus>
+            <v6tmetegevus valdkond_nr="2" v6tmetegevus_nr="3">Käteosavus</v6tmetegevus>
+            <v6tmetegevus valdkond_nr="2" v6tmetegevus_nr="4">Käelise tegevusega seotud muud piirangud</v6tmetegevus>
+            <v6tmetegevus valdkond_nr="3" v6tmetegevus_nr="1">Suhtlemine: nägemine</v6tmetegevus>
+            <v6tmetegevus valdkond_nr="3" v6tmetegevus_nr="2">Suhtlemine: kuulmine</v6tmetegevus>
+            <v6tmetegevus valdkond_nr="3" v6tmetegevus_nr="3">Suhtlemine: keel ja kõne</v6tmetegevus>
+            <v6tmetegevus valdkond_nr="4" v6tmetegevus_nr="1">Teadvusel püsimine ärkveloleku ajal</v6tmetegevus>
+            <v6tmetegevus valdkond_nr="4" v6tmetegevus_nr="2">Soole ja põie kontrollimine</v6tmetegevus>
+            <v6tmetegevus valdkond_nr="4" v6tmetegevus_nr="3">Söömine ja joomine</v6tmetegevus>
+            <v6tmetegevus valdkond_nr="4" v6tmetegevus_nr="4">Teadvusel püsimise ja enesehooldusega seotud muud piirangud</v6tmetegevus>
+            <v6tmetegevus valdkond_nr="5" v6tmetegevus_nr="1">Tegevuste õppimine</v6tmetegevus>
+            <v6tmetegevus valdkond_nr="5" v6tmetegevus_nr="2">Tegevuste alustamine ja lõpetamine</v6tmetegevus>
+            <v6tmetegevus valdkond_nr="5" v6tmetegevus_nr="3">Õppimise ja tegevuste sooritamisega seotud muud piirangud</v6tmetegevus>
+            <v6tmetegevus valdkond_nr="6" v6tmetegevus_nr="1">Väljaskäimine</v6tmetegevus>
+            <v6tmetegevus valdkond_nr="6" v6tmetegevus_nr="2">Ohu tajumine</v6tmetegevus>
+            <v6tmetegevus valdkond_nr="6" v6tmetegevus_nr="3">Toimetulek muutustega</v6tmetegevus>
+            <v6tmetegevus valdkond_nr="6" v6tmetegevus_nr="4">Muutustega kohanemise ja ohu tajumisega seotud muud piirangud</v6tmetegevus>
+            <v6tmetegevus valdkond_nr="7" v6tmetegevus_nr="1">Sotsiaalsete olukordadega hakkamasaamine</v6tmetegevus>
+            <v6tmetegevus valdkond_nr="7" v6tmetegevus_nr="2">Olukorrale kohane käitumine</v6tmetegevus>
+            <v6tmetegevus valdkond_nr="7" v6tmetegevus_nr="3">Inimestevahelise lävimise ja suhetega seotud muud piirangud</v6tmetegevus>
+        </vanusgrupiV6tmetegevused>
+		<vanusgrupiKysimused question="Palume hinnata lapse hakkamasaamist...">
+			<kysimus valdkond_nr="1" v6tmetegevus_nr="2" rfk_kategooria="tyhi">
+                iseseisvalt liikumisega siseruumides
+			</kysimus>
+			<kysimus valdkond_nr="1" v6tmetegevus_nr="2" rfk_kategooria="tyhi">
+				liikumisega õuetingimustes
+			</kysimus>
+			<kysimus valdkond_nr="1" v6tmetegevus_nr="3" rfk_kategooria="tyhi">
+				istumast püsti tõusmisega
+			</kysimus>
+			<kysimus valdkond_nr="2" v6tmetegevus_nr="3" rfk_kategooria="tyhi">
+                käeliste tegevustega (nt. joonistamine, söögiriistade kasutamine jm. täppisliigutustega)
+			</kysimus>
+			<kysimus valdkond_nr="3" v6tmetegevus_nr="1" rfk_kategooria="d110">
+                nägemisega
+			</kysimus>
+			<kysimus valdkond_nr="3" v6tmetegevus_nr="2" rfk_kategooria="d115">
+                kuulmisega
+			</kysimus>
+			<kysimus valdkond_nr="3" v6tmetegevus_nr="3" rfk_kategooria="d330">
+                kõnelemisega
+			</kysimus>
+			<kysimus valdkond_nr="4" v6tmetegevus_nr="2" rfk_kategooria="tyhi">
+                soole ja põie kontrollimisega
+			</kysimus>
+			<kysimus valdkond_nr="4" v6tmetegevus_nr="3" rfk_kategooria="tyhi">
+				söömisega
+			</kysimus>
+			<kysimus valdkond_nr="5" v6tmetegevus_nr="2" rfk_kategooria="tyhi">
+				igapäevategevustega (nt. riietumisega, käte pesemise ja eakohaste hügieenitoimingutega)
+			</kysimus>
+			<kysimus valdkond_nr="5" v6tmetegevus_nr="2" rfk_kategooria="tyhi">
+                tegevuste alustamise ja tegevuses püsimisega
+			</kysimus>
+			<kysimus valdkond_nr="6" v6tmetegevus_nr="1" rfk_kategooria="tyhi">
+				lasteaias või koolis õppimisega ja huvitegevuses osalemisega
+			</kysimus>
+			<kysimus valdkond_nr="5" v6tmetegevus_nr="1" rfk_kategooria="tyhi">
+				uute teadmiste ja oskuste omandamisega
+			</kysimus>
+			<kysimus valdkond_nr="7" v6tmetegevus_nr="2" rfk_kategooria="tyhi">
+                igapäevases olukorras lapsele kohase käitumisega
+			</kysimus>
+			<kysimus valdkond_nr="6" v6tmetegevus_nr="2" rfk_kategooria="tyhi">
+                eakohase võimega ohtu tajuda
+			</kysimus>
+			<kysimus valdkond_nr="7" v6tmetegevus_nr="1" rfk_kategooria="tyhi">
+                kehtestatud piiridest/käskudest/keeldudest aru saamisega
+			</kysimus>
+			<kysimus valdkond_nr="7" v6tmetegevus_nr="1" rfk_kategooria="tyhi">
+				lähedaste inimestega lävimisega
+			</kysimus>
+            <kysimus valdkond_nr="7" v6tmetegevus_nr="1" rfk_kategooria="tyhi">
+				võõraste inimestega (näiteks uus arst, õpetaja jt) lävimisega
+			</kysimus>
+			<kysimus valdkond_nr="7" v6tmetegevus_nr="1" rfk_kategooria="tyhi">
+				eakaaslastega suhtlemisega
+			</kysimus>
+		</vanusgrupiKysimused>
+		<vanusgrupiYldKysimused question="">
+            Palun kirjeldage lapsel terviseseisundi tõttu esinevaid probleeme
+			Milliseid abivahendeid laps kasutab? Kas abivahenditest on abi?
+			Kas laps vajab vaimse tervise seisundist tingitud järelevalvet?
+			Kui lapsele osutatakse sotsiaalteenuseid (tugiisik, sotsiaaltransport jms) kohalikust omavalitsusest, siis kirjeldage milliseid teenuseid osutati ja kui sageli.
+			Kirjeldage kas laps saab lasteaias individuaalset abi (tugiisik, logopeed, eripedagoog) või koolis kohandatud õpet (näiteks lihtsustatud või individuaalne õppekava)
+		</vanusgrupiYldKysimused>
+        <vanusgrupiFailiTekst>
+            Juhul, kui lapse kohta on koostatud kohaliku omavalitsuse juhtumiplaan või olete käinud haridusliku erivajaduse hindamisel, lisage need dokumendid taotlusele.
+        </vanusgrupiFailiTekst>
+	</vanusgrupp>
+	<vanusgrupp name="Laps 9-15" kysimustik="true">
+		<muutumatudSeisundid question="Kas lapsel on mõni nimetatud terviseseisunditest?">
+            jäseme osaline või täielik puudumine
+			iseseisvalt liikumisvõimetu ja/või püsivalt ratastoolis
+			juhitav hingamine või pidev hapnikuravi
+			diagnoositud vaimne alaareng (mõõdukas/raske/sügav)
+			mõlema silma pimedus
+		</muutumatudSeisundid>
+        <vanusgrupiV6tmetegevused>
+            <v6tmetegevus valdkond_nr="1" v6tmetegevus_nr="1">Liikumine eri tasapindadel</v6tmetegevus>
+            <v6tmetegevus valdkond_nr="1" v6tmetegevus_nr="2">Ohutu ja takistuseta ringiliikumine</v6tmetegevus>
+            <v6tmetegevus valdkond_nr="1" v6tmetegevus_nr="3">Seismine ja istumine</v6tmetegevus>
+            <v6tmetegevus valdkond_nr="1" v6tmetegevus_nr="4">Liikumisega seotud muud piirangud</v6tmetegevus>
+            <v6tmetegevus valdkond_nr="2" v6tmetegevus_nr="1">Käte sirutamine</v6tmetegevus>
+            <v6tmetegevus valdkond_nr="2" v6tmetegevus_nr="2">Asjade ülestõstmine ja liigutamine</v6tmetegevus>
+            <v6tmetegevus valdkond_nr="2" v6tmetegevus_nr="3">Käteosavus</v6tmetegevus>
+            <v6tmetegevus valdkond_nr="2" v6tmetegevus_nr="4">Käelise tegevusega seotud muud piirangud</v6tmetegevus>
+            <v6tmetegevus valdkond_nr="3" v6tmetegevus_nr="1">Suhtlemine: nägemine</v6tmetegevus>
+            <v6tmetegevus valdkond_nr="3" v6tmetegevus_nr="2">Suhtlemine: kuulmine</v6tmetegevus>
+            <v6tmetegevus valdkond_nr="3" v6tmetegevus_nr="3">Suhtlemine: keel ja kõne</v6tmetegevus>
+            <v6tmetegevus valdkond_nr="4" v6tmetegevus_nr="1">Teadvusel püsimine ärkveloleku ajal</v6tmetegevus>
+            <v6tmetegevus valdkond_nr="4" v6tmetegevus_nr="2">Soole ja põie kontrollimine</v6tmetegevus>
+            <v6tmetegevus valdkond_nr="4" v6tmetegevus_nr="3">Söömine ja joomine</v6tmetegevus>
+            <v6tmetegevus valdkond_nr="4" v6tmetegevus_nr="4">Teadvusel püsimise ja enesehooldusega seotud muud piirangud</v6tmetegevus>
+            <v6tmetegevus valdkond_nr="5" v6tmetegevus_nr="1">Tegevuste õppimine</v6tmetegevus>
+            <v6tmetegevus valdkond_nr="5" v6tmetegevus_nr="2">Tegevuste alustamine ja lõpetamine</v6tmetegevus>
+            <v6tmetegevus valdkond_nr="5" v6tmetegevus_nr="3">Õppimise ja tegevuste sooritamisega seotud muud piirangud</v6tmetegevus>
+            <v6tmetegevus valdkond_nr="6" v6tmetegevus_nr="1">Väljaskäimine</v6tmetegevus>
+            <v6tmetegevus valdkond_nr="6" v6tmetegevus_nr="2">Ohu tajumine</v6tmetegevus>
+            <v6tmetegevus valdkond_nr="6" v6tmetegevus_nr="3">Toimetulek muutustega</v6tmetegevus>
+            <v6tmetegevus valdkond_nr="6" v6tmetegevus_nr="4">Muutustega kohanemise ja ohu tajumisega seotud muud piirangud</v6tmetegevus>
+            <v6tmetegevus valdkond_nr="7" v6tmetegevus_nr="1">Sotsiaalsete olukordadega hakkamasaamine</v6tmetegevus>
+            <v6tmetegevus valdkond_nr="7" v6tmetegevus_nr="2">Olukorrale kohane käitumine</v6tmetegevus>
+            <v6tmetegevus valdkond_nr="7" v6tmetegevus_nr="3">Inimestevahelise lävimise ja suhetega seotud muud piirangud</v6tmetegevus>
+        </vanusgrupiV6tmetegevused>
+		<vanusgrupiKysimused question="Palume hinnata lapse hakkamasaamist...">
+			<kysimus valdkond_nr="1" v6tmetegevus_nr="2" rfk_kategooria="tyhi">
+				iseseisvalt liikumisega siseruumides
+			</kysimus>
+			<kysimus valdkond_nr="1" v6tmetegevus_nr="2" rfk_kategooria="tyhi">
+				liikumisega õuetingimustes
+			</kysimus>
+			<kysimus valdkond_nr="1" v6tmetegevus_nr="3" rfk_kategooria="tyhi">
+				istumast püsti tõusmisega
+			</kysimus>
+			<kysimus valdkond_nr="2" v6tmetegevus_nr="3" rfk_kategooria="tyhi">
+                käeliste tegevustega hakkama saamisega (nt. klaviatuuri kasutamine, telefoni käsitsemine, eseme haaramine/asetamine)
+			</kysimus>
+			<kysimus valdkond_nr="3" v6tmetegevus_nr="1" rfk_kategooria="tyhi">
+                nägemisega
+			</kysimus>
+			<kysimus valdkond_nr="3" v6tmetegevus_nr="2" rfk_kategooria="tyhi">
+				kuulmisega
+			</kysimus>
+			<kysimus valdkond_nr="3" v6tmetegevus_nr="3" rfk_kategooria="tyhi">
+				kõnelemisega
+			</kysimus>
+			<kysimus valdkond_nr="4" v6tmetegevus_nr="2" rfk_kategooria="tyhi">
+				soole ja põie kontrollimisega
+			</kysimus>
+			<kysimus valdkond_nr="4" v6tmetegevus_nr="3" rfk_kategooria="tyhi">
+				söömisega
+			</kysimus>
+			<kysimus valdkond_nr="5" v6tmetegevus_nr="2" rfk_kategooria="tyhi">
+				igapäevategevustega (nt. riietumisega, pesemise ja hügieenitoimingutega)
+			</kysimus>
+			<kysimus valdkond_nr="5" v6tmetegevus_nr="2" rfk_kategooria="tyhi">
+                tegevuste alustamise ja alustatud tegevuste lõpuni viimisega
+			</kysimus>
+			<kysimus valdkond_nr="5" v6tmetegevus_nr="1" rfk_kategooria="tyhi">
+				õppetöös ja huvitegevuses osalemisega
+			</kysimus>
+			<kysimus valdkond_nr="5" v6tmetegevus_nr="1" rfk_kategooria="tyhi">
+				tavaõppel ehk riiklikul õppekaval hakkama saamisega
+			</kysimus>
+			<kysimus valdkond_nr="5" v6tmetegevus_nr="1" rfk_kategooria="tyhi">
+				uute teadmiste ja oskuste omandamisega
+			</kysimus>
+			<kysimus valdkond_nr="7" v6tmetegevus_nr="2" rfk_kategooria="tyhi">
+                igapäevases olukorras lapsele kohase käitumisega
+			</kysimus>
+			<kysimus valdkond_nr="6" v6tmetegevus_nr="2" rfk_kategooria="tyhi">
+                eakohase võimega ohtu tajuda
+			</kysimus>
+			<kysimus valdkond_nr="7" v6tmetegevus_nr="2" rfk_kategooria="tyhi">
+                kehtestatud piiridest/käskudest/keeldudest aru saamisega
+			</kysimus>
+			<kysimus valdkond_nr="6" v6tmetegevus_nr="3" rfk_kategooria="tyhi">
+				muutuvate olukordadega kohanemisega (nt. muutus päevakavas, harjumuspärases tegevuses)
+			</kysimus>
+			<kysimus valdkond_nr="7" v6tmetegevus_nr="1" rfk_kategooria="tyhi">
+                eakaaslastega lävimisega
+			</kysimus>
+            <kysimus valdkond_nr="7" v6tmetegevus_nr="1" rfk_kategooria="tyhi">
+				võõraste inimestega (näiteks uus arst, õpetaja jt) lävimisega
+			</kysimus>
+			<kysimus valdkond_nr="7" v6tmetegevus_nr="1" rfk_kategooria="tyhi">
+				lähedaste inimestega lävimisega
+			</kysimus>
+			<kysimus valdkond_nr="7" v6tmetegevus_nr="1" rfk_kategooria="tyhi">
+				suhtlemisel ja vestluses osalemisel
+			</kysimus>
+		</vanusgrupiKysimused>
+		<vanusgrupiYldKysimused question="">
+            Palun kirjeldage lapsel terviseseisundi tõttu esinevaid probleeme
+			Milliseid abivahendeid laps kasutab? Kas abivahenditest on abi?
+			Kas laps vajab vaimse tervise seisundist tingitud järelevalvet? 
+			Kui lapsele osutatakse sotsiaalteenuseid (tugiisik, sotsiaaltransport jms) kohalikust omavalitsusest, siis kirjeldage milliseid teenuseid osutati ja kui sageli.
+			Kirjeldage kas laps saab koolis kohandatud õpet (näiteks lihtsustatud või individuaalset õppekava)
+		</vanusgrupiYldKysimused>
+        <vanusgrupiFailiTekst>
+            Juhul, kui lapse kohta on koostatud kohaliku omavalitsuse juhtumiplaan või olete käinud haridusliku erivajaduse hindamisel, lisage need dokumendid taotlusele.
+        </vanusgrupiFailiTekst>
+	</vanusgrupp>
+	<vanusgrupp name="Vanaduspensioniealine" kysimustik="true">
+		<muutumatudSeisundid question="Kas Teil on mõni all nimetatud terviseseisunditest?">
+            jäseme osaline või täielik puudumine
+			püsivalt voodihaige ja/või püsivalt ratastoolis
+			juhitav hingamine või pidev hapnikuravi (va uneapnoe)
+			diagnoositud vaimne alaareng (mõõdukas/raske/sügav)
+            väljakujunenud dementsus
+			mõlema silma pimedus
+		</muutumatudSeisundid>
+        <vanusgrupiV6tmetegevused>
+            <v6tmetegevus valdkond_nr="1" v6tmetegevus_nr="1">Liikumine eri tasapindadel</v6tmetegevus>
+            <v6tmetegevus valdkond_nr="1" v6tmetegevus_nr="2">Ohutu ja takistuseta ringiliikumine</v6tmetegevus>
+            <v6tmetegevus valdkond_nr="1" v6tmetegevus_nr="3">Seismine ja istumine</v6tmetegevus>
+            <v6tmetegevus valdkond_nr="1" v6tmetegevus_nr="4">Liikumisega seotud muud piirangud</v6tmetegevus>
+            <v6tmetegevus valdkond_nr="2" v6tmetegevus_nr="1">Käte sirutamine</v6tmetegevus>
+            <v6tmetegevus valdkond_nr="2" v6tmetegevus_nr="2">Asjade ülestõstmine ja liigutamine</v6tmetegevus>
+            <v6tmetegevus valdkond_nr="2" v6tmetegevus_nr="3">Käteosavus</v6tmetegevus>
+            <v6tmetegevus valdkond_nr="2" v6tmetegevus_nr="4">Käelise tegevusega seotud muud piirangud</v6tmetegevus>
+            <v6tmetegevus valdkond_nr="3" v6tmetegevus_nr="1">Suhtlemine: nägemine</v6tmetegevus>
+            <v6tmetegevus valdkond_nr="3" v6tmetegevus_nr="2">Suhtlemine: kuulmine</v6tmetegevus>
+            <v6tmetegevus valdkond_nr="3" v6tmetegevus_nr="3">Suhtlemine: keel ja kõne</v6tmetegevus>
+            <v6tmetegevus valdkond_nr="4" v6tmetegevus_nr="1">Teadvusel püsimine ärkveloleku ajal</v6tmetegevus>
+            <v6tmetegevus valdkond_nr="4" v6tmetegevus_nr="2">Soole ja põie kontrollimine</v6tmetegevus>
+            <v6tmetegevus valdkond_nr="4" v6tmetegevus_nr="3">Söömine ja joomine</v6tmetegevus>
+            <v6tmetegevus valdkond_nr="4" v6tmetegevus_nr="4">Teadvusel püsimise ja enesehooldusega seotud muud piirangud</v6tmetegevus>
+            <v6tmetegevus valdkond_nr="5" v6tmetegevus_nr="1">Tegevuste õppimine</v6tmetegevus>
+            <v6tmetegevus valdkond_nr="5" v6tmetegevus_nr="2">Tegevuste alustamine ja lõpetamine</v6tmetegevus>
+            <v6tmetegevus valdkond_nr="5" v6tmetegevus_nr="3">Õppimise ja tegevuste sooritamisega seotud muud piirangud</v6tmetegevus>
+            <v6tmetegevus valdkond_nr="6" v6tmetegevus_nr="1">Väljaskäimine</v6tmetegevus>
+            <v6tmetegevus valdkond_nr="6" v6tmetegevus_nr="2">Ohu tajumine</v6tmetegevus>
+            <v6tmetegevus valdkond_nr="6" v6tmetegevus_nr="3">Toimetulek muutustega</v6tmetegevus>
+            <v6tmetegevus valdkond_nr="6" v6tmetegevus_nr="4">Muutustega kohanemise ja ohu tajumisega seotud muud piirangud</v6tmetegevus>
+            <v6tmetegevus valdkond_nr="7" v6tmetegevus_nr="1">Sotsiaalsete olukordadega hakkamasaamine</v6tmetegevus>
+            <v6tmetegevus valdkond_nr="7" v6tmetegevus_nr="2">Olukorrale kohane käitumine</v6tmetegevus>
+            <v6tmetegevus valdkond_nr="7" v6tmetegevus_nr="3">Inimestevahelise lävimise ja suhetega seotud muud piirangud</v6tmetegevus>
+        </vanusgrupiV6tmetegevused>
+		<vanusgrupiKysimused question="Palume hinnata oma hakkamasaamist...">
+			<kysimus valdkond_nr="1" v6tmetegevus_nr="1" rfk_kategooria="tyhi">
+				kodus liikumisega
+			</kysimus>
+			<kysimus valdkond_nr="1" v6tmetegevus_nr="2" rfk_kategooria="tyhi">
+				kodust väljas liikumisega
+			</kysimus>
+			<kysimus valdkond_nr="1" v6tmetegevus_nr="3" rfk_kategooria="tyhi">
+				istumast püsti tõusmisega
+			</kysimus>
+			<kysimus valdkond_nr="2" v6tmetegevus_nr="2" rfk_kategooria="tyhi">
+				koduste toimetustega hakkama saamisega (näiteks koristamisega, toidu valmistamisega)
+			</kysimus>
+			<kysimus valdkond_nr="3" v6tmetegevus_nr="1" rfk_kategooria="tyhi">
+                nägemisega
+			</kysimus>
+			<kysimus valdkond_nr="3" v6tmetegevus_nr="2" rfk_kategooria="tyhi">
+                kuulmisega
+			</kysimus>
+			<kysimus valdkond_nr="3" v6tmetegevus_nr="3" rfk_kategooria="tyhi">
+                kõnelemisega
+			</kysimus>
+			<kysimus valdkond_nr="4" v6tmetegevus_nr="3" rfk_kategooria="tyhi">
+                söömisega
+			</kysimus>
+			<kysimus valdkond_nr="5" v6tmetegevus_nr="2" rfk_kategooria="tyhi">
+				igapäevategevustega (nt riietumisega, pesemisega, tualetitoimingutega?)
+			</kysimus>
+			<kysimus valdkond_nr="5" v6tmetegevus_nr="2" rfk_kategooria="tyhi">
+                oluliste igapäevategevuste meelespidamisega
+			</kysimus>
+			<kysimus valdkond_nr="6" v6tmetegevus_nr="1" rfk_kategooria="tyhi">
+				tööl käimisega ja/või huvitegevuses osalemisega
+			</kysimus>
+			<kysimus valdkond_nr="6" v6tmetegevus_nr="3" rfk_kategooria="tyhi">
+                muutuvate olukordadega kohanemisega (nt igapäeva rutiini muutus)
+			</kysimus>
+			<kysimus valdkond_nr="7" v6tmetegevus_nr="1" rfk_kategooria="tyhi">
+                lähedaste inimestega lävimisega
+			</kysimus>
+			<kysimus valdkond_nr="7" v6tmetegevus_nr="1" rfk_kategooria="tyhi">
+				võõrastega lävimisega
+			</kysimus>
+		</vanusgrupiKysimused>
+		<vanusgrupiYldKysimused question="">
+			Milliseid abivahendeid kasutate? Kas abivahenditest on abi?
+			Kas taotleja vajab vaimse tervise seisundist tingitud järelevalvet? 
+            		Kes Teid igapäevategevuste juures abistab ja kui sageli?
+			Millist abi olete kohalikust omavalitsusest saanud?
+		</vanusgrupiYldKysimused>
+        <vanusgrupiFailiTekst>
+            Kui teil on enda terviseseisundit kirjeldavaid dokumente (välja arvatud tervise infosüsteemis olevad dokumendid) palume need taotlusele lisada.
+        </vanusgrupiFailiTekst>
+	</vanusgrupp>
+</vanusgrupid>

@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vanusgrupid>
+	<vanusgrupp name="Laps 0-2" kysimustik="false">
+		<muutumatudSeisundid question="Kas Teie lapsel on mõni all nimetatud terviseseisunditest?">
+            juhitav hingamine või pidev hapnikuravi
+            sondiga toitmine
+            mõlema kõrva kurtus
+            mõlema silma pimedus
+		</muutumatudSeisundid>
+		<vanusgrupiKysimused/>
+		<vanusgrupiYldKysimused question="">
+            Palun kirjeldage oma lapsel esinevaid probleeme
+            Kas ja milliseid abivahendeid laps kasutab? Kas abivahenditest on abi?
+		</vanusgrupiYldKysimused>
+	</vanusgrupp>
+	<vanusgrupp name="Laps 3-8" kysimustik="true">
+		<muutumatudSeisundid question="Kas Teie lapsel on mõni all nimetatud terviseseisunditest?">
+            juhitav hingamine või pidev hapnikuravi
+            vaimne alaareng (mõõdukas/ raske/ sügav)
+            iseseisvalt liikumisvõimetu ja/või püsivalt ratastoolis
+            kurttummus
+            mõlema silma pimedus
+		</muutumatudSeisundid>
+		<vanusgrupiKysimused question="Palume hinnata Teie lapse hakkamasaamist järgnevate tegevuste juures.">
+			<kysimus valdkond_nr="1" rfk_kategooria="tyhi">
+                liikumisega tubastes tingimustes
+			</kysimus>
+			<kysimus valdkond_nr="1" rfk_kategooria="tyhi">
+				liikumisega õuetingimustes
+			</kysimus>
+			<kysimus valdkond_nr="1" rfk_kategooria="tyhi">
+				istumast püsti tõusmisega
+			</kysimus>
+			<kysimus valdkond_nr="2" rfk_kategooria="tyhi">
+                käeliste tegevustega hakkama saamisel (nt. joonistamine, söögiriistade kasutamine jm. täppisliigutused)
+			</kysimus>
+			<kysimus valdkond_nr="3.1" rfk_kategooria="tyhi">
+                nägemisega
+			</kysimus>
+			<kysimus valdkond_nr="3.2" rfk_kategooria="tyhi">
+                kuulmisega
+			</kysimus>
+			<kysimus valdkond_nr="3.3" rfk_kategooria="tyhi">
+                kõneleimisega
+			</kysimus>
+			<kysimus valdkond_nr="4" rfk_kategooria="tyhi">
+                soole ja põie kontrollimisega
+			</kysimus>
+			<kysimus valdkond_nr="4" rfk_kategooria="tyhi">
+				söömisega
+			</kysimus>
+			<kysimus valdkond_nr="4" rfk_kategooria="tyhi">
+				igapäevategevustega (nt. riietumisega, käte pesemise ja eakohaste hügieenitoimingutega)
+			</kysimus>
+			<kysimus valdkond_nr="5" rfk_kategooria="tyhi">
+                tegevuste alustamise ja tegevuses püsimisega
+			</kysimus>
+			<kysimus valdkond_nr="5" rfk_kategooria="tyhi">
+				lasteaias või koolis käimise ja huvitegevuses osalemisega
+			</kysimus>
+			<kysimus valdkond_nr="5" rfk_kategooria="tyhi">
+				uute teadmiste omandamisega
+			</kysimus>
+			<kysimus valdkond_nr="6" rfk_kategooria="tyhi">
+                eakohase võimega ohtu tajuda
+			</kysimus>
+			<kysimus valdkond_nr="7" rfk_kategooria="tyhi">
+                eakohase lävimisega
+			</kysimus>
+			<kysimus valdkond_nr="7" rfk_kategooria="tyhi">
+				lähedaste inimestega lävimisega
+			</kysimus>
+			<kysimus valdkond_nr="7" rfk_kategooria="tyhi">
+				eakohase vastastikuse suhtlemisega
+			</kysimus>
+		</vanusgrupiKysimused>
+		<vanusgrupiYldKysimused question="">
+            Nimetage igapäevategevused, mille juures vajab teie laps abi?
+			Kes last nende tegevuste juures abistab ja kui sageli
+			Kas ja milliseid abivahendeid laps kasutab? Kas abivahenditest on abi?
+			Kas olete küsinud või saanud lapsele abi lasteasutusest või koolist, kohalikust omavalitsusest?
+		</vanusgrupiYldKysimused>
+	</vanusgrupp>
+	<vanusgrupp name="Laps 9-15" kysimustik="true">
+		<muutumatudSeisundid question="Kas Teie lapsel on mõni all nimetatud terviseseisunditest?">
+            juhitav hingamine või pidev hapnikuravi
+			vaimne alaareng (mõõdukas/ raske/ sügav)
+            iseseisvalt liikumisvõimetu ja/või püsivalt ratastoolis
+            kurttummus
+			mõlema silma pimedus
+		</muutumatudSeisundid>
+		<vanusgrupiKysimused question="Palume hinnata Teie lapse hakkamasaamist järgnevate tegevuste juures.">
+			<kysimus valdkond_nr="1" rfk_kategooria="tyhi">
+				kodus liikumisega
+			</kysimus>
+			<kysimus valdkond_nr="1" rfk_kategooria="tyhi">
+				kodust väljas liikumisega
+			</kysimus>
+			<kysimus valdkond_nr="1" rfk_kategooria="tyhi">
+				istumast püsti tõusmisega
+			</kysimus>
+			<kysimus valdkond_nr="2" rfk_kategooria="tyhi">
+                käeliste tegevustega hakkama saamisel (nt. klaviatuuri kasutamine, telefoni käsitsemine, eseme haaramine/ asetamine)
+			</kysimus>
+			<kysimus valdkond_nr="3.1" rfk_kategooria="tyhi">
+                nägemisega
+			</kysimus>
+			<kysimus valdkond_nr="3.1" rfk_kategooria="tyhi">
+				kuulmisega
+			</kysimus>
+			<kysimus valdkond_nr="3.1" rfk_kategooria="tyhi">
+				kõnelemisega
+			</kysimus>
+			<kysimus valdkond_nr="4" rfk_kategooria="tyhi">
+				soole ja põie kontrollimisega
+			</kysimus>
+			<kysimus valdkond_nr="4" rfk_kategooria="tyhi">
+				söömisega
+			</kysimus>
+			<kysimus valdkond_nr="4" rfk_kategooria="tyhi">
+				igapäevategevustega (nt. riietumisega, pesemise ja hügieenitoimingutega)
+			</kysimus>
+			<kysimus valdkond_nr="5" rfk_kategooria="tyhi">
+                tegevuste alustamise ja alustatud tegevuste lõpuni viimisega
+			</kysimus>
+			<kysimus valdkond_nr="5" rfk_kategooria="tyhi">
+				koolis käimise ja huvitegevuses osalemisega
+			</kysimus>
+			<kysimus valdkond_nr="5" rfk_kategooria="tyhi">
+				tavaõppel hakkama saamisega
+			</kysimus>
+			<kysimus valdkond_nr="6" rfk_kategooria="tyhi">
+                ohu tajumisega (nt. liikluses)
+			</kysimus>
+			<kysimus valdkond_nr="6" rfk_kategooria="tyhi">
+				muutuvate olukordadega kohanemisega (nt. muutus päevakavas, harjumuspärases tegevuses)
+			</kysimus>
+			<kysimus valdkond_nr="7" rfk_kategooria="tyhi">
+                eakaaslastega lävimisega
+			</kysimus>
+			<kysimus valdkond_nr="7" rfk_kategooria="tyhi">
+				lähedaste inimestega lävimisega
+			</kysimus>
+			<kysimus valdkond_nr="7" rfk_kategooria="tyhi">
+				suhtlemisel ja vestluses osalemisel
+			</kysimus>
+		</vanusgrupiKysimused>
+		<vanusgrupiYldKysimused question="">
+            Nimetage igapäevategevused, mille juures vajab teie laps abi?
+            Kes last nende tegevuste juures abistab ja kui sageli?
+            Kas ja milliseid abivahendeid laps kasutab? Kas abivahendi(te)st on abi?
+			Kas olete küsinud või saanud lapsele abi koolist, kohalikust omavalitsusest või mujalt? Kui jah, siis millist?
+		</vanusgrupiYldKysimused>
+	</vanusgrupp>
+	<vanusgrupp name="Vanaduspensioniealine" kysimustik="true">
+		<muutumatudSeisundid question="Kas Teil on mõni all nimetatud terviseseisunditest?">
+            väljakujunenud dementsus
+            pahaloomuline kasvaja parimal võimalikul toetusravil
+            juhitav hingamine või pidev hapnikuravi (va uneapnoe)
+			vaimne alaareng (mõõdukas/ raske/ sügav)
+			püsivalt voodihaige ja/või püsivalt ratastoolis
+			kurttummus
+			mõlema silma pimedus
+		</muutumatudSeisundid>
+		<vanusgrupiKysimused question="Palume hinnata oma hakkamasaamist järgnevate tegevuste juures.">
+			<kysimus valdkond_nr="1" rfk_kategooria="tyhi">
+				kodus liikumisega
+			</kysimus>
+			<kysimus valdkond_nr="1" rfk_kategooria="tyhi">
+				kodust väljas liikumisega
+			</kysimus>
+			<kysimus valdkond_nr="1" rfk_kategooria="tyhi">
+				istumast püsti tõusmisega
+			</kysimus>
+			<kysimus valdkond_nr="2" rfk_kategooria="tyhi">
+				koduste toimetustega hakkama saamisel (näiteks koristamine, toidu valmistamine?)
+			</kysimus>
+			<kysimus valdkond_nr="3.1" rfk_kategooria="tyhi">
+                nägemisega
+			</kysimus>
+			<kysimus valdkond_nr="3.2" rfk_kategooria="tyhi">
+                kuulmisega
+			</kysimus>
+			<kysimus valdkond_nr="3.3" rfk_kategooria="tyhi">
+                kõnelemisega
+			</kysimus>
+			<kysimus valdkond_nr="4" rfk_kategooria="tyhi">
+                söömisega
+			</kysimus>
+			<kysimus valdkond_nr="4" rfk_kategooria="tyhi">
+				igapäevategevustega (nt riietumisega, pesemisega, tualetitoimingutega?)
+			</kysimus>
+			<kysimus valdkond_nr="5" rfk_kategooria="tyhi">
+                oluliste igapäevategevuste meelespidamisega
+			</kysimus>
+			<kysimus valdkond_nr="5" rfk_kategooria="tyhi">
+				tööl käimisega ja/või huvitegevuses osalemisega
+			</kysimus>
+			<kysimus valdkond_nr="6" rfk_kategooria="tyhi">
+                muutuvate olukordadega kohanemisega (nt igapäeva rutiini muutus)
+			</kysimus>
+			<kysimus valdkond_nr="7" rfk_kategooria="tyhi">
+                lähedaste inimestega lävimisega
+			</kysimus>
+			<kysimus valdkond_nr="7" rfk_kategooria="tyhi">
+				võõrastega lävimisega
+			</kysimus>
+		</vanusgrupiKysimused>
+		<vanusgrupiYldKysimused question="">
+            Nimetage igapäevategevused, mille juures vajate abi?
+			Kes Teid nende tegevuste juures abistab ja kui sageli?
+			Kas ja milliseid abivahendeid kasutate? Kas abivahendi(te)st on abi?
+			Millist abi olete kohalikust omavalitsuset saanud?
+		</vanusgrupiYldKysimused>
+	</vanusgrupp>
+</vanusgrupid>

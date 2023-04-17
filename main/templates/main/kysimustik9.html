@@ -1,0 +1,220 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block title %}{{ block.super }} küsimustiku proto 9{% endblock %}
+
+{% block src %}
+  <script type="text/javascript">
+    // Muutujad vue jaoks
+    var urlSaveResults = "{% url 'main:save_kysimustik9_results' %}";
+    var urlRefreshEkspertiis = "{% url 'main:get_kysimustik9_ekspertiis' %}";
+    var selectedSkaala = {{ selectedSkaala }};
+    const vanusgrupid = {{ vanusgrupid | safe }};
+    const vanusgruppideMuutumatudSeisundid = {{ vanusgruppideMuutumatudSeisundid | safe }};
+    const vanusgruppideV6tmetegevused = {{ vanusgruppideV6tmetegevused | safe }};
+    const vanusgruppideKysimused = {{ vanusgruppideKysimused | safe }};
+    const vanusgruppideYldKysimused = {{ vanusgruppideYldKysimused | safe }};
+    const vanusgruppideFailiTekstid = {{ vanusgruppideFailiTekstid | safe }};
+    var ipAddress = "{{ ip }}";
+  </script>
+{% endblock %}
+
+{% block css %}
+  <style>
+    label {
+     padding-left: 0.4em;
+    }
+
+    .question {
+      width: 300px;
+    }
+
+    .unanswered {
+      width: 100px;
+      text-align: center;
+    }
+
+    .poll {
+      width: 30px;
+      text-align: center;
+    }
+
+    .result {
+      width: 80px;
+      text-align: left;
+    }
+
+    /*
+    Enter and leave animations can use different
+    durations and timing functions.
+    */
+    .slide-fade-enter-active {
+      transition: all 0.5s ease-out;
+    }
+
+    .slide-fade-leave-active {
+      transition: all 0.5s cubic-bezier(1, 0.5, 0.8, 1);
+    }
+
+    .slide-fade-enter-from,
+    .slide-fade-leave-to {
+      opacity: 0;
+    }
+
+    .fade-enter-active,
+    .fade-leave-active {
+      transition: opacity 0.5s ease;
+    }
+
+    .fade-enter-from,
+    .fade-leave-to {
+      opacity: 0;
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+  <div class="w3-container" id="kysimustik9">
+    <button onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-black">
+      Mis värk on?
+    </button>
+
+    <button @click="showBackgroundInfo = !showBackgroundInfo" class="w3-button">
+      <span v-if="showBackgroundInfo">Ära näita valdkondi/võtmetegevusi/arvnäitajat</span>
+      <span v-else>Näita  valdkondi/võtmetegevusi/arvnäitajat</span>
+    </button>
+
+    <div id="id01" class="w3-modal">
+      <div class="w3-modal-content">
+        <div class="w3-container">
+          <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+          <p>Enesehinnangust piirangu määraja arvutamine inimese valiku järgi</p>
+          <ul>
+            <li>inimene teeb valiku skaalal [[ skaalad[selectedSkaala].skaala[0] ]]-[[ skaalad[selectedSkaala].skaala.slice(-1)[0] ]] -> valik</li>
+            <li>arvnäitaja = 4 / [[ skaalad[selectedSkaala].skaala.slice(-1)[0] ]] * valik (arvutatakse kahe komakoha täpsusega)</li>
+            <li>määraja = 0, kui arvnäitaja < 1,00</li>
+            <li>määraja = 1, kui 1,00 <= arvnäitaja < 2,00</li>
+            <li>määraja = 2, kui 2,00 <= arvnäitaja < 2,76</li>
+            <li>määraja = 3, kui 2,76 <= arvnäitaja < 3,50</li>
+            <li>määraja = 4, kui 3,50 <= arvnäitaja</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+    <div v-if="showDebug">
+      &NonBreakingSpace;<span>Skaala?</span>&NonBreakingSpace;
+      <select v-model="selectedSkaala">
+        <option v-for="option in skaalad" v-bind:value="option.value">
+          [[ option.text ]]
+        </option>
+      </select>
+    </div>
+
+    &NonBreakingSpace;<span>Vanusgrupp?</span>&NonBreakingSpace;
+    <select v-model="selectedVanusgrupp">
+      <option v-for="option in vanusgrupid" v-bind:value="option.value">
+        [[ option.text ]]
+      </option>
+    </select>
+
+    <h3>Terviseseisundi kirjeldus</h3>
+    <div class="w3-panel w3-padding w3-card w3-pale-blue">
+      <h3 v-show="showBackgroundInfo">Progresseeruv või muutumatu terviseseisund</h3>
+      <p>[[ muutumatudSeisundidQuestion.kysimus ]]<span v-if="muutumatudSeisundidQuestion.kohustuslik" style="color: red"> *</span></p>
+      <textarea rows="3" cols="80" v-model="muutumatudSeisundidQuestion.answer" placeholder="siia saab kirjutada pika jutu..."></textarea>
+    </div>
+
+    <transition name="slide-fade">
+    <div v-show="showKysimustik" class="w3-row w3-padding w3-pale-green">
+      <h3 v-show="showBackgroundInfo">Palun vasta küsimustele</h3>
+      <p>[[ kysimustikQuestion ]]</p>
+      <ul>
+        <li v-for="rida in skaalad[selectedSkaala].legend">
+          [[ rida ]]
+        </li>
+      </ul>
+      <table>
+        <tr>
+          <th class="question"></th>
+          <th class="poll" v-for="n in skaalad[selectedSkaala].skaala" :key="n">
+            [[ n ]]
+          </th>
+          <th v-show="showBackgroundInfo" class="result"
+              title="Arvnäitaja 0-4 PISTS kord arvutamise metoodika alusel">MM18
+          </th>
+        </tr>
+      </table>
+      <div v-for="(kysimus, kysimusIndex) in kysimustikList">
+        <span v-show="showBackgroundInfo">[[ kysimus.valdkond_nr ]].[[ kysimus.v6tmetegevus_nr ]]&NonBreakingSpace;</span>
+        <span v-html="kysimus.text"></span><span v-if="kysimus.kohustuslik" style="color: red"> *</span><br>
+        <table>
+          <tr>
+            <td class="question"></td>
+            <td class="poll" v-for="n in skaalad[selectedSkaala].skaala" :key="n">
+              <input
+                      type="radio"
+                      :id="n"
+                      :value="n"
+                      v-model.number="kysimus.score"
+                      v-bind:title="[[ skaalad[selectedSkaala].legend[n] ]]"
+              />
+              <label :for="n"></label>
+            </td>
+            <td v-show="showBackgroundInfo" class="result">[[ getScore(kysimusIndex) ]]</td>
+          </tr>
+          <transition name="slide-fade">
+            <tr v-show="kysimus.score >= skaalad[selectedSkaala].extraKysimus">
+              <td class="question"></td>
+              <td colspan="10">Täpsustage palun, milline tervisehäire peamiselt piiranguid põhjustab?</td>
+              <td><textarea rows="3" cols="40" v-model="kysimus.answer"
+                            placeholder="siia saab kirjutada pika jutu..."></textarea></td>
+            </tr>
+          </transition>
+        </table>
+      </div>
+    </div>
+    </transition>
+
+    <div  v-show="showBackgroundInfo" class="w3-panel w3-padding w3-card w3-pale-blue">
+      <div class="w3-half">
+        <button id='refreshEkspertiis' @click="refreshEkspertiis">Ekspertarvamuse vaade</button>
+        <hr>
+        <div id="ekspertiis" class="w3-card"></div>
+        <hr>
+        <div id="rfkd" class="w3-card"></div>
+      </div>
+    </div>
+
+    <div class="w3-panel w3-padding w3-card w3-pale-blue">
+      <h3 v-show="showBackgroundInfo">Üldküsimused</h3>
+      <p>[[ yldkysimusedQuestion ]]</p>
+      <div v-for="(kysimus, kysimusIndex) in yldkysimusedList" :key="kysimusIndex">
+        <p><span v-html="kysimus.text"></span><span v-if="kysimus.kohustuslik" style="color: red"> *</span></p>
+        <textarea rows="3" cols="80" v-model="kysimus.answer" placeholder="siia saab kirjutada pika jutu..."></textarea>
+      </div>
+    </div>
+    <div class="w3-panel w3-padding w3-card w3-pale-blue">
+      <div class="w3-row">
+        [[ vanusgrupiFailiTekst ]]<br>
+        <button id='saveFile' @click="saveFile">Lisa fail</button>
+      </div>
+    </div>
+    <div class="w3-panel w3-padding w3-card w3-light-grey">
+      <h3 v-show="showBackgroundInfo">Tagasiside</h3>
+      <div>
+        <p><span>Testimiseks: Nimi ja kommentaar küsimustiku kohta:</span></p>
+        <textarea rows="5" cols="80" v-model="feedback" placeholder="siia saab kirjutada pika jutu..."></textarea>
+        <br>
+        <button id='saveButton' @click="saveResults">Saada</button>
+        <button id='resetForm' @click="resetForm">Täida uuesti</button>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block javascript %}
+  {#  <script src="https://unpkg.com/vue@next"></script>#}
+  <script src="{% static 'main/kysimustik9.js' %}?ver=2022"></script>
+{% endblock %}

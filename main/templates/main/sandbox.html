@@ -1,0 +1,253 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block title %}{{ block.super }} mängunurk{% endblock %}
+
+{% block src %}
+  <script type="text/javascript">
+    // Muutujad vue jaoks
+    var host = 'http://3.136.97.151:8000'
+    var urlICFPath = "{% url 'main:get_icf_path' %}"
+    var urlICFCalcs = "{% url 'main:get_icf_calcs' %}"
+    var urlICFSummary = "{% url 'main:get_icf_summary' %}"
+  </script>
+{% endblock %}
+
+{% block css %}
+  <style>
+    .verticalColumnHeader {
+      display:flex;
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      justify-content:center;
+      align-items:center;
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+  <div class="w3-container" id="watch-example">
+
+    <div class="w3-container">
+      <div class="w3-row w3-padding-16">
+        <div class="w3-col">
+          <div class="w3-row">
+            <a
+                  href="{% url 'index' %}"
+                  class="w3-bar-item w3-button w3-theme-d4 w3-hover-white">
+              RFK mängunurk
+            </a>
+            <button
+                    onclick="document.getElementById('id01').style.display='block'"
+                    class="w3-button w3-hover-white">
+              Mis värk on?
+            </button>
+
+            <button v-on:click="makeDemo6" class="w3-button w3-hover-white">D1: d4</button>
+            <button v-on:click="makeDemo7" class="w3-button w3-hover-white">D2: d4</button>
+            <button v-on:click="makeDemo8" class="w3-button w3-hover-white">D3: d4</button>
+            <button v-on:click="makeDemo9" class="w3-button w3-hover-white">D4: b2</button>
+            <button v-on:click="makeDemo10" class="w3-button w3-hover-white">D5: d1</button>
+          </div>
+{#          <a#}
+{#              href="{% url 'some_view' %}"#}
+{#              class="w3-bar-item w3-button w3-theme-d4 w3-hover-white">#}
+{#            PDF#}
+{#          </a>#}
+        </div>
+      </div>
+      <div id="id01" class="w3-modal">
+        <div class="w3-modal-content">
+          <div class="w3-container">
+            <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+            <p>RFK mängunurka saab erinevate valdkondade alla lisada RFK koodide komplekte koos määrajatega.</p>
+            <p>Määrajate alusel grupeeritakse need 1. (nt b2), 2. (nt b230) ja 3. taseme (b230-b249) järgi.</p>
+            <p>s- ja e-koode ning koode määrajatega 8 (täpsustamata - Tta) ja 9 (ei ole rakendatav) ignoreeritakse</p>
+            <p>Risttabel arvutatakse nii:</p>
+            <p>Meetod 1 - aritmeetiliste keskmiste meetod:</p>
+            <ul>
+              <li>rea ja veeru väärtused leitakse grupi määrajate aritmeetiline keskmisena nt b230.1 ja b240.2 -> b2 1,5</li>
+              <li>leitakse rea ja veeru väärtuse aritmeetiline keskmine d4=2,5 ja b2=1,5 -> 2,0</li>
+              <li>saadud arv ümardatakse täisarvuks 2,2 -> 2, 2,5 -> 3 jne</li>
+            </ul>
+            <p>Meetod 2 - ruutkeskmise meetod:</p>
+            <ul>
+              <li>rea ja veeru väärtused leitakse grupi määrajate ruutkeskmisena nt b230.1 ja b240.2 -> b2 1,58</li>
+              <li>leitakse rea ja veeru väärtuste aritmeetiline keskmine d4=2 ja b2=1,58 -> 1,80</li>
+              <li>tulemusest võetakse ruutjuur ja ümardatakse täisarvuks 1,80 -> 2, 2,2 -> 2, 2,5 -> 3 jne</li>
+              <li>vt https://et.wikipedia.org/wiki/Ruutkeskmine</li>
+            </ul>
+            <p>Meetod 3 - geomeetriliste keskmiste meetod (0->1):</p>
+            <ul>
+              <li>NB! 0-määrajad saavad väärtuseks 1</li>
+              <li>rea ja veeru väärtused leitakse grupi määrajate geomeetriline keskmisena nt b230.1 ja b240.2 -> b2 1,41</li>
+              <li>leitakse rea ja veeru väärtuse keskmiste summa keskmine d4=2,5 ja b2=1,41 -> 1,68</li>
+              <li>saadud keskmine ümardatakse täisarvuks 1,68 -> 2, 2,2 -> 2, 2,5 -> 3 jne</li>
+            </ul>
+            <p>Meetod 4 - geomeetriliste keskmiste meetod (0-määrajatega koode ignoreeritakse):</p>
+            <ul>
+              <li>NB! 0-määrajatega koode ignoreeritakse</li>
+              <li>rea ja veeru väärtused leitakse grupi määrajate geomeetriline keskmisena nt b230.1 ja b240.2 -> b2 1,41</li>
+              <li>leitakse rea ja veeru väärtuse keskmiste summa keskmine d4=2,5 ja b2=1,41 -> 1,68</li>
+              <li>saadud keskmine ümardatakse täisarvuks 1,68 -> 2, 2,2 -> 2, 2,5 -> 3 jne</li>
+            </ul>
+            <p>Kokkuvõttes võetakse kõikide valdkondade unikaalsed koodid ja tehakse sama operatsioon nagu valdkonniti</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="w3-container">
+      <p>
+        RFK kategooria (kood ilma määrajateta):<br>
+        <input
+                v-model="rfkCode"
+                placeholder="näiteks b230"
+        >
+        [[ rfkPath ]]
+      </p>
+    </div>
+
+    <div class="w3-container">
+      Arutusmeetod:
+      <select v-model="selected">
+        <option v-for="option in options" v-bind:value="option.value">
+          [[ option.text ]]
+        </option>
+      </select>
+      {#      <span> Valitud: [[ selected ]]</span>#}
+    </div>
+
+    <h4>Töövõime hindamise andmed</h4>
+    <div class="w3-bar">
+      <button
+          class="w3-bar-item w3-button tablink"
+          v-for="input in inputs"
+          v-on:click="openTab($event, 'tvh_' + input.id)"
+          v-bind:id="'tvh_button_' + input.id"
+      >
+        TVH[[ input.id ]]: [[ input.category ]] <span class="w3-text-red" v-if="input.len">([[ input.len ]])</span>
+      </button>
+    </div>
+    <div
+        class="w3-row w3-padding-16 w3-border tab"
+        v-for="input in inputs"
+        v-bind:style="[(input.id===1) ?  {'display': ''}: {'display': 'none'}]"
+        v-bind:key="'tvh_' + input.id"
+				v-bind:id="'tvh_' + input.id"
+    >
+      <div class="w3-container w3-padding">
+        <strong>[[ input.category ]]</strong>
+      </div>
+      <div class="w3-col l1">
+        <div class="w3-container">
+          <textarea
+                  v-model="input.question"
+                  placeholder="Siia kirjuta või kleebi RFK koodid koos määrajatega (e ja s koode ei kasutata)"
+                  rows="10"
+                  cols="10"
+          ></textarea>
+        </div>
+      </div>
+      <div class="w3-col l2">
+        <div class="w3-container">
+          <span v-html="input.result1"></span>
+        </div>
+      </div>
+      <div class="w3-col l4">
+        <div class="w3-container">
+          <span v-html="input.result2"></span>
+        </div>
+      </div>
+      <div class="w3-col l4">
+        <div class="w3-container">
+          <span v-html="input.result3"></span>
+        </div>
+      </div>
+    </div>
+
+    <h4>Puude raskusastme andmed</h4>
+    <div class="w3-bar">
+      <button
+          class="w3-bar-item w3-button tablink"
+          v-for="input in prt_categories"
+          v-on:click="openTab($event, 'prt_' + input.id)"
+          v-bind:id="'prt_button_' + input.id"
+      >
+        Funkts[[ input.id ]]: [[ input.category ]] <span class="w3-text-red" v-if="input.len">([[ input.len ]])</span>
+      </button>
+    </div>
+
+    <div
+        class="w3-row w3-padding-16 w3-border tab"
+        v-for="input in prt_categories"
+        v-bind:style="[(input.id===1) ?  {'display': ''}: {'display': 'none'}]"
+        v-bind:key="'prt_' + input.id"
+				v-bind:id="'prt_' + input.id"
+    >
+      <div class="w3-container w3-padding">
+        <strong>[[ input.category ]]</strong>
+      </div>
+      <div class="w3-col l1">
+        <div class="w3-container">
+          <span v-html="input.rfk_set"></span>
+        </div>
+      </div>
+      <div class="w3-col l2">
+        <div class="w3-container">
+          <span v-html="input.result1"></span>
+        </div>
+      </div>
+      <div class="w3-col l4">
+        <div class="w3-container">
+          <span v-html="input.result2"></span>
+        </div>
+        <div class="w3-row w3-padding-16">
+          <span v-html="input.resultVerbose4"></span>
+        </div>
+      </div>
+      <div class="w3-col l4">
+        <div class="w3-container">
+          <span v-html="input.result3"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="w3-row">
+      <div class="w3-container w3-padding">
+        <strong>Kokkuvõte</strong>
+      </div>
+    </div>
+    <div class="w3-row">
+      <div class="w3-col l3 w3-container">
+        <span v-html="resultSummary0"></span>
+      </div>
+      <div class="w3-col l4 w3-container">
+        <div class="w3-row">
+          <span v-html="resultSummary2"></span>
+        </div>
+        <div class="w3-row w3-padding-16">
+          <span v-html="resultVerbose4"></span>
+        </div>
+      </div>
+      <div class="w3-col l4 w3-container">
+        <div class="w3-row">
+          <span v-html="resultSummary3"></span>
+        </div>
+        <div class="w3-row w3-padding-16">
+          <span v-html="resultVerbose3"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="w3-row w3-small w3-container w3-padding">
+      [[ answer ]]
+    </div>
+  </div>
+
+{% endblock %}
+
+{% block javascript %}
+  <script src="{% static 'main/main.js'%}?ver=2022"></script>
+{% endblock %}

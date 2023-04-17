@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+{% load static %}
+{% load extras %}
+
+<html lang="et">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>
+      {% block title %}Liivakast{% endblock %}
+    </title>
+
+    <!--  Laetavad moodulid-->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
+		<!-- Vue development version, includes helpful console warnings -->
+    <script src="https://unpkg.com/vue@3"></script>
+    <!-- Vue production version -->
+    {#    <script src="https://unpkg.com/vue@3.2.31/dist/vue.global.prod.js"></script>#}
+    {% block src %}{% endblock %}
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'main/main.css' %}?ver=2021.06">
+    {% block css %}{% endblock %}
+
+  </head>
+  <body class="Site w3-light-grey">
+    <main class="Site-content">
+      {% block content %}{% endblock %}
+    </main>
+
+    {% if COOKIE_CONSENT_INUSE %}
+      <script>
+        // Cookie compliance message
+        // @FacepalmRobot https://codepen.io/FacepalmRobot/pen/ldFnr
+
+        (function(){
+          //Change these values
+          var msg = (
+            'valgalinn.ee kasutab mugavama sirvimise huvides küpsiseid. ' +
+            '<a href="{% url 'privacy' %}">Lisateave.</a>'
+          );
+          var closeBtnMsg = "Sain aru";
+          var privacyLink = "https://www.google.com";
+
+          //check cookies
+          if(document.cookie){
+            var cookieString = document.cookie;
+            var cookieList = cookieString.split(";");
+            // if cookie named CookieOK is found, return
+            for(x = 0; x < cookieList.length; x++){
+              if (cookieList[x].indexOf("CookieOK") !== -1){return}
+            }
+          }
+
+          var docRoot = document.body;
+          var okC = document.createElement("div");
+          okC.setAttribute("id", "okCookie");
+          var okCp = document.createElement("p");
+          var okcText = document.createTextNode('');
+
+          //close button
+          var okCclose = document.createElement("a");
+          var okcCloseText = document.createTextNode(closeBtnMsg);
+          okCclose.setAttribute("href", "#");
+          okCclose.setAttribute("id", "okClose");
+          okCclose.appendChild(okcCloseText);
+          okCclose.addEventListener("click", closeCookie, false);
+
+          //add to DOM
+          okCp.appendChild(okcText);
+          okCp.innerHTML = msg;
+          okC.appendChild(okCp);
+          okC.appendChild(okCclose);
+          docRoot.appendChild(okC);
+
+          okC.classList.add("okcBeginAnimate");
+
+          function closeCookie(){
+            const now = new Date();
+            var cookieExpire = new Date();
+            cookieExpire.setFullYear(cookieExpire.getFullYear() +2);
+            const elements = [
+              'CookieOK=' + now.getTime(),
+              'expires=' + cookieExpire.toGMTString(),
+              'path=/'
+            ];
+            console.log(elements.join('; '))
+            document.cookie=elements.join('; ')
+            docRoot.removeChild(okC);
+          }
+
+        })();
+      </script>
+    {% endif %}
+    {% block javascript %}{% endblock %}
+    <footer>
+			<div class="w3-bar">
+        <a href="#">
+					<button class="w3-button w3-hover-white fa fa-angle-double-up"></button>
+				</a>
+				<a href="{% url 'rfk' %}">
+						<button class="w3-button w3-hover-white w3-right w3-text-grey"><small>&#9400;&nbsp;2021-{% now "Y" %} Kalev Härk</small></button>
+				</a>
+      </div>
+		</footer>
+  </body>
+</html>

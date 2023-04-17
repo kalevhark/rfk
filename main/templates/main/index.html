@@ -1,0 +1,93 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block title %}{{ block.super }} mängunurk{% endblock %}
+
+{% block src %}
+  <script type="text/javascript">
+    // Muutujad vue jaoks
+    var host = 'http://3.136.97.151:8000'
+  </script>
+{% endblock %}
+
+{% block content %}
+  <div class="w3-container">
+    <a
+        href="{% url 'sandbox' %}"
+        class="w3-bar-item w3-button w3-theme-d4 w3-hover-white">
+      RFK analüüs
+    </a>
+    <br>
+    <a
+        href="{% url 'rfk' %}"
+        class="w3-bar-item w3-button w3-theme-d4 w3-hover-white">
+      RFK koodiotsija
+    </a>
+    <br>
+{#    <a#}
+{#        href="{% url 'kysimustik2' %}"#}
+{#        class="w3-bar-item w3-button w3-theme-d4 w3-hover-white">#}
+{#      LAVA küsimustiku proto 2#}
+{#    </a>#}
+{#    <br>#}
+{#    <a#}
+{#        href="{% url 'kysimustik3' %}"#}
+{#        class="w3-bar-item w3-button w3-theme-d4 w3-hover-white">#}
+{#      LAVA küsimustiku proto 3#}
+{#    </a>#}
+{#    <br>#}
+{#    <a#}
+{#        href="{% url 'kysimustik4' %}"#}
+{#        class="w3-bar-item w3-button w3-theme-d4 w3-hover-white">#}
+{#      LAVA küsimustiku proto 4#}
+{#    </a>#}
+{#    <br>#}
+{#    <a#}
+{#        href="{% url 'kysimustik5' %}"#}
+{#        class="w3-bar-item w3-button w3-theme-d4 w3-hover-white">#}
+{#      LAVA küsimustiku proto 5#}
+{#    </a>#}
+{#    <br>#}
+{#    <a#}
+{#        href="{% url 'kysimustik6' %}"#}
+{#        class="w3-bar-item w3-button w3-theme-d4 w3-hover-white">#}
+{#      LAVA küsimustiku proto 6#}
+{#    </a>#}
+{#    <br>#}
+    <a
+        href="{% url 'kysimustik7' %}"
+        class="w3-bar-item w3-button w3-theme-d4 w3-hover-white">
+      LAVA küsimustiku proto 7
+    </a>
+    <br>
+    <a
+        href="{% url 'kysimustik8' %}"
+        class="w3-bar-item w3-button w3-theme-d4 w3-hover-white">
+      LAVA küsimustiku proto 8
+    </a>
+    <br>
+    <a
+        href="{% url 'kysimustik9' %}"
+        class="w3-bar-item w3-button w3-theme-d4 w3-hover-white">
+      LAVA küsimustiku proto 9
+    </a>
+{#    <div id="app">#}
+{#      Vue testnupp: <button @click="count++">[[ count ]]</button>#}
+{#    </div>#}
+  </div>
+{% endblock %}
+
+{% block javascript %}
+{#  <script>#}
+{#    const { createApp } = Vue#}
+{##}
+{#    createApp({#}
+{#      delimiters: ['[[', ']]'],#}
+{#      data() {#}
+{#        return {#}
+{#          count: 0#}
+{#        }#}
+{#      }#}
+{#    }).mount('#app')#}
+{#  </script>#}
+{% endblock %}
