@@ -147,9 +147,9 @@ CORS_ALLOW_ALL_ORIGINS = True
 COOKIE_CONSENT_INUSE = False
 
 # AWS SES credentials
-EMAIL_HOST = config['aws_mail']['HOST']
-EMAIL_HOST_PASSWORD = config['aws_mail']['PASSWORD_SMTP']
-EMAIL_HOST_USER = config['aws_mail']['USERNAME_SMTP']
-EMAIL_PORT = config['aws_mail']['PORT']
-EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = config['aws_mail']['DEFAULT_FROM_EMAIL']
+# EMAIL_HOST = config['aws_mail']['HOST']
+# EMAIL_HOST_PASSWORD = config['aws_mail']['PASSWORD_SMTP']
+# EMAIL_HOST_USER = config['aws_mail']['USERNAME_SMTP']
+# EMAIL_PORT = config['aws_mail']['PORT']
+# EMAIL_USE_TLS = True
+# DEFAULT_FROM_EMAIL = config['aws_mail']['DEFAULT_FROM_EMAIL']
