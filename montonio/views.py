@@ -9,7 +9,7 @@ def get_payload():
     # 1. Gather the checkout data
     payload = {
         "accessKey": settings.MY_ACCESS_KEY,
-        "merchantReference": "ANNETUS 123",
+        "merchantReference": "ANNETUS123",
         "returnUrl": "http://test.valgalinn.ee:8000/montonio/naase",
         "notificationUrl": "http://test.valgalinn.ee:8000/montonio/teavita",
         "currency": "EUR",
@@ -48,7 +48,7 @@ def get_payload():
             "method": "paymentInitiation",
             "methodDisplay": "Maksa läbi oma panga",
             "methodOptions": {
-                "paymentDescription": "Annetus 123",
+                "paymentDescription": "Annetus",
                 "preferredCountry": "EE",
                 # This is the code of the bank that the customer chose at checkout.
                 # See the GET /stores/payment-methods endpoint for the list of available banks.
@@ -67,7 +67,7 @@ def index(request):
     # 3. Generate the token
     token = jwt.encode(payload, settings.MY_SECRET_KEY, algorithm='HS256')
     # 4. Send the token to the API and get the payment URL
-    response = requests.post('https://sandbox-stargate.montonio.com/api/orders', json={
+    response = requests.post('https://stargate.montonio.com/api/orders', json={
         'body': token
     })
     data = response.json()
