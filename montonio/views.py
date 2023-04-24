@@ -67,14 +67,14 @@ def index(request):
     # 3. Generate the token
     token = jwt.encode(payload, settings.MY_SECRET_KEY, algorithm='HS256')
     # 4. Send the token to the API and get the payment URL
-    response = requests.post('https://stargate.montonio.com/api/orders', json={
-        'body': token
-    })
-    data = response.json()
+    # response = requests.post('https://sandbox-stargate.montonio.com/api/orders', json={
+    #     'body': token
+    # })
+    # data = response.json()
     # payment_url = data['paymentUrl']
 
     # 5. Redirect the customer to the checkout page
-    print(data)
+    # print(data)
     # webbrowser.open(payment_url)
     return redirect('/')
 
