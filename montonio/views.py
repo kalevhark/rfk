@@ -76,10 +76,10 @@ def index(request):
     # 5. Redirect the customer to the checkout page
     print(data)
     # webbrowser.open(payment_url)
-    return redirect('/montonio')
+    return redirect('/')
 
 def naase(request):
-    return redirect('/montonio')
+    return redirect('/')
 
 def teavita(request):
     return redirect('/')
