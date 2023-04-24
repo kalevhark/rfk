@@ -48,7 +48,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'corsheaders', # https://github.com/adamchainz/django-cors-headers
-    'main',
+    'main', # RFK sandbox
+    'montonio', # montonio sandbox
 ]
 
 MIDDLEWARE = [
@@ -146,3 +147,6 @@ CORS_ALLOW_ALL_ORIGINS = True
 # cookie consent in use?
 COOKIE_CONSENT_INUSE = False
 
+# montonio keys
+MY_ACCESS_KEY = config['montonio']['MY_ACCESS_KEY']
+MY_SECRET_KEY = config['montonio']['MY_SECRET_KEY']
