@@ -148,5 +148,12 @@ CORS_ALLOW_ALL_ORIGINS = True
 COOKIE_CONSENT_INUSE = False
 
 # montonio keys
-MY_ACCESS_KEY = config['montonio']['MY_ACCESS_KEY']
-MY_SECRET_KEY = config['montonio']['MY_SECRET_KEY']
+MONTONIO_LIVE = True
+if MONTONIO_LIVE:
+    MONTONIO_API_SERVER = config['montonio-live']['MONTONIO_API_SERVER']
+    MY_ACCESS_KEY = config['montonio-live']['MY_ACCESS_KEY']
+    MY_SECRET_KEY = config['montonio-live']['MY_SECRET_KEY']
+else:
+    MONTONIO_API_SERVER = config['montonio-sandbox']['MONTONIO_API_SERVER']
+    MY_ACCESS_KEY = config['montonio-sandbox']['MY_ACCESS_KEY']
+    MY_SECRET_KEY = config['montonio-sandbox']['MY_SECRET_KEY']

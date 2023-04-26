@@ -1,4 +1,5 @@
 from datetime import datetime, timedelta
+import json
 
 from django.conf import settings
 from django.http import HttpResponseRedirect
@@ -67,7 +68,6 @@ def get_payload(user, preferred_region, preferred_provider, amount):
     }
     return payload
 
-import json
 def get_order(request):
     if request:
         # 1. Gather the checkout data
@@ -84,7 +84,7 @@ def get_order(request):
         print(token)
 
         # 4. Send the token to the API and get the payment URL
-        response = requests.post('https://sandbox-stargate.montonio.com/api/orders', json={
+        response = requests.post(f'{settings.MONTONIO_API_SERVER}/orders', json={
             'body': token
         })
         data = response.json()
@@ -117,7 +117,7 @@ def get_payment_methods(request):
         algorithm='HS256'
     )
     response = requests.get(
-        'https://sandbox-stargate.montonio.com/api/stores/payment-methods',
+        f'{settings.MONTONIO_API_SERVER}/stores/payment-methods',
         headers={'Authorization': f'Bearer {auth_header}'}
     )
     data = response.json()
