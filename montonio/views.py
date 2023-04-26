@@ -68,6 +68,8 @@ def index(request):
     payload = get_payload()
     # 3. Generate the token
     token = jwt.encode(payload, settings.MY_SECRET_KEY, algorithm='HS256')
+    print(settings.MY_SECRET_KEY, settings.MY_ACCESS_KEY, token)
+
     # 4. Send the token to the API and get the payment URL
     response = requests.post('https://sandbox-stargate.montonio.com/api/orders', json={
         'body': token
@@ -81,30 +83,33 @@ def index(request):
     return redirect('/')
     # return render(request, "montonio/index.html", {})
 
-# def index(request):
-#     from datetime import datetime, timedelta
-#
-#     payload = {
-#         'accessKey': settings.MY_ACCESS_KEY,
-#         'iat': datetime.utcnow(),
-#         'exp': datetime.utcnow() + timedelta(hours=1)
-#     }
-#
-#     auth_header = jwt.encode(
-#         payload,
-#         settings.MY_SECRET_KEY,
-#         algorithm='HS256'
-#     )
-#     response = requests.get(
-#         'https://stargate.montonio.com/api/stores/payment-methods',
-#         headers={'Authorization': f'Bearer {auth_header}'}
-#     )
-#     data = response.json()
-#     print(data)
-#     return redirect('/')
+def index_bak(request):
+    from datetime import datetime, timedelta
+    payload = {
+        'accessKey': settings.MY_ACCESS_KEY,
+        'iat': datetime.utcnow(),
+        'exp': datetime.utcnow() + timedelta(hours=1)
+    }
+
+    auth_header = jwt.encode(
+        payload,
+        settings.MY_SECRET_KEY,
+        algorithm='HS256'
+    )
+    response = requests.get(
+        'https://sandbox-stargate.montonio.com/api/stores/payment-methods',
+        headers={'Authorization': f'Bearer {auth_header}'}
+    )
+    data = response.json()
+    print(data)
+    return redirect('/')
 
 def naase(request):
+    if request:
+        print(request.META)
     return redirect('/')
 
 def teavita(request):
+    if request:
+        print(request.META)
     return redirect('/')
