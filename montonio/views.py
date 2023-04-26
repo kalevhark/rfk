@@ -98,8 +98,7 @@ def get_order(request):
     return JsonResponse({'data': data})
 
 def index(request):
-    storeSetupData = json.dumps(get_payment_methods())
-    print(storeSetupData)
+    storeSetupData = get_payment_methods()
     return render(
         request,
         "montonio/index.html",
@@ -126,7 +125,8 @@ def get_payment_methods():
         headers={'Authorization': f'Bearer {auth_header}'}
     )
     data = response.json()
-    print(data)
+    # print(data)
+    return data
     # return JsonResponse({'data': data})
 
 def naase(request):
