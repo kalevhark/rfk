@@ -8,13 +8,19 @@
 </head>
 <body>
     <form id="my-checkout" novalidate>
-        <input id="montonio-checkout-user" name="montonio-checkout-user" type="text" placeholder="User" value="User" />
+{#        {% csrf_token %}#}
+        <input id="montonio-checkout-user" name="montonio-checkout-user" type="text" placeholder="Nimi" value="" />
+        <input id="montonio-checkout-amount" name="montonio-checkout-amount" type="text" placeholder="Summa" value="9.99" />
         <!-- This is the target div -->
         <div id="montonio-checkout"></div>
         <button type="submit">Submit</button>
     </form>
+    <div id="answer"></div>
 
     <script>
+        function setAnswer(text) {
+          answer.innerHTML = text;
+        }
         // Make sure to wrap your code in the window.onMontonioLoaded function
         window.onMontonioLoaded = function() {
             var checkout = Montonio.Checkout.PaymentInitiation.create({
@@ -36,11 +42,25 @@
             e.preventDefault();
             var formData = form.elements;
             var output = {
+                // "csrfmiddlewaretoken": form.elements['csrfmiddlewaretoken'].value,
                 "User": form.elements['montonio-checkout-user'].value,
+                "Amount": form.elements['montonio-checkout-amount'].value,
                 "Preferred region": form.elements['preferred-region'].value,
                 "Preferred provider": form.elements['preferred-bank'].value,
             }
-            alert(JSON.stringify(output, null, 2))
+            // alert(JSON.stringify(output, null, 2))
+            let csrftoken = '{{ csrf_token }}'
+            fetch('http://127.0.0.1:8000/montonio/get_order/', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrftoken,
+                },
+                body: JSON.stringify(output)
+            })
+            .then(response => response.json())
+            .then(response => setAnswer('Serveri vastus: ' + JSON.stringify(response)))
         })
     </script>
     <!-- Don't forget to include the script tag -->
