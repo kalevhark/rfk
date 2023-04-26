@@ -148,7 +148,7 @@ CORS_ALLOW_ALL_ORIGINS = True
 COOKIE_CONSENT_INUSE = False
 
 # montonio keys
-MONTONIO_LIVE = True
+MONTONIO_LIVE = False
 if MONTONIO_LIVE:
     MONTONIO_API_SERVER = config['montonio-live']['MONTONIO_API_SERVER']
     MY_ACCESS_KEY = config['montonio-live']['MY_ACCESS_KEY']
