@@ -98,7 +98,7 @@ def get_order(request):
     return JsonResponse({'data': data})
 
 def index(request):
-    storeSetupData = get_payment_methods()
+    storeSetupData = json.dumps(get_payment_methods())
     return render(
         request,
         "montonio/index.html",
