@@ -81,7 +81,7 @@ def get_order(request):
         payload = get_payload(user, preferred_region, preferred_provider, amount)
         # 3. Generate the token
         token = jwt.encode(payload, settings.MY_SECRET_KEY, algorithm='HS256')
-        print(token)
+        print(settings.MONTONIO_API_SERVER)
 
         # 4. Send the token to the API and get the payment URL
         response = requests.post(f'{settings.MONTONIO_API_SERVER}/orders', json={
