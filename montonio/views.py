@@ -125,11 +125,13 @@ def get_payment_methods():
         headers={'Authorization': f'Bearer {auth_header}'}
     )
     data = response.json()
-    # print(data)
-    return response
+    print(json.dumps(data))
+    return json.dumps(data)
+
     # return JsonResponse({'data': data})
 
 def naase(request):
+    print(type(get_payment_methods()))
     if request:
         print(request.META)
     return redirect('/')
