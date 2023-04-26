@@ -126,7 +126,7 @@ def get_payment_methods():
     )
     data = response.json()
     # print(data)
-    return data
+    return response
     # return JsonResponse({'data': data})
 
 def naase(request):
