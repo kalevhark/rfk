@@ -23,6 +23,7 @@
         }
         // Make sure to wrap your code in the window.onMontonioLoaded function
         window.onMontonioLoaded = function() {
+            console.log({{ storeSetupData }});
             var checkout = Montonio.Checkout.PaymentInitiation.create({
                 accessKey: 'YOUR_ACCESS_KEY',
                 // The JSON string obtained from the HTTP request GET /stores/payment-methods.
