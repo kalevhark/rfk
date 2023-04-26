@@ -99,6 +99,7 @@ def get_order(request):
 
 def index(request):
     storeSetupData = json.dumps(get_payment_methods())
+    print(storeSetupData)
     return render(
         request,
         "montonio/index.html",
