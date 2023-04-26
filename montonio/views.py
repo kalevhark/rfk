@@ -98,13 +98,17 @@ def get_order(request):
     return JsonResponse({'data': data})
 
 def index(request):
+    storeSetupData = get_payment_methods()
     return render(
         request,
         "montonio/index.html",
-        {'my_access_key': settings.MY_ACCESS_KEY}
+        {
+            'my_access_key': settings.MY_ACCESS_KEY,
+            'storeSetupData': storeSetupData
+        }
     )
 
-def get_payment_methods(request):
+def get_payment_methods():
     payload = {
         'accessKey': settings.MY_ACCESS_KEY,
         'iat': datetime.utcnow(),
@@ -122,7 +126,7 @@ def get_payment_methods(request):
     )
     data = response.json()
     print(data)
-    return JsonResponse({'data': data})
+    # return JsonResponse({'data': data})
 
 def naase(request):
     if request:
@@ -132,4 +136,5 @@ def naase(request):
 def teavita(request):
     if request:
         print(request.body)
+    get_payment_methods()
     return redirect('/')
