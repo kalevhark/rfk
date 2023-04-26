@@ -21,7 +21,7 @@ def get_payload(user, preferred_region, preferred_provider, amount):
         "notificationUrl": "http://test.valgalinn.ee:8000/montonio/teavita",
         "currency": "EUR",
         "exp": exp,
-        "grandTotal": amount,
+        "grandTotal": "9.99",
         "locale": "et",
         # "billingAddress": {
         #     "firstName": "Kalev",
@@ -62,7 +62,7 @@ def get_payload(user, preferred_region, preferred_provider, amount):
                 # See the GET /stores/payment-methods endpoint for the list of available banks.
                 "preferredProvider": preferred_provider
             },
-            "amount": amount,  # Yes, this is the same as order['grandTotal'].
+            "amount": "9.99",  # Yes, this is the same as order['grandTotal'].
             "currency": "EUR"  # This must match the currency of the order.
         }
     }
