@@ -5,7 +5,7 @@ from django.conf import settings
 from django.http import HttpResponseRedirect
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import redirect
-from django.shortcuts import render
+from django.shortcuts import render, reverse
 
 import jwt
 import requests
@@ -17,8 +17,8 @@ def get_payload(user, preferred_region, preferred_provider, amount):
     payload = {
         "accessKey": settings.MY_ACCESS_KEY,
         "merchantReference": "ANNETUS123",
-        "returnUrl": "http://test.valgalinn.ee:8000/montonio/naase",
-        "notificationUrl": "http://test.valgalinn.ee:8000/montonio/teavita",
+        "returnUrl": "http://test.valgalinn.ee:8000/montonio/naase/",
+        "notificationUrl": "http://test.valgalinn.ee:8000/montonio/teavita/",
         "currency": "EUR",
         "exp": exp,
         "grandTotal": 9.99,
@@ -97,17 +97,6 @@ def get_order(request):
         data = 'NOK'
     return JsonResponse({'data': data})
 
-def index(request):
-    storeSetupData = get_payment_methods()
-    return render(
-        request,
-        "montonio/index.html",
-        {
-            'my_access_key': settings.MY_ACCESS_KEY,
-            'storeSetupData': storeSetupData
-        }
-    )
-
 def get_payment_methods():
     payload = {
         'accessKey': settings.MY_ACCESS_KEY,
@@ -125,19 +114,51 @@ def get_payment_methods():
         headers={'Authorization': f'Bearer {auth_header}'}
     )
     data = response.json()
-    print(json.dumps(data))
     return json.dumps(data)
-
     # return JsonResponse({'data': data})
 
+def index(request):
+    # storeSetupData = get_payment_methods()
+    return render(
+        request,
+        "montonio/index.html",
+        {
+            'my_access_key': settings.MY_ACCESS_KEY,
+            # 'storeSetupData': storeSetupData
+        }
+    )
+
 def naase(request):
-    print(type(get_payment_methods()))
-    if request:
-        print(request.META)
-    return redirect('/')
+    if request and request.method == 'POST':
+        print(request.POST)
+        # Fetched from the URL for returnUrl and from POST body->orderToken when it's a notification
+        orderToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoidGhlLW1vbnRvbmlvLW9yZGVyLXV1aWQiLCJhY2Nlc3NLZXkiOiJNWV9BQ0NFU1NfS0VZIiwibWVyY2hhbnRSZWZlcmVuY2UiOiJNWS1PUkRFUi1JRC0xMjMiLCJtZXJjaGFudFJlZmVyZW5jZURpc3BsYXkiOiJNWS1PUkRFUi1JRC0xMjMiLCJwYXltZW50U3RhdHVzIjoiUEFJRCIsImdyYW5kVG90YWwiOjk5Ljk5LCJjdXJyZW5jeSI6IkVVUiIsIm1lcmNoYW50X3JlZmVyZW5jZSI6Ik1ZLU9SREVSLUlELTEyMyIsIm1lcmNoYW50X3JlZmVyZW5jZV9kaXNwbGF5IjoiTVktT1JERVItSUQtMTIzIiwicGF5bWVudF9zdGF0dXMiOiJQQUlEIn0.X6Ym70AA1bYIsKyNc1NL4NpznKXCrGX5xacqc1ovtuE'
+        orderToken = request.POST.get('orderToken')
+        # The Order ID you got from Montonio as a response to creating the order
+        montonioOrderId = 'the-montonio-order-uuid'
+
+        try:
+            decoded = jwt.decode(
+                orderToken,
+                settings.MY_SECRET_KEY,
+                algorithms=['HS256']
+            )
+        except jwt.exceptions.InvalidSignatureError as identifier:
+            pass  # Token validation failed
+
+        if (
+                decoded['paymentStatus'] == 'PAID'
+                # and decoded['uuid'] == montonioOrderId
+                and decoded['accessKey'] == settings.MY_ACCESS_KEY
+        ):
+            print('PAID')
+            pass  # Payment completed
+        else:
+            print('NOT PAID')
+            pass  # Payment not completed
+    return redirect(reverse('montonio:index'))
 
 def teavita(request):
     if request:
         print(request.body)
-    get_payment_methods()
-    return redirect('/')
+    return redirect(reverse('montonio:index'))
