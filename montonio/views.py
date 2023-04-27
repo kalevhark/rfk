@@ -10,13 +10,25 @@ from django.views.decorators.csrf import csrf_exempt
 
 import jwt
 import requests
-import webbrowser
+
+FONDID = {
+    'studentFund': 'õpilastele',
+    'teacherFund': 'õpetajatele'
+}
 
 def get_payload(preferred_region, preferred_provider, amount, targetfund, isikukood):
+    # Prepare data for payload
     amount = int(amount)
     exp = int((datetime.utcnow() + timedelta(seconds=10*60)).timestamp())
-    merchantReference = f'{targetfund}-' + '-'.join(str(x) for x in datetime.now().timetuple()[:6]) # TODO: Ajutine uuid lahendus
-    paymentDescription = f'Annetus {targetfund} {isikukood}'
+    merchantReference = '-'.join(
+        [
+            targetfund,
+            '-'.join(str(x) for x in datetime.now().timetuple()[:6]), # TODO: Ajutine uuid lahendus
+            isikukood
+        ]
+    )
+    paymentDescription = ' '.join(['Annetus stipendiumifondi', FONDID[targetfund], isikukood])
+
     # 1. Gather the checkout data
     payload = {
         "accessKey": settings.MY_ACCESS_KEY,
@@ -30,8 +42,8 @@ def get_payload(preferred_region, preferred_provider, amount, targetfund, isikuk
         "locale": "et",
         # "billingAddress": {
         #     "firstName": "Kalev",
-        #     "lastName": "Härk",
-        #     "email": "kalev.hark@mail.ee",
+        #     "lastName": "Bull",
+        #     "email": "nomail@mail.ee",
         #     "addressLine1": "Kai 1",
         #     "locality": "Tallinn",
         #     "region": "Harjumaa",
@@ -40,8 +52,8 @@ def get_payload(preferred_region, preferred_provider, amount, targetfund, isikuk
         # },
         # "shippingAddress": {
         #     "firstName": "Kalev",
-        #     "lastName": "Härk",
-        #     "email": "kalev.hark@mail.ee",
+        #     "lastName": "Bull",
+        #     "email": "nomail@mail.ee",
         #     "addressLine1": "Kai 1",
         #     "locality": "Tallinn",
         #     "region": "Harjumaa",
@@ -78,7 +90,6 @@ def get_order(request):
         # 1. Gather the checkout data
         # 2. Specify the payment method
         data = json.loads(request.body)
-        # user = data['User']
         amount = data['Amount']
         targetfund = data['TargetFund']
         isikukood = data['Isikukood']
@@ -88,7 +99,6 @@ def get_order(request):
         payload = get_payload(preferred_region, preferred_provider, amount, targetfund, isikukood)
         # 3. Generate the token
         token = jwt.encode(payload, settings.MY_SECRET_KEY, algorithm='HS256')
-        # print(settings.MONTONIO_API_SERVER)
 
         # 4. Send the token to the API and get the payment URL
         response = requests.post(
@@ -107,6 +117,7 @@ def get_order(request):
         data = 'NOK'
     return JsonResponse({'data': data})
 
+# tagastab võimalikud maksekanalid
 def get_payment_methods():
     payload = {
         'accessKey': settings.MY_ACCESS_KEY,
@@ -142,7 +153,6 @@ def index(request):
 def naase(request, merchantReference):
     if request and request.method == 'GET':
         # Fetched from the URL for returnUrl and from POST body->orderToken when it's a notification
-        # orderToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoidGhlLW1vbnRvbmlvLW9yZGVyLXV1aWQiLCJhY2Nlc3NLZXkiOiJNWV9BQ0NFU1NfS0VZIiwibWVyY2hhbnRSZWZlcmVuY2UiOiJNWS1PUkRFUi1JRC0xMjMiLCJtZXJjaGFudFJlZmVyZW5jZURpc3BsYXkiOiJNWS1PUkRFUi1JRC0xMjMiLCJwYXltZW50U3RhdHVzIjoiUEFJRCIsImdyYW5kVG90YWwiOjk5Ljk5LCJjdXJyZW5jeSI6IkVVUiIsIm1lcmNoYW50X3JlZmVyZW5jZSI6Ik1ZLU9SREVSLUlELTEyMyIsIm1lcmNoYW50X3JlZmVyZW5jZV9kaXNwbGF5IjoiTVktT1JERVItSUQtMTIzIiwicGF5bWVudF9zdGF0dXMiOiJQQUlEIn0.X6Ym70AA1bYIsKyNc1NL4NpznKXCrGX5xacqc1ovtuE'
         orderToken = request.GET.get('order-token')
         # The Order ID you got from Montonio as a response to creating the order
         # montonioOrderId = 'the-montonio-order-uuid'
@@ -154,11 +164,12 @@ def naase(request, merchantReference):
                 algorithms=['HS256']
             )
         except jwt.exceptions.InvalidSignatureError as identifier:
-            pass  # Token validation failed
+            # Token validation failed
+            return redirect(reverse('montonio:index'))
 
         if (
                 decoded['paymentStatus'] == 'PAID'
-                # and decoded['uuid'] == merchantReference
+                # and decoded['uuid'] == montonioOrderId
                 and decoded['merchantReference'] == merchantReference
                 and decoded['accessKey'] == settings.MY_ACCESS_KEY
         ):
@@ -169,7 +180,7 @@ def naase(request, merchantReference):
             print('NOT PAID')
             message = 'Makse jäeti pooleli või ebaõnnestus'
             pass  # Payment not completed
-    else:
+    else: # kui ei ole request.GET
         return redirect(reverse('montonio:index'))
 
     return render(
