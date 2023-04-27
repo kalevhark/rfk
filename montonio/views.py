@@ -17,7 +17,7 @@ def get_payload(user, preferred_region, preferred_provider, amount):
     # 1. Gather the checkout data
     payload = {
         "accessKey": settings.MY_ACCESS_KEY,
-        "merchantReference": "ANNETUS003",
+        "merchantReference": "ANNETUS004",
         "returnUrl": "http://test.valgalinn.ee:8000/montonio/naase/",
         "notificationUrl": "http://test.valgalinn.ee:8000/montonio/teavita/",
         "currency": "EUR",
@@ -136,7 +136,7 @@ def naase(request):
         print(request.GET)
         # Fetched from the URL for returnUrl and from POST body->orderToken when it's a notification
         # orderToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoidGhlLW1vbnRvbmlvLW9yZGVyLXV1aWQiLCJhY2Nlc3NLZXkiOiJNWV9BQ0NFU1NfS0VZIiwibWVyY2hhbnRSZWZlcmVuY2UiOiJNWS1PUkRFUi1JRC0xMjMiLCJtZXJjaGFudFJlZmVyZW5jZURpc3BsYXkiOiJNWS1PUkRFUi1JRC0xMjMiLCJwYXltZW50U3RhdHVzIjoiUEFJRCIsImdyYW5kVG90YWwiOjk5Ljk5LCJjdXJyZW5jeSI6IkVVUiIsIm1lcmNoYW50X3JlZmVyZW5jZSI6Ik1ZLU9SREVSLUlELTEyMyIsIm1lcmNoYW50X3JlZmVyZW5jZV9kaXNwbGF5IjoiTVktT1JERVItSUQtMTIzIiwicGF5bWVudF9zdGF0dXMiOiJQQUlEIn0.X6Ym70AA1bYIsKyNc1NL4NpznKXCrGX5xacqc1ovtuE'
-        orderToken = request.POST.get('orderToken')
+        orderToken = request.POST.get('order-token')
         # The Order ID you got from Montonio as a response to creating the order
         # montonioOrderId = 'the-montonio-order-uuid'
 
