@@ -139,12 +139,18 @@ def get_payment_methods():
     # return JsonResponse({'data': data})
 
 def index(request):
+    targetFund = request.GET.get('targetFund')
+    if targetFund and targetFund in FONDID.keys():
+        pass
+    else:
+        targetFund = list(FONDID.keys())[0]
     # storeSetupData = get_payment_methods()
     return render(
         request,
         "montonio/index.html",
         {
             'my_access_key': settings.MY_ACCESS_KEY,
+            'targetFund': targetFund,
             # 'storeSetupData': storeSetupData
         }
     )

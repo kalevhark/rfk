@@ -255,12 +255,20 @@
 
             <div class="donate-fund-box">
               <div class="donate-fund">
-                <div class="fund selected">
-                  <input autocomplete="off" type="radio" name="donation_type" id="studentFund" value="studentFund" checked="checked">
+                <div class="fund {% if targetFund == "studentFund" %}selected{% endif %}">
+                  <input
+                          autocomplete="off" type="radio"
+                          name="donation_type" id="studentFund" value="studentFund"
+                          class="required" {% if targetFund == "studentFund" %}checked="checked"{% endif %}
+                  >
                   <label for="studentFund">Õpilastele</label>
                 </div>
-                <div class="fund">
-                  <input autocomplete="off" type="radio" name="donation_type" id="teacherFund" value="teacherFund" class="required">
+                <div class="fund {% if targetFund == "teacherFund" %}selected{% endif %}">
+                  <input
+                          autocomplete="off" type="radio"
+                          name="donation_type" id="teacherFund" value="teacherFund"
+                          class="required" {% if targetFund == "teacherFund" %}checked="checked"{% endif %}
+                  >
                   <label for="teacherFund">Õpetajatele</label>
                 </div>
               </div>
