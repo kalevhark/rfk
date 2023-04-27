@@ -5,103 +5,113 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Montonio SDK</title>
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-    <style>
-      @import url(https://fonts.googleapis.com/css?family=Oswald:400,700,300);
-      @import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,600);
-      body {
-        background-color: #24282e;
-        font-family: "Open Sans", sans-serif;
-        display: flex;
-        justify-content: center;
-        padding: 50px 0;
-      }
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <!-- donation css&script forked from https://codepen.io/dspstudio/pen/mERQWw -->
+  <style>
+    /* Valga gümnaasiumi veebi värviskeem
+    --blue: #4EA9DC;
+    --gray: #CDCDCD;
+    --brandprimary: #46A4D9;
+    --light: #F3F3F3;
+    --black: #212322;
+    --black2: #2B2E2D;
+    --lightblue: #EDF7FC; */
 
-      .donate {
+    @import url(https://fonts.googleapis.com/css?family=Oswald:400,700,300);
+    @import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,600);
+    body {
+      background-color: #EDF7FC;
+      font-family: "Open Sans", sans-serif;
+      display: flex;
+      justify-content: center;
+      padding: 10px 0;
+    }
+
+    .donate {
         /*padding: 50px*/
-        background-color: #171b24;
-        width: 500px;
+        background-color: #46A4D9;
+        width: 375px;
         color: #FFF;
-      }
+    }
 
-      .donate p {
+    .donate p {
         line-height: 24px;
         font-size: 14px;
         font-weight: 300;
-      }
+    }
 
-      .donate h3 {
+    .donate h3 {
         font-size: 14px;
         font-weight: 300;
         margin-bottom: 30px;
-      }
+    }
 
-      .denomination {
+    .denomination {
         float: left;
         width: 33%;
         text-align: center;
         padding: 13px 0;
         cursor: pointer;
-        background-color: #171b24;
+        background-color: #4EA9DC;
         margin: 0 1px 1px 0;
         transition: background-color 0.2s ease;
-      }
+    }
 
-      .denomination label {
+    .denomination label {
         font-weight: 600;
         cursor: pointer;
-      }
+    }
 
-      .denomination input {
+    .denomination input {
         left: -10001px;
         position: absolute;
-      }
+    }
 
-      .denomination-other,
-      .isikukood {
+    .denomination-other,
+    .isikukood {
         width: 99.8%;
-      }
+    }
 
-      .denomination-other input,
-      .isikukood input {
+    .denomination-other input,
+    .isikukood input {
         position: relative;
         color: #FFF;
         font-size: 14px;
         font-weight: 600;
         width: inherit;
         text-align: center;
-        background-color: #171b24;
+        background-color: #4EA9DC;
         border: none;
         padding: 13px 0;
         transition: background-color 0.2s ease;
-      }
+    }
 
-      .denomination-other input:hover,
-      .isikukood input:hover {
+    .denomination-other input:hover,
+    .isikukood input:hover {
         background-color: #ec3029;
-      }
+    }
 
-      .denomination-other input:before,
-      .isikukood input:before {
+    .denomination-other input:before,
+    .isikukood input:before {
         position: absolute;
         left: 6px;
         top: 2px;
         content: "$";
-      }
+    }
 
-      .donate-amount .selected, .denomination-other input.selected, .donate-amount .denomination:hover {
+    .donate-amount .selected, .denomination-other input.selected, .donate-amount .denomination:hover {
         background-color: #EC3029;
         border: 0;
-      }
+    }
 
-      .donate-black h2 {
+    .donate-black h2 {
         font-family: "Oswald", sans-serif;
         color: #FFF;
         font-size: 32px;
         margin-bottom: 30px;
-      }
+    }
 
-      .donate-black h2 span {
+    .donate-black h2 span {
         display: block;
         float: left;
         font-size: 16px;
@@ -112,25 +122,25 @@
         height: 25px;
         background-color: #ec3029;
         border-radius: 50%;
-      }
+    }
 
-      .donate-type label,
-      .donate-payment label {
+    .donate-type label,
+    .donate-payment label {
         font-size: 14px;
         font-weight: 300;
         margin-right: 30px;
-      }
+    }
 
-      .donate-blue {
-        background-color: #1e252d;
+    .donate-blue {
+        background-color: #46A4D9;
         padding: 25px;
-      }
+    }
 
-      .donate-black {
+    .donate-black {
         padding: 25px;
-      }
+    }
 
-      .donate-submit button {
+    .donate-submit button {
         font-family: "Oswald", sans-serif;
         width: 100%;
         background-color: #ec3029;
@@ -142,45 +152,45 @@
         margin: 30px 0;
         text-transform: uppercase;
         cursor: pointer;
-      }
+    }
 
-      .donate-submit small {
+    .donate-submit small {
         color: rgba(255, 255, 255, 0.4);
         font-size: 13px;
-      }
+    }
 
-      ::-webkit-input-placeholder {
+    ::-webkit-input-placeholder {
         color: #FFF;
         font-size: 14px;
         font-weight: 300;
-      }
+    }
 
-      :-moz-placeholder {
+    :-moz-placeholder {
         color: #FFF;
         font-weight: 300;
-      }
+    }
 
-      ::-moz-placeholder {
+    ::-moz-placeholder {
         color: #FFF;
         font-weight: 300;
-      }
+    }
 
-      :-ms-input-placeholder {
+    :-ms-input-placeholder {
         font-weight: 300;
         color: #FFF;
-      }
+    }
 
-      *:focus {
+    *:focus {
         outline: none;
-      }
-    </style>
+    }
+  </style>
 </head>
 <body>
     <form id="my-checkout" novalidate>
         <div class="donate">
           <div class="donate-black">
             <h2>Anneta stipendiumifondi</h2>
-            <p>Annetusi kogustakse õpilastele või õpetajatele välja antavate stipendiumide jaoks.</p>
+            <p>Annetusi kogutakse <strong>Valga Gümnaasiumi</strong> õpilastele või õpetajatele välja antavate stipendiumide jaoks.</p>
           </div>
           <div class="donate-blue">
             <h3>Annetuse summa*</h3>
