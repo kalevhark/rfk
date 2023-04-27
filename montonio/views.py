@@ -6,6 +6,7 @@ from django.http import HttpResponseRedirect
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import redirect
 from django.shortcuts import render, reverse
+from django.views.decorators.csrf import csrf_exempt
 
 import jwt
 import requests
@@ -81,7 +82,7 @@ def get_order(request):
         payload = get_payload(user, preferred_region, preferred_provider, amount)
         # 3. Generate the token
         token = jwt.encode(payload, settings.MY_SECRET_KEY, algorithm='HS256')
-        print(settings.MONTONIO_API_SERVER)
+        # print(settings.MONTONIO_API_SERVER)
 
         # 4. Send the token to the API and get the payment URL
         response = requests.post(f'{settings.MONTONIO_API_SERVER}/orders', json={
@@ -91,7 +92,7 @@ def get_order(request):
         # payment_url = data['paymentUrl']
 
         # 5. Redirect the customer to the checkout page
-        print(data)
+        # print(data)
         # webbrowser.open(payment_url)
     else:
         data = 'NOK'
@@ -128,7 +129,9 @@ def index(request):
         }
     )
 
+@csrf_exempt
 def naase(request):
+    print('naase', request.method)
     if request and request.method == 'POST':
         print(request.POST)
         # Fetched from the URL for returnUrl and from POST body->orderToken when it's a notification
@@ -158,7 +161,9 @@ def naase(request):
             pass  # Payment not completed
     return redirect(reverse('montonio:index'))
 
+@csrf_exempt
 def teavita(request):
+    print('teavita', request.method)
     if request:
         print(request.body)
     return redirect(reverse('montonio:index'))
