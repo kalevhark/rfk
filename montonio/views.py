@@ -13,17 +13,18 @@ import requests
 import webbrowser
 
 def get_payload(user, preferred_region, preferred_provider, amount):
+    amount = 9.99
     exp = int((datetime.utcnow() + timedelta(seconds=10*60)).timestamp())
-    uuid = 'Annetus-' + '-'.join(str(x) for x in datetime.now().timetuple()[:6]) # TODO: Ajutine uuid lahendus
+    merchantReference = 'Annetus-' + '-'.join(str(x) for x in datetime.now().timetuple()[:6]) # TODO: Ajutine uuid lahendus
     # 1. Gather the checkout data
     payload = {
         "accessKey": settings.MY_ACCESS_KEY,
-        "merchantReference": uuid,
-        "returnUrl": f"http://test.valgalinn.ee:8000/montonio/naase/{uuid}/",
+        "merchantReference": merchantReference,
+        "returnUrl": f"http://test.valgalinn.ee:8000/montonio/naase/{merchantReference}/",
         "notificationUrl": "http://test.valgalinn.ee:8000/montonio/teavita/",
         "currency": "EUR",
         "exp": exp,
-        "grandTotal": 9.99,
+        "grandTotal": amount,
         "locale": "et",
         # "billingAddress": {
         #     "firstName": "Kalev",
@@ -64,7 +65,7 @@ def get_payload(user, preferred_region, preferred_provider, amount):
                 # See the GET /stores/payment-methods endpoint for the list of available banks.
                 "preferredProvider": preferred_provider
             },
-            "amount": 9.99,  # Yes, this is the same as order['grandTotal'].
+            "amount": amount,  # Yes, this is the same as order['grandTotal'].
             "currency": "EUR"  # This must match the currency of the order.
         }
     }
@@ -86,15 +87,18 @@ def get_order(request):
         # print(settings.MONTONIO_API_SERVER)
 
         # 4. Send the token to the API and get the payment URL
-        response = requests.post(f'{settings.MONTONIO_API_SERVER}/orders', json={
-            'body': token
-        })
+        response = requests.post(
+            f'{settings.MONTONIO_API_SERVER}/orders',
+            json={
+                'body': token
+            },
+            headers={'Content-Type: application/json'}
+        )
         data = response.json()
         # payment_url = data['paymentUrl']
 
         # 5. Redirect the customer to the checkout page
-        # print(data)
-        # webbrowser.open(payment_url)
+        # return redirect(payment_url)
     else:
         data = 'NOK'
     return JsonResponse({'data': data})
@@ -131,8 +135,8 @@ def index(request):
     )
 
 @csrf_exempt
-def naase(request, uuid):
-    print('naase', uuid, request.method)
+def naase(request, merchantReference):
+    print('naase', merchantReference, request.method)
     if request and request.method == 'GET':
         print(request.GET)
         # Fetched from the URL for returnUrl and from POST body->orderToken when it's a notification
@@ -153,7 +157,8 @@ def naase(request, uuid):
 
         if (
                 decoded['paymentStatus'] == 'PAID'
-                and decoded['uuid'] == uuid
+                # and decoded['uuid'] == merchantReference
+                and decoded['merchantReference'] == merchantReference
                 and decoded['accessKey'] == settings.MY_ACCESS_KEY
         ):
             print('PAID')
