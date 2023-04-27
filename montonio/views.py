@@ -147,6 +147,7 @@ def naase(request, uuid):
                 settings.MY_SECRET_KEY,
                 algorithms=['HS256']
             )
+            print(decoded)
         except jwt.exceptions.InvalidSignatureError as identifier:
             pass  # Token validation failed
 
