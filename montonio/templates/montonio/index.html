@@ -57,11 +57,13 @@ body {
   position: absolute;
 }
 
-.denomination-other {
+.denomination-other,
+.isikukood {
   width: 99.8%;
 }
 
-.denomination-other input {
+.denomination-other input,
+.isikukood input {
   position: relative;
   color: #FFF;
   font-size: 14px;
@@ -74,11 +76,13 @@ body {
   transition: background-color 0.2s ease;
 }
 
-.denomination-other input:hover {
+.denomination-other input:hover,
+.isikukood input:hover {
   background-color: #ec3029;
 }
 
-.denomination-other input:before {
+.denomination-other input:before,
+.isikukood input:before {
   position: absolute;
   left: 6px;
   top: 2px;
@@ -231,6 +235,10 @@ body {
             <h3>Vali maksekanal</h3>
             <!-- This is the target div -->
             <div id="montonio-checkout"></div>
+            <p><small>Annetused stipendiumifondi on tulumaksuvabad, kui sisestad oma isikukoodi:</small></p>
+            <div class="isikukood">
+              <input autocomplete="off" type="text" maxlength="11" name="isikukood" value="" placeholder="Sisesta isikukood">
+            </div>
 {#            <div>#}
 {#              <label>#}
 {#                <input type="radio" name="payment" value="paypal" checked="checked" autocomplete="off">PayPal#}
@@ -241,7 +249,6 @@ body {
 {#            </div>#}
             <div class="donate-submit">
               <button type="submit" autocomplete="off">Anneta 5€</button>
-              <p><small>Annetused stipendiumifondi on tulumaksuvabad.</small></p>
             </div>
           </div>
         </div>
@@ -271,6 +278,17 @@ body {
         $(".denomination").removeClass("selected").prop('checked', false);
         $(this).addClass("selected");
         $("button").text('Anneta ' + $(this).val() + key + '€');
+      });
+
+      $(".isikukood input").on('keypress', function (event) {
+        // allow only int values
+        // TODO: remove leading 0
+        var regex = new RegExp("^[0-9]+$");
+        var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+        if (!regex.test(key)) {
+          event.preventDefault();
+          return false;
+        }
       });
     </script>
 
