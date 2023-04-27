@@ -92,7 +92,7 @@ def get_order(request):
             json={
                 'body': token
             },
-            headers={'Content-Type: application/json'}
+            headers={'Content-Type': 'application/json'}
         )
         data = response.json()
         # payment_url = data['paymentUrl']
