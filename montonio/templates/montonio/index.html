@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Montonio SDK</title>
+    <title>Valga gümnaasium vilistlaskogu annetuskeskkond</title>
   <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
   <!-- donation css&script forked from https://codepen.io/dspstudio/pen/mERQWw -->
   <style>
@@ -46,9 +46,10 @@
         margin-bottom: 30px;
     }
 
-    .denomination {
+    .denomination,
+    .fund {
         float: left;
-        width: 33%;
+        {#width: 33%;#}
         text-align: center;
         padding: 13px 0;
         cursor: pointer;
@@ -57,12 +58,22 @@
         transition: background-color 0.2s ease;
     }
 
-    .denomination label {
+    .fund {
+        width: 48%;
+    }
+
+    .denomination {
+        width: 33%;
+    }
+
+    .denomination label,
+    .fund label {
         font-weight: 600;
         cursor: pointer;
     }
 
-    .denomination input {
+    .denomination input,
+    .fund input {
         left: -10001px;
         position: absolute;
     }
@@ -76,7 +87,7 @@
     .isikukood input {
         position: relative;
         color: #FFF;
-        font-size: 14px;
+        {#font-size: 14px;#}
         font-weight: 600;
         width: inherit;
         text-align: center;
@@ -96,10 +107,14 @@
         position: absolute;
         left: 6px;
         top: 2px;
-        content: "$";
+        {#content: "$";#}
     }
 
-    .donate-amount .selected, .denomination-other input.selected, .donate-amount .denomination:hover {
+    .donate-amount .selected,
+    .denomination-other input.selected,
+    .donate-amount .denomination:hover,
+    .donate-fund .selected,
+    .donate-fund .fund:hover {
         background-color: #EC3029;
         border: 0;
     }
@@ -126,9 +141,10 @@
 
     .donate-type label,
     .donate-payment label {
-        font-size: 14px;
-        font-weight: 300;
-        margin-right: 30px;
+        {#font-size: 14px;#}
+        font-weight: 600;
+        {#margin-right: 30px;#}
+        text-align: center;
     }
 
     .donate-blue {
@@ -196,12 +212,12 @@
             <h3>Annetuse summa*</h3>
             <div class="donate-amount-box">
               <div class="donate-amount">
-                <div class="denomination selected">
-                  <input autocomplete="off" type="radio" name="amount" id="amount5" value="5" checked="">
+                <div class="denomination">
+                  <input autocomplete="off" type="radio" name="amount" id="amount5" value="5">
                   <label for="amount5">5€</label>
                 </div>
-                <div class="denomination">
-                  <input autocomplete="off" type="radio" name="amount" id="amount10" value="10">
+                <div class="denomination selected">
+                  <input autocomplete="off" type="radio" name="amount" id="amount10" value="10" checked="">
                   <label for="amount10">10€</label>
                 </div>
                 <div class="denomination">
@@ -226,17 +242,32 @@
               </div>
             </div>
           </div>
-          <div class="donate-black donate-type">
+          <div class="donate-blue donate-type">
             <h3>Annetan stipendiumifondi*</h3>
-            <label>
-                  <input type="radio" name="donation_type" value="studentFund" checked="checked" autocomplete="off" class="required">
-                  Õpilastele
-            </label>
-            <label>
-                  <input type="radio" name="donation_type" value="teacherFund" autocomplete="off" class="required">
-                  Õpetajatele
-            </label>
+{#            <label>#}
+{#                  <input type="radio" name="donation_type" value="studentFund" checked="checked" autocomplete="off" class="required">#}
+{#                  Õpilastele#}
+{#            </label>#}
+{#            <label>#}
+{#                  <input type="radio" name="donation_type" value="teacherFund" autocomplete="off" class="required">#}
+{#                  Õpetajatele#}
+{#            </label>#}
+
+            <div class="donate-fund-box">
+              <div class="donate-fund">
+                <div class="fund selected">
+                  <input autocomplete="off" type="radio" name="donation_type" id="studentFund" value="studentFund" checked="checked">
+                  <label for="studentFund">Õpilastele</label>
+                </div>
+                <div class="fund">
+                  <input autocomplete="off" type="radio" name="donation_type" id="teacherFund" value="teacherFund" class="required">
+                  <label for="teacherFund">Õpetajatele</label>
+                </div>
+              </div>
+            </div>
+
           </div>
+
           <div class="donate-blue donate-payment">
             <h3>Vali maksekanal*</h3>
             <!-- This is the target div -->
@@ -260,6 +291,12 @@
         $(this).addClass("selected");
         $(this).children(":first").prop('checked', true);
         $("button").text('Anneta ' + $(this).children(":first").val() + '€')
+      });
+
+      $(".fund").click(function(event) {
+        $(".fund").removeClass("selected").prop('checked', false);
+        $(this).addClass("selected");
+        $(this).children(":first").prop('checked', true);
       });
 
       $(".denomination-other input").on('keypress', function (event) {
