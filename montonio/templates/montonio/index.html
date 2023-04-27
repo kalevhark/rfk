@@ -5,17 +5,275 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Montonio SDK</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Oswald:400,700,300);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,600);
+body {
+  background-color: #24282e;
+  font-family: "Open Sans", sans-serif;
+  display: flex;
+  justify-content: center;
+  padding: 50px 0;
+}
+
+.donate {
+  /*padding: 50px*/
+  background-color: #171b24;
+  width: 500px;
+  color: #FFF;
+}
+
+.donate p {
+  line-height: 24px;
+  font-size: 14px;
+  font-weight: 300;
+}
+
+.donate h3 {
+  font-size: 14px;
+  font-weight: 300;
+  margin-bottom: 30px;
+}
+
+.denomination {
+  float: left;
+  width: 33%;
+  text-align: center;
+  padding: 13px 0;
+  cursor: pointer;
+  background-color: #171b24;
+  margin: 0 1px 1px 0;
+  transition: background-color 0.2s ease;
+}
+
+.denomination label {
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.denomination input {
+  left: -10001px;
+  position: absolute;
+}
+
+.denomination-other {
+  width: 99.8%;
+}
+
+.denomination-other input {
+  position: relative;
+  color: #FFF;
+  font-size: 14px;
+  font-weight: 600;
+  width: inherit;
+  text-align: center;
+  background-color: #171b24;
+  border: none;
+  padding: 13px 0;
+  transition: background-color 0.2s ease;
+}
+
+.denomination-other input:hover {
+  background-color: #ec3029;
+}
+
+.denomination-other input:before {
+  position: absolute;
+  left: 6px;
+  top: 2px;
+  content: "$";
+}
+
+.donate-amount .selected, .denomination-other input.selected, .donate-amount .denomination:hover {
+  background-color: #EC3029;
+  border: 0;
+}
+
+.donate-black h2 {
+  font-family: "Oswald", sans-serif;
+  color: #FFF;
+  font-size: 32px;
+  margin-bottom: 30px;
+}
+
+.donate-black h2 span {
+  display: block;
+  float: left;
+  font-size: 16px;
+  padding-top: 7px;
+  margin-right: 20px;
+  text-align: center;
+  width: 30px;
+  height: 25px;
+  background-color: #ec3029;
+  border-radius: 50%;
+}
+
+.donate-type label,
+.donate-payment label {
+  font-size: 14px;
+  font-weight: 300;
+  margin-right: 30px;
+}
+
+.donate-blue {
+  background-color: #1e252d;
+  padding: 25px;
+}
+
+.donate-black {
+  padding: 25px;
+}
+
+.donate-submit button {
+  font-family: "Oswald", sans-serif;
+  width: 100%;
+  background-color: #ec3029;
+  border: none;
+  color: #FFF;
+  font-size: 20px;
+  line-height: 20px;
+  padding: 14px 0;
+  margin: 30px 0;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.donate-submit small {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 13px;
+}
+
+::-webkit-input-placeholder {
+  color: #FFF;
+  font-size: 14px;
+  font-weight: 300;
+}
+
+:-moz-placeholder {
+  color: #FFF;
+  font-weight: 300;
+}
+
+::-moz-placeholder {
+  color: #FFF;
+  font-weight: 300;
+}
+
+:-ms-input-placeholder {
+  font-weight: 300;
+  color: #FFF;
+}
+
+*:focus {
+  outline: none;
+}
+    </style>
 </head>
 <body>
     <form id="my-checkout" novalidate>
 {#        {% csrf_token %}#}
-        <input id="montonio-checkout-user" name="montonio-checkout-user" type="text" placeholder="Nimi" value="" />
-        <input id="montonio-checkout-amount" name="montonio-checkout-amount" type="text" placeholder="Summa" value="9.99" />
-        <!-- This is the target div -->
-        <div id="montonio-checkout"></div>
-        <button type="submit">Submit</button>
+{#        <input id="montonio-checkout-user" name="montonio-checkout-user" type="text" placeholder="Nimi" value="" />#}
+{#        <input id="montonio-checkout-amount" name="montonio-checkout-amount" type="text" placeholder="Summa" value="9.99" />#}
+
+        <div class="donate">
+          <div class="donate-black">
+            <h2>Anneta stipendiumifondi</h3>
+            <p>Võimalik on valida õpilase või õpetaja stipendiumifondi vahel.</p>
+          </div>
+          <div class="donate-blue">
+            <h3>Annetuse summa*</h3>
+            <div class="donate-amount-box">
+              <div class="donate-amount">
+                <div class="denomination selected">
+                  <input autocomplete="off" type="radio" name="amount" id="amount5" value="5" checked="">
+                  <label for="amount5">5€</label>
+                </div>
+                <div class="denomination">
+                  <input autocomplete="off" type="radio" name="amount" id="amount10" value="10">
+                  <label for="amount10">10€</label>
+                </div>
+                <div class="denomination">
+                  <input autocomplete="off" type="radio" name="amount" id="amount15" value="15">
+                  <label for="amount15">15€</label>
+                </div>
+                <div class="denomination">
+                  <input autocomplete="off" type="radio" name="amount" id="amount25" value="25">
+                  <label for="amount25">25€</label>
+                </div>
+                <div class="denomination">
+                  <input autocomplete="off" type="radio" name="amount" id="amount50" value="50">
+                  <label for="amount50">50€</label>
+                </div>
+                <div class="denomination">
+                  <input autocomplete="off" type="radio" name="amount" id="amount100" value="100">
+                  <label for="amount100">100€</label>
+                </div>
+              </div>
+              <div class="denomination-other">
+                <input autocomplete="off" type="text" name="amountother" value="" placeholder="Sisesta oma summa">
+              </div>
+            </div>
+          </div>
+          <div class="donate-black donate-type">
+            <h3>Annetan*</h3>
+            <label>
+                  <input type="radio" name="donation_type" value="studentFund" checked="checked" autocomplete="off" class="required">
+                  Õpilaste stipendiumi jaoks
+            </label>
+            <label>
+                  <input type="radio" name="donation_type" value="teacherFund" autocomplete="off" class="required">
+                  Õpetajate stipendiumi jaoks
+            </label>
+          </div>
+          <div class="donate-blue donate-payment">
+            <h3>Vali maksekanal</h3>
+            <!-- This is the target div -->
+            <div id="montonio-checkout"></div>
+{#            <div>#}
+{#              <label>#}
+{#                <input type="radio" name="payment" value="paypal" checked="checked" autocomplete="off">PayPal#}
+{#              </label>#}
+{#              <label>#}
+{#                <input type="radio" name="payment" value="crypto" autocomplete="off">Cryptocurrency#}
+{#              </label>#}
+{#            </div>#}
+            <div class="donate-submit">
+              <button type="submit" autocomplete="off">Anneta 5€</button>
+              <p><small>Annetused stipendiumifondi on tulumaksuvabad.</small></p>
+            </div>
+          </div>
+        </div>
+
+{#        <button type="submit">Submit</button>#}
     </form>
     <div id="answer"></div>
+
+    <script>
+      $(".denomination").click(function(event) {
+        $(".denomination").removeClass("selected").prop('checked', false);
+        $(".denomination-other input").removeClass("selected").val('');
+        $(this).addClass("selected");
+        $(this).children(":first").prop('checked', true);
+        $("button").text('Anneta ' + $(this).children(":first").val() + '€')
+      });
+
+      $(".denomination-other input").on('keypress', function (event) {
+        // allow only int values
+        // TODO: remove leading 0
+        var regex = new RegExp("^[0-9]+$");
+        var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+        if (!regex.test(key)) {
+          event.preventDefault();
+          return false;
+        }
+
+        $(".denomination").removeClass("selected").prop('checked', false);
+        $(this).addClass("selected");
+        $("button").text('Anneta ' + $(this).val() + key + '€');
+      });
+    </script>
 
     <script>
         function setAnswer(text) {
@@ -44,11 +302,15 @@
             var formData = form.elements;
             var output = {
                 // "csrfmiddlewaretoken": form.elements['csrfmiddlewaretoken'].value,
-                "User": form.elements['montonio-checkout-user'].value,
-                "Amount": form.elements['montonio-checkout-amount'].value,
+                // "User": form.elements['montonio-checkout-user'].value,
+                // "Amount": form.elements['montonio-checkout-amount'].value,
+                "Amount": form.elements['amountother'].value ? form.elements['amountother'].value : form.elements['amount'].value,
+                // "Amount2": form.elements['amountother'].value,
+                "TargetFund": form.elements['donation_type'].value,
                 "Preferred region": form.elements['preferred-region'].value,
                 "Preferred provider": form.elements['preferred-bank'].value,
             }
+            console.log(output);
             // alert(JSON.stringify(output, null, 2))
             let csrftoken = '{{ csrf_token }}'
             fetch('/montonio/get_order/', {

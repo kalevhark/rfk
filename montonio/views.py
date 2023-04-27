@@ -12,8 +12,8 @@ import jwt
 import requests
 import webbrowser
 
-def get_payload(user, preferred_region, preferred_provider, amount):
-    amount = 9.99
+def get_payload(preferred_region, preferred_provider, amount, targetfund):
+    amount = int(amount)
     exp = int((datetime.utcnow() + timedelta(seconds=10*60)).timestamp())
     merchantReference = 'Annetus-' + '-'.join(str(x) for x in datetime.now().timetuple()[:6]) # TODO: Ajutine uuid lahendus
     # 1. Gather the checkout data
@@ -59,7 +59,7 @@ def get_payload(user, preferred_region, preferred_provider, amount):
             "method": "paymentInitiation",
             "methodDisplay": "Maksa läbi oma panga",
             "methodOptions": {
-                "paymentDescription": f"{user} annetus",
+                "paymentDescription": f"{targetfund} annetus",
                 "preferredCountry": preferred_region,
                 # This is the code of the bank that the customer chose at checkout.
                 # See the GET /stores/payment-methods endpoint for the list of available banks.
@@ -76,12 +76,13 @@ def get_order(request):
         # 1. Gather the checkout data
         # 2. Specify the payment method
         data = json.loads(request.body)
-        user = data['User']
+        # user = data['User']
         amount = data['Amount']
+        targetfund = data['TargetFund']
         preferred_region = data['Preferred region']
         preferred_provider = data['Preferred provider']
 
-        payload = get_payload(user, preferred_region, preferred_provider, amount)
+        payload = get_payload(preferred_region, preferred_provider, amount, targetfund)
         # 3. Generate the token
         token = jwt.encode(payload, settings.MY_SECRET_KEY, algorithm='HS256')
         # print(settings.MONTONIO_API_SERVER)
