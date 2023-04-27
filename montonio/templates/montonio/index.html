@@ -279,6 +279,10 @@ body {
           answer.innerHTML = text;
           data = JSON.parse(text);
           console.log(data);
+          if (data['data'] && data['data']['paymentUrl']) {
+            let url = data['data']['paymentUrl'];
+            window.open(url,"_self");
+          }
         }
 
         // Make sure to wrap your code in the window.onMontonioLoaded function
