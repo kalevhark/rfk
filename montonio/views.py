@@ -14,11 +14,12 @@ import webbrowser
 
 def get_payload(user, preferred_region, preferred_provider, amount):
     exp = int((datetime.utcnow() + timedelta(seconds=10*60)).timestamp())
+    uuid = 'Annetus-' + '-'.join(str(x) for x in datetime.now().timetuple()[:6]) # TODO: Ajutine uuid lahendus
     # 1. Gather the checkout data
     payload = {
         "accessKey": settings.MY_ACCESS_KEY,
-        "merchantReference": "ANNETUS006",
-        "returnUrl": "http://test.valgalinn.ee:8000/montonio/naase/",
+        "merchantReference": uuid,
+        "returnUrl": f"http://test.valgalinn.ee:8000/montonio/naase/{uuid}/",
         "notificationUrl": "http://test.valgalinn.ee:8000/montonio/teavita/",
         "currency": "EUR",
         "exp": exp,
@@ -130,8 +131,8 @@ def index(request):
     )
 
 @csrf_exempt
-def naase(request):
-    print('naase', request.method)
+def naase(request, uuid):
+    print('naase', uuid, request.method)
     if request and request.method == 'GET':
         print(request.GET)
         # Fetched from the URL for returnUrl and from POST body->orderToken when it's a notification
@@ -151,7 +152,7 @@ def naase(request):
 
         if (
                 decoded['paymentStatus'] == 'PAID'
-                # and decoded['uuid'] == montonioOrderId
+                and decoded['uuid'] == uuid
                 and decoded['accessKey'] == settings.MY_ACCESS_KEY
         ):
             print('PAID')
