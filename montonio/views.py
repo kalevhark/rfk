@@ -17,7 +17,7 @@ def get_payload(user, preferred_region, preferred_provider, amount):
     # 1. Gather the checkout data
     payload = {
         "accessKey": settings.MY_ACCESS_KEY,
-        "merchantReference": "ANNETUS001",
+        "merchantReference": "ANNETUS002",
         "returnUrl": "http://test.valgalinn.ee:8000/montonio/naase/",
         "notificationUrl": "http://test.valgalinn.ee:8000/montonio/teavita/",
         "currency": "EUR",
