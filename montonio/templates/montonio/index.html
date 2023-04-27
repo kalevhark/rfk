@@ -277,6 +277,8 @@ body {
     <script>
         function setAnswer(text) {
           answer.innerHTML = text;
+          data = JSON.parse(text);
+          console.log(data);
         }
 
         // Make sure to wrap your code in the window.onMontonioLoaded function

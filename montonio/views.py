@@ -167,7 +167,15 @@ def naase(request, merchantReference):
         else:
             print('NOT PAID')
             pass  # Payment not completed
-    return redirect(reverse('montonio:index'))
+    # return redirect(reverse('montonio:index'))
+    return render(
+        request,
+        "montonio/naase.html",
+        {
+            'decoded': decoded,
+            # 'storeSetupData': storeSetupData
+        }
+    )
 
 @csrf_exempt
 def teavita(request):
