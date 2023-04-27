@@ -324,7 +324,7 @@ body {
                 body: JSON.stringify(output)
             })
             .then(response => response.json())
-            .then(response => setAnswer('Serveri vastus: ' + JSON.stringify(response)))
+            .then(response => setAnswer(JSON.stringify(response)))
         })
     </script>
     <!-- Don't forget to include the script tag -->
