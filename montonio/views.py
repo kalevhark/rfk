@@ -12,14 +12,16 @@ import jwt
 import requests
 import webbrowser
 
-def get_payload(preferred_region, preferred_provider, amount, targetfund):
+def get_payload(preferred_region, preferred_provider, amount, targetfund, isikukood):
     amount = int(amount)
     exp = int((datetime.utcnow() + timedelta(seconds=10*60)).timestamp())
     merchantReference = f'{targetfund}-' + '-'.join(str(x) for x in datetime.now().timetuple()[:6]) # TODO: Ajutine uuid lahendus
+    paymentDescription = f'Annetus {targetfund} {isikukood}'
     # 1. Gather the checkout data
     payload = {
         "accessKey": settings.MY_ACCESS_KEY,
         "merchantReference": merchantReference,
+        "merchantReferenceDisplay": paymentDescription,
         "returnUrl": f"http://test.valgalinn.ee:8000/montonio/naase/{merchantReference}/",
         "notificationUrl": "http://test.valgalinn.ee:8000/montonio/teavita/",
         "currency": "EUR",
@@ -59,7 +61,7 @@ def get_payload(preferred_region, preferred_provider, amount, targetfund):
             "method": "paymentInitiation",
             "methodDisplay": "Maksa läbi oma panga",
             "methodOptions": {
-                "paymentDescription": f"{targetfund} annetus",
+                "paymentDescription": paymentDescription,
                 "preferredCountry": preferred_region,
                 # This is the code of the bank that the customer chose at checkout.
                 # See the GET /stores/payment-methods endpoint for the list of available banks.
@@ -79,10 +81,11 @@ def get_order(request):
         # user = data['User']
         amount = data['Amount']
         targetfund = data['TargetFund']
+        isikukood = data['Isikukood']
         preferred_region = data['Preferred region']
         preferred_provider = data['Preferred provider']
 
-        payload = get_payload(preferred_region, preferred_provider, amount, targetfund)
+        payload = get_payload(preferred_region, preferred_provider, amount, targetfund, isikukood)
         # 3. Generate the token
         token = jwt.encode(payload, settings.MY_SECRET_KEY, algorithm='HS256')
         # print(settings.MONTONIO_API_SERVER)
@@ -137,9 +140,7 @@ def index(request):
 
 @csrf_exempt
 def naase(request, merchantReference):
-    print('naase', merchantReference, request.method)
     if request and request.method == 'GET':
-        print(request.GET)
         # Fetched from the URL for returnUrl and from POST body->orderToken when it's a notification
         # orderToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoidGhlLW1vbnRvbmlvLW9yZGVyLXV1aWQiLCJhY2Nlc3NLZXkiOiJNWV9BQ0NFU1NfS0VZIiwibWVyY2hhbnRSZWZlcmVuY2UiOiJNWS1PUkRFUi1JRC0xMjMiLCJtZXJjaGFudFJlZmVyZW5jZURpc3BsYXkiOiJNWS1PUkRFUi1JRC0xMjMiLCJwYXltZW50U3RhdHVzIjoiUEFJRCIsImdyYW5kVG90YWwiOjk5Ljk5LCJjdXJyZW5jeSI6IkVVUiIsIm1lcmNoYW50X3JlZmVyZW5jZSI6Ik1ZLU9SREVSLUlELTEyMyIsIm1lcmNoYW50X3JlZmVyZW5jZV9kaXNwbGF5IjoiTVktT1JERVItSUQtMTIzIiwicGF5bWVudF9zdGF0dXMiOiJQQUlEIn0.X6Ym70AA1bYIsKyNc1NL4NpznKXCrGX5xacqc1ovtuE'
         orderToken = request.GET.get('order-token')
@@ -152,7 +153,6 @@ def naase(request, merchantReference):
                 settings.MY_SECRET_KEY,
                 algorithms=['HS256']
             )
-            print(decoded)
         except jwt.exceptions.InvalidSignatureError as identifier:
             pass  # Token validation failed
 
@@ -163,17 +163,21 @@ def naase(request, merchantReference):
                 and decoded['accessKey'] == settings.MY_ACCESS_KEY
         ):
             print('PAID')
+            message = 'Makse õnnestus'
             pass  # Payment completed
         else:
             print('NOT PAID')
+            message = 'Makse jäeti pooleli või ebaõnnestus'
             pass  # Payment not completed
-    # return redirect(reverse('montonio:index'))
+    else:
+        return redirect(reverse('montonio:index'))
+
     return render(
         request,
         "montonio/naase.html",
         {
             'decoded': decoded,
-            # 'storeSetupData': storeSetupData
+            'message': message
         }
     )
 
