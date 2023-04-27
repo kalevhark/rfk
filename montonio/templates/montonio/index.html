@@ -276,9 +276,9 @@ body {
 
     <script>
         function setAnswer(text) {
-          answer.innerHTML = text;
+          // answer.innerHTML = text;
           data = JSON.parse(text);
-          console.log(data);
+          // console.log(data);
           if (data['data'] && data['data']['paymentUrl']) {
             let url = data['data']['paymentUrl'];
             window.open(url,"_self");

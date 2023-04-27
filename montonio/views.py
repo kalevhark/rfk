@@ -15,7 +15,7 @@ import webbrowser
 def get_payload(preferred_region, preferred_provider, amount, targetfund):
     amount = int(amount)
     exp = int((datetime.utcnow() + timedelta(seconds=10*60)).timestamp())
-    merchantReference = 'Annetus-' + '-'.join(str(x) for x in datetime.now().timetuple()[:6]) # TODO: Ajutine uuid lahendus
+    merchantReference = f'{targetfund}-' + '-'.join(str(x) for x in datetime.now().timetuple()[:6]) # TODO: Ajutine uuid lahendus
     # 1. Gather the checkout data
     payload = {
         "accessKey": settings.MY_ACCESS_KEY,
