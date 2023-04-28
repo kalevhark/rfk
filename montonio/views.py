@@ -93,8 +93,8 @@ def get_order(request):
         amount = data['Amount']
         targetfund = data['TargetFund']
         isikukood = data['Isikukood']
-        preferred_region = data['Preferred region']
-        preferred_provider = data['Preferred provider']
+        preferred_region = data.get('Preferred region', 'EE') # võib olla valimata
+        preferred_provider = data.get('Preferred provider') # võib olla valimata
 
         payload = get_payload(preferred_region, preferred_provider, amount, targetfund, isikukood)
         # 3. Generate the token
@@ -139,15 +139,41 @@ def get_payment_methods():
     # return JsonResponse({'data': data})
 
 def index(request):
-    targetFund = request.GET.get('targetFund')
-    if targetFund and targetFund in FONDID.keys():
-        pass
-    else:
-        targetFund = list(FONDID.keys())[0]
-    # storeSetupData = get_payment_methods()
     return render(
         request,
         "montonio/index.html",
+        {}
+    )
+
+def anneta1(request):
+    targetFund = request.GET.get('targetFund')
+    if targetFund and targetFund in FONDID.keys():
+        print(request.META.get('HTTP_REFERER'))
+    else:
+        targetFund = list(FONDID.keys())[0]
+    # storeSetupData = get_payment_methods()
+
+    return render(
+        request,
+        "montonio/anneta1.html",
+        {
+            'my_access_key': settings.MY_ACCESS_KEY,
+            'targetFund': targetFund,
+            # 'storeSetupData': storeSetupData
+        }
+    )
+
+def anneta2(request):
+    targetFund = request.GET.get('targetFund')
+    if targetFund and targetFund in FONDID.keys():
+        print(request.META.get('HTTP_REFERER'))
+    else:
+        targetFund = list(FONDID.keys())[0]
+    # storeSetupData = get_payment_methods()
+
+    return render(
+        request,
+        "montonio/anneta2.html",
         {
             'my_access_key': settings.MY_ACCESS_KEY,
             'targetFund': targetFund,
