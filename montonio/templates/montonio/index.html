@@ -1,10 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Annetuskeskkond</title>
-</head>
-<body>
+{% extends 'montonio/base.html' %}
+{% block title %}{{ block.super }} - Valga gümnaasiumi vilistlaskogu annetuskeskkond{% endblock %}
+{% block content %}
   <h2>Valga gümnaasiumi vilistlaskogu annetuskeskkond</h2>
   <p>
     <a href="{% url 'montonio:anneta1' %}">Annetuste lahendus 1</a>
@@ -12,5 +8,4 @@
   <p>
     <a href="{% url 'montonio:anneta2' %}">Annetuste lahendus 2</a>
   </p>
-</body>
-</html>
+{% endblock %}

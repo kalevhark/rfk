@@ -1,15 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Tagasiside</title>
-</head>
-<body>
+{% extends 'montonio/base.html' %}
+{% block title %}{{ block.super }} - Tagasiside{% endblock %}
+{% block content %}
   Makse tulemus:
   <h2>{{ message }}</h2>
   <p>{{ decoded }}</p>
   <p>
     <a href="{% url 'montonio:index' %}">Tagasi annetuste lehele</a>
   </p>
-</body>
-</html>
+{% endblock %}
