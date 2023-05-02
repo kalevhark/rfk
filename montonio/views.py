@@ -170,6 +170,7 @@ def anneta2(request):
     else:
         targetFund = list(FONDID.keys())[0]
     # storeSetupData = get_payment_methods()
+    print(request.META['HTTP_REFERER'])
 
     return render(
         request,

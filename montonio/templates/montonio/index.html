@@ -2,10 +2,24 @@
 {% block title %}{{ block.super }} - Valga gümnaasiumi vilistlaskogu annetuskeskkond{% endblock %}
 {% block content %}
   <h2>Valga gümnaasiumi vilistlaskogu annetuskeskkond</h2>
-  <p>
-    <a href="{% url 'montonio:anneta1' %}">Annetuste lahendus 1</a>
-  </p>
-  <p>
-    <a href="{% url 'montonio:anneta2' %}">Annetuste lahendus 2</a>
-  </p>
+  <div class="w3-panel">
+    <p>
+      <a href="{% url 'montonio:anneta1' %}">Annetuste lahendus 1</a>
+    </p>
+    <p>
+      <a href="{% url 'montonio:anneta2' %}">Annetuste lahendus 2</a>
+    </p>
+  </div>
+  <div class="w3-panel">
+    Soovin annetada:
+    <hr>
+    <a
+            href="{% url 'montonio:anneta2' %}?targetFund=studentFund"
+            class="w3-button w3-blue w3-quarter"> õpilaste stipendiumifondi
+    </a>
+    <a
+            href="{% url 'montonio:anneta2' %}?targetFund=teacherFund"
+            class="w3-button w3-blue w3-quarter">õpetajate stipendiumifondi
+    </a>
+  </div>
 {% endblock %}
