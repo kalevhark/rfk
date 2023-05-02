@@ -1,8 +1,8 @@
 {% extends 'montonio/base.html' %}
 {% block title %}{{ block.super }} - Tagasiside{% endblock %}
 {% block content %}
-  Makse tulemus:
   <h2>{{ message }}</h2>
+  Makse tehnilised andmed:
   <p>{{ decoded }}</p>
   <p>
     <a href="{% url 'montonio:index' %}">Tagasi annetuste lehele</a>

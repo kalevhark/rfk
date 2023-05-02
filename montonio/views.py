@@ -207,11 +207,11 @@ def naase(request, merchantReference):
                 and decoded['accessKey'] == settings.MY_ACCESS_KEY
         ):
             print('PAID')
-            message = 'Makse õnnestus'
+            message = 'Makse õnnestus. Suur tänu!'
             pass  # Payment completed
         else:
             print('NOT PAID')
-            message = 'Makse jäeti pooleli või ebaõnnestus'
+            message = 'Makse jäeti pooleli või ebaõnnestus.'
             pass  # Payment not completed
     else: # kui ei ole request.GET
         return redirect(reverse('montonio:index'))
