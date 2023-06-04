@@ -10,7 +10,7 @@ class RFK(models.Model):
     ThirdLevel = models.CharField(max_length=1) # 'ThirdLevel': '0',
     FourthLevel = models.CharField(max_length=1) # 'FourthLevel': '0',
     levelno = models.SmallIntegerField() # 'levelno': '2',
-    code = models.CharField(max_length=6) # 'code': 'b1',
+    code = models.CharField(max_length=9) # 'code': 'b1',
     parent = models.CharField(max_length=5) # 'parent': 'b',
     mlsort = models.SmallIntegerField() # 'mlsort': '1',
     leafnode = models.SmallIntegerField() # 'leafnode': '0',

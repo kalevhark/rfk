@@ -1,5 +1,6 @@
 from django.db.models.functions import Concat
 from django.db.models import F, Value, CharField
+from django.db.models.functions import Length
 
 from ajax_select import register, LookupChannel
 
@@ -63,6 +64,7 @@ class KategooriaLookup(LookupChannel):
         else:
             splits = q.split(' ')
             queryset = self.model.objects.annotate(
+                length=Length('code'),
                 nimi=Concat(
                     F('code'),
                     Value(' '),
@@ -70,6 +72,7 @@ class KategooriaLookup(LookupChannel):
                     output_field=CharField()
                 )
             )
+            queryset = queryset.filter(length__gt=3, length__lt=7)
             for split in splits:
                 queryset = queryset.filter(nimi__icontains=split)
         return queryset
