@@ -101,7 +101,7 @@ class ICF_Est_New():
                 if row['code']:
                     self.df[row['code']] = row
                     n += 1
-        print(n, len(self.df))
+        # print(n, len(self.df), self.df['b28013'])
 
 icf_eng = ICF_Est_New().df
 
@@ -315,19 +315,33 @@ def get_icf_qualifier(group, category, direction, scores):
     return ' '.join(result)
 
 # get_icf_code_formatted(*result.groups())
-def get_icf_code_colored(group, category, direction, scores):
-    icf_code_colored = ''.join(
-        [
-            f'<span class="icf-category">{group}{category}</span>',
-            f'<span class="icf-qualifier-1">{direction}{scores[0]}</span>',
-            f'<span class="icf-qualifier-2">{scores[1]}</span>' if len(scores) > 1 else '',
-            f'<span class="icf-qualifier-3">{scores[2]}</span>' if len(scores) > 2 else '',
-        ]
-    )
+def get_icf_code_colored(group, category, direction, scores, flat=False):
+    if flat:
+        icf_code_colored = ''.join(
+            [
+                f'{group}{category}',
+                f'{direction}{scores[0]}',
+                f'{scores[1]}' if len(scores) > 1 else '',
+                f'{scores[2]}' if len(scores) > 2 else '',
+            ]
+        )
+    else:
+        icf_code_colored = ''.join(
+            [
+                f'<span class="icf-category">{group}{category}</span>',
+                f'<span class="icf-qualifier-1">{direction}{scores[0]}</span>',
+                f'<span class="icf-qualifier-2">{scores[1]}</span>' if len(scores) > 1 else '',
+                f'<span class="icf-qualifier-3">{scores[2]}</span>' if len(scores) > 2 else '',
+            ]
+        )
     return icf_code_colored
 
 # Kirjutab lahti RFK koodi
-def get_icf_code_verbose(request=None, code=''):
+def get_icf_code_verbose(request=None, code='', flat=False):
+    """
+    code RFK kood koos möärajaga
+    flat=False HTML tage ei kasutata
+    """
     if request:
         code = request.GET.get('code', '')
         code = code.strip().lower()
@@ -335,13 +349,15 @@ def get_icf_code_verbose(request=None, code=''):
     result = re.search(pattern, code)
     icf_code_verbose = ''
     if result:
-        # icf_code_verbose = ''.join(result.groups())
         category = ''.join(result.groups()[:2])
         category_verbose = get_rfk_title(category)
         qualifiers_verbose = get_icf_qualifier(*result.groups())
         if category_verbose and qualifiers_verbose:
-            code_formatted = get_icf_code_colored(*result.groups())
-            icf_code_verbose = f'<strong>{code_formatted}</strong>: {category_verbose} - {qualifiers_verbose}'
+            code_formatted = get_icf_code_colored(*result.groups(), flat=flat)
+            if flat:
+                icf_code_verbose = f'{code_formatted} {category_verbose} - {qualifiers_verbose}'
+            else:
+                icf_code_verbose = f'<strong>{code_formatted}</strong>: {category_verbose} - {qualifiers_verbose}'
     if request:
         return JsonResponse(
             {
@@ -1798,6 +1814,36 @@ def get_excel():
         # for col in sheet.iter_cols(1, sheet.max_column):
         #     print(col[row].value)
 
+from main.forms import KategooriaForm, ArticleFormSet
+def prt(request):
+    if request.method == "POST":
+        form = KategooriaForm(request.POST)
+        if form.is_valid():
+            # do something with the formset.cleaned_data
+            pass
+        formset = ArticleFormSet(request.POST)
+        if formset.is_valid():
+            # do something with the formset.cleaned_data
+            pass
+    else:
+        form = KategooriaForm()
+        formset = ArticleFormSet()
+    return render(
+        request,
+        'main/prt.html',
+        {
+            "form": form,
+            "formset": formset.as_ul()
+        }
+    )
+
+from main.models import RFK
+def import_icf2db():
+    for code in icf_eng:
+        row = RFK(**icf_eng[code])
+        print(row)
+        row.save()
+
 import os
 if __name__ == "__main__":
     import django
@@ -1807,5 +1853,6 @@ if __name__ == "__main__":
 if __name__ == '__main__':
     # for i in range(1, 5):
     #     test(i)
-    get_excel()
+    # get_excel()
+    import_icf2db()
     pass

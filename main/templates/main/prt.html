@@ -1,0 +1,46 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block title %}{{ block.super }} - sisestaja{% endblock %}
+
+{% block src %}{% endblock %}
+
+{% block css %}
+  <style>
+    .horizontal ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: #333333;
+    }
+
+    .horizontal li {
+      float: left;
+      list-style-type: none;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+  <div class="w3-container">
+    <div class="w3-panel">
+      {{ form.media }}
+      <p>Alternatiiv 1</p>
+      <form method="post">
+        {{ form }}
+      </form>
+    </div>
+
+    <div class="w3-panel">
+      <p>Alternatiiv 2</p>
+      <form class="horizontal" method="post">
+        <table>
+          {{ formset}}
+        </table>
+      </form>
+    </div>
+  </div>
+{% endblock %}
+
+{% block javascript %}{% endblock %}

@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'corsheaders', # https://github.com/adamchainz/django-cors-headers
+    'ajax_select',  # ajax selectväljad https://github.com/crucialfelix/django-ajax-selects
     'main', # RFK sandbox
     'montonio', # montonio sandbox
 ]

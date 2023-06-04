@@ -18,12 +18,15 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
 from main import views
+from ajax_select import urls as ajax_select_urls
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('ajax_select/', include(ajax_select_urls)),
     path('privacy/', views.privacy, name='privacy'),
     path('sandbox/', views.sandbox, name='sandbox'),
     path('rfk/', views.rfk, name='rfk'),
+    path('prt/', views.prt, name='prt'),
     path('covidpass_s9a/', views.covidpass_s9a, name='covidpass_s9a'),
     path('covidpass_s9a_2/', views.covidpass_s9a_2, name='covidpass_s9a_2'),
     # path('kysimustik2/', views.kysimustik2, name='kysimustik2'),
