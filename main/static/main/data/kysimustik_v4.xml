@@ -117,10 +117,10 @@
                 <kysimus valdkond_nr="7" v6tmetegevus_nr="1" rfk_kategooria="tyhi" kohustuslik="ei">
                     kehtestatud piiridest/käskudest/keeldudest aru saamisega
                 </kysimus>
-                <kysimus valdkond_nr="7" v6tmetegevus_nr="1" rfk_kategooria="tyhi" kohustuslik="ei">
+                <kysimus valdkond_nr="7" v6tmetegevus_nr="3" rfk_kategooria="tyhi" kohustuslik="ei">
                     lähedaste inimestega lävimisega
                 </kysimus>
-                <kysimus valdkond_nr="7" v6tmetegevus_nr="1" rfk_kategooria="tyhi" kohustuslik="ei">
+                <kysimus valdkond_nr="7" v6tmetegevus_nr="3" rfk_kategooria="tyhi" kohustuslik="ei">
                     võõraste inimestega (näiteks uus arst, õpetaja jt) lävimisega
                 </kysimus>
                 <kysimus valdkond_nr="7" v6tmetegevus_nr="1" rfk_kategooria="tyhi" kohustuslik="ei">
@@ -227,10 +227,10 @@
                 <kysimus valdkond_nr="7" v6tmetegevus_nr="1" rfk_kategooria="tyhi" kohustuslik="ei">
                     eakaaslastega lävimisega
                 </kysimus>
-                <kysimus valdkond_nr="7" v6tmetegevus_nr="1" rfk_kategooria="tyhi" kohustuslik="ei">
+                <kysimus valdkond_nr="7" v6tmetegevus_nr="3" rfk_kategooria="tyhi" kohustuslik="ei">
                     võõraste inimestega (näiteks uus arst, õpetaja jt) lävimisega
                 </kysimus>
-                <kysimus valdkond_nr="7" v6tmetegevus_nr="1" rfk_kategooria="tyhi" kohustuslik="ei">
+                <kysimus valdkond_nr="7" v6tmetegevus_nr="3" rfk_kategooria="tyhi" kohustuslik="ei">
                     lähedaste inimestega lävimisega
                 </kysimus>
                 <kysimus valdkond_nr="7" v6tmetegevus_nr="1" rfk_kategooria="tyhi" kohustuslik="ei">
@@ -316,7 +316,7 @@
                 <kysimus valdkond_nr="6" v6tmetegevus_nr="3" rfk_kategooria="tyhi" kohustuslik="ei">
                     muutuvate olukordadega kohanemisega (nt igapäeva rutiini muutus)
                 </kysimus>
-                <kysimus valdkond_nr="7" v6tmetegevus_nr="1" rfk_kategooria="tyhi" kohustuslik="ei">
+                <kysimus valdkond_nr="7" v6tmetegevus_nr="3" rfk_kategooria="tyhi" kohustuslik="ei">
                     lähedaste inimestega lävimisega
                 </kysimus>
                 <kysimus valdkond_nr="7" v6tmetegevus_nr="1" rfk_kategooria="tyhi" kohustuslik="ei">
