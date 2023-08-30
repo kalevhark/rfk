@@ -78,8 +78,8 @@ Vue.createApp({
 // Linkide kopeerimine lõikelauale
 // button onclick="getLinkCopy(this)" onmouseout="outLinkCopy()"
 function getLinkCopy(btn) {
-  var linkCopyUrl = btn.getAttribute("data-uri")
-  var linkCopyId = btn.getAttribute("id")
+  var linkCopyUrl = btn.getAttribute("data-uri");
+  var linkCopyId = btn.getAttribute("id");
   navigator.clipboard.writeText(linkCopyUrl);
   var tooltip = document.getElementById("linkCopyTooltip_"+linkCopyId);
   if (tooltip !== null) {
