@@ -80,7 +80,8 @@ Vue.createApp({
 function getLinkCopy(btn) {
   var linkCopyUrl = btn.getAttribute("data-uri");
   var linkCopyId = btn.getAttribute("id");
-  navigator.clipboard.writeText(linkCopyUrl);
+  // navigator.clipboard.writeText(linkCopyUrl);
+  unsecuredCopyToClipboard(linkCopyUrl);
   var tooltip = document.getElementById("linkCopyTooltip_"+linkCopyId);
   if (tooltip !== null) {
     var tooltipInnerHTMLOld = tooltip.innerHTML;
@@ -97,4 +98,18 @@ function outLinkCopy() {
   var tooltip = document.getElementById("linkCopyTooltip");
   tooltip.classList.remove("w3-pale-green");
   tooltip.innerHTML = "kopeeri link";
+}
+
+function unsecuredCopyToClipboard(text) {
+  const textArea = document.createElement("textarea");
+  textArea.value = text;
+  document.body.appendChild(textArea);
+  textArea.focus();
+  textArea.select();
+  try {
+    document.execCommand('copy');
+  } catch (err) {
+    console.error('Unable to copy to clipboard', err);
+  }
+  document.body.removeChild(textArea);
 }
