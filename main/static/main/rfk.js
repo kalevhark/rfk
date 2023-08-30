@@ -81,7 +81,12 @@ function getLinkCopy(btn) {
   var linkCopyUrl = btn.getAttribute("data-uri");
   var linkCopyId = btn.getAttribute("id");
   // navigator.clipboard.writeText(linkCopyUrl);
-  unsecuredCopyToClipboard(linkCopyUrl);
+  // unsecuredCopyToClipboard(linkCopyUrl);
+  if (window.isSecureContext && navigator.clipboard) {
+    navigator.clipboard.writeText(linkCopyUrl);
+  } else {
+    unsecuredCopyToClipboard(linkCopyUrl);
+  }
   var tooltip = document.getElementById("linkCopyTooltip_"+linkCopyId);
   if (tooltip !== null) {
     var tooltipInnerHTMLOld = tooltip.innerHTML;
