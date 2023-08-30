@@ -74,3 +74,27 @@ Vue.createApp({
       }
     },
 }).mount('#codesearch')
+
+// Linkide kopeerimine lõikelauale
+// button onclick="getLinkCopy(this)" onmouseout="outLinkCopy()"
+function getLinkCopy(btn) {
+  var linkCopyUrl = btn.getAttribute("data-uri")
+  var linkCopyId = btn.getAttribute("id")
+  navigator.clipboard.writeText(linkCopyUrl);
+  var tooltip = document.getElementById("linkCopyTooltip_"+linkCopyId);
+  if (tooltip !== null) {
+    var tooltipInnerHTMLOld = tooltip.innerHTML;
+    tooltip.classList.add("w3-pale-green");
+    tooltip.innerHTML = "kopeeritud lõikelauale";
+    setTimeout(function () {
+      tooltip.innerHTML = tooltipInnerHTMLOld;
+      tooltip.classList.remove("w3-pale-green");
+    }, 2500);
+  }
+}
+
+function outLinkCopy() {
+  var tooltip = document.getElementById("linkCopyTooltip");
+  tooltip.classList.remove("w3-pale-green");
+  tooltip.innerHTML = "kopeeri link";
+}

@@ -20,6 +20,8 @@ else:
 
 from pyhtml import *
 
+from main.models import RFK
+
 RFK_REGEX = r"[bdes](?:\d{3,}\.\d+)"
 SCORE_CLASSES = ['', 'w3-pale-yellow', 'w3-yellow', 'w3-pale-red', 'w3-red']
 SCORE_SCALE = [5, 25, 50, 95, 100]
@@ -185,9 +187,25 @@ def get_icf_matches(request=None, q=''):
             translated_description_formatted = highlight_matches(phrases, translated_description)
             matches.append(
                 (
-                    f"<strong>{code_translated}</strong>",
+                    f"""
+                    <a
+                              class="copylink w3-tooltip"
+                              onclick="getLinkCopy(this)"
+                              id="{code}"
+                              data-uri="{code} {translated_title}"
+                    >
+                        <strong>{code_translated}</strong>
+                        <span
+                            class="copylink-confirmation w3-text"
+                            id="linkCopyTooltip_{code}"
+                        >
+                            <i class="fa fa-clone"></i>
+                        </span>
+                    </a>
+                    """,
                     translated_title_formatted,
                     translated_description_formatted,
+                    # ' '.join([code, translated_title])
                 )
             )
     if request:
