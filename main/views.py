@@ -1573,7 +1573,7 @@ def save_kysimustik9_results(request):
     )
 
 def get_kysimustik9():
-    filename = 'kysimustik_v4.xml'
+    filename = 'kysimustik_v5.xml'
     file = STATIC_DIR / 'data' / filename
     with open(file, 'r', encoding='utf8') as f:
         tree = ET.parse(f)
