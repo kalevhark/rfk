@@ -128,13 +128,16 @@
 
     <transition name="slide-fade">
     <div v-show="showKysimustik" class="w3-row w3-padding w3-pale-green">
-      <h3 v-show="showBackgroundInfo">Palun vasta küsimustele</h3>
+      <h3 v-show="showBackgroundInfo">Skaalaküsimused</h3>
       <p>[[ kysimustikQuestion ]]</p>
+      <p>Palume hinnata hakkamasaamist tegutsemises ja osaluses järgmistes võtmetegevustes:</p>
+      <p>Legend</p>
       <ul>
         <li v-for="rida in skaalad[selectedSkaala].legend">
           [[ rida ]]
         </li>
       </ul>
+      <p>Küsimustele vastamiseks vajuta numbrile, mis iseloomustab seisundit kõige täpsemini</p>
       <table>
         <tr>
           <th class="question"></th>

@@ -29,12 +29,12 @@
 			<vanusgrupiKysimused question="nan"/>
 			<vanusgrupiYldKysimused question="">
 				<kysimus kohustuslik="ei">Palun kirjeldage lühidalt lapsel terviseseisundi tõttu esinevaid probleeme, sh abivahendite vajadus vms</kysimus>
-				<kysimus kohustuslik="ei">Kui lapsele osutatakse sotsiaalteenuseid kohalikust omavalitsusest, siis kirjeldage milliseid teenuseid osutati ja kui sageli.</kysimus>
+				<kysimus kohustuslik="ei">Kui lapsele osutatakse sotsiaalteenuseid, siis kirjeldage milliseid teenuseid osutati ja kui sageli.</kysimus>
 			</vanusgrupiYldKysimused>
 			<vanusgrupiFailiTekst>Juhul, kui soovite lapse tervisliku seisundi kohta lisada täiendavaid dokumente, siis saate seda teha siin.</vanusgrupiFailiTekst>
 		</vanusgrupp>
 		<vanusgrupp name="Laps 3-8" kysimustik="true">
-			<muutumatudSeisundid kohustuslik="ei">Kas lapsel on mõni järgnevatest terviseseisunditest: jäseme osaline või täielik puudumine, juhitav hingamine või pidev hapnikuravi, mõlema silma pimedus, diagnoositud vaimne alaareng (mõõdukas/raske/sügav), iseseisvalt liikumisvõimetu ja/või püsivalt ratastoolis? Kui jah, siis palun nimetage see.</muutumatudSeisundid>
+			<muutumatudSeisundid kohustuslik="ei">Kas lapsel on mõni järgnevatest terviseseisunditest: jäseme osaline või täielik puudumine, juhitav hingamine või pidev hapnikuravi, mõlema silma pimedus, iseseisvalt liikumisvõimetu ja/või püsivalt ratastoolis? Kui jah, siis palun nimetage see.</muutumatudSeisundid>
 			<vanusgrupiV6tmetegevused>
 				<v6tmetegevus valdkond_nr="1" v6tmetegevus_nr="1">Liikumine eri tasapindadel</v6tmetegevus>
 				<v6tmetegevus valdkond_nr="1" v6tmetegevus_nr="2">Ohutu ja takistuseta ringiliikumine</v6tmetegevus>
@@ -66,7 +66,7 @@
 				<kysimus valdkond_nr="1" v6tmetegevus_nr="2" rfk_kategooria="d450" kohustuslik="ei">iseseisvalt liikumisega siseruumides</kysimus>
 				<kysimus valdkond_nr="1" v6tmetegevus_nr="2" rfk_kategooria="d460" kohustuslik="ei">liikumisega õuetingimustes</kysimus>
 				<kysimus valdkond_nr="1" v6tmetegevus_nr="3" rfk_kategooria="d420" kohustuslik="ei">istumast püsti tõusmisega</kysimus>
-				<kysimus valdkond_nr="2" v6tmetegevus_nr="3" rfk_kategooria="d440" kohustuslik="ei">käeliste tegevustega hakkama saamisel (nt. joonistamine, söögiriistade kasutamine jm. täppisliigutustega)</kysimus>
+				<kysimus valdkond_nr="2" v6tmetegevus_nr="3" rfk_kategooria="d440" kohustuslik="ei">käeliste tegevustega (nt. joonistamine, söögiriistade kasutamine jm. täppisliigutustega)</kysimus>
 				<kysimus valdkond_nr="3" v6tmetegevus_nr="1" rfk_kategooria="d110" kohustuslik="ei">nägemisega</kysimus>
 				<kysimus valdkond_nr="3" v6tmetegevus_nr="2" rfk_kategooria="d115" kohustuslik="ei">kuulmisega</kysimus>
 				<kysimus valdkond_nr="3" v6tmetegevus_nr="3" rfk_kategooria="d330" kohustuslik="ei">kõnelemisega</kysimus>
@@ -86,13 +86,13 @@
 				<kysimus kohustuslik="ei">Palun kirjeldage lapsel terviseseisundi tõttu esinevaid probleeme</kysimus>
 				<kysimus kohustuslik="ei">Milliseid abivahendeid laps kasutab? Kas abivahenditest on abi?</kysimus>
 				<kysimus kohustuslik="ei">Kas laps vajab vaimse tervise seisundist tingitud järelevalvet ja millistes elulistes situatsioonides?</kysimus>
-				<kysimus kohustuslik="ei">Kui lapsele osutatakse sotsiaalteenuseid (tugiisik, sotsiaaltransport jms) kohalikust omavalitsusest, siis kirjeldage milliseid teenuseid osutati ja kui sageli.</kysimus>
+				<kysimus kohustuslik="ei">Kui lapsele osutatakse sotsiaalteenuseid (tugiisik, sotsiaaltransport vms), siis kirjeldage milliseid teenuseid osutati ja kui sageli.</kysimus>
 				<kysimus kohustuslik="ei">Kirjeldage kas laps saab lasteaias või koolis individuaalset abi (tugiisik, logopeed, eripedagoog, psühholoog) või koolis kohandatud õpet (näiteks lihtsustatud või individuaalne õppekava)</kysimus>
 			</vanusgrupiYldKysimused>
 			<vanusgrupiFailiTekst>Juhul, kui lapse kohta on koostatud kohaliku omavalitsuse juhtumiplaan või olete käinud haridusliku erivajaduse hindamisel, lisage need dokumendid taotlusele.</vanusgrupiFailiTekst>
 		</vanusgrupp>
 		<vanusgrupp name="Laps 9-15" kysimustik="true">
-			<muutumatudSeisundid kohustuslik="ei">Kas lapsel on mõni järgnevatest terviseseisunditest: jäseme osaline või täielik puudumine, juhitav hingamine või pidev hapnikuravi, mõlema silma pimedus, diagnoositud vaimne alaareng (mõõdukas/raske/sügav), iseseisvalt liikumisvõimetu ja/või püsivalt ratastoolis? Kui jah, siis palun nimetage see.</muutumatudSeisundid>
+			<muutumatudSeisundid kohustuslik="ei">Kas lapsel on mõni järgnevatest terviseseisunditest: jäseme osaline või täielik puudumine, juhitav hingamine või pidev hapnikuravi, mõlema silma pimedus, iseseisvalt liikumisvõimetu ja/või püsivalt ratastoolis? Kui jah, siis palun nimetage see.</muutumatudSeisundid>
 			<vanusgrupiV6tmetegevused>
 				<v6tmetegevus valdkond_nr="1" v6tmetegevus_nr="1">Liikumine eri tasapindadel</v6tmetegevus>
 				<v6tmetegevus valdkond_nr="1" v6tmetegevus_nr="2">Ohutu ja takistuseta ringiliikumine</v6tmetegevus>
@@ -124,14 +124,14 @@
 				<kysimus valdkond_nr="1" v6tmetegevus_nr="2" rfk_kategooria="d450" kohustuslik="ei">iseseisvalt liikumisega siseruumides</kysimus>
 				<kysimus valdkond_nr="1" v6tmetegevus_nr="2" rfk_kategooria="d460" kohustuslik="ei">liikumisega õuetingimustes</kysimus>
 				<kysimus valdkond_nr="1" v6tmetegevus_nr="3" rfk_kategooria="d420" kohustuslik="ei">istumast püsti tõusmisega</kysimus>
-				<kysimus valdkond_nr="2" v6tmetegevus_nr="3" rfk_kategooria="d440" kohustuslik="ei">käeliste tegevustega hakkama saamisega (nt. klaviatuuri kasutamine, telefoni käsitsemine, eseme haaramine/ asetamine)</kysimus>
+				<kysimus valdkond_nr="2" v6tmetegevus_nr="3" rfk_kategooria="d440" kohustuslik="ei">käeliste tegevustega (nt. klaviatuuri kasutamine, telefoni käsitsemine, eseme haaramine/ asetamine)</kysimus>
 				<kysimus valdkond_nr="3" v6tmetegevus_nr="1" rfk_kategooria="d110" kohustuslik="ei">nägemisega</kysimus>
 				<kysimus valdkond_nr="3" v6tmetegevus_nr="2" rfk_kategooria="d115" kohustuslik="ei">kuulmisega</kysimus>
 				<kysimus valdkond_nr="3" v6tmetegevus_nr="3" rfk_kategooria="d330" kohustuslik="ei">kõnelemisega</kysimus>
 				<kysimus valdkond_nr="4" v6tmetegevus_nr="2" rfk_kategooria="d530" kohustuslik="ei">soole ja põie kontrollimisega</kysimus>
 				<kysimus valdkond_nr="4" v6tmetegevus_nr="3" rfk_kategooria="d550" kohustuslik="ei">söömisega</kysimus>
 				<kysimus valdkond_nr="5" v6tmetegevus_nr="1" rfk_kategooria="d155" kohustuslik="ei">õppetöös ja huvitegevuses osalemisega</kysimus>
-				<kysimus valdkond_nr="5" v6tmetegevus_nr="1" rfk_kategooria="d1551" kohustuslik="ei">tavaõppel ehk riiklikul õppekaval hakkama saamisega</kysimus>
+				<kysimus valdkond_nr="5" v6tmetegevus_nr="1" rfk_kategooria="d1551" kohustuslik="ei">tavaõppel ehk riiklikul õppekaval õppimisega</kysimus>
 				<kysimus valdkond_nr="5" v6tmetegevus_nr="1" rfk_kategooria="d155" kohustuslik="ei">uute teadmiste ja oskuste omandamisega</kysimus>
 				<kysimus valdkond_nr="5" v6tmetegevus_nr="2" rfk_kategooria="d230" kohustuslik="ei">igapäevategevustega (nt. riietumisega, pesemise ja hügieenitoimingutega)</kysimus>
 				<kysimus valdkond_nr="5" v6tmetegevus_nr="2" rfk_kategooria="d230" kohustuslik="ei">tegevuste alustamise ja alustatud tegevuste lõpuni viimisega</kysimus>
@@ -148,13 +148,13 @@
 				<kysimus kohustuslik="ei">Palun kirjeldage lapsel terviseseisundi tõttu esinevaid probleeme</kysimus>
 				<kysimus kohustuslik="ei">Milliseid abivahendeid laps kasutab? Kas abivahenditest on abi?</kysimus>
 				<kysimus kohustuslik="ei">Kas laps vajab vaimse tervise seisundist tingitud järelevalvet ja millistes elulistes situatsioonides?</kysimus>
-				<kysimus kohustuslik="ei">Kui lapsele osutatakse sotsiaalteenuseid (tugiisik, sotsiaaltransport jms) kohalikust omavalitsusest, siis kirjeldage milliseid teenuseid osutati ja kui sageli.</kysimus>
+				<kysimus kohustuslik="ei">Kui lapsele osutatakse sotsiaalteenuseid (tugiisik, sotsiaaltransport vms), siis kirjeldage milliseid teenuseid osutati ja kui sageli.</kysimus>
 				<kysimus kohustuslik="ei">Kirjeldage kas laps saab koolis kohandatud õpet (näiteks lihtsustatud või individuaalset õppekava)</kysimus>
 			</vanusgrupiYldKysimused>
 			<vanusgrupiFailiTekst>Juhul, kui lapse kohta on koostatud kohaliku omavalitsuse juhtumiplaan või olete käinud haridusliku erivajaduse hindamisel, lisage need dokumendid taotlusele.</vanusgrupiFailiTekst>
 		</vanusgrupp>
 		<vanusgrupp name="Vanaduspensioniealine" kysimustik="true">
-			<muutumatudSeisundid kohustuslik="ei">Kas Teil esineb mõni järgnevatest terviseseisunditest: jäseme osaline või täielik puudumine, püsivalt voodihaige ja/või püsivalt ratastoolis, juhitav hingamine või pidev hapnikuravi (va uneapnoe), diagnoositud vaimne alaareng (mõõdukas/raske/sügav), väljakujunenud dementsus, mõlema silma pimedus? Kui jah, siis palun nimetage see.</muutumatudSeisundid>
+			<muutumatudSeisundid kohustuslik="ei">Kas Teil esineb mõni järgnevatest terviseseisunditest: jäseme osaline või täielik puudumine, püsivalt voodihaige ja/või püsivalt ratastoolis, juhitav hingamine või pidev hapnikuravi (va uneapnoe), väljakujunenud dementsus, mõlema silma pimedus? Kui jah, siis palun nimetage see.</muutumatudSeisundid>
 			<vanusgrupiV6tmetegevused>
 				<v6tmetegevus valdkond_nr="1" v6tmetegevus_nr="1">Liikumine eri tasapindadel</v6tmetegevus>
 				<v6tmetegevus valdkond_nr="1" v6tmetegevus_nr="2">Ohutu ja takistuseta ringiliikumine</v6tmetegevus>
@@ -186,7 +186,7 @@
 				<kysimus valdkond_nr="1" v6tmetegevus_nr="1" rfk_kategooria="d450" kohustuslik="ei">kodus liikumisega</kysimus>
 				<kysimus valdkond_nr="1" v6tmetegevus_nr="2" rfk_kategooria="d460" kohustuslik="ei">kodust väljas liikumisega</kysimus>
 				<kysimus valdkond_nr="1" v6tmetegevus_nr="3" rfk_kategooria="d420" kohustuslik="ei">istumast püsti tõusmisega</kysimus>
-				<kysimus valdkond_nr="2" v6tmetegevus_nr="2" rfk_kategooria="d430" kohustuslik="ei">koduste toimetustega hakkama saamisel (näiteks koristamine, toidu valmistamine?)</kysimus>
+				<kysimus valdkond_nr="2" v6tmetegevus_nr="2" rfk_kategooria="d430" kohustuslik="ei">koduste toimetustega (näiteks koristamine, toidu valmistamine)</kysimus>
 				<kysimus valdkond_nr="3" v6tmetegevus_nr="1" rfk_kategooria="d110" kohustuslik="ei">nägemisega</kysimus>
 				<kysimus valdkond_nr="3" v6tmetegevus_nr="2" rfk_kategooria="d115" kohustuslik="ei">kuulmisega</kysimus>
 				<kysimus valdkond_nr="3" v6tmetegevus_nr="3" rfk_kategooria="d330" kohustuslik="ei">kõnelemisega</kysimus>
@@ -203,7 +203,7 @@
 				<kysimus kohustuslik="ei">Milliseid abivahendeid kasutate? Kas abivahenditest on abi?</kysimus>
 				<kysimus kohustuslik="ei">Kas vajate vaimse tervise seisundist tingitud järelevalvet?</kysimus>
 				<kysimus kohustuslik="ei">Kes igapäevategevuste juures Teid abistab ja kui sageli?</kysimus>
-				<kysimus kohustuslik="ei">Millist abi olete kohalikust omavalitsusest küsinud või saanud?</kysimus>
+				<kysimus kohustuslik="ei">Milliseid sotsiaalteenuseid (koduteenus, sotsiaaltransport, tugiisik vms) olete saanud ja kui sageli?</kysimus>
 			</vanusgrupiYldKysimused>
 			<vanusgrupiFailiTekst>Kui on taotleja terviseseisundit kirjeldavaid dokumente (välja arvatud digiloos olevad dokumendid, näiteks audiogramm, vaateväljade uuring vms), palume need taotlusele lisada.</vanusgrupiFailiTekst>
 		</vanusgrupp>

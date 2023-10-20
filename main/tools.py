@@ -3,7 +3,15 @@ from xml.dom import minidom
 
 import pandas as pd
 
-FILE = "Valdkondade loogika ja vaated_LAVA.xlsx"
+if __name__ != '__main__':
+    from django.conf import settings
+    STATIC_DIR = settings.BASE_DIR / 'main' / 'static' / 'main'
+else:
+    from pathlib import Path
+    BASE_DIR = Path(__file__).resolve().parent.parent
+    STATIC_DIR = BASE_DIR / 'main' / 'static' / 'main'
+
+FILE = STATIC_DIR / "data/Valdkondade loogika ja vaated_LAVA.xlsx"
 
 def add_valdkonnad(root, valdkonnadChild):
     valdkonnad_pd = pd.read_excel(
@@ -134,10 +142,11 @@ def create_xml_file(versioon='0'):
 
     xml_str = root.toprettyxml(indent="\t", encoding='UTF-8')
 
-    save_path_file = f"kysimustik_v{versioon}.xml"
+    save_path_file = STATIC_DIR / f"data/kysimustik_v{versioon}.xml"
 
     with open(save_path_file, "wb") as f:
         f.write(xml_str)
 
 if __name__ == "__main__":
     create_xml_file(versioon='5')
+    pass
