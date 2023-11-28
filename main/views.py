@@ -1855,6 +1855,41 @@ def prt(request):
         }
     )
 
+import random
+def j6ul2023(request):
+    rfk_codes_b = [
+        'b535.1', # Seedesüsteemiga seonduvad aistingud
+        'b1265.0', # Optimism
+        'b1300.0', # Vaimse energia tase
+    ]
+    rfk_codes_d = [
+        'd550.00', # Söömine
+        'd6604.0', # Teiste abistamine toitumisel
+        'd760.0', # Perekondlikud suhted
+        'd350.00', # Vestlemine
+        'd920.0', # Puhke - ja vabaajategevustes osalemine
+        'd460.0', # Erinevates kohtades liikumine
+    ]
+    rfk_codes_e = [
+        'e1401+4', # Kultuuri -, sporditegevuse ja vaba aja veetmise abivahendid ning tehnoloogiad
+        'e350+4', # Kodustatud loomad
+        'e320+4', # Sõbrad
+    ]
+    random.shuffle(rfk_codes_b)
+    random.shuffle(rfk_codes_d)
+    random.shuffle(rfk_codes_e)
+    return render(
+        request,
+        'main/j6ul2023.html',
+        {
+            'snowflakes': range(1, 108),
+            'rfk_code_verbose_b1': get_icf_code_verbose(request=None, code=rfk_codes_b[0], flat=False),
+            'rfk_code_verbose_d1': get_icf_code_verbose(request=None, code=rfk_codes_d[0], flat=False),
+            'rfk_code_verbose_d2': get_icf_code_verbose(request=None, code=rfk_codes_d[1], flat=False),
+            'rfk_code_verbose_e1': get_icf_code_verbose(request=None, code=rfk_codes_e[0], flat=False),
+        }
+    )
+
 from main.models import RFK
 def import_icf2db():
     for code in icf_eng:

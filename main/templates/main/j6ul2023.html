@@ -1,0 +1,196 @@
+<!-- Christmas Card by Dasom Ko https://codepen.io/ds92ko/pen/mdKdgqe  -->
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block title %}{{ block.super }} - RFK jõulusoov 2023{% endblock %}
+
+{% block src %}{% endblock %}
+
+{% block css %}
+  <link rel="stylesheet" href="{% static 'main/j6ul2023.css' %}?ver=2023">
+  <style>
+    .result {
+      line-height:1.5em;
+      min-height:3.5em;
+    }
+
+    .result-icf-code-verbose {
+      font-size: 1.5em;
+    }
+
+    .icf-category {
+      color: black;
+    }
+
+    .icf-qualifier-1 {
+      color: lightcoral;
+    }
+
+    .icf-qualifier-2 {
+      color: green;
+    }
+
+    .icf-qualifier-3 {
+      color: blue;
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+    <div class="wrapper">
+      <div class="container">
+        <div class="background">
+          <div class="snow-wrap front">
+            <div class="snow snow__top">
+              {% for snowflake in snowflakes %}
+                <span class="snowflake"></span>
+              {% endfor %}
+            </div>
+            <div class="snow snow__mid">
+              {% for snowflake in snowflakes %}
+                <span class="snowflake"></span>
+              {% endfor %}
+            </div>
+            <div class="snow snow__bot">
+              {% for snowflake in snowflakes %}
+                <span class="snowflake"></span>
+              {% endfor %}
+            </div>
+          </div>
+          <div class="snow-wrap back">
+            <div class="snow snow__top">
+              {% for snowflake in snowflakes %}
+                <span class="snowflake"></span>
+              {% endfor %}
+            </div>
+            <div class="snow snow__mid">
+              {% for snowflake in snowflakes %}
+                <span class="snowflake"></span>
+              {% endfor %}
+            </div>
+            <div class="snow snow__bot">
+              {% for snowflake in snowflakes %}
+                <span class="snowflake"></span>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+
+        <div class="contents">
+          <div class="santa">
+            <ul class="santa__hat">
+              <li class="hat__pompon"></li>
+              <li class="hat__crown"></li>
+              <li class="hat__banding"></li>
+            </ul>
+            <ul class="santa__head">
+              <li class="head__hair"></li>
+              <li class="head__face"></li>
+              <li class="head__nose"></li>
+              <li class="head__left-eye"></li>
+              <li class="head__right-eye"></li>
+              <li class="head__left-ear"></li>
+              <li class="head__right-ear"></li>
+              <li class="head__left-cheek"></li>
+              <li class="head__right-cheek"></li>
+              <li class="head__mustache">
+                <ul class="mustache-wrap">
+                  <li class="mustache__top-left"></li>
+                  <li class="mustache__top-right"></li>
+                  <li class="mustache__left"></li>
+                  <li class="mustache__right"></li>
+                  <li class="mustache__bottom-left"></li>
+                  <li class="mustache__bottom-right"></li>
+                </ul>
+              </li>
+            </ul>
+            <ul class="santa__body">
+              <li class="body__clothes"></li>
+            </ul>
+          </div>
+
+          <div class="envelope">
+            <div class="cover">
+              <span class="heart card__open-btn"></span>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card__title">
+              <div class="merry">
+                <h2>
+                  <span class="heart"></span>
+                  <span class="title__text">H</span>
+                </h2>
+                <h2>
+                  <span class="heart"></span>
+                  <span class="title__text">Ä</span>
+                </h2>
+                <h2>
+                  <span class="heart"></span>
+                  <span class="title__text">I</span>
+                </h2>
+                <h2>
+                  <span class="heart"></span>
+                  <span class="title__text">D</span>
+                </h2>
+                <h2>
+                  <span class="heart"></span>
+                  <span class="title__text"></span>
+                </h2>
+              </div>
+              <div class="christmas">
+                <h2>
+                  <span class="heart"></span>
+                  <span class="title__text">J</span>
+                </h2>
+                <h2>
+                  <span class="heart"></span>
+                  <span class="title__text">Õ</span>
+                </h2>
+                <h2>
+                  <span class="heart"></span>
+                  <span class="title__text">U</span>
+                </h2>
+                <h2>
+                  <span class="heart"></span>
+                  <span class="title__text">L</span>
+                </h2>
+                <h2>
+                  <span class="heart"></span>
+                  <span class="title__text">E</span>
+                </h2>
+              </div>
+            </div>
+            <div class="card__contents">
+              <div class="letter-wrap">
+                <div class="letter">
+                  <div class="dear">
+                    <span>🙋‍♀️ Hea RFK sõber,</span>
+                  </div>
+                  Siin on Sinu RFK hinnang jõuluajaks: <br>
+                  🥰 {{ rfk_code_verbose_b1|safe }}<br>
+                  🥰 {{ rfk_code_verbose_d1|safe }}<br>
+                  🥰 {{ rfk_code_verbose_d2|safe }}<br>
+                  🥰 {{ rfk_code_verbose_e1|safe }}<br>
+                  <div class="from">
+                    <span>Sinu jõuluvana 🎅</span>
+                  </div>
+                  <br>
+                  <a href="{% url 'j6ul2023' %}" class="button button-silver"><span>🎄 Hinda uuesti</span></a>
+                  <a href="{% url 'rfk' %}" class="button button-silver"><span>&#128526; Tagasi tööle</span></a>
+                </div>
+                <div class="letter__gradient">
+                  Rahulikku jõuluaega ja head uut aastat!
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+  <script src="{% static 'main/j6ul2023.js'%}?ver=2023"></script>
+{% endblock %}
