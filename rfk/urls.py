@@ -40,6 +40,6 @@ urlpatterns = [
     path('some_view/', views.some_view, name='some_view'),
     path('main/', include('main.urls')),
     path('montonio/', include('montonio.urls')),
-    path('j6ul2023/', views.j6ul2023, name='j6ul2023'),
+    # path('j6ul2023/', views.j6ul2023, name='j6ul2023'),
     path('admin/', admin.site.urls),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
