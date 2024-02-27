@@ -1,4 +1,3 @@
-from collections import Counter, deque
 import csv
 from datetime import datetime
 import itertools
@@ -20,7 +19,7 @@ else:
 
 from pyhtml import *
 
-from main.models import RFK
+# from main.models import RFK
 
 RFK_REGEX = r"[bdes](?:\d{3,}\.\d+)"
 SCORE_CLASSES = ['', 'w3-pale-yellow', 'w3-yellow', 'w3-pale-red', 'w3-red']
@@ -29,7 +28,6 @@ ROWS, COLUMNS, IGNORE = (('d'), ('b'), ('s', 'e')) # Milliseid koodigruppe ja ku
 COLUMNS_VERBOSE, IGNORE_VERBOSE = (('b', 's'), ('e')) # Milliseid koodigruppe ja kus arvesse v6tta verbaalsel esitusel
 LEVEL_MILD, LEVEL_MODERATE, LEVEL_SEVERE, LEVEL_EXTREME = range(1, 5) # RFK määrajad
 LEVEL_TTA = 9 # RFK määraja TTa e Täpsustama
-# FILE_VER = 'icf2017_est_v03_03_22'
 FILE_VER = 'icf2017_est_2022_v2'
 
 """
@@ -42,46 +40,6 @@ Participation                       Participation restrictions
 polytomous (multiple-level) scale:
 “mild”, “moderate”, “severe” or “extreme"
 """
-#
-# Kooditabelite import ja töötlus
-#
-
-# class ICF_Eng():
-#     # Loeb ICF kooditabeli sõnastikuks:
-#     # keys = code
-#     # element.keys:
-#     # 'version',
-#     # 'Dimension', 'Chapter',
-#     # 'Block', 'SecondLevel', 'ThirdLevel', 'FourthLevel', 'levelno',
-#     # 'code', 'parent', 'mlsort', 'leafnode',
-#     # 'Title', 'Description', 'Inclusions', 'Exclusions', 'selected',
-#     # 'Translated_title', 'Translated_description', 'Translated_inclusions', 'Translated_exclusions']
-#
-#     def __init__(self):
-#         self.df = dict()
-#         with open(STATIC_DIR / 'icf2017_eng_v20210601.csv', newline='', encoding='windows-1252') as csvfile:
-#             reader = csv.DictReader(csvfile, delimiter=';', quotechar='"')
-#             n = 0
-#             for row in reader:
-#                 self.df[row['code']] = row
-#                 n += 1
-#         print(n, len(self.df))
-#
-#
-#
-# class ICF_Est():
-#
-#     def __init__(self):
-#         self.df = dict()
-#         with open(STATIC_DIR / 'icf2017_est_v20210513.csv', newline='', encoding='windows-1252') as csvfile:
-#             reader = csv.DictReader(csvfile, delimiter=';', quotechar='"')
-#             n = 0
-#             for row in reader:
-#                 if row['Kood']:
-#                     self.df[row['Kood']] = row
-#                     n += 1
-#         print(n, len(self.df))
-
 
 class ICF_Est_New():
     # Loeb ICF kooditabeli sõnastikuks:
