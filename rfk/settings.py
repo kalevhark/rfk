@@ -33,8 +33,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     'localhost', '127.0.0.1',
-    'rfk.ee', 'www.rfk.ee',
-    'test.valgalinn.ee', '18.217.179.154'
+    'rfk.ee', 'www.rfk.ee', '18.217.179.154',
+    'test.valgalinn.ee', '63.33.55.93'
 ]
 
 
