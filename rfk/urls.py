@@ -27,6 +27,7 @@ urlpatterns = [
     path('sandbox/', views.sandbox, name='sandbox'),
     path('rfk/', views.rfk, name='rfk'),
     path('prt/', views.prt, name='prt'),
+    # path('prt1/', views.prt1, name='prt1'),
     path('covidpass_s9a/', views.covidpass_s9a, name='covidpass_s9a'),
     path('covidpass_s9a_2/', views.covidpass_s9a_2, name='covidpass_s9a_2'),
     # path('kysimustik2/', views.kysimustik2, name='kysimustik2'),

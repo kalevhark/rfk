@@ -35,6 +35,16 @@ class KategooriaLookup(LookupChannel):
                 m22raja in
                 [0, 1, 2, 3, 4, 8, 9]
             ]
+        elif len(q) > 3 and '.' == q[-2] and (q[0].lower() in ['b']):
+            kategooria, m22raja = q.split('.')
+            queryset = [
+                Item(
+                    pk=RFK.objects.filter(code__exact=kategooria)[0].pk,
+                    value=f'{q}',
+                    match=get_icf_code_verbose(request=None, code=f'{q}', flat=True),
+                    repr=get_icf_code_verbose(request=None, code=f'{q}', flat=True),
+                )
+            ]
         elif len(q) > 3 and '.' == q[-2] and (q[0].lower() in ['d', 's']):
             m22rajad = ['', 0, 1, 2, 3, 4, 8, 9]
             if q[0].lower() == 's':
