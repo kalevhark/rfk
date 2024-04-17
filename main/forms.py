@@ -13,6 +13,9 @@ class KategooriaForm(forms.Form):
         plugin_options={'autoFocus': True, 'minLength': 2}
     )
 
+    class Media:
+        js = ["/static/admin/js/jquery.init.js"]
+
 M22RAJAD = [(str(m22raja), str(m22raja)) for m22raja in [''] + [*range(0, 10)]]
 
 class ArticleForm(forms.Form):
