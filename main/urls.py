@@ -17,4 +17,5 @@ urlpatterns = [
     path('save_kysimustik9_results/', views.save_kysimustik9_results, name='save_kysimustik9_results'),
     path('get_kysimustik8_ekspertiis/', views.get_kysimustik8_ekspertiis, name='get_kysimustik8_ekspertiis'),
     path('get_kysimustik9_ekspertiis/', views.get_kysimustik9_ekspertiis, name='get_kysimustik9_ekspertiis'),
+    path('get_icf_calcs_prt/', views.get_icf_calcs_prt, name='get_icf_calcs_prt'),
 ]

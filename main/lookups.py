@@ -28,6 +28,7 @@ class KategooriaLookup(LookupChannel):
             queryset = [
                 Item(
                     pk=RFK.objects.filter(code__exact=q[:-1])[0].pk,
+                    # pk=f'{q}{m22raja}',
                     value=f'{q}{m22raja}',
                     match=get_icf_code_verbose(request=None, code=f'{q}{m22raja}', flat=True),
                     repr=get_icf_code_verbose(request=None, code=f'{q}{m22raja}', flat=True),
@@ -40,6 +41,7 @@ class KategooriaLookup(LookupChannel):
             queryset = [
                 Item(
                     pk=RFK.objects.filter(code__exact=kategooria)[0].pk,
+                    # pk=f'{q}',
                     value=f'{q}',
                     match=get_icf_code_verbose(request=None, code=f'{q}', flat=True),
                     repr=get_icf_code_verbose(request=None, code=f'{q}', flat=True),
@@ -52,6 +54,7 @@ class KategooriaLookup(LookupChannel):
             queryset = [
                 Item(
                     pk=RFK.objects.filter(code__exact=q[:-2])[0].pk,
+                    # pk=f'{q}{m22raja}',
                     value=f'{q}{m22raja}',
                     match=get_icf_code_verbose(request=None, code=f'{q}{m22raja}', flat=True),
                     repr=get_icf_code_verbose(request=None, code=f'{q}{m22raja}', flat=True),
@@ -63,7 +66,8 @@ class KategooriaLookup(LookupChannel):
             m22rajad = [''] + [*range(0, 10)]
             queryset = [
                 Item(
-                    pk=RFK.objects.filter(code__exact=q[:-3])[0].pk,
+                    # pk=RFK.objects.filter(code__exact=q[:-3])[0].pk,
+                    pk=f'{q}{m22raja}',
                     value=f'{q}{m22raja}',
                     match=get_icf_code_verbose(request=None, code=f'{q}{m22raja}', flat=True),
                     repr=get_icf_code_verbose(request=None, code=f'{q}{m22raja}', flat=True),

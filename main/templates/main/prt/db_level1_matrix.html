@@ -1,0 +1,27 @@
+{% load extras %}
+<table class="w3-table w3-striped w3-small w3-card-4">
+  <thead>
+    <tr>
+      <th></th>
+      {% for b_code in db_level1_dict.d1 %}
+        {% if forloop.first %}
+          <th></th>
+        {% else %}
+          <th title="{{ b_code|get_icf_title }}">
+            {{ b_code }}
+          </th>
+        {% endif %}
+      {% endfor %}
+    </tr>
+  </thead>
+  <tbody>
+    {% for d_code, qualifiers in db_level1_dict.items %}
+      <tr>
+        <th title="{{ d_code|get_icf_title }}">{{ d_code }}</th>
+        {% for qualifier, value in qualifiers.items %}
+          <td class="w3-center {{ value|get_value_class }}">{{ value }}</td>
+        {% endfor %}
+      </tr>  
+    {% endfor %}
+  </tbody>
+</table>

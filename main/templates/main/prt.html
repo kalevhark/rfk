@@ -1,9 +1,19 @@
 {% extends "main/base.html" %}
 {% load static %}
+{% load extras %}
 
 {% block title %}{{ block.super }} - sisestaja{% endblock %}
 
-{% block src %}{% endblock %}
+{% block src %}
+  <link href="{% static 'ajax_select/css/ajax_select.css' %}" type="text/css" media="all" rel="stylesheet">
+  <script src="{% static 'admin/js/jquery.init.js' %}"></script>
+  <script src="{% static 'ajax_select/js/bootstrap.js' %}"></script>
+  <script src="{% static 'ajax_select/js/ajax_select.js' %}"></script>
+  <script type="text/javascript">
+    // Muutujad vue jaoks
+    var urlGetICFCalcsPRT = "{% url 'main:get_icf_calcs_prt' %}"
+  </script>
+{% endblock %}
 
 {% block css %}
   <style>
@@ -19,28 +29,62 @@
       float: left;
       list-style-type: none;
     }
+    
+    .invalid {
+      border: none;
+      outline: 2px solid red;
+    }
 </style>
 {% endblock %}
 
 {% block content %}
-  <div class="w3-container">
-    <div class="w3-panel">
-      {{ form.media }}
-      <p>Alternatiiv 1</p>
-      <form method="post">
-        {{ form }}
-      </form>
-    </div>
-
-    <div class="w3-panel">
-      <p>Alternatiiv 2</p>
-      <form class="horizontal" method="post">
-        <table>
-          {{ formset}}
-        </table>
-      </form>
+  <div id="app" class="w3-container">
+    <div class="w3-row">
+      <div class="w3-threequarter w3-panel">
+        {# Navigatsiooniriba #}
+        <div class="w3-bar">
+          {% for code, item in codeset.items %}
+            {% ifchanged item.valdkond %}
+              <button class="w3-bar-item w3-button tablink" onclick="openCity(event, '{{ item.valdkond }}')">{{ item.valdkond }}</button>
+            {% endifchanged %}
+          {% endfor %}
+        </div>
+        {# Sisestusvorm #}
+        <form id="prt" method="post">
+          {% csrf_token %}
+          {%  for code, item in codeset.items %}
+            {% ifchanged item.valdkond %}
+              <div class="w3-row city code_{{ item.valdkond }}">
+                <h2>{{ item.valdkond }} {{ item.valdkond|get_icf_title }}</h2>
+              </div>
+            {% endifchanged %}
+            <div class="w3-row w3-card city code_{{ item.valdkond }}">
+              <div class="w3-third w3-padding">
+                {{ code }}
+                <select id="{{ code }}_activities" onchange="checkCodes()">
+                  <option>---</option>
+                  <option>0</option>
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                </select>
+                <br>{{ code|get_icf_title }}
+              </div> 
+              <div class="w3-twothird w3-margin-bottom">{{ item.form }}</div>
+            </div>
+          {% endfor %}
+        </form>
+      </div>
+      <div class="w3-quarter w3-panel">
+        <p><button id='saveButton' @click="saveResults">Arvuta</button></p>
+        <p><div id="db_level1_matrix"></div></p>
+        <p><div id="b_level2_matrix"></div></p>
+      </div>
     </div>
   </div>
 {% endblock %}
 
-{% block javascript %}{% endblock %}
+{% block javascript %}
+  <script src="{% static 'main/prt.js'%}?ver=2024"></script>
+{% endblock %}

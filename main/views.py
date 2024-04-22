@@ -1587,26 +1587,54 @@ def get_excel():
         # for col in sheet.iter_cols(1, sheet.max_column):
         #     print(col[row].value)
 
+import openpyxl
 from main.forms import KategooriaForm, ArticleFormSet
+
+def read_codeset_from_excel():
+    wb = openpyxl.load_workbook(settings.BASE_DIR / 'main' / 'static' / 'main' / 'data' / 'RFK_koodisett.xlsx')
+    ws = wb.active
+    codeset = dict()
+    for row in ws.iter_rows(
+            min_row=2, max_row=None,
+            min_col=1, max_col=7,
+            values_only=True
+    ):
+        codeset[row[0]] = {
+            'valdkond': row[0][:2], # d1, d2 etc
+            'nimetus': row[1],
+            'seotud': row[2],
+            'koolieelik': row[3],
+            'kooliealine': row[4],
+            'vanaduspensioniealine': row[5],
+            'tooealine': row[6],
+            'form': KategooriaForm(
+                auto_id=f'{row[0]}_%s',
+            )
+        }
+    return codeset
+
 def prt(request):
+    codeset = read_codeset_from_excel()
     if request.method == "POST":
         form = KategooriaForm(request.POST)
         if form.is_valid():
-            # do something with the formset.cleaned_data
-            pass
-        formset = ArticleFormSet(request.POST)
-        if formset.is_valid():
-            # do something with the formset.cleaned_data
-            pass
+            kategooria = form.cleaned_data["kategooria"]
+            print(kategooria)
+        # formset = ArticleFormSet(request.POST)
+        # if formset.is_valid():
+        #     # do something with the formset.cleaned_data
+        #     pass
     else:
+        pass
         form = KategooriaForm()
-        formset = ArticleFormSet()
+        # formset = ArticleFormSet()
     return render(
         request,
         'main/prt.html',
         {
-            "form": form,
-            "formset": formset.as_ul()
+            'codeset': codeset,
+            # "form": form,
+            # "formset": formset.as_ul()
         }
     )
 
@@ -1651,6 +1679,67 @@ def import_icf2db():
         row = RFK(**icf_eng[code])
         print(row)
         row.save()
+
+# arvutab maatriksi level1 d x b m22rajatega
+def calc_dblevel1_qualifiers(codeset):
+    rfk_set = dict()
+    for d_code in range(1, 10):
+        rfk_set[f'd{d_code}'] = dict()
+        rfk_set[f'd{d_code}']['d_qualifier'] = ''
+        for b_code in range(1, 9):
+            rfk_set[f'd{d_code}'][f'b{b_code}'] = ''
+    for code_pair in codeset:
+        if code_pair[0][0] == 'd' and code_pair[1][0] == 'b': # ainult kui on d ja b koodipaar
+            d_code, d_qualifier = code_pair[0].split('.')
+            b_code, b_qualifier = code_pair[1].split('.')
+            if (rfk_set[d_code[:2]]['d_qualifier'] < d_qualifier):
+                rfk_set[d_code[:2]]['d_qualifier'] = d_qualifier
+            if (rfk_set[d_code[:2]][b_code[:2]] < b_qualifier):
+                rfk_set[d_code[:2]][b_code[:2]] = b_qualifier
+    return rfk_set
+
+# arvutab maatriksi level1 d x b m22rajatega
+def calc_blevel2_qualifiers(codeset):
+    rfk_set = dict()
+    for code_pair in codeset:
+        if code_pair[0][0] == 'd' and code_pair[1][0] == 'b': # ainult kui on d ja b koodipaar
+            b_code, b_qualifier = code_pair[1].split('.')
+            blevel2_code = get_icf_group(b_code)
+            if blevel2_code in rfk_set.keys():
+                if rfk_set[blevel2_code] < b_qualifier:
+                    rfk_set[blevel2_code] = b_qualifier
+            else:
+                rfk_set[blevel2_code] = b_qualifier
+    return rfk_set
+
+from django.template.loader import render_to_string
+# andmeid valdkondade jaoks
+def get_icf_calcs_prt(request):
+    params = request.GET.get('params', '')
+    if params:
+        codeset = json.loads(params)
+    else:
+        codeset = []
+
+    db_level1_dict = calc_dblevel1_qualifiers(codeset)
+    db_level1_matrix = render_to_string(
+        'main/prt/db_level1_matrix.html',
+        context={'db_level1_dict': db_level1_dict}
+    )
+
+    b_level2_dict = calc_blevel2_qualifiers(codeset)
+    b_level2_matrix = render_to_string(
+        'main/prt/b_level2_matrix.html',
+        context={'b_level2_dict': b_level2_dict}
+    )
+
+    return JsonResponse(
+        {
+            'db_level1_matrix': db_level1_matrix,
+            'b_level2_matrix': b_level2_matrix,
+        },
+        safe=False
+    )
 
 import os
 if __name__ == "__main__":

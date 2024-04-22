@@ -10,11 +10,13 @@ class KategooriaForm(forms.Form):
         'kategooriad',
         required=False,
         help_text='',
-        plugin_options={'autoFocus': True, 'minLength': 2}
+        plugin_options={'autoFocus': True, 'minLength': 2},
+        label=''
     )
 
     class Media:
-        js = ["/static/admin/js/jquery.init.js"]
+        # js = ["/static/admin/js/jquery.init.js"]
+        pass
 
 M22RAJAD = [(str(m22raja), str(m22raja)) for m22raja in [''] + [*range(0, 10)]]
 

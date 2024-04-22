@@ -1,0 +1,11 @@
+{% load extras %}
+<table class="w3-table w3-striped w3-small w3-card-4">
+  <tbody>
+    {% for code, qualifier in b_level2_dict.items %}
+      <tr>
+        <td>{{ code|get_icf_title }}</td>
+        <td class="{{ qualifier|get_value_class }}">{{ qualifier }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
