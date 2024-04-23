@@ -45,7 +45,13 @@
         <div class="w3-bar">
           {% for code, item in codeset.items %}
             {% ifchanged item.valdkond %}
-              <button class="w3-bar-item w3-button tablink" onclick="openCity(event, '{{ item.valdkond }}')">{{ item.valdkond }}</button>
+              <button 
+                      id="tablink_{{ item.valdkond }}"
+                      class="w3-bar-item w3-button tablink {% if forloop.first %}w3-border{% endif %}" 
+                      onclick="openCity(event, '{{ item.valdkond }}')"
+              >
+                {{ item.valdkond }}
+              </button>
             {% endifchanged %}
           {% endfor %}
         </div>

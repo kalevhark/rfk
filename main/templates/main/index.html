@@ -13,12 +13,6 @@
 {% block content %}
   <div class="w3-container">
     <a
-        href="{% url 'sandbox' %}"
-        class="w3-bar-item w3-button w3-theme-d4 w3-hover-white">
-      RFK analüüs
-    </a>
-    <br>
-    <a
         href="{% url 'rfk' %}"
         class="w3-bar-item w3-button w3-theme-d4 w3-hover-white">
       RFK koodiotsija
@@ -27,7 +21,13 @@
     <a
         href="{% url 'prt' %}"
         class="w3-bar-item w3-button w3-theme-d4 w3-hover-white">
-      RFK PRT analüüsija
+      RFK analüüsija
+    </a>
+    <br>
+    <a
+        href="{% url 'sandbox' %}"
+        class="w3-bar-item w3-button w3-theme-d4 w3-hover-white">
+      RFK analüüsija (vana versioon)
     </a>
     <br>
 {#    <a#}
