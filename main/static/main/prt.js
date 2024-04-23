@@ -43,7 +43,7 @@ function checkCodes() {
   const SCORE_CLASSES = ['w3-pale-green', 'w3-sand', 'w3-pale-yellow', 'w3-pale-red', 'w3-red'];
   tablinks = document.getElementsByClassName("tablink");
   for (i = 0; i < tablinks.length; i++) {
-    tablinks[i].classList.remove('w3-sand', 'w3-pale-yellow', 'w3-pale-red', 'w3-red');
+    tablinks[i].classList.remove('w3-pale-green', 'w3-sand', 'w3-pale-yellow', 'w3-pale-red', 'w3-red');
   }
 
   for(var d_level1_code in d_level1_results) {
