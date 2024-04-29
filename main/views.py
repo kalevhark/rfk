@@ -1712,6 +1712,21 @@ def calc_blevel2_qualifiers(codeset):
                 rfk_set[blevel2_code] = b_qualifier
     return rfk_set
 
+def calc_dlevel1_max(db_level1_dict):
+    qualifier = max(
+        [
+            db_level1_dict[key]["d_qualifier"]
+            for key
+            in db_level1_dict
+        ]
+    )
+    qualifier_verbose = get_icf_qualifier('d', '', '.', str(qualifier))
+    return {
+        'qualifier': qualifier,
+        'qualifier_verbose': qualifier_verbose
+    }
+
+
 from django.template.loader import render_to_string
 # andmeid valdkondade jaoks
 def get_icf_calcs_prt(request):
@@ -1722,10 +1737,16 @@ def get_icf_calcs_prt(request):
         codeset = []
 
     db_level1_dict = calc_dblevel1_qualifiers(codeset)
+    d_level1_max = calc_dlevel1_max(db_level1_dict)
     db_level1_matrix = render_to_string(
         'main/prt/db_level1_matrix.html',
-        context={'db_level1_dict': db_level1_dict}
+        context={
+            'db_level1_dict': db_level1_dict,
+            'd_level1_max': d_level1_max
+        }
     )
+
+
 
     b_level2_dict = calc_blevel2_qualifiers(codeset)
     b_level2_matrix = render_to_string(

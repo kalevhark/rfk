@@ -19,9 +19,19 @@
       <tr>
         <th title="{{ d_code|get_icf_title }}">{{ d_code }}</th>
         {% for qualifier, value in qualifiers.items %}
-          <td class="w3-center {{ value|get_value_class }}">{{ value }}</td>
+          <td 
+                  class="w3-center {{ value|get_value_class }}"
+          >
+            {{ value }}
+          </td>
         {% endfor %}
       </tr>  
     {% endfor %}
   </tbody>
 </table>
+{% if d_level1_max.qualifier %}
+  <p class="w3-small">
+    Tegutsemis- ja osaluspiirang:<br>
+    {{ d_level1_max.qualifier }} - {{ d_level1_max.qualifier_verbose|safe }}
+  </p>
+{% endif %}

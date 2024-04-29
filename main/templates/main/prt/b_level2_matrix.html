@@ -1,5 +1,14 @@
 {% load extras %}
 <table class="w3-table w3-striped w3-small w3-card-4">
+  {% if b_level2_dict %}
+    <thead>
+      <tr>
+        <td colspan="2">
+          Funktsioonihäirete kokkuvõte
+        </td>
+      </tr>
+    </thead>
+  {% endif %}
   <tbody>
     {% for code, qualifier in b_level2_dict.items %}
       <tr>
