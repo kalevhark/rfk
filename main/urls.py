@@ -18,4 +18,5 @@ urlpatterns = [
     path('get_kysimustik8_ekspertiis/', views.get_kysimustik8_ekspertiis, name='get_kysimustik8_ekspertiis'),
     path('get_kysimustik9_ekspertiis/', views.get_kysimustik9_ekspertiis, name='get_kysimustik9_ekspertiis'),
     path('get_icf_calcs_prt/', views.get_icf_calcs_prt, name='get_icf_calcs_prt'),
+    path('get_helenamiia/', views.get_helenamiia, name='get_helenamiia'),
 ]

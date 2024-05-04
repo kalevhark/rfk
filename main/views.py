@@ -1762,6 +1762,15 @@ def get_icf_calcs_prt(request):
         safe=False
     )
 
+def get_helenamiia(request):
+    ipaadress = request.META.get('HTTP_X_FORWARDED_FOR') or request.META.get('REMOTE_ADDR')
+    return JsonResponse(
+        {
+            'uussisu': f'<strong>Nüüd on õige asi</strong><br>Sinu aadress on {ipaadress}',
+        },
+        safe=False
+    )
+
 def helenamiia(request):
     metaandmed = request.META
     return render(

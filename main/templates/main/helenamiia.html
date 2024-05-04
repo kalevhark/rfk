@@ -8,10 +8,39 @@
 <body>
 {% block content %}
   Tere, Helena Miia!<br>
-  <div id="metaandmed"></div>
-  {% for key, item in metaandmed.items %}
-    {{ key }}: {{ item }}<br>
-  {% endfor %}
+  <div id="metaandmed" style="visibility: hidden">Siia paneme uue sisu!</div>
+{#  {% for key, item in metaandmed.items %}#}
+{#    {{ key }}: {{ item }}<br>#}
+{#  {% endfor %}#}
 {% endblock %}
 </body>
+
+{% block javascript %}
+  <script>
+    window.onload = (event) => {
+      {#setTimeout( function() #}
+      {#  {#}
+      {#    document.getElementById("metaandmed").style.visibility = "visible";#}
+      {#  }, 2000#}
+      {#)#}
+        $.ajax({
+          // url: $("#container_mixed_ilmateade").attr("data-url"),
+          url: '/main/get_helenamiia/',
+          dataType: 'json',
+          timeout: 300000,
+          success: function (data)
+            {
+              // document.getElementById("loader").style.display = "none";
+              elMetaandmed = document.getElementById("metaandmed");
+              elMetaandmed.innerHTML = data.uussisu;
+              elMetaandmed.style.visibility = "visible";
+            },
+          error: function (XMLHttpRequest, textstatus, errorThrown)
+            {
+              console.log(errorThrown)
+            }
+        });
+    };
+  </script>
+{% endblock %}
 </html>
