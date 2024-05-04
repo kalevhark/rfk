@@ -1,0 +1,17 @@
+{% extends "main/base.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Katse Helena Miiale näidata Django veebi tegemist</title>
+</head>
+<body>
+{% block content %}
+  Tere, Helena Miia!<br>
+  <div id="metaandmed"></div>
+  {% for key, item in metaandmed.items %}
+    {{ key }}: {{ item }}<br>
+  {% endfor %}
+{% endblock %}
+</body>
+</html>

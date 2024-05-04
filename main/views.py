@@ -1762,6 +1762,15 @@ def get_icf_calcs_prt(request):
         safe=False
     )
 
+def helenamiia(request):
+    metaandmed = request.META
+    return render(
+        request,
+        template_name='main/helenamiia.html',
+        context={
+            'metaandmed': metaandmed
+        }
+    )
 import os
 if __name__ == "__main__":
     import django
