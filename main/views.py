@@ -10,6 +10,7 @@ if __name__ != '__main__':
     from django.conf import settings
     from django.http import HttpResponse, JsonResponse
     from django.shortcuts import render
+    from django.template.loader import render_to_string
 
     STATIC_DIR = settings.BASE_DIR / 'main' / 'static' / 'main'
 else:
@@ -1606,7 +1607,7 @@ def read_codeset_from_excel():
             'koolieelik': row[3],
             'kooliealine': row[4],
             'vanaduspensioniealine': row[5],
-            'tooealine': row[6],
+            'tööealine': row[6],
             'form': KategooriaForm(
                 auto_id=f'{row[0]}_%s',
             )
@@ -1614,27 +1615,26 @@ def read_codeset_from_excel():
     return codeset
 
 def prt(request):
+    vanusgrupid = ['kõik', 'koolieelik', 'kooliealine', 'tööealine', 'vanaduspensioniealine']
+    valitud_vanusgrupp = request.GET.get('vanusgrupp')
     codeset = read_codeset_from_excel()
+    if valitud_vanusgrupp is not None and valitud_vanusgrupp in vanusgrupid:
+        codeset = {k:v for k,v in codeset.items() if codeset[k][valitud_vanusgrupp] is not None}
     if request.method == "POST":
         form = KategooriaForm(request.POST)
         if form.is_valid():
             kategooria = form.cleaned_data["kategooria"]
             print(kategooria)
-        # formset = ArticleFormSet(request.POST)
-        # if formset.is_valid():
-        #     # do something with the formset.cleaned_data
-        #     pass
     else:
         pass
         form = KategooriaForm()
-        # formset = ArticleFormSet()
     return render(
         request,
         'main/prt.html',
         {
             'codeset': codeset,
-            # "form": form,
-            # "formset": formset.as_ul()
+            'vanusgrupid': vanusgrupid,
+            'valitud_vanusgrupp': valitud_vanusgrupp
         }
     )
 
@@ -1727,7 +1727,6 @@ def calc_dlevel1_max(db_level1_dict):
     }
 
 
-from django.template.loader import render_to_string
 # andmeid valdkondade jaoks
 def get_icf_calcs_prt(request):
     params = request.GET.get('params', '')

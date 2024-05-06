@@ -39,7 +39,17 @@
 
 {% block content %}
   <div id="app" class="w3-container">
-    <div class="w3-row">
+    <div class="w3-bar">
+      {% for vanusgrupp in vanusgrupid %}
+        <a 
+                href="{% url 'prt' %}{% if vanusgrupp != 'kõik' %}?vanusgrupp={{ vanusgrupp }}{% endif %}"
+                class="w3-bar-item w3-button w3-theme-d4 {% if vanusgrupp == valitud_vanusgrupp %}w3-green{% endif %} w3-hover-white"
+        >
+          {{ vanusgrupp|capfirst }}
+        </a>
+      {% endfor %}
+    </div>
+    <div id="hindamisleht" class="w3-row">
       <div class="w3-threequarter w3-panel">
         {# Navigatsiooniriba #}
         <div class="w3-bar">
@@ -61,10 +71,13 @@
           {%  for code, item in codeset.items %}
             {% ifchanged item.valdkond %}
               <div class="w3-row city code_{{ item.valdkond }}">
-                <h2>{{ item.valdkond }} {{ item.valdkond|get_icf_title }}</h2>
+                <h3>{{ item.valdkond }} {{ item.valdkond|get_icf_title|lower|capfirst }}</h3>
               </div>
             {% endifchanged %}
-            <div class="w3-row w3-card city code_{{ item.valdkond }}">
+            <div 
+                    class="w3-row w3-card city code_{{ item.valdkond }}"
+                    style="display: none"
+            >
               <div class="w3-third w3-padding">
                 {{ code }}
                 <select id="{{ code }}_activities" onchange="checkCodes()">

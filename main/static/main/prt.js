@@ -12,11 +12,12 @@ function openCity(evt, cityName) {
   for (i = 0; i < y.length; i++) {
     y[i].style.display = "block";
   }
-  evt.currentTarget.classList.add('w3-border');
+  if (evt !== null) {
+    evt.currentTarget.classList.add('w3-border');
+  }
 }
 
 function checkCodes() {
-
   // kontrollime et d-koodiga koos oleks ka b-koodid
   let decks = document.querySelectorAll(".results_on_deck");
   let d_level1_results = {};
@@ -87,6 +88,7 @@ window.onload = (event) => {
       // });
     }
   );
+  openCity(null, 'd1'); // teeme esimese valdkonna n2htavaks
 };
 
 const { createApp, ref } = Vue
