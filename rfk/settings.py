@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'ajax_select',  # ajax selectväljad https://github.com/crucialfelix/django-ajax-selects
     'main', # RFK sandbox
     'montonio', # montonio sandbox
+    'sihtnumber', # postiindeksid
 ]
 
 MIDDLEWARE = [
