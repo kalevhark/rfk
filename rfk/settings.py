@@ -37,7 +37,6 @@ ALLOWED_HOSTS = [
     'test.valgalinn.ee', '63.33.55.93'
 ]
 
-
 # Application definition
 
 INSTALLED_APPS = [
