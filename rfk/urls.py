@@ -64,6 +64,7 @@ urlpatterns = [
     path('privacy/', views.privacy, name='privacy'),
     path('sandbox/', views.sandbox, name='sandbox'),
     path('rfk/', views.rfk, name='rfk'),
+    path('coreset/', views.coreset, name='coreset'),
     path('prt/', views.prt, name='prt'),
     # path('prt1/', views.prt1, name='prt1'),
     path('covidpass_s9a/', views.covidpass_s9a, name='covidpass_s9a'),
