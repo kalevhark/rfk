@@ -51,6 +51,8 @@ INSTALLED_APPS = [
     'main', # RFK sandbox
     'montonio', # montonio sandbox
     'sihtnumber', # postiindeksid
+    'rest_framework', # Django REST framework
+    'django_filters', # Django filters
 ]
 
 MIDDLEWARE = [
@@ -158,3 +160,12 @@ else:
     MONTONIO_API_SERVER = config['montonio-sandbox']['MONTONIO_API_SERVER']
     MY_ACCESS_KEY = config['montonio-sandbox']['MY_ACCESS_KEY']
     MY_SECRET_KEY = config['montonio-sandbox']['MY_SECRET_KEY']
+
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ],
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+}

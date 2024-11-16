@@ -13,15 +13,53 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from ajax_select import urls as ajax_select_urls
+
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
+
+import django_filters
+from django_filters import rest_framework as filters
+
+from rest_framework import routers, serializers, viewsets
+
 from main import views
-from ajax_select import urls as ajax_select_urls
+from main.models import RFK
+
+# Serializers define the API representation.
+class RFKSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = RFK
+        fields = ['code', 'Translated_title', 'Translated_description', 'Translated_inclusions', 'Translated_exclusions']
+
+
+class RFKFilter(filters.FilterSet):
+    # Võimaldab API päringuid: http://18.196.203.237/api/rfk/?code=d450
+    # code_search = django_filters.CharFilter(field_name='code', lookup_expr='exact')
+    code = django_filters.CharFilter(method='lookup_code')
+
+    def lookup_code(self, queryset, field_name, value):
+        queryset = queryset.filter(code=value)
+        return queryset
+
+
+# ViewSets define the view behavior.
+class RFKViewSet(viewsets.ModelViewSet):
+    queryset = RFK.objects.all()
+    serializer_class = RFKSerializer
+    # Järgnev vajalik, et saaks teha filtreeritud API päringuid
+    filter_backends = (filters.DjangoFilterBackend,)
+    filterset_class = RFKFilter
+    
+# Routers provide an easy way of automatically determining the URL conf.
+router = routers.DefaultRouter()
+router.register(r'rfk', RFKViewSet)
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('api/', include(router.urls)),
     path('ajax_select/', include(ajax_select_urls)),
     path('privacy/', views.privacy, name='privacy'),
     path('sandbox/', views.sandbox, name='sandbox'),
