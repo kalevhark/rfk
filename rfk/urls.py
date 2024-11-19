@@ -58,7 +58,7 @@ router = routers.DefaultRouter()
 router.register(r'rfk', RFKViewSet)
 
 urlpatterns = [
-    path('', views.index, name='index'),
+    path('', views.rfk, name='index'),
     path('api/', include(router.urls)),
     path('ajax_select/', include(ajax_select_urls)),
     path('privacy/', views.privacy, name='privacy'),

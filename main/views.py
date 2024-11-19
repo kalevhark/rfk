@@ -119,7 +119,7 @@ def highlight_matches(phrases, string):
         try:
             junk = next(junks)
             string_formatted += string[lastposition:junk.start()]
-            string_formatted += f'<span class="w3-pale-green">{string[junk.start():junk.end()]}</span>'
+            string_formatted += f'<span class="marked-pale-green">{string[junk.start():junk.end()]}</span>'
             lastposition = junk.end()
         except StopIteration:
             string_formatted += string[lastposition:]
@@ -149,17 +149,21 @@ def get_icf_matches(request=None, q=''):
                 (
                     f"""
                     <a
-                              class="copylink w3-tooltip"
+                              class="copylink"
+                              data-bs-toggle="tooltip" data-bs-placement="top" title="kopeeri '{code} {translated_title}' lõikelauale"
                               onclick="getLinkCopy(this)"
                               id="{code}"
                               data-uri="{code} {translated_title}"
                     >
                         <strong>{code_translated}</strong>
                         <span
-                            class="copylink-confirmation w3-text"
+                            class="copylink-confirmation"
                             id="linkCopyTooltip_{code}"
                         >
-                            <i class="fa fa-clone"></i>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16">
+                                <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1z"/>
+                                <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0z"/>
+                            </svg>
                         </span>
                     </a>
                     """,

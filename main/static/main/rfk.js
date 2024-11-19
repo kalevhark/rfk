@@ -42,6 +42,10 @@ Vue.createApp({
           .then(function (response) {
             if ( response.data ) {
               vm.rfkPath = response.data.result
+              var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+              var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl)
+              })
             } else {
               vm.rfkPath = vm.result + ': sellist koodi ei ole'
             }
@@ -87,14 +91,14 @@ function getLinkCopy(btn) {
   } else {
     unsecuredCopyToClipboard(linkCopyUrl);
   }
-  var tooltip = document.getElementById("linkCopyTooltip_"+linkCopyId);
+  var tooltip = document.getElementById("linkCopyTooltip_"+linkCopyId).parentElement;
   if (tooltip !== null) {
     var tooltipInnerHTMLOld = tooltip.innerHTML;
-    tooltip.classList.add("w3-pale-green");
+    tooltip.classList.add("text-success");
     tooltip.innerHTML = "kopeeritud lõikelauale";
     setTimeout(function () {
       tooltip.innerHTML = tooltipInnerHTMLOld;
-      tooltip.classList.remove("w3-pale-green");
+      tooltip.classList.remove("text-success");
     }, 2500);
   }
 }
