@@ -145,6 +145,8 @@ def get_icf_matches(request=None, q=''):
             translated_title_formatted = highlight_matches(phrases, translated_title)
             translated_description = icf_eng[key]['Translated_description']
             translated_description_formatted = highlight_matches(phrases, translated_description)
+            translated_inclusions = icf_eng[key]['Translated_inclusions']
+            translated_exclusions = icf_eng[key]['Translated_exclusions']
             matches.append(
                 (
                     f"""
@@ -169,6 +171,8 @@ def get_icf_matches(request=None, q=''):
                     """,
                     translated_title_formatted,
                     translated_description_formatted,
+                    translated_inclusions,
+                    translated_exclusions,
                     # ' '.join([code, translated_title])
                 )
             )
