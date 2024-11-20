@@ -1770,7 +1770,45 @@ def get_icf_calcs_prt(request):
         safe=False
     )
 
+def read_coreset_from_excel():
+    wb = openpyxl.load_workbook(settings.BASE_DIR / 'main' / 'static' / 'main' / 'data' / 'RFK_coreset.xlsx')
+    ws = wb.active
+    # Create a list of functions
+    functions = [] 
+  
+    # Iterate over the rows in the sheet 
+    # Iterate through rows 
+    for i, row in enumerate(ws): 
+        # Skip the first row (the row with the column names) 
+        if i == 0: 
+            continue
+        # Get the value of the first cell in the row 
+        fn = row[0].value
+        if fn not in functions:
+            # Add the value to the list 
+            functions.append(fn) 
+    
+    coreset = {fn: [] for fn in functions}
+    
+    for col in ws.iter_rows(
+            min_row=2, max_row=None,
+            min_col=1, max_col=6,
+            values_only=True
+    ):
+        coreset[col[0]].append(
+            {
+                'valdkond': col[1],
+                'kategooria': col[2],
+                'vanaduspensioniealine': col[3],
+                'kooliealine': col[4],
+                'koolieelik': col[5]
+            }
+        )
+    return coreset
+    
 def coreset(request):
+    coreset = read_coreset_from_excel()
+    print(coreset)
     coreset = {
         'Liikumine': ['d450', 'd460'],
         'Muu': ['d440'],
