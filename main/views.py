@@ -119,7 +119,7 @@ def highlight_matches(phrases, string):
         try:
             junk = next(junks)
             string_formatted += string[lastposition:junk.start()]
-            string_formatted += f'<span class="marked-pale-green">{string[junk.start():junk.end()]}</span>'
+            string_formatted += f'<span class="highlight">{string[junk.start():junk.end()]}</span>'
             lastposition = junk.end()
         except StopIteration:
             string_formatted += string[lastposition:]
@@ -1808,20 +1808,23 @@ def read_coreset_from_excel():
     
 def coreset(request):
     coreset = read_coreset_from_excel()
-    print(coreset)
-    coreset = {
-        'Liikumine': ['d450', 'd460'],
-        'Muu': ['d440'],
-        'Nägemine': ['d110'],
-        'Kuulmine': ['d115'],
-        'Keel-kõne': ['d330'],
-        'Vaimne': ['d210', 'd220'],
-    }
+    # coreset = {
+    #     'Liikumine': ['d450', 'd460'],
+    #     'Muu': ['d440'],
+    #     'Nägemine': ['d110'],
+    #     'Kuulmine': ['d115'],
+    #     'Keel-kõne': ['d330'],
+    #     'Vaimne': ['d210', 'd220'],
+    # }
     for key in coreset:
         for n in range(0, len(coreset[key])):
-            category = coreset[key][n]
+            category = coreset[key][n]['kategooria']
             category_row = RFK.objects.get(code=category)
             coreset[key][n] = {
+                'valdkond': coreset[key][n]['valdkond'],
+                'vanaduspensioniealine': coreset[key][n]['vanaduspensioniealine'],
+                'kooliealine': coreset[key][n]['kooliealine'],
+                'koolieelik': coreset[key][n]['koolieelik'],
                 'category': category_row.code,
                 'Translated_title': category_row.Translated_title,
                 'Translated_description': category_row.Translated_description,
