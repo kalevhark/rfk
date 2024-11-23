@@ -1808,14 +1808,6 @@ def read_coreset_from_excel():
     
 def coreset(request):
     coreset = read_coreset_from_excel()
-    # coreset = {
-    #     'Liikumine': ['d450', 'd460'],
-    #     'Muu': ['d440'],
-    #     'Nägemine': ['d110'],
-    #     'Kuulmine': ['d115'],
-    #     'Keel-kõne': ['d330'],
-    #     'Vaimne': ['d210', 'd220'],
-    # }
     for key in coreset:
         for n in range(0, len(coreset[key])):
             category = coreset[key][n]['kategooria']
@@ -1829,13 +1821,36 @@ def coreset(request):
                 'Translated_title': category_row.Translated_title,
                 'Translated_description': category_row.Translated_description,
                 'Translated_inclusions': category_row.Translated_inclusions,
-                'Translated_exclusions': category_row.Translated_exclusions
+                'Translated_exclusions': category_row.Translated_exclusions,
+                'form': KategooriaForm(
+                    auto_id=f'{key}',
+                )
             }
     return render(
         request,
         template_name='main/coreset.html',
         context={
             'coreset': coreset
+        }
+    )
+
+def expmoodul(request):
+    vanusgrupid = ['kõik', 'koolieelik', 'kooliealine', 'tööealine', 'vanaduspensioniealine']
+    valitud_vanusgrupp = request.GET.get('vanusgrupp')
+    if request.method == "POST":
+        form = KategooriaForm(request.POST)
+        if form.is_valid():
+            kategooria = form.cleaned_data["kategooria"]
+            print(kategooria)
+    else:
+        form = KategooriaForm()
+    return render(
+        request,
+        'main/expmoodul.html',
+        {
+            'form': form,
+            'vanusgrupid': vanusgrupid,
+            'valitud_vanusgrupp': valitud_vanusgrupp
         }
     )
 

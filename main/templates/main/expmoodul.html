@@ -1,0 +1,709 @@
+{% extends "main/base_bs5.html" %}
+{% load static %}
+
+{% block title %}{{ block.super }} - hindamine{% endblock %}
+{% block h1 %}{{ block.super }} - hindamine{% endblock %}
+
+{% block css %}
+<style>
+	.ui-menu-item > a {
+		text-decoration: none;
+	}
+
+	.ui-menu-item > a.ui-state-active {
+		background: lightgray;
+	}
+</style>
+{% endblock %}
+
+{% block content %}
+	<div id="app" class="container bg-light">
+		<button class="btn btn-outline-secondary" @click="showVotmetegevused = !showVotmetegevused">
+			<span v-if="showVotmetegevused">Ära näita võtmetegevusi</span>
+			<span v-else>Näita võtmetegevustega</span>
+		</button>
+		<button class="btn btn-outline-secondary" @click="showRFK = !showRFK">
+			<span v-if="showRFK">Ära näita RFK koode</span>
+			<span v-else>Näita RFK koode</span>
+		</button>
+		<h1>4. Taotluse ülevaade</h1>
+		
+		<div class="accordion accordion-flush" id="accordionFlushExample">
+		  
+		  <div class="accordion-item">
+			<h2 class="accordion-header" id="flush-headingOne">
+			  <button class="accordion-button collapsed bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+				4.1 Liikumise funktsioon (Liikumine)
+			  </button>
+			</h2>
+			<div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+			  <div class="accordion-body">
+				<p>
+					<h6>Valdkond: Liikumine</h6>
+					Taotleja enesehinnang
+					<ul class="list-group">
+					  <li class="list-group-item fst-italic">An item</li>
+					  <li class="list-group-item fst-italic">A second item</li>
+					  <li class="list-group-item fst-italic">A third item</li>
+					</ul>
+				</p>
+				<div v-if="showVotmetegevused" class="input-group mb-3">
+				  <label class="input-group-text" for="inputGroupSelect01_01">Võtmetegevus 1  EH skoor: 0  PRT skoor:</label>
+				  <select class="form-select" id="inputGroupSelect01_01" v-model="Select01_01" @change="calcValdkond01">
+					<option value="0" selected>0</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+				  </select>
+				</div>
+				<div v-if="showVotmetegevused" class="input-group mb-3">
+				  <label class="input-group-text" for="inputGroupSelect01_02">Võtmetegevus 2  EH skoor: 0  PRT skoor:</label>
+				  <select class="form-select" id="inputGroupSelect01_02" v-model="Select01_02" @change="calcValdkond01">
+					<option value="0" selected>0</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+				  </select>
+				</div>
+				<div v-if="showVotmetegevused" class="input-group mb-3">
+				  <label class="input-group-text" for="inputGroupSelect01_03">Võtmetegevus 3  EH skoor: 0  PRT skoor:</label>
+				  <select class="form-select" id="inputGroupSelect01_03" v-model="Select01_03" @change="calcValdkond01">
+					<option value="0" selected>0</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+				  </select>
+				</div>
+				<div class="input-group mb-3">
+				  <label class="input-group-text" for="inputGroupSelect01_04"><span v-if="showVotmetegevused">Võtmetegevus M </span><span v-else>Piirangu</span>&nbsp EH skoor: 0  PRT skoor:</label>
+				  <select class="form-select" id="inputGroupSelect01_M" v-model="Select01_M" @change="calcValdkond01">
+					<option value="0" selected>0</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+				  </select>
+				</div>
+				<h6>Valdkonna piirangu arvväärtus ja raskusaste: <span v-if="showVotmetegevused">[[Select01_01]] [[Select01_02]] [[Select01_03]] </span> [[Select01_M]] = [[Valdkond01Skoor]] [[Valdkond01Raskusaste]]</h6>
+				
+				  <div class="row align-items-start">
+					<div class="col">
+					  <h6>EH RFK koodid</h6>
+					  <ul class="list-group">
+						  <li class="list-group-item">
+							<input v-if="showRFK" type="codeRFK" class="form-control" id="exampleFormControlInput1eh_1" placeholder="d450.1 Kõndimine, KERGE piirang">
+							<input v-else type="codeRFK" class="form-control" id="exampleFormControlInput1eh_1e">
+						  </li>
+						  <li class="list-group-item">
+							<input v-if="showRFK" type="codeRFK" class="form-control" id="exampleFormControlInput1eh_2" placeholder="d420.3 Siirdumine, RASKE piirang">
+							<input v-else type="codeRFK" class="form-control" id="exampleFormControlInput1eh_2e">
+						  </li>
+						  <li class="list-group-item">
+							<input type="codeRFK" class="form-control" id="exampleFormControlInput1eh_3" placeholder="">
+						  </li>
+						</ul>
+					</div>
+					<div class="col">
+					  <h6>PRT RFK koodid</h6>
+					  {{ form }}
+					</div>
+				  </div>
+				  <div class="row align-items-start">
+					<div class="col">
+					 <h6>PRT diagnoosid</h6>
+					 <ul class="list-group">
+					  <li class="list-group-item fst-italic">An item</li>
+					  <li class="list-group-item fst-italic">A second item</li>
+					  <li class="list-group-item fst-italic">A third item</li>
+					</ul>
+					</div>
+				  </div>
+				<h6>PRT puude raskusaste: [[FunktsioonLiikumineRaskusaste]]</h6>
+				<h6>Põhjendus</h6>
+				<div class="form-floating">
+				  <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea1" style="height: 100px"></textarea>
+				  <label for="floatingTextarea1">Siia kirjutatakse põhjendused...</label>
+				</div>
+			  </div>
+			</div>
+		  </div>
+		  
+		  <div class="accordion-item">
+			<h2 class="accordion-header" id="flush-headingTwo">
+			  <button class="accordion-button collapsed bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+				4.2 Muu funktsioon (Käeline tegevus ja enesehooldus)
+			  </button>
+			</h2>
+			<div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+			  <div class="accordion-body">
+				<p>
+					<h6>Valdkond: Käeline tegevus</h6>
+					Taotleja enesehinnang
+					<ul class="list-group">
+					  <li class="list-group-item fst-italic">An item</li>
+					  <li class="list-group-item fst-italic">A second item</li>
+					  <li class="list-group-item fst-italic">A third item</li>
+					</ul>
+				</p>
+				<div v-if="showVotmetegevused" class="input-group mb-3">
+				  <label class="input-group-text" for="inputGroupSelect02_01">Võtmetegevus 1  EH skoor: 0  PRT skoor:</label>
+				  <select class="form-select" id="inputGroupSelect02_01" v-model="Select02_01" @change="calcValdkond02">
+					<option value="0" selected>0</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+				  </select>
+				</div>
+				<div v-if="showVotmetegevused" class="input-group mb-3">
+				  <label class="input-group-text" for="inputGroupSelect02_02">Võtmetegevus 2  EH skoor: 0  PRT skoor:</label>
+				  <select class="form-select" id="inputGroupSelect02_02" v-model="Select02_02" @change="calcValdkond02">
+					<option value="0" selected>0</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+				  </select>
+				</div>
+				<div v-if="showVotmetegevused" class="input-group mb-3">
+				  <label class="input-group-text" for="inputGroupSelect02_03">Võtmetegevus 3  &nbsp EH skoor: 0  PRT skoor:</label>
+				  <select class="form-select" id="inputGroupSelect02_03" v-model="Select02_03" @change="calcValdkond02">
+					<option value="0" selected>0</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+				  </select>
+				</div>
+				<div class="input-group mb-3">
+				  <label class="input-group-text" for="inputGroupSelect02_04"><span v-if="showVotmetegevused">Võtmetegevus M</span><span v-else>Piirangu </span> &nbsp EH skoor: 0  PRT skoor:</label>
+				  <select class="form-select" id="inputGroupSelect02_04" v-model="Select02_M" @change="calcValdkond02">
+					<option value="0" selected>0</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+				  </select>
+				</div>
+				<h6>Valdkonna piirangu arvväärtus ja raskusaste: <span v-if="showVotmetegevused">[[Select02_01]] [[Select02_02]] [[Select02_03]] </span> [[Select02_M]] = [[Valdkond02Skoor]] [[Valdkond02Raskusaste]]</h6>
+				<p>
+					<h6>Valdkond: Teadvusel püsimine ja enesehooldus</h6>
+					Taotleja enesehinnang
+					<ul class="list-group">
+					  <li class="list-group-item fst-italic">An item</li>
+					  <li class="list-group-item fst-italic">A second item</li>
+					  <li class="list-group-item fst-italic">A third item</li>
+					</ul>
+				</p>
+				<div v-if="showVotmetegevused" class="input-group mb-3">
+				  <label class="input-group-text" for="inputGroupSelect04_01">Teadvusel püsimine ärkveloleku ajal  EH skoor: 0  PRT skoor:</label>
+				  <select class="form-select" id="inputGroupSelect04_01" v-model="Select04_01" @change="calcValdkond04">
+					<option value="0" selected>0</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+				  </select>
+				</div>
+				<div v-if="showVotmetegevused" class="input-group mb-3">
+				  <label class="input-group-text" for="inputGroupSelect04_02">Soole ja põie kontrollimine  EH skoor: 0  PRT skoor:</label>
+				  <select class="form-select" id="inputGroupSelect04_02" v-model="Select04_02" @change="calcValdkond04">
+					<option value="0" selected>0</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+				  </select>
+				</div>
+				<div v-if="showVotmetegevused" class="input-group mb-3">
+				  <label class="input-group-text" for="inputGroupSelect04_03">Söömine ja joomine  EH skoor: 0  PRT skoor:</label>
+				  <select class="form-select" id="inputGroupSelect04_03" v-model="Select04_03" @change="calcValdkond04">
+					<option value="0" selected>0</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+				  </select>
+				</div>
+				<div class="input-group mb-3">
+				  <label class="input-group-text" for="inputGroupSelect04_04"><span v-if="showVotmetegevused">Võtmetegevus M</span><span v-else>Teadvusel püsimise ja enesehooldusega seotud</span>&nbsp EH skoor: 0  PRT skoor:</label>
+				  <select class="form-select" id="inputGroupSelect04_04" v-model="Select04_M" @change="calcValdkond04">
+					<option value="0" selected>0</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+				  </select>
+				</div>
+				<h6>Valdkonna piirangu arvväärtus ja raskusaste: <span v-if="showVotmetegevused">[[Select04_01]] [[Select04_02]] [[Select04_03]] </span> [[Select04_M]] = [[Valdkond04Skoor]] [[Valdkond04Raskusaste]]</h6>
+				<div class="row align-items-start">
+					<div class="col">
+					  <h6>EH RFK koodid</h6>
+					  <ul class="list-group">
+						  <li class="list-group-item fst-italic">An item</li>
+						  <li class="list-group-item fst-italic">A second item</li>
+						  <li class="list-group-item fst-italic">A third item</li>
+						</ul>
+					</div>
+					<div class="col">
+					  <h6>PRT RFK koodid</h6>
+						<ul class="list-group">
+						  <li class="list-group-item fst-italic">An item</li>
+						  <li class="list-group-item fst-italic">A second item</li>
+						  <li class="list-group-item fst-italic">A third item</li>
+						</ul>
+					</div>
+				  </div>
+				  <div class="row align-items-start">
+					<div class="col">
+					 <h6>PRT diagnoosid</h6>
+					 <ul class="list-group">
+					  <li class="list-group-item fst-italic">An item</li>
+					  <li class="list-group-item fst-italic">A second item</li>
+					  <li class="list-group-item fst-italic">A third item</li>
+					</ul>
+					</div>
+				  </div>
+				<h6>PRT puude raskusaste: [[FunktsioonMuuRaskusaste]]</h6>
+				<h6>Põhjendus</h6>
+				<div class="form-floating">
+				  <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+				  <label for="floatingTextarea2">Siia kirjutatakse põhjendused...</label>
+				</div>
+			  </div>
+			</div>
+		  </div>
+		  
+		  <div class="accordion-item">
+			<h2 class="accordion-header" id="flush-headingThree">
+			  <button class="accordion-button collapsed bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+				4.3 Suhtlemine
+			  </button>
+			</h2>
+			<div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+			  <div class="accordion-body">
+				<h6>Nägemisfunktsiooni kõrvalekalle</h6>
+				<div class="input-group mb-3">
+				  <label class="input-group-text" for="inputGroupSelect03_01"><span v-if="showVotmetegevused">Võtmetegevus M</span><span v-else>Piirangu</span> &nbsp EH skoor: 0  PRT skoor:</label>
+				  <select class="form-select" id="inputGroupSelect03_01" v-model="Select03_01_M" @change="calcValdkond03_01">
+					<option value="0" selected>0</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+				  </select>
+				</div>
+				<h6>Valdkonna piirangu arvväärtus ja raskusaste: [[Select03_01_M]] [[Valdkond03_01Raskusaste]]</h6>
+				<div class="row align-items-start">
+					<div class="col">
+					  <h6>EH RFK koodid</h6>
+					  <ul class="list-group">
+						  <li class="list-group-item fst-italic">An item</li>
+						  <li class="list-group-item fst-italic">A second item</li>
+						  <li class="list-group-item fst-italic">A third item</li>
+						</ul>
+					</div>
+					<div class="col">
+					  <h6>PRT RFK koodid</h6>
+						<ul class="list-group">
+						  <li class="list-group-item fst-italic">An item</li>
+						  <li class="list-group-item fst-italic">A second item</li>
+						  <li class="list-group-item fst-italic">A third item</li>
+						</ul>
+					</div>
+				  </div>
+				  <div class="row align-items-start">
+					<div class="col">
+					 <h6>PRT diagnoosid</h6>
+					 <ul class="list-group">
+					  <li class="list-group-item fst-italic">An item</li>
+					  <li class="list-group-item fst-italic">A second item</li>
+					  <li class="list-group-item fst-italic">A third item</li>
+					</ul>
+					</div>
+				  </div>
+				<h6>PRT puude raskusaste: [[FunktsioonNagemineRaskusaste]]</h6>
+				<h6>Põhjendus</h6>
+				<div class="form-floating">
+				  <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea3_1" style="height: 100px"></textarea>
+				  <label for="floatingTextarea3_1">Siia kirjutatakse põhjendused...</label>
+				</div>
+				<h6>Kuulmisfunktsiooni kõrvalekalle</h6>
+				<div class="input-group mb-3">
+				  <label class="input-group-text" for="inputGroupSelect03_02"><span v-if="showVotmetegevused">Võtmetegevus M</span><span v-else>Piirangu </span> &nbsp EH skoor: 0  PRT skoor:</label>
+				  <select class="form-select" id="inputGroupSelect03_02" v-model="Select03_02_M" @change="calcValdkond03_02">
+					<option value="0" selected>0</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+				  </select>
+				</div>
+				<h6>Valdkonna piirangu arvväärtus ja raskusaste: [[Select03_02_M]] [[Valdkond03_02Raskusaste]]</h6>
+				<div class="row align-items-start">
+					<div class="col">
+					  <h6>EH RFK koodid</h6>
+					  <ul class="list-group">
+						  <li class="list-group-item fst-italic">An item</li>
+						  <li class="list-group-item fst-italic">A second item</li>
+						  <li class="list-group-item fst-italic">A third item</li>
+						</ul>
+					</div>
+					<div class="col">
+					  <h6>PRT RFK koodid</h6>
+						<ul class="list-group">
+						  <li class="list-group-item fst-italic">An item</li>
+						  <li class="list-group-item fst-italic">A second item</li>
+						  <li class="list-group-item fst-italic">A third item</li>
+						</ul>
+					</div>
+				  </div>
+				  <div class="row align-items-start">
+					<div class="col">
+					 <h6>PRT diagnoosid</h6>
+					 <ul class="list-group">
+					  <li class="list-group-item fst-italic">An item</li>
+					  <li class="list-group-item fst-italic">A second item</li>
+					  <li class="list-group-item fst-italic">A third item</li>
+					</ul>
+					</div>
+				  </div>
+				<h6>PRT puude raskusaste: [[FunktsioonKuulmineRaskusaste]]</h6>
+				<h6>Põhjendus</h6>
+				<div class="form-floating">
+				  <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea3_2" style="height: 100px"></textarea>
+				  <label for="floatingTextarea3_2">Siia kirjutatakse põhjendused...</label>
+				</div>
+				<h6>Keele-kõne funktsiooni kõrvalekalle</h6>
+				<div class="input-group mb-3">
+				  <label class="input-group-text" for="inputGroupSelect03_03"><span v-if="showVotmetegevused">Võtmetegevus M</span><span v-else>Piirangu </span> &nbsp EH skoor: 0  PRT skoor:</label>
+				  <select class="form-select" id="inputGroupSelect03_03" v-model="Select03_03_M" @change="calcValdkond03_03">
+					<option value="0" selected>0</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+				  </select>
+				</div>
+				<h6>Valdkonna piirangu arvväärtus ja raskusaste:  [[Select03_03_M]] [[Valdkond03_03Raskusaste]]</h6>
+				<div class="row align-items-start">
+					<div class="col">
+					  <h6>EH RFK koodid</h6>
+					  <ul class="list-group">
+						  <li class="list-group-item fst-italic">An item</li>
+						  <li class="list-group-item fst-italic">A second item</li>
+						  <li class="list-group-item fst-italic">A third item</li>
+						</ul>
+					</div>
+					<div class="col">
+					  <h6>PRT RFK koodid</h6>
+						<ul class="list-group">
+						  <li class="list-group-item fst-italic">An item</li>
+						  <li class="list-group-item fst-italic">A second item</li>
+						  <li class="list-group-item fst-italic">A third item</li>
+						</ul>
+					</div>
+				  </div>
+				  <div class="row align-items-start">
+					<div class="col">
+					 <h6>PRT diagnoosid</h6>
+					 <ul class="list-group">
+					  <li class="list-group-item fst-italic">An item</li>
+					  <li class="list-group-item fst-italic">A second item</li>
+					  <li class="list-group-item fst-italic">A third item</li>
+					</ul>
+					</div>
+				  </div>
+				<h6>PRT puude raskusaste: [[FunktsioonKeelKoneRaskusaste]]</h6>
+				<h6>Põhjendus</h6>
+				<div class="form-floating">
+				  <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea3_3" style="height: 100px"></textarea>
+				  <label for="floatingTextarea3_3">Siia kirjutatakse põhjendused...</label>
+				</div>
+			  </div>
+			</div>
+		  </div>
+		  
+		  <div class="accordion-item">
+			<h2 class="accordion-header" id="flush-headingFour">
+			  <button class="accordion-button collapsed bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
+				4.4 Vaimne funktsioon (Vaimne sooritus)
+			  </button>
+			</h2>
+			<div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingFour" data-bs-parent="#accordionFlushExample">
+			  <div class="accordion-body">
+				<p>
+					<h6>Valdkond: Õppimine ja tegevuste elluviimine</h6>
+					Taotleja enesehinnang
+					<ul class="list-group">
+					  <li class="list-group-item fst-italic">An item</li>
+					  <li class="list-group-item fst-italic">A second item</li>
+					  <li class="list-group-item fst-italic">A third item</li>
+					</ul>
+				</p>
+				<div v-if="showVotmetegevused" class="input-group mb-3">
+				  <label class="input-group-text" for="inputGroupSelect05_01">Võtmetegevus 1  EH skoor: 0  PRT skoor:</label>
+				  <select class="form-select" id="inputGroupSelect05_01" v-model="Select05_01" @change="calcValdkond05">
+					<option value="0" selected>0</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+				  </select>
+				</div>
+				<div v-if="showVotmetegevused" class="input-group mb-3">
+				  <label class="input-group-text" for="inputGroupSelect05_02">Võtmetegevus 2  EH skoor: 0  PRT skoor:</label>
+				  <select class="form-select" id="inputGroupSelect05_02" v-model="Select05_02" @change="calcValdkond05">
+					<option value="0" selected>0</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+				  </select>
+				</div>
+				<div class="input-group mb-3">
+				  <label class="input-group-text" for="inputGroupSelect05_03"><span v-if="showVotmetegevused">Võtmetegevus M</span><span v-else>Piirangu </span> &nbsp EH skoor: 0  PRT skoor:</label>
+				  <select class="form-select" id="inputGroupSelect05_03" v-model="Select05_M" @change="calcValdkond05">
+					<option value="0" selected>0</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+				  </select>
+				</div>
+				<p>Valdkonna piirangu arvväärtus ja raskusaste: <span v-if="showVotmetegevused">[[Select05_01]] [[Select05_02]]</span> [[Select05_M]] = [[Valdkond05Skoor]] [[Valdkond05Raskusaste]]</p>
+				<p>
+					<h6>Valdkond: Muutustega kohanemine ja ohu tajumine</h6>
+					Taotleja enesehinnang
+					<ul class="list-group">
+					  <li class="list-group-item fst-italic">An item</li>
+					  <li class="list-group-item fst-italic">A second item</li>
+					  <li class="list-group-item fst-italic">A third item</li>
+					</ul>
+					</p>
+				<div v-if="showVotmetegevused" class="input-group mb-3">
+				  <label class="input-group-text" for="inputGroupSelect06_01">Võtmetegevus 1  EH skoor: 0  PRT skoor:</label>
+				  <select class="form-select" id="inputGroupSelect06_01" v-model="Select06_01" @change="calcValdkond06">
+					<option value="0" selected>0</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+				  </select>
+				</div>
+				<div v-if="showVotmetegevused" class="input-group mb-3">
+				  <label class="input-group-text" for="inputGroupSelect06_02">Võtmetegevus 2  EH skoor: 0  PRT skoor:</label>
+				  <select class="form-select" id="inputGroupSelect06_02" v-model="Select06_02" @change="calcValdkond06">
+					<option value="0" selected>0</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+				  </select>
+				</div>
+				<div v-if="showVotmetegevused" class="input-group mb-3">
+				  <label class="input-group-text" for="inputGroupSelect06_03">Võtmetegevus 3  &nbsp EH skoor: 0  PRT skoor:</label>
+				  <select class="form-select" id="inputGroupSelect06_03" v-model="Select06_03" @change="calcValdkond06">
+					<option value="0" selected>0</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+				  </select>
+				</div>
+				<div class="input-group mb-3">
+				  <label class="input-group-text" for="inputGroupSelect06_04"><span v-if="showVotmetegevused">Võtmetegevus M</span><span v-else>Piirangu </span> &nbsp EH skoor: 0  PRT skoor:</label>
+				  <select class="form-select" id="inputGroupSelect06_04" v-model="Select06_M" @change="calcValdkond06">
+					<option value="0" selected>0</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+				  </select>
+				</div>
+				<h6>Valdkonna piirangu arvväärtus ja raskusaste:  <span v-if="showVotmetegevused">[[Select06_01]] [[Select06_02]] [[Select06_03]] </span> [[Select06_M]] = [[Valdkond06Skoor]] [[Valdkond06Raskusaste]]</h6>
+				<p>
+					<h6>Valdkond: Inimestevaheline lävimine ja suhted</h6>
+					Taotleja enesehinnang
+					<ul class="list-group">
+					  <li class="list-group-item fst-italic">An item</li>
+					  <li class="list-group-item fst-italic">A second item</li>
+					  <li class="list-group-item fst-italic">A third item</li>
+					</ul>
+					</p>
+				<div v-if="showVotmetegevused" class="input-group mb-3">
+				  <label class="input-group-text" for="inputGroupSelect07_01">Võtmetegevus 1  EH skoor: 0  PRT skoor:</label>
+				  <select class="form-select" id="inputGroupSelect07_01" v-model="Select07_01" @change="calcValdkond07">
+					<option value="0" selected>0</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+				  </select>
+				</div>
+				<div v-if="showVotmetegevused" class="input-group mb-3">
+				  <label class="input-group-text" for="inputGroupSelect07_02">Võtmetegevus 2  EH skoor: 0  PRT skoor:</label>
+				  <select class="form-select" id="inputGroupSelect07_02" v-model="Select07_02" @change="calcValdkond07">
+					<option value="0" selected>0</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+				  </select>
+				</div>
+				<div class="input-group mb-3">
+				  <label class="input-group-text" for="inputGroupSelect07_03"><span v-if="showVotmetegevused">Võtmetegevus M</span><span v-else>Piirangu </span> &nbsp EH skoor: 0  PRT skoor:</label>
+				  <select class="form-select" id="inputGroupSelect07_03" v-model="Select07_M" @change="calcValdkond07">
+					<option value="0" selected>0</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+				  </select>
+				</div>
+				<h6>Valdkonna piirangu arvväärtus ja raskusaste:  <span v-if="showVotmetegevused">[[Select07_01]] [[Select07_02]]</span> [[Select07_M]] = [[Valdkond07Skoor]] [[Valdkond07Raskusaste]]</h6>
+				<div class="row align-items-start">
+					<div class="col">
+					  <h6>EH RFK koodid</h6>
+					  <ul class="list-group">
+						  <li class="list-group-item fst-italic">An item</li>
+						  <li class="list-group-item fst-italic">A second item</li>
+						  <li class="list-group-item fst-italic">A third item</li>
+						</ul>
+					</div>
+					<div class="col">
+					  <h6>PRT RFK koodid</h6>
+						<ul class="list-group">
+						  <li class="list-group-item fst-italic">An item</li>
+						  <li class="list-group-item fst-italic">A second item</li>
+						  <li class="list-group-item fst-italic">A third item</li>
+						</ul>
+					</div>
+				  </div>
+				  <div class="row align-items-start">
+					<div class="col">
+					 <h6>PRT diagnoosid</h6>
+					 <ul class="list-group">
+					  <li class="list-group-item fst-italic">An item</li>
+					  <li class="list-group-item fst-italic">A second item</li>
+					  <li class="list-group-item fst-italic">A third item</li>
+					</ul>
+					</div>
+				  </div>
+				<h6>PRT puude raskusaste: [[FunktsioonVaimneRaskusaste]]</h6>
+				<h6>Põhjendus</h6>
+				<div class="form-floating">
+				  <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea5" style="height: 100px"></textarea>
+				  <label for="floatingTextarea5">Siia kirjutatakse põhjendused...</label>
+				</div>
+			  </div>
+			</div>
+		  </div>
+		  
+		  <div class="accordion-item">
+			<h2 class="accordion-header" id="flush-headingFive">
+			  <button class="accordion-button collapsed bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive">
+				5. Lõpphinnang
+			  </button>
+			</h2>
+			<div id="flush-collapseFive" class="accordion-collapse collapse" aria-labelledby="flush-headingFive" data-bs-parent="#accordionFlushExample">
+			  <div class="accordion-body">
+				<h6>Puudeaste [[puudeRaskusaste]]</h6>
+				<h6>Funktsioonipiirangud</h6>
+				<div class="row align-items-start">
+					<div class="col">
+					  <h6>Liikumise funktsioon</h6>
+					  <ul class="list-group">
+						  <li class="list-group-item">[[Valdkond01Skoor]]</li>
+						  <li class="list-group-item"></li>
+						  <li class="list-group-item"></li>
+						  <li class="list-group-item">[[FunktsioonLiikumineRaskusaste]]</li>
+						</ul>
+					</div>
+					<div class="col">
+					  <h6>Muu<br>funktsioon</h6>
+					  <ul class="list-group">
+						  <li class="list-group-item">[[Valdkond02Skoor]]</li>
+						  <li class="list-group-item">[[Valdkond04Skoor]]</li>
+						  <li class="list-group-item"></li>
+						  <li class="list-group-item">[[FunktsioonMuuRaskusaste]]</li>
+						</ul>
+					</div>
+					<div class="col">
+					  <h6>Nägemise funktsioon</h6>
+					  <ul class="list-group">
+						  <li class="list-group-item">[[Valdkond03_01Skoor]]</li>
+						  <li class="list-group-item"></li>
+						  <li class="list-group-item"></li>
+						  <li class="list-group-item">[[FunktsioonNagemineRaskusaste]]</li>
+						</ul>
+					</div>
+					<div class="col">
+					  <h6>Kuulmise funktsioon</h6>
+					  <ul class="list-group">
+						  <li class="list-group-item">[[Valdkond03_02Skoor]]</li>
+						  <li class="list-group-item"></li>
+						  <li class="list-group-item"></li>
+						  <li class="list-group-item">[[FunktsioonKuulmineRaskusaste]]</li>
+						</ul>
+					</div>
+					<div class="col">
+					  <h6>Keele-kõne funktsioon</h6>
+					  <ul class="list-group">
+						  <li class="list-group-item">[[Valdkond03_03Skoor]]</li>
+						  <li class="list-group-item"></li>
+						  <li class="list-group-item"></li>
+						  <li class="list-group-item">[[FunktsioonKeelKoneRaskusaste]]</li>
+						</ul>
+					</div>
+					<div class="col">
+					  <h6>Vaimne funktsioon</h6>
+					  <ul class="list-group">
+						  <li class="list-group-item">[[Valdkond05Skoor]]</li>
+						  <li class="list-group-item">[[Valdkond06Skoor]]</li>
+						  <li class="list-group-item">[[Valdkond07Skoor]]</li>
+						  <li class="list-group-item">[[FunktsioonVaimneRaskusaste]]</li>
+						</ul>
+					</div>
+					<div class="col">
+					  <h6>Muu funktsioon (erijuhtum)</h6>
+					</div>
+				  </div>
+				<h6>Objektiivne staatus ja uuringutulemused (ei lähe otsusele)</h6>
+				<div class="form-floating">
+				  <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextareaObjektiivneStaatus" style="height: 100px"></textarea>
+				  <label for="floatingTextareaObjektiivneStaatus">Siia kirjutatakse leiud...</label>
+				</div>
+				<h6>Otsuse põhjendus (läheb otsusele)</h6>
+				<div class="form-floating">
+				  <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextareaOtsusePohjendus" style="height: 100px"></textarea>
+				  <label for="floatingTextareaOtsusePohjendus">Siia kirjutatakse põhjenduse kokkuvõte...</label>
+				</div>
+				<h6>Kaasatud spetsialistide ütlused</h6>
+				<h6>Arstid ja TSK</h6>
+				<h6>Otsuse andmed</h6>
+			  </div>
+			</div>
+		  </div>
+		</div>
+	</div>
+	{% endblock %}
+
+	{% block src %}
+	  <!--  Laetavad moodulid-->
+		<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+		<!-- Vue -->
+		<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+		<!-- Ajax Selects -->
+		<link href="{% static 'ajax_select/css/ajax_select.css' %}" type="text/css" media="all" rel="stylesheet">
+		<script src="{% static 'admin/js/jquery.init.js' %}"></script>
+		<script src="{% static 'ajax_select/js/bootstrap.js' %}"></script>
+		<script src="{% static 'ajax_select/js/ajax_select.js' %}"></script>
+	{% endblock %}
+
+	{% block js %}
+	  <script src="{% static 'main/expmoodul.js'%}?ver=2022"></script>
+	{% endblock %}
