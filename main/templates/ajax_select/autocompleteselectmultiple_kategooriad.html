@@ -6,7 +6,7 @@
 <input type="hidden" name="{{name}}" id="{{html_id}}" value="{{current_ids}}" data-ajax-select="autocompleteselectmultiple" data-plugin-options="{{ data_plugin_options }}" />
 
 {% block extra_script %}
-{#<script type="text/javascript">#}
+{% comment %} <script type="application/javascript"> {% endcomment %}
 {#  function {{html_id}}_kontrolli(elementId) {#}
 {#    console.log(elementId);#}
 {#    var outerDiv = document.getElementById("{{html_id}}_on_deck");#}
@@ -23,18 +23,18 @@
 {#    }#}
 {#  }#}
 {#    #}
-{#  $("#{{html_id}}_on_deck").bind('added', function() {#}
-{#    var id = $("#{{html_id}}").val();#}
-{#    console.log('added id:' + id );#}
-{#    let elementId = "#{{html_id}}"#}
-{#    {{html_id}}_kontrolli(elementId);#}
-{#  });#}
-{#  #}
-{#  $("#{{html_id}}_on_deck").bind('killed', function() {#}
-{#    var current = $("#{{html_id}}").val()#}
-{#    console.log('removed, current is:' + current);#}
-{#  });#}
-{#</script>#}
+  {% comment %} $("#{{html_id}}_on_deck").bind('added', function() {
+    var id = $("#{{html_id}}").val();
+    console.log('added id:' + id );
+    let elementId = "#{{html_id}}"
+    // {{html_id}}_kontrolli(elementId);
+  });
+
+  $("#{{html_id}}_on_deck").bind('killed', function() {
+    var current = $("#{{html_id}}").val();
+    console.log('removed, current is:' + current);
+  });
+</script> {% endcomment %}
 {% endblock %}
 {# django admin adds the help text. this is for use outside of the admin #}
 {% block help %}{% if help_text %}<p class="help">{{help_text}}</p>{% endif %}{% endblock %}

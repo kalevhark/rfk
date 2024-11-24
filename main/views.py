@@ -341,9 +341,9 @@ def get_icf_code_verbose(request=None, code='', flat=False):
         if category_verbose and qualifiers_verbose:
             code_formatted = get_icf_code_colored(*result.groups(), flat=flat)
             if flat:
-                icf_code_verbose = f'{code_formatted} {category_verbose} - {qualifiers_verbose}'
+                icf_code_verbose = f'<span class="icf-code">{code_formatted}</span>: {category_verbose} - {qualifiers_verbose}'
             else:
-                icf_code_verbose = f'<strong>{code_formatted}</strong>: {category_verbose} - {qualifiers_verbose}'
+                icf_code_verbose = f'<span class="icf-code" style="color: green;">{code_formatted}</span>: {category_verbose} - {qualifiers_verbose}'
     if request:
         return JsonResponse(
             {
@@ -1809,6 +1809,7 @@ def read_coreset_from_excel():
 def coreset(request):
     coreset = read_coreset_from_excel()
     for key in coreset:
+        print(key)
         for n in range(0, len(coreset[key])):
             category = coreset[key][n]['kategooria']
             category_row = RFK.objects.get(code=category)
@@ -1823,7 +1824,7 @@ def coreset(request):
                 'Translated_inclusions': category_row.Translated_inclusions,
                 'Translated_exclusions': category_row.Translated_exclusions,
                 'form': KategooriaForm(
-                    auto_id=f'{key}',
+                    auto_id=f'{key}_%s',
                 )
             }
     return render(

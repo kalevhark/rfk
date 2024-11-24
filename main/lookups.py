@@ -30,8 +30,8 @@ class KategooriaLookup(LookupChannel):
                     pk=RFK.objects.filter(code__exact=q[:-1])[0].pk,
                     # pk=f'{q}{m22raja}',
                     value=f'{q}{m22raja}',
-                    match=get_icf_code_verbose(request=None, code=f'{q}{m22raja}', flat=True),
-                    repr=get_icf_code_verbose(request=None, code=f'{q}{m22raja}', flat=True),
+                    match=get_icf_code_verbose(request=None, code=f'{q}{m22raja}', flat=False),
+                    repr=get_icf_code_verbose(request=None, code=f'{q}{m22raja}', flat=False),
                 ) for
                 m22raja in
                 [0, 1, 2, 3, 4, 8, 9]
@@ -43,8 +43,8 @@ class KategooriaLookup(LookupChannel):
                     pk=RFK.objects.filter(code__exact=kategooria)[0].pk,
                     # pk=f'{q}',
                     value=f'{q}',
-                    match=get_icf_code_verbose(request=None, code=f'{q}', flat=True),
-                    repr=get_icf_code_verbose(request=None, code=f'{q}', flat=True),
+                    match=get_icf_code_verbose(request=None, code=f'{q}', flat=False),
+                    repr=get_icf_code_verbose(request=None, code=f'{q}', flat=False),
                 )
             ]
         elif len(q) > 3 and '.' == q[-2] and (q[0].lower() in ['d', 's']):
@@ -56,8 +56,8 @@ class KategooriaLookup(LookupChannel):
                     pk=RFK.objects.filter(code__exact=q[:-2])[0].pk,
                     # pk=f'{q}{m22raja}',
                     value=f'{q}{m22raja}',
-                    match=get_icf_code_verbose(request=None, code=f'{q}{m22raja}', flat=True),
-                    repr=get_icf_code_verbose(request=None, code=f'{q}{m22raja}', flat=True),
+                    match=get_icf_code_verbose(request=None, code=f'{q}{m22raja}', flat=False),
+                    repr=get_icf_code_verbose(request=None, code=f'{q}{m22raja}', flat=False),
                 ) for
                 m22raja in
                 m22rajad
@@ -69,8 +69,8 @@ class KategooriaLookup(LookupChannel):
                     # pk=RFK.objects.filter(code__exact=q[:-3])[0].pk,
                     pk=f'{q}{m22raja}',
                     value=f'{q}{m22raja}',
-                    match=get_icf_code_verbose(request=None, code=f'{q}{m22raja}', flat=True),
-                    repr=get_icf_code_verbose(request=None, code=f'{q}{m22raja}', flat=True),
+                    match=get_icf_code_verbose(request=None, code=f'{q}{m22raja}', flat=False),
+                    repr=get_icf_code_verbose(request=None, code=f'{q}{m22raja}', flat=False),
                 ) for
                 m22raja in
                 m22rajad
@@ -102,7 +102,7 @@ class KategooriaLookup(LookupChannel):
     def format_item_display(self, item):
         """ (HTML) formatted item for displaying item in the selected deck area """
         if isinstance(item, RFK):
-            answer = f'{item.code}'
+            answer = f'<span class="icf-code" style="color: red;">{item.code}</span> NB! määrajad puuduvad.'
         else:
             answer = get_icf_code_verbose(request=None, code=item.value, flat=True)
         return answer
