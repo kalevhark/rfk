@@ -82,7 +82,7 @@ urlpatterns = [
     path('main/', include('main.urls')),
     path('montonio/', include('montonio.urls')),
     path('sihtnumber/', include('sihtnumber.urls')),
-    # path('j6ul2023/', views.j6ul2023, name='j6ul2023'),
+    path('j6ul2024/', views.j6ul2024, name='j6ul2024'),
     path('helenamiia/', views.helenamiia, name='helenamiia'),
     path('admin/', admin.site.urls),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -1648,14 +1648,17 @@ def prt(request):
     )
 
 import random
-def j6ul2023(request):
+def j6ul2024(request):
     rfk_codes_b = [
         'b535.1', # Seedesüsteemiga seonduvad aistingud
         'b1265.0', # Optimism
         'b1300.0', # Vaimse energia tase
+        'b1264.0', # Kogemustele avatus
+        'b1303.1', # Himu
     ]
     rfk_codes_d = [
         'd550.00', # Söömine
+        'd560.00', # Joomine
         'd6604.0', # Teiste abistamine toitumisel
         'd760.0', # Perekondlikud suhted
         'd350.00', # Vestlemine
@@ -1672,7 +1675,7 @@ def j6ul2023(request):
     random.shuffle(rfk_codes_e)
     return render(
         request,
-        'main/j6ul2023.html',
+        'main/j6ul2024.html',
         {
             'snowflakes': range(1, 108),
             'rfk_code_verbose_b1': get_icf_code_verbose(request=None, code=rfk_codes_b[0], flat=False),

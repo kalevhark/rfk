@@ -6,6 +6,10 @@
 
 {% block css %}
   <style>
+    a {
+      text-decoration: none;
+    }
+
     .result {
       line-height:1.5em;
       min-height:3.5em;
@@ -63,18 +67,14 @@
 {% block content %}
   <div class="container" id="codesearch">
     <div class="row align-items-start">
-      <p>
-{#        <a#}
-{#                href="{% url 'j6ul2023' %}"#}
-{#                class="w3-button"#}
-{#                title="Näita RFK jõulukaarti"#}
-{#        >#}
-{#          <span> 🎅 </span>#}
-{#        </a>#}
-      </p>
-    </div>
-    <div class="row align-items-start">
       <div class="input-group mb-3">
+        <a
+                href="{% url 'j6ul2024' %}"
+                class="w3-button"
+                title="Näita RFK jõulukaarti"
+        >
+          <span> 🎅 </span>
+        </a>&nbsp&nbsp
         <input 
           v-model="rfkCode"
           type="text" 
