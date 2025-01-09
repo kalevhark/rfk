@@ -1818,10 +1818,8 @@ def coreset(request):
     coreset_all = read_coreset_from_excel()
     coreset_groups = {}
     for group in function_groups:
-        print(function_groups[group])
         coreset = {key: coreset_all[key] for key in function_groups[group]}
         for key in coreset:
-            print(key)
             for n in range(0, len(coreset[key])):
                 category = coreset[key][n]['kategooria']
                 category_row = RFK.objects.get(code=category)
