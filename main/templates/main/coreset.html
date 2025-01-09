@@ -7,55 +7,98 @@
 {% block content %}
   <div class="container">
     <div class="row align-items-start p-3 g-2">
-      {% for key, item in coreset.items %}
-        <div class="col">
-          <ul class="list-group">
-            <li class="list-group-item active p-2" aria-current="true">{{ key }}</li>
-            {% for code in item %}
-              {% ifchanged code.valdkond %}
-                <li class="list-group-item disable p-2">Valdkond {{ code.valdkond }}</li>
-              {% endifchanged %}
-              <li class="list-group-item p-2">
-              <a 
-                tabindex="0" 
-                class="btn btn-sm btn-outline-secondary"
-                role="button"
-                data-bs-toggle="popover" 
-                data-bs-placement="bottom"
-                data-bs-trigger="focus" 
-                data-bs-html="true"
-                title="{{ code.Translated_description }}"
-                data-bs-content="+ {{ code.Translated_inclusions }}<br>- {{code.Translated_exclusions }}"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
-                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
-                  <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
-                </svg>
-                {{ code.category }}
-              </a>
-              <a 
-                tabindex="0" 
-                class="btn btn-sm btn-outline-success"
-                role="button"
-                title="kopeeri '{{ code.category }}' lõikelauale"
-                onclick="navigator.clipboard.writeText('{{ code.category }}.')"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16">
-                  <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1z"/>
-                  <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0z"/>
-                </svg>
-              </a>
-              <small>
-              {% if code.vanaduspensioniealine %}V{% endif %}
-              {% if code.kooliealine %}L+{% endif %}
-              {% if code.koolieelik %}L-{% endif %}
-              </small>
-              <br>{{ code.Translated_title}}
-              </li>
+      
+      <ul class="nav nav-tabs" id="myTab" role="tablist">
+        {% for group, coreset in coreset_groups.items %}
+          <li class="nav-item" role="presentation">
+            <button 
+                class="nav-link {% if forloop.first %}active{% endif %}" 
+                id="{{ group }}-tab" 
+                data-bs-toggle="tab" 
+                data-bs-target="#{{ group }}" 
+                type="button" 
+                role="tab" 
+                aria-controls="{{ group }}"
+                aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+            >
+              {{ group }}
+            </button>
+          </li>
+        {% endfor %}
+      </ul>
+      
+      <div class="tab-content" id="myTabContent">
+        {% for group, coreset in coreset_groups.items %}
+          <div 
+              class="tab-pane fade {% if forloop.first %}show active{% endif %}" 
+              id="{{ group }}" 
+              role="tabpanel" 
+              aria-labelledby="{{ group }}-tab"
+          >          
+            {% for key, item in coreset.items %}
+              <div class="col">
+                <ul class="list-group">
+                  {% comment %} <li class="list-group-item active p-2" aria-current="true">{{ key }}</li> {% endcomment %}
+                  {% for code in item %}
+                    {% ifchanged code.valdkond %}
+                      <li class="list-group-item active p-2" aria-current="true">{{ key|capfirst }}: Valdkond {{ code.valdkond }}</li>
+                    {% endifchanged %}
+                    <li class="list-group-item p-2">
+                    <a 
+                      tabindex="0" 
+                      class="btn btn-sm btn-outline-secondary"
+                      role="button"
+                      data-bs-toggle="popover" 
+                      data-bs-placement="bottom"
+                      data-bs-trigger="focus" 
+                      data-bs-html="true"
+                      title="{{ code.Translated_description }}"
+                      data-bs-content="+ {{ code.Translated_inclusions }}<br>- {{code.Translated_exclusions }}"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                        <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                      </svg>
+                      {{ code.category }}
+                    </a>
+                    <a 
+                      tabindex="0" 
+                      class="btn btn-sm btn-outline-success"
+                      role="button"
+                      title="kopeeri '{{ code.category }}' lõikelauale"
+                      onclick="navigator.clipboard.writeText('{{ code.category }}.')"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16">
+                        <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1z"/>
+                        <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0z"/>
+                      </svg>
+                    </a>
+                    <small>
+                    {% if code.vanaduspensioniealine == "EI" %}
+                      <span title="Ei soovitata kasutada vanaduspensioniealist puhul">
+                        <del><mark>V</mark></del>
+                      </span>
+                    {% endif %}
+                    {% if code.kooliealine == "EI" %}
+                      <span title="Ei soovitata kasutada kooliealiste puhul">
+                        <del><mark>L+</mark></del>
+                      </span>
+                    {% endif %}
+                    {% if code.koolieelik == "EI" %}
+                      <span title="Ei soovitata kasutada koolieelikute puhul">
+                        <del><mark>L-</mark></del>
+                      </span>
+                    {% endif %}
+                    </small>
+                    <br>{{ code.Translated_title}}
+                    </li>
+                  {% endfor %}
+                </ul>
+              </div>
             {% endfor %}
-          </ul>
-        </div>
-      {% endfor %}
+          </div>
+        {% endfor %}
+      </div>
     </div>
   </div>
 {% endblock %}

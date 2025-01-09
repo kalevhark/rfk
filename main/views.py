@@ -1778,7 +1778,6 @@ def read_coreset_from_excel():
     ws = wb.active
     # Create a list of functions
     functions = [] 
-  
     # Iterate over the rows in the sheet 
     # Iterate through rows 
     for i, row in enumerate(ws): 
@@ -1810,31 +1809,45 @@ def read_coreset_from_excel():
     return coreset
     
 def coreset(request):
-    coreset = read_coreset_from_excel()
-    for key in coreset:
-        print(key)
-        for n in range(0, len(coreset[key])):
-            category = coreset[key][n]['kategooria']
-            category_row = RFK.objects.get(code=category)
-            coreset[key][n] = {
-                'valdkond': coreset[key][n]['valdkond'],
-                'vanaduspensioniealine': coreset[key][n]['vanaduspensioniealine'],
-                'kooliealine': coreset[key][n]['kooliealine'],
-                'koolieelik': coreset[key][n]['koolieelik'],
-                'category': category_row.code,
-                'Translated_title': category_row.Translated_title,
-                'Translated_description': category_row.Translated_description,
-                'Translated_inclusions': category_row.Translated_inclusions,
-                'Translated_exclusions': category_row.Translated_exclusions,
-                'form': KategooriaForm(
-                    auto_id=f'{key}_%s',
-                )
-            }
+    function_groups = {
+        'Liikumine': ['liikumine'],
+        'Suhtlemine': ['nägemine', 'kuulmine', 'keel-kõne'],
+        'Muu': ['muu'],
+        'Vaimne': ['vaimne']
+    }
+    coreset_all = read_coreset_from_excel()
+    coreset_groups = {}
+    for group in function_groups:
+        print(function_groups[group])
+        coreset = {key: coreset_all[key] for key in function_groups[group]}
+        for key in coreset:
+            print(key)
+            for n in range(0, len(coreset[key])):
+                category = coreset[key][n]['kategooria']
+                category_row = RFK.objects.get(code=category)
+                coreset[key][n] = {
+                    'valdkond': coreset[key][n]['valdkond'],
+                    'vanaduspensioniealine': coreset[key][n]['vanaduspensioniealine'],
+                    'kooliealine': coreset[key][n]['kooliealine'],
+                    'koolieelik': coreset[key][n]['koolieelik'],
+                    'category': category_row.code,
+                    'Translated_title': category_row.Translated_title,
+                    'Translated_description': category_row.Translated_description,
+                    'Translated_inclusions': category_row.Translated_inclusions,
+                    'Translated_exclusions': category_row.Translated_exclusions,
+                    'form': KategooriaForm(
+                        auto_id=f'{key}_%s',
+                    )
+                }
+            # endfor for n in range(0, len(coreset[key]))
+        # endfor key in coreset
+        coreset_groups[group] = coreset
+        
     return render(
         request,
         template_name='main/coreset.html',
         context={
-            'coreset': coreset
+            'coreset_groups': coreset_groups,
         }
     )
 
