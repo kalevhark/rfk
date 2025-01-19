@@ -68,13 +68,13 @@
   <div class="container" id="codesearch">
     <div class="row align-items-start">
       <div class="input-group mb-3">
-        <a
+        {% comment %} <a
                 href="{% url 'j6ul2024' %}"
                 class="w3-button"
                 title="Näita RFK jõulukaarti"
         >
           <span> 🎅 </span>
-        </a>&nbsp&nbsp
+        </a>&nbsp&nbsp {% endcomment %}
         <input 
           v-model="rfkCode"
           type="text" 
