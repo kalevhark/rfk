@@ -78,7 +78,7 @@
 				  </select>
 				</div>
 				<div class="input-group mb-3">
-				  <label class="input-group-text" for="inputGroupSelect01_04"><span v-if="showVotmetegevused">Võtmetegevus M </span><span v-else>Piirangu</span>&nbsp EH skoor: 0  PRT skoor:</label>
+				  <label class="input-group-text" for="inputGroupSelect01_04">Liikumisega seotud <span v-if="showVotmetegevused">&nbsp;muud&nbsp;</span> piirangud:</label>
 				  <select class="form-select" id="inputGroupSelect01_M" v-model="Select01_M" @change="calcValdkond01">
 					<option value="0" selected>0</option>
 					<option value="1">1</option>
@@ -179,7 +179,7 @@
 				  </select>
 				</div>
 				<div class="input-group mb-3">
-				  <label class="input-group-text" for="inputGroupSelect02_04"><span v-if="showVotmetegevused">Võtmetegevus M</span><span v-else>Piirangu </span> &nbsp EH skoor: 0  PRT skoor:</label>
+				  <label class="input-group-text" for="inputGroupSelect02_04">Käelise tegevusega seotud <span v-if="showVotmetegevused">&nbsp;muud&nbsp;</span>piirangud:</label>
 				  <select class="form-select" id="inputGroupSelect02_04" v-model="Select02_M" @change="calcValdkond02">
 					<option value="0" selected>0</option>
 					<option value="1">1</option>
@@ -229,7 +229,7 @@
 				  </select>
 				</div>
 				<div class="input-group mb-3">
-				  <label class="input-group-text" for="inputGroupSelect04_04"><span v-if="showVotmetegevused">Võtmetegevus M</span><span v-else>Teadvusel püsimise ja enesehooldusega seotud</span>&nbsp EH skoor: 0  PRT skoor:</label>
+				  <label class="input-group-text" for="inputGroupSelect04_04">Teadvusel püsimise ja enesehooldusega seotud <span v-if="showVotmetegevused">&nbsp;muud&nbsp;</span> piirangud:</label>
 				  <select class="form-select" id="inputGroupSelect04_04" v-model="Select04_M" @change="calcValdkond04">
 					<option value="0" selected>0</option>
 					<option value="1">1</option>
@@ -287,7 +287,7 @@
 			  <div class="accordion-body">
 				<h6>Nägemisfunktsiooni kõrvalekalle</h6>
 				<div class="input-group mb-3">
-				  <label class="input-group-text" for="inputGroupSelect03_01"><span v-if="showVotmetegevused">Võtmetegevus M</span><span v-else>Piirangu</span> &nbsp EH skoor: 0  PRT skoor:</label>
+				  <label class="input-group-text" for="inputGroupSelect03_01">Nägemisega seotud piirangud:</label>
 				  <select class="form-select" id="inputGroupSelect03_01" v-model="Select03_01_M" @change="calcValdkond03_01">
 					<option value="0" selected>0</option>
 					<option value="1">1</option>
@@ -333,7 +333,7 @@
 				</div>
 				<h6>Kuulmisfunktsiooni kõrvalekalle</h6>
 				<div class="input-group mb-3">
-				  <label class="input-group-text" for="inputGroupSelect03_02"><span v-if="showVotmetegevused">Võtmetegevus M</span><span v-else>Piirangu </span> &nbsp EH skoor: 0  PRT skoor:</label>
+				  <label class="input-group-text" for="inputGroupSelect03_02">Kuulmisega seotud piirangud</label>
 				  <select class="form-select" id="inputGroupSelect03_02" v-model="Select03_02_M" @change="calcValdkond03_02">
 					<option value="0" selected>0</option>
 					<option value="1">1</option>
@@ -379,7 +379,7 @@
 				</div>
 				<h6>Keele-kõne funktsiooni kõrvalekalle</h6>
 				<div class="input-group mb-3">
-				  <label class="input-group-text" for="inputGroupSelect03_03"><span v-if="showVotmetegevused">Võtmetegevus M</span><span v-else>Piirangu </span> &nbsp EH skoor: 0  PRT skoor:</label>
+				  <label class="input-group-text" for="inputGroupSelect03_03">Keele-kõnega seotud piirangud:</label>
 				  <select class="form-select" id="inputGroupSelect03_03" v-model="Select03_03_M" @change="calcValdkond03_03">
 					<option value="0" selected>0</option>
 					<option value="1">1</option>
@@ -465,7 +465,7 @@
 				  </select>
 				</div>
 				<div class="input-group mb-3">
-				  <label class="input-group-text" for="inputGroupSelect05_03"><span v-if="showVotmetegevused">Võtmetegevus M</span><span v-else>Piirangu </span> &nbsp EH skoor: 0  PRT skoor:</label>
+				  <label class="input-group-text" for="inputGroupSelect05_03">Õppimisega ja tegevuste sooritamisega seotud <span v-if="showVotmetegevused">&nbsp;muud&nbsp;</span> piirangud:</label>
 				  <select class="form-select" id="inputGroupSelect05_03" v-model="Select05_M" @change="calcValdkond05">
 					<option value="0" selected>0</option>
 					<option value="1">1</option>
@@ -515,7 +515,7 @@
 				  </select>
 				</div>
 				<div class="input-group mb-3">
-				  <label class="input-group-text" for="inputGroupSelect06_04"><span v-if="showVotmetegevused">Võtmetegevus M</span><span v-else>Piirangu </span> &nbsp EH skoor: 0  PRT skoor:</label>
+				  <label class="input-group-text" for="inputGroupSelect06_04">Muutustega kohanemise ja ohu tajumisega seotud <span v-if="showVotmetegevused">&nbsp;muud&nbsp;</span> piirangud:</label>
 				  <select class="form-select" id="inputGroupSelect06_04" v-model="Select06_M" @change="calcValdkond06">
 					<option value="0" selected>0</option>
 					<option value="1">1</option>
@@ -555,7 +555,7 @@
 				  </select>
 				</div>
 				<div class="input-group mb-3">
-				  <label class="input-group-text" for="inputGroupSelect07_03"><span v-if="showVotmetegevused">Võtmetegevus M</span><span v-else>Piirangu </span> &nbsp EH skoor: 0  PRT skoor:</label>
+				  <label class="input-group-text" for="inputGroupSelect07_03">Inimestevahelise lävimise ja suhetega seotud <span v-if="showVotmetegevused">&nbsp;muud&nbsp;</span> piirangud:</label>
 				  <select class="form-select" id="inputGroupSelect07_03" v-model="Select07_M" @change="calcValdkond07">
 					<option value="0" selected>0</option>
 					<option value="1">1</option>
