@@ -3,7 +3,13 @@
 
 {% block title %}{{ block.super }}: coreset{% endblock %}
 {% block h1 %}{{ block.super }}: coreset{% endblock %}
-
+{% block css%}
+<style type="text/css">
+  .popover{
+    max-width: 600px;
+  }
+</style>
+{% endblock %}
 {% block content %}
   <div class="container">
     <div class="row align-items-start p-3 g-2">
@@ -53,7 +59,7 @@
                       data-bs-trigger="focus" 
                       data-bs-html="true"
                       title="{{ code.Translated_description }}"
-                      data-bs-content="+ {{ code.Translated_inclusions }}<br>- {{code.Translated_exclusions }}"
+                      data-bs-content="{% if code.children %}{{ code.children }}{% else %}+ {{ code.Translated_inclusions }}<br>- {{code.Translated_exclusions }}{% endif %}"
                     >
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
                         <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>

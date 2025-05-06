@@ -1807,7 +1807,9 @@ def read_coreset_from_excel():
             }
         )
     return coreset
-    
+
+from django.db.models.functions import Length
+
 def coreset(request):
     function_groups = {
         'Liikumine': ['liikumine'],
@@ -1823,6 +1825,17 @@ def coreset(request):
             for n in range(0, len(coreset[key])):
                 category = coreset[key][n]['kategooria']
                 category_row = RFK.objects.get(code=category)
+                if category_row.SecondLevel!='0':
+                    children = None
+                else:
+                    dimension = category_row.Dimension
+                    chapter = category_row.Chapter
+                    block = category_row.Block
+                    qs = RFK.objects.annotate(code_len=Length('code')).filter(Dimension=dimension, Chapter=chapter, Block=block, code_len=4)
+                    children_list = [f'{el.code} {el.Translated_title}' for el in qs]
+                    children = '<br>'.join(children_list)
+                    print(children)
+                    
                 coreset[key][n] = {
                     'valdkond': coreset[key][n]['valdkond'],
                     'vanaduspensioniealine': coreset[key][n]['vanaduspensioniealine'],
@@ -1833,6 +1846,7 @@ def coreset(request):
                     'Translated_description': category_row.Translated_description,
                     'Translated_inclusions': category_row.Translated_inclusions,
                     'Translated_exclusions': category_row.Translated_exclusions,
+                    'children': children,
                     'form': KategooriaForm(
                         auto_id=f'{key}_%s',
                     )
