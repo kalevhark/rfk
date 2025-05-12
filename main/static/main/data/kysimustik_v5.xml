@@ -129,10 +129,10 @@
 				<kysimus valdkond_nr="3" v6tmetegevus_nr="3" rfk_kategooria="d330" kohustuslik="ei">kõnelemine</kysimus>
 				<kysimus valdkond_nr="4" v6tmetegevus_nr="4" rfk_kategooria="d530" kohustuslik="ei">soole ja põie kontrollimine</kysimus>
 				<kysimus valdkond_nr="4" v6tmetegevus_nr="4" rfk_kategooria="d550" kohustuslik="ei">söömine (välja arvatud toidueelistused ja toitumisharjumused)</kysimus>
+				<kysimus valdkond_nr="4" v6tmetegevus_nr="4" rfk_kategooria="d230" kohustuslik="ei">igapäevategevused (näiteks riietumine, hügieenitoimingud)</kysimus>
 				<kysimus valdkond_nr="5" v6tmetegevus_nr="3" rfk_kategooria="d155" kohustuslik="ei">õppetöös ja huvitegevuses osalemine</kysimus>
 				<kysimus valdkond_nr="5" v6tmetegevus_nr="3" rfk_kategooria="d1551" kohustuslik="ei">tavaõppel ehk riiklikul õppekaval õppimine</kysimus>
 				<kysimus valdkond_nr="5" v6tmetegevus_nr="3" rfk_kategooria="d155" kohustuslik="ei">uute teadmiste ja oskuste omandamine koolis, kodus ja huvitegevuses</kysimus>
-				<kysimus valdkond_nr="4" v6tmetegevus_nr="4" rfk_kategooria="d230" kohustuslik="ei">igapäevategevused (näiteks riietumine, hügieenitoimingud)</kysimus>
 				<kysimus valdkond_nr="5" v6tmetegevus_nr="3" rfk_kategooria="d230" kohustuslik="ei">tegevuste alustamine ja alustatud tegevuste lõpuni viimine</kysimus>
 				<kysimus valdkond_nr="6" v6tmetegevus_nr="4" rfk_kategooria="d240" kohustuslik="ei">eakohane võime ohtu tajuda (sh ennastkahjustav käitumine) ja ohu korral abi otsida</kysimus>
 				<kysimus valdkond_nr="6" v6tmetegevus_nr="4" rfk_kategooria="d240" kohustuslik="ei">muutuvate olukordadega kohanemine (näiteks muutus päevakavas, harjumuspärases tegevuses)</kysimus>
