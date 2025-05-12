@@ -28,8 +28,8 @@
 			</vanusgrupiV6tmetegevused>
 			<vanusgrupiKysimused question="nan"/>
 			<vanusgrupiYldKysimused question="">
-				<kysimus kohustuslik="ei">Palun kirjeldage lühidalt lapsel terviseseisundi tõttu esinevaid probleeme, sh abivahendite vajadus vms</kysimus>
-				<kysimus kohustuslik="ei">Kui lapsele osutatakse sotsiaalteenuseid, siis kirjeldage milliseid teenuseid osutati ja kui sageli.</kysimus>
+				<kysimus kohustuslik="ei">Palun kirjelda probleeme, mis lapsel terviseseisundi tõttu esinevad</kysimus>
+				<kysimus kohustuslik="ei">Kui lapsele saab sotsiaalteenuseid, siis kirjelda milliseid teenuseid ja kui sageli ning kelle poolt.</kysimus>
 			</vanusgrupiYldKysimused>
 			<vanusgrupiFailiTekst>Juhul, kui soovite lapse tervisliku seisundi kohta lisada täiendavaid dokumente, siis saate seda teha siin.</vanusgrupiFailiTekst>
 		</vanusgrupp>
@@ -62,32 +62,31 @@
 				<v6tmetegevus valdkond_nr="7" v6tmetegevus_nr="2">Olukorrale kohane käitumine</v6tmetegevus>
 				<v6tmetegevus valdkond_nr="7" v6tmetegevus_nr="3">Inimestevahelise lävimise ja suhetega seotud muud piirangud</v6tmetegevus>
 			</vanusgrupiV6tmetegevused>
-			<vanusgrupiKysimused question="Palume hinnata lapse hakkamasaamist...">
-				<kysimus valdkond_nr="1" v6tmetegevus_nr="2" rfk_kategooria="d450" kohustuslik="ei">iseseisvalt liikumisega siseruumides</kysimus>
-				<kysimus valdkond_nr="1" v6tmetegevus_nr="2" rfk_kategooria="d460" kohustuslik="ei">liikumisega õuetingimustes</kysimus>
-				<kysimus valdkond_nr="1" v6tmetegevus_nr="3" rfk_kategooria="d420" kohustuslik="ei">istumast püsti tõusmisega</kysimus>
-				<kysimus valdkond_nr="2" v6tmetegevus_nr="3" rfk_kategooria="d440" kohustuslik="ei">käeliste tegevustega (nt. joonistamine, söögiriistade kasutamine jm. täppisliigutustega)</kysimus>
-				<kysimus valdkond_nr="3" v6tmetegevus_nr="1" rfk_kategooria="d110" kohustuslik="ei">nägemisega</kysimus>
-				<kysimus valdkond_nr="3" v6tmetegevus_nr="2" rfk_kategooria="d115" kohustuslik="ei">kuulmisega</kysimus>
-				<kysimus valdkond_nr="3" v6tmetegevus_nr="3" rfk_kategooria="d330" kohustuslik="ei">kõnelemisega</kysimus>
-				<kysimus valdkond_nr="4" v6tmetegevus_nr="2" rfk_kategooria="d530" kohustuslik="ei">soole ja põie kontrollimisega</kysimus>
-				<kysimus valdkond_nr="4" v6tmetegevus_nr="3" rfk_kategooria="d550" kohustuslik="ei">söömisega</kysimus>
-				<kysimus valdkond_nr="5" v6tmetegevus_nr="1" rfk_kategooria="d155" kohustuslik="ei">uute teadmiste ja oskuste omandamisega</kysimus>
-				<kysimus valdkond_nr="5" v6tmetegevus_nr="2" rfk_kategooria="d230" kohustuslik="ei">igapäevategevustega (nt. riietumisega, käte pesemise ja eakohaste hügieenitoimingutega)</kysimus>
-				<kysimus valdkond_nr="5" v6tmetegevus_nr="2" rfk_kategooria="d230" kohustuslik="ei">tegevuste alustamise ja tegevuses püsimisega</kysimus>
-				<kysimus valdkond_nr="6" v6tmetegevus_nr="1" rfk_kategooria="d240" kohustuslik="ei">lasteaias või koolis käimise ja huvitegevuses osalemisega</kysimus>
-				<kysimus valdkond_nr="6" v6tmetegevus_nr="2" rfk_kategooria="d240" kohustuslik="ei">eakohase võimega ohtu tajuda</kysimus>
-				<kysimus valdkond_nr="7" v6tmetegevus_nr="1" rfk_kategooria="d750" kohustuslik="ei">eakaaslastega suhtlemisega</kysimus>
-				<kysimus valdkond_nr="7" v6tmetegevus_nr="1" rfk_kategooria="d710" kohustuslik="ei">lähedaste inimestega lävimisega</kysimus>
-				<kysimus valdkond_nr="7" v6tmetegevus_nr="2" rfk_kategooria="d720" kohustuslik="ei">kehtestatud piiridest/käskudest/keeldudest aru saamisega</kysimus>
-				<kysimus valdkond_nr="7" v6tmetegevus_nr="2" rfk_kategooria="d720" kohustuslik="ei">igapäevases olukorras lapsele kohase käitumisega</kysimus>
+			<vanusgrupiKysimused question="Hinda hakkamasaamist järgevates olukordades:">
+				<kysimus valdkond_nr="1" v6tmetegevus_nr="4" rfk_kategooria="d450" kohustuslik="ei">iseseisvalt liikumine siseruumides ilma pideva kõrvalabita</kysimus>
+				<kysimus valdkond_nr="1" v6tmetegevus_nr="4" rfk_kategooria="d460" kohustuslik="ei">liikumine õues ilma pideva kõrvalabita</kysimus>
+				<kysimus valdkond_nr="1" v6tmetegevus_nr="4" rfk_kategooria="d420" kohustuslik="ei">vajaduspõhiselt kehaasendi vahetamine, istumast püsti tõusmine ja istumine ilma pideva kõrvalabita</kysimus>
+				<kysimus valdkond_nr="2" v6tmetegevus_nr="4" rfk_kategooria="d440" kohustuslik="ei">käeline tegevus (näiteks joonistamine, söögiriistade kasutamine või muu täppisliigutus)</kysimus>
+				<kysimus valdkond_nr="3" v6tmetegevus_nr="1" rfk_kategooria="d110" kohustuslik="ei">nägemine</kysimus>
+				<kysimus valdkond_nr="3" v6tmetegevus_nr="2" rfk_kategooria="d115" kohustuslik="ei">kuulmine</kysimus>
+				<kysimus valdkond_nr="3" v6tmetegevus_nr="3" rfk_kategooria="d330" kohustuslik="ei">kõnelemine</kysimus>
+				<kysimus valdkond_nr="4" v6tmetegevus_nr="4" rfk_kategooria="d530" kohustuslik="ei">soole ja põie kontrollimine</kysimus>
+				<kysimus valdkond_nr="4" v6tmetegevus_nr="4" rfk_kategooria="d550" kohustuslik="ei">söömine (välja arvatud toidueelistused ja toitumisharjumused)</kysimus>
+				<kysimus valdkond_nr="4" v6tmetegevus_nr="4" rfk_kategooria="d230" kohustuslik="ei">igapäevategevused (näiteks riietumine, eakohased hügieenitoimingud)</kysimus>
+				<kysimus valdkond_nr="5" v6tmetegevus_nr="3" rfk_kategooria="d155" kohustuslik="ei">uute teadmiste ja oskuste omandamine</kysimus>
+				<kysimus valdkond_nr="5" v6tmetegevus_nr="3" rfk_kategooria="d230" kohustuslik="ei">tegevuste alustamine ja tegevuses püsimine</kysimus>
+				<kysimus valdkond_nr="6" v6tmetegevus_nr="4" rfk_kategooria="d240" kohustuslik="ei">lasteaias või koolis käimise ja huvitegevuses osalemisega</kysimus>
+				<kysimus valdkond_nr="6" v6tmetegevus_nr="4" rfk_kategooria="d240" kohustuslik="ei">eakohane võimega ohtu tajuda</kysimus>
+				<kysimus valdkond_nr="7" v6tmetegevus_nr="3" rfk_kategooria="d750" kohustuslik="ei">eakaaslastega suhtlemine</kysimus>
+				<kysimus valdkond_nr="7" v6tmetegevus_nr="3" rfk_kategooria="d710" kohustuslik="ei">lähedaste inimestega suhtlemine</kysimus>
+				<kysimus valdkond_nr="7" v6tmetegevus_nr="3" rfk_kategooria="d720" kohustuslik="ei">kehtestatud piiridest/käskudest/keeldudest aru saamine ja lihtsate korralduste täitmine</kysimus>
 			</vanusgrupiKysimused>
 			<vanusgrupiYldKysimused question="">
-				<kysimus kohustuslik="ei">Palun kirjeldage lapsel terviseseisundi tõttu esinevaid probleeme</kysimus>
-				<kysimus kohustuslik="ei">Milliseid abivahendeid laps kasutab? Kas abivahenditest on abi?</kysimus>
-				<kysimus kohustuslik="ei">Kas laps vajab vaimse tervise seisundist tingitud järelevalvet ja millistes elulistes situatsioonides?</kysimus>
-				<kysimus kohustuslik="ei">Kui lapsele osutatakse sotsiaalteenuseid (tugiisik, sotsiaaltransport vms), siis kirjeldage milliseid teenuseid osutati ja kui sageli.</kysimus>
-				<kysimus kohustuslik="ei">Kirjeldage kas laps saab lasteaias või koolis individuaalset abi (tugiisik, logopeed, eripedagoog, psühholoog) või koolis kohandatud õpet (näiteks lihtsustatud või individuaalne õppekava)</kysimus>
+				<kysimus kohustuslik="ei">Palun kirjelda probleeme, mis lapsel terviseseisundi tõttu esinevad</kysimus>
+				<kysimus kohustuslik="ei">Kui laps kasutab abivahendeid, siis milliseid ning kas nendest on abi? Kas laps vajab abivahendite kasutamisel kõrvalist abi ja juhendamist?</kysimus>
+				<kysimus kohustuslik="ei">Kas laps vajab vaimse tervise seisundist tingitud järelevalvet ja kas vajadus on kinnitatud eriarsti poolt?</kysimus>
+				<kysimus kohustuslik="ei">Kui laps saab sotsiaalteenuseid (näiteks tugiisik, sotsiaaltransport vms), siis kirjelda milliseid teenuseid ja kui sageli.</kysimus>
+				<kysimus kohustuslik="ei">Kirjeldage kas laps saab lasteaias individuaalset abi (näiteks tugiisik, logopeed, eripedagoog) või koolis kohandatud õpet (näiteks individuaalne õppekava, lihtsustatud õpe, toimetuleku- või hooldusõpe või tugiteenuseid), siis kirjelda seda</kysimus>
 			</vanusgrupiYldKysimused>
 			<vanusgrupiFailiTekst>Juhul, kui lapse kohta on koostatud kohaliku omavalitsuse juhtumiplaan või olete käinud haridusliku erivajaduse hindamisel, lisage need dokumendid taotlusele.</vanusgrupiFailiTekst>
 		</vanusgrupp>
@@ -120,36 +119,36 @@
 				<v6tmetegevus valdkond_nr="7" v6tmetegevus_nr="2">Olukorrale kohane käitumine</v6tmetegevus>
 				<v6tmetegevus valdkond_nr="7" v6tmetegevus_nr="3">Inimestevahelise lävimise ja suhetega seotud muud piirangud</v6tmetegevus>
 			</vanusgrupiV6tmetegevused>
-			<vanusgrupiKysimused question="Palume hinnata lapse hakkamasaamist...">
-				<kysimus valdkond_nr="1" v6tmetegevus_nr="2" rfk_kategooria="d450" kohustuslik="ei">iseseisvalt liikumisega siseruumides</kysimus>
-				<kysimus valdkond_nr="1" v6tmetegevus_nr="2" rfk_kategooria="d460" kohustuslik="ei">liikumisega õuetingimustes</kysimus>
-				<kysimus valdkond_nr="1" v6tmetegevus_nr="3" rfk_kategooria="d420" kohustuslik="ei">istumast püsti tõusmisega</kysimus>
-				<kysimus valdkond_nr="2" v6tmetegevus_nr="3" rfk_kategooria="d440" kohustuslik="ei">käeliste tegevustega (nt. klaviatuuri kasutamine, telefoni käsitsemine, eseme haaramine/ asetamine)</kysimus>
-				<kysimus valdkond_nr="3" v6tmetegevus_nr="1" rfk_kategooria="d110" kohustuslik="ei">nägemisega</kysimus>
-				<kysimus valdkond_nr="3" v6tmetegevus_nr="2" rfk_kategooria="d115" kohustuslik="ei">kuulmisega</kysimus>
-				<kysimus valdkond_nr="3" v6tmetegevus_nr="3" rfk_kategooria="d330" kohustuslik="ei">kõnelemisega</kysimus>
-				<kysimus valdkond_nr="4" v6tmetegevus_nr="2" rfk_kategooria="d530" kohustuslik="ei">soole ja põie kontrollimisega</kysimus>
-				<kysimus valdkond_nr="4" v6tmetegevus_nr="3" rfk_kategooria="d550" kohustuslik="ei">söömisega</kysimus>
-				<kysimus valdkond_nr="5" v6tmetegevus_nr="1" rfk_kategooria="d155" kohustuslik="ei">õppetöös ja huvitegevuses osalemisega</kysimus>
-				<kysimus valdkond_nr="5" v6tmetegevus_nr="1" rfk_kategooria="d1551" kohustuslik="ei">tavaõppel ehk riiklikul õppekaval õppimisega</kysimus>
-				<kysimus valdkond_nr="5" v6tmetegevus_nr="1" rfk_kategooria="d155" kohustuslik="ei">uute teadmiste ja oskuste omandamisega</kysimus>
-				<kysimus valdkond_nr="5" v6tmetegevus_nr="2" rfk_kategooria="d230" kohustuslik="ei">igapäevategevustega (nt. riietumisega, pesemise ja hügieenitoimingutega)</kysimus>
-				<kysimus valdkond_nr="5" v6tmetegevus_nr="2" rfk_kategooria="d230" kohustuslik="ei">tegevuste alustamise ja alustatud tegevuste lõpuni viimisega</kysimus>
-				<kysimus valdkond_nr="6" v6tmetegevus_nr="2" rfk_kategooria="d240" kohustuslik="ei">eakohase võimega ohtu tajuda</kysimus>
-				<kysimus valdkond_nr="6" v6tmetegevus_nr="3" rfk_kategooria="d240" kohustuslik="ei">muutuvate olukordadega kohanemisega (nt. muutus päevakavas, harjumuspärases tegevuses)</kysimus>
-				<kysimus valdkond_nr="7" v6tmetegevus_nr="1" rfk_kategooria="d350" kohustuslik="ei">suhtlemisel ja vestluses osalemisel</kysimus>
-				<kysimus valdkond_nr="7" v6tmetegevus_nr="1" rfk_kategooria="d750" kohustuslik="ei">lähedaste inimestega lävimisega</kysimus>
-				<kysimus valdkond_nr="7" v6tmetegevus_nr="1" rfk_kategooria="d750" kohustuslik="ei">eakaaslastega lävimisega</kysimus>
-				<kysimus valdkond_nr="7" v6tmetegevus_nr="1" rfk_kategooria="d740" kohustuslik="ei">võõraste inimestega (näiteks uus arst, õpetaja jt) lävimisega</kysimus>
-				<kysimus valdkond_nr="7" v6tmetegevus_nr="2" rfk_kategooria="d720" kohustuslik="ei">igapäevases olukorras lapsele kohase käitumisega</kysimus>
-				<kysimus valdkond_nr="7" v6tmetegevus_nr="2" rfk_kategooria="d720" kohustuslik="ei">kehtestatud piiridest/käskudest/keeldudest aru saamisega</kysimus>
+			<vanusgrupiKysimused question="Hinda hakkamasaamist järgevates olukordades:">
+				<kysimus valdkond_nr="1" v6tmetegevus_nr="4" rfk_kategooria="d450" kohustuslik="ei">iseseisvalt liikumine siseruumides ilma pideva kõrvalabita</kysimus>
+				<kysimus valdkond_nr="1" v6tmetegevus_nr="4" rfk_kategooria="d460" kohustuslik="ei">liikumine õues ilma pideva kõrvalabita</kysimus>
+				<kysimus valdkond_nr="1" v6tmetegevus_nr="4" rfk_kategooria="d420" kohustuslik="ei">vajaduspõhiselt kehaasendi vahetamine, istumast püsti tõusmine ja istumine ilma pideva kõrvalabita</kysimus>
+				<kysimus valdkond_nr="2" v6tmetegevus_nr="4" rfk_kategooria="d440" kohustuslik="ei">käelised tegevused (näiteks joonistamine, söögiriistade kasutamine või muu täppisliigutus)</kysimus>
+				<kysimus valdkond_nr="3" v6tmetegevus_nr="1" rfk_kategooria="d110" kohustuslik="ei">nägemine</kysimus>
+				<kysimus valdkond_nr="3" v6tmetegevus_nr="2" rfk_kategooria="d115" kohustuslik="ei">kuulmine</kysimus>
+				<kysimus valdkond_nr="3" v6tmetegevus_nr="3" rfk_kategooria="d330" kohustuslik="ei">kõnelemine</kysimus>
+				<kysimus valdkond_nr="4" v6tmetegevus_nr="4" rfk_kategooria="d530" kohustuslik="ei">soole ja põie kontrollimine</kysimus>
+				<kysimus valdkond_nr="4" v6tmetegevus_nr="4" rfk_kategooria="d550" kohustuslik="ei">söömine (välja arvatud toidueelistused ja toitumisharjumused)</kysimus>
+				<kysimus valdkond_nr="5" v6tmetegevus_nr="3" rfk_kategooria="d155" kohustuslik="ei">õppetöös ja huvitegevuses osalemine</kysimus>
+				<kysimus valdkond_nr="5" v6tmetegevus_nr="3" rfk_kategooria="d1551" kohustuslik="ei">tavaõppel ehk riiklikul õppekaval õppimine</kysimus>
+				<kysimus valdkond_nr="5" v6tmetegevus_nr="3" rfk_kategooria="d155" kohustuslik="ei">uute teadmiste ja oskuste omandamine koolis, kodus ja huvitegevuses</kysimus>
+				<kysimus valdkond_nr="4" v6tmetegevus_nr="4" rfk_kategooria="d230" kohustuslik="ei">igapäevategevused (näiteks riietumine, hügieenitoimingud)</kysimus>
+				<kysimus valdkond_nr="5" v6tmetegevus_nr="3" rfk_kategooria="d230" kohustuslik="ei">tegevuste alustamine ja alustatud tegevuste lõpuni viimine</kysimus>
+				<kysimus valdkond_nr="6" v6tmetegevus_nr="4" rfk_kategooria="d240" kohustuslik="ei">eakohane võime ohtu tajuda (sh ennastkahjustav käitumine) ja ohu korral abi otsida</kysimus>
+				<kysimus valdkond_nr="6" v6tmetegevus_nr="4" rfk_kategooria="d240" kohustuslik="ei">muutuvate olukordadega kohanemine (näiteks muutus päevakavas, harjumuspärases tegevuses)</kysimus>
+				<kysimus valdkond_nr="7" v6tmetegevus_nr="3" rfk_kategooria="d350" kohustuslik="ei">suhtlemine ja vestluses osalemine</kysimus>
+				<kysimus valdkond_nr="7" v6tmetegevus_nr="3" rfk_kategooria="d750" kohustuslik="ei">lähedaste inimestega suhtlemine</kysimus>
+				<kysimus valdkond_nr="7" v6tmetegevus_nr="3" rfk_kategooria="d750" kohustuslik="ei">eakaaslastega suhtlemine</kysimus>
+				<kysimus valdkond_nr="7" v6tmetegevus_nr="3" rfk_kategooria="d740" kohustuslik="ei">võõraste inimestega (näiteks uus arst, õpetaja jt) suhtlemine</kysimus>
+				<kysimus valdkond_nr="7" v6tmetegevus_nr="3" rfk_kategooria="d720" kohustuslik="ei">igapäevases olukorras vanusele kohase käitumine</kysimus>
+				<kysimus valdkond_nr="7" v6tmetegevus_nr="3" rfk_kategooria="d720" kohustuslik="ei">kehtestatud piiridest/käskudest/keeldudest aru saamine</kysimus>
 			</vanusgrupiKysimused>
 			<vanusgrupiYldKysimused question="">
-				<kysimus kohustuslik="ei">Palun kirjeldage lapsel terviseseisundi tõttu esinevaid probleeme</kysimus>
-				<kysimus kohustuslik="ei">Milliseid abivahendeid laps kasutab? Kas abivahenditest on abi?</kysimus>
-				<kysimus kohustuslik="ei">Kas laps vajab vaimse tervise seisundist tingitud järelevalvet ja millistes elulistes situatsioonides?</kysimus>
-				<kysimus kohustuslik="ei">Kui lapsele osutatakse sotsiaalteenuseid (tugiisik, sotsiaaltransport vms), siis kirjeldage milliseid teenuseid osutati ja kui sageli.</kysimus>
-				<kysimus kohustuslik="ei">Kirjeldage kas laps saab koolis kohandatud õpet (näiteks lihtsustatud või individuaalset õppekava)</kysimus>
+				<kysimus kohustuslik="ei">Palun kirjelda probleeme, mis lapsel terviseseisundi tõttu esinevad</kysimus>
+				<kysimus kohustuslik="ei">Kui laps kasutab abivahendeid, siis milliseid ning kas nendest on abi? Kas laps vajab abivahendite kasutamisel kõrvalist abi ja juhendamist?</kysimus>
+				<kysimus kohustuslik="ei">Kas laps vajab vaimse tervise seisundist tingitud järelevalvet ja kas vajadus on kinnitatud eriarsti poolt?</kysimus>
+				<kysimus kohustuslik="ei">Kui laps saab sotsiaalteenuseid (tugiisik, sotsiaaltransport vms), siis kirjelda milliseid teenuseid ja kui sageli.</kysimus>
+				<kysimus kohustuslik="ei">Kui laps saab koolis kohandatud õpet (näiteks individuaalne õppekava, lihtsustatud õpe, toimetuleku- või hooldusõpe või tugiteenuseid nagu logopeed, eripedagoog, psühholoog), siis kirjelda kui sageli</kysimus>
 			</vanusgrupiYldKysimused>
 			<vanusgrupiFailiTekst>Juhul, kui lapse kohta on koostatud kohaliku omavalitsuse juhtumiplaan või olete käinud haridusliku erivajaduse hindamisel, lisage need dokumendid taotlusele.</vanusgrupiFailiTekst>
 		</vanusgrupp>
