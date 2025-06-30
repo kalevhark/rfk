@@ -60,7 +60,7 @@ function kontrolli(elementId) {
     let childNode = outerDiv.childNodes[items - 1];
     let childNodeTextSplits = childNode.textContent.trim().split(' ');
     let childNodeText = childNodeTextSplits[1].trim();
-    if (childNodeText.includes('.') === false) {
+    if (childNodeText.includes('.') === false & childNodeText.includes('+') === false) {
       // console.log('viga!');
       document.getElementById(elementId + "_kategooria_text").value = childNodeText + '.';
       $(childNode).find('span').trigger( "click" );
@@ -102,11 +102,12 @@ createApp({
       decks.forEach(
         (deck) => {
           let code = deck.id.split('_', 1)[0];
-          let m22raja = $("#" + code + "_activities")[0].value;
-          if (m22raja !== '---' && deck.hasChildNodes()) {
+          let d_m22raja = $("#" + code + "_activities")[0].value;
+          if (d_m22raja !== '---' && deck.hasChildNodes()) {
             let children = deck.childNodes;
             for (const node of children) {
-              codeset.push([code + "." + m22raja, node.textContent.split(' ')[1]]);
+              let b_m22raja = node.textContent.split(' ')[1].split(':')[0] // stringist X b340.3: Muude hääleliste väljenduste funktsioonid -  raske häire
+              codeset.push([code + "." + d_m22raja, b_m22raja]);
             }
           }
         }
