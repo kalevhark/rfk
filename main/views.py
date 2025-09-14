@@ -6,6 +6,12 @@ import math
 import re
 from unicodedata import category
 import xml.etree.ElementTree as ET
+import os
+
+if __name__ == "__main__":
+    import django
+    os.environ['DJANGO_SETTINGS_MODULE'] = 'rfk.settings'
+    django.setup()
 
 if __name__ != '__main__':
     from django.conf import settings
@@ -19,6 +25,7 @@ else:
     BASE_DIR = Path(__file__).resolve().parent.parent
     STATIC_DIR = BASE_DIR / 'main' / 'static' / 'main'
 
+import openpyxl
 from pyhtml import *
 
 # from main.models import RFK
@@ -67,6 +74,51 @@ class ICF_Est_New():
 
 icf_eng = ICF_Est_New().df
 
+class ICFEtOfficial:
+    # Loeb ICF kooditabeli sõnastikuks:
+    # keys = code
+    # element.keys:
+    # 'version',
+    # 'Dimension', 'Chapter',
+    # 'Block', 'SecondLevel', 'ThirdLevel', 'FourthLevel', 'levelno',
+    # 'code', 'parent', 'mlsort', 'leafnode',
+    # 'Title', 'Description', 'Inclusions', 'Exclusions', 'selected',
+    # 'Translated_title', 'Translated_description', 'Translated_inclusions', 'Translated_exclusions']
+    def __init__(self):
+        self.VERSION = '1.0.0'
+        wb = openpyxl.load_workbook(STATIC_DIR / f'VS-rfk-{self.VERSION}.xlsx')
+        ws = wb.active
+        self.codeset = dict()
+        for row in ws.iter_rows(
+                min_row=2, max_row=None,
+                min_col=1, max_col=11,
+                values_only=True
+        ):
+            self.codeset[row[0]] = {
+                'version': row[10],
+                'Dimension': row[0][0], # d, b etc ametlikus klassifikaatoris ei ole kasutusel
+                'Chapter': row[0][1] if len(row[0]) > 1 else '0', # 1, 2 etc ametlikus klassifikaatoris ei ole kasutusel
+                'Block': None, # ametlikus klassifikaatoris ei ole kasutusel
+                'SecondLevel': row[0][2:4] if len(row[0]) > 2 else '0', # 10, 11 etc ametlikus klassifikaatoris ei ole kasutusel
+                'ThirdLevel': row[0][4] if len(row[0]) > 4 else '0', # 1, 2 etc ametlikus klassifikaatoris ei ole kasutusel
+                'FourthLevel': row[0][5] if len(row[0]) > 5 else '0', # 1, 2 etc ametlikus klassifikaatoris ei ole kasutusel
+                'levelno': None, # ametlikus klassifikaatoris ei ole kasutusel
+                'code':  row[0], 
+                'parent': row[8],
+                'mlsort': row[4], # ametlikus klassifikaatoris ei ole kasutusel
+                'leafnode': None, # ametlikus klassifikaatoris ei ole kasutusel
+                'Title': row[2], 
+                'Description': None, # ametlikus klassifikaatoris ei ole kasutusel
+                'Inclusions': None, # ametlikus klassifikaatoris ei ole kasutusel
+                'Exclusions': None, # ametlikus klassifikaatoris ei ole kasutusel
+                'selected': None, # ametlikus klassifikaatoris ei ole kasutusel
+                'Translated_title': row[1],
+                'Translated_description': row[3],
+                'Translated_inclusions': None, # ametlikus klassifikaatoris ei ole kasutusel
+                'Translated_exclusions': None, # ametlikus klassifikaatoris ei ole kasutusel
+            }
+
+icf_et_official = ICFEtOfficial().codeset
 
 def get_icf_group(code):
     # Tagastab valitud koodi koodigrupi vahemiku d4105 -> d410-d429
@@ -1563,8 +1615,6 @@ def some_view(request):
     buffer.seek(0)
     return FileResponse(buffer, as_attachment=True, filename='hello.pdf')
 
-import openpyxl
-
 def get_excel():
     from django.conf import settings
 
@@ -1778,6 +1828,17 @@ def read_coreset_from_excel():
     ws = wb.active
     # Create a list of functions
     functions = [] 
+    PRT_VALDKONNAD = {
+        '1': 'Liikumine',
+        '2': 'Käeline tegevus',
+        '3.1': 'Nägemisfunktsiooni kõrvalekalle',
+        '3.2': 'Kuulmisfunktsiooni kõrvalekalle',
+        '3.3': 'Keele-kõne funktsiooni kõrvalekalle',
+        '4': 'Teadvusel püsimine ja enesehooldus',
+        '5': 'Õppimine ja tegevuste elluviimine',
+        '6': 'Muutustega kohanemine ja ohu tajumine',
+        '7': 'Inimestevaheline lävimine ja suhted'
+    }
     # Iterate over the rows in the sheet 
     # Iterate through rows 
     for i, row in enumerate(ws): 
@@ -1799,7 +1860,7 @@ def read_coreset_from_excel():
     ):
         coreset[col[0]].append(
             {
-                'valdkond': col[1],
+                'valdkond': f'{col[1]}. {PRT_VALDKONNAD[col[1]]}',
                 'kategooria': col[2],
                 'vanaduspensioniealine': col[3],
                 'kooliealine': col[4],
@@ -1903,16 +1964,47 @@ def helenamiia(request):
         }
     )
 
+import string
+# puhastatud_string = lambda s: s.strip().lower().translate({ord(c): None for c in string.whitespace})
+puhastatud_string = lambda s: re.sub(r"\s+", "", s)
 
-import os
-if __name__ == "__main__":
-    import django
-    os.environ['DJANGO_SETTINGS_MODULE'] = 'rfk.settings'
-    django.setup()
+import requests
+def compare_codesets(icf_eng, icf_et_official):
+    print("Puuduvad mitteametlikus:")
+    keys_official = icf_et_official.keys()
+    for key in keys_official:
+        if key not in icf_eng.keys():
+            print(key)
+    
+    print("Puuduvad ametlikus:")
+    keys_old = icf_eng.keys()
+    for key in keys_old:
+        if key not in icf_et_official.keys():
+            print(key)
+            # url = f'https://term.tehik.ee/fhir/CodeSystem/$lookup?system=https://fhir.ee/CodeSystem/rfk&code={key}'
+            # resp = requests.get(url)
+            # print(resp)
+
+    keys_all_set = set(list(keys_official) + list(keys_old))
+    keys_all = list(keys_all_set)
+    keys_all.sort()
+    for key in keys_all:
+        try:
+            u = icf_et_official[key]['Translated_title']
+        except:
+            u = 'pole'
+        try:
+            v = icf_eng[key]['Translated_title']
+        except:
+            v = 'pole'
+        if puhastatud_string(u) != puhastatud_string(v):
+            print(key, u, 'vs', v)
 
 if __name__ == '__main__':
     # for i in range(1, 5):
     #     test(i)
     # get_excel()
-    import_icf2db()
+    # import_icf2db()
+    compare_codesets(icf_eng, icf_et_official)
+    print(icf_et_official['d450'])
     pass
