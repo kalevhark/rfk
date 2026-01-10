@@ -1591,6 +1591,234 @@ def get_kysimustik9_ekspertiis(request):
         safe=False
     )
 
+
+#
+# Küsimustiku vaade ver 10
+#
+
+# Vue kysimustik10 tulemuste salvestamiseks
+def save_kysimustik10_results(request):
+    kysimustik_results = {
+        'version': '10',
+        'ipAddress': request.GET.get('ipAddress', ''),
+        'vanusgrupp': json.loads(request.GET.get('vanusgrupp', '')),
+        'toggleShowForm': request.GET.get('toggleShowForm', ''),
+        'kysimustikList': json.loads(request.GET.get('kysimustikList', '')),
+        'yldkysimusedList': json.loads(request.GET.get('yldkysimusedList', '')),
+        'feedback': request.GET.get('feedback', '')
+    }
+    # print(kysimustik_results)
+    versioon = kysimustik_results['version']
+    vanusgrupp = kysimustik_results['vanusgrupp']['text']
+    timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+    filename = f'eneseHinnang_v{versioon}_{vanusgrupp}_{timestamp}.json'
+    with open(STATIC_DIR / 'data' / filename, 'w', encoding='utf8') as f:
+        json.dump(kysimustik_results, f)
+
+    return JsonResponse(
+        {'filename': filename},
+        safe=False
+    )
+
+def get_kysimustik10():
+    filename = 'kysimustik_v10.xml'
+    file = STATIC_DIR / 'data' / filename
+    with open(file, 'r', encoding='utf8') as f:
+        tree = ET.parse(f)
+        root = tree.getroot()
+
+    vanusgrupid = []
+    vanusgruppideMuutumatudSeisundid = {}
+    vanusgruppideV6tmetegevused = {}
+    vanusgruppideKysimused = {}
+    vanusgruppideYldKysimused = {}
+    vanusgruppideFailiTekstid = {}
+
+    n = 0
+    for child in root.find('vanusgrupid'):
+        # print(child.tag, child.attrib, child.find('muutumatudSeisundid').text.split('\n'))
+        # vanusgruppide nimetused
+        vanusgrupp = {
+            'kysimustik': child.attrib['kysimustik'] == 'true',
+            'text': child.attrib['name'],
+            'value': n
+        }
+        vanusgrupid.append(vanusgrupp)
+
+        # vanusgruppide muutumatute seisundite loetelud
+        # i = itertools.count(0)
+        muutumatudSeisundidData = child.find('muutumatudSeisundid')
+        muutumatudSeisundidQuestion = {'kysimus': muutumatudSeisundidData.text.strip(), 'answer': ''}
+        vanusgruppideMuutumatudSeisundid[n] = {
+            'muutumatudSeisundidQuestion': muutumatudSeisundidQuestion,
+        }
+
+        # vanusgrupi v6tmetegevused
+        vanusgrupiV6tmetegevusedData = child.find('vanusgrupiV6tmetegevused')
+        vanusgrupiV6tmetegevusedList = [
+            {
+                'text': kysimus.text.strip(),
+                'valdkond_nr': kysimus.attrib['valdkond_nr'],
+                'v6tmetegevus_nr': kysimus.attrib['v6tmetegevus_nr'],
+            }
+            for kysimus
+            in vanusgrupiV6tmetegevusedData.findall('v6tmetegevus')
+            if len(kysimus.text.strip()) > 0
+        ]
+
+        # vanusgrupi kysimused
+        if child.attrib['kysimustik'] == 'true':
+            vanusgrupiKysimusedData = child.find('vanusgrupiKysimused')
+            vanusgrupiKysimusedQuestion = vanusgrupiKysimusedData.attrib['question']
+            vanusgrupiKysimusedList = [
+                {
+                    'text': kysimus.text.strip(),
+                    'valdkond_nr': kysimus.attrib['valdkond_nr'],
+                    'v6tmetegevus_nr': kysimus.attrib['v6tmetegevus_nr'],
+                    'rfk_kategooria': kysimus.attrib['rfk_kategooria'],
+                    'kohustuslik': kysimus.attrib['kohustuslik'] == 'jah',
+                    'score': '',
+                    'answer': ''
+                }
+                for kysimus
+                in vanusgrupiKysimusedData.findall('kysimus')
+                if len(kysimus.text.strip()) > 0
+            ]
+        else:
+            vanusgrupiKysimusedQuestion = ''
+            vanusgrupiKysimusedList = []
+
+        vanusgruppideV6tmetegevused[n] = {
+            'vanusgrupiV6tmetegevusedList': vanusgrupiV6tmetegevusedList
+        }
+
+        vanusgruppideKysimused[n] = {
+            'vanusgrupiKysimusedQuestion': vanusgrupiKysimusedQuestion,
+            'vanusgrupiKysimusedList': vanusgrupiKysimusedList
+        }
+
+        # vanusgrupi yldkysimused
+        vanusgrupiYldKysimusedData = child.find('vanusgrupiYldKysimused')
+        vanusgrupiYldKysimusedQuestion = vanusgrupiYldKysimusedData.attrib['question']
+        vanusgrupiYldKysimusedList = [
+            {
+                'text': kysimus.text.strip(),
+                'kohustuslik': kysimus.attrib['kohustuslik'] == 'jah',
+                'answer': ''
+            }
+            for kysimus
+            in vanusgrupiYldKysimusedData.findall('kysimus')
+            if len(kysimus.text.strip()) > 0
+        ]
+        vanusgruppideYldKysimused[n] = {
+            'vanusgrupiYldKysimusedQuestion': vanusgrupiYldKysimusedQuestion,
+            'vanusgrupiYldKysimusedList': vanusgrupiYldKysimusedList
+        }
+        vanusgrupiFailiTekst = child.find('vanusgrupiFailiTekst')
+        vanusgruppideFailiTekstid[n] = vanusgrupiFailiTekst.text.strip()
+        n += 1
+
+    kysimustik = {
+        'vanusgrupid': vanusgrupid,
+        'vanusgruppideMuutumatudSeisundid': vanusgruppideMuutumatudSeisundid,
+        'vanusgruppideV6tmetegevused': vanusgruppideV6tmetegevused,
+        'vanusgruppideKysimused': vanusgruppideKysimused,
+        'vanusgruppideYldKysimused': vanusgruppideYldKysimused,
+        'vanusgruppideFailiTekstid': vanusgruppideFailiTekstid
+    }
+    return kysimustik
+
+def kysimustik10(request):
+    kysimustik = get_kysimustik10()
+    vanusgrupid = kysimustik['vanusgrupid']
+    vanusgruppideMuutumatudSeisundid = kysimustik['vanusgruppideMuutumatudSeisundid']
+    vanusgruppideV6tmetegevused = kysimustik['vanusgruppideV6tmetegevused']
+    vanusgruppideKysimused = kysimustik['vanusgruppideKysimused']
+    vanusgruppideYldKysimused = kysimustik['vanusgruppideYldKysimused']
+    vanusgruppideFailiTekstid = kysimustik['vanusgruppideFailiTekstid']
+
+    context = {
+        'selectedSkaala': 1,
+        'vanusgrupid': json.dumps(vanusgrupid),
+        'vanusgruppideMuutumatudSeisundid': json.dumps(vanusgruppideMuutumatudSeisundid),
+        'vanusgruppideV6tmetegevused': json.dumps(vanusgruppideV6tmetegevused),
+        'vanusgruppideKysimused': json.dumps(vanusgruppideKysimused),
+        'vanusgruppideYldKysimused': json.dumps(vanusgruppideYldKysimused),
+        'vanusgruppideFailiTekstid': json.dumps(vanusgruppideFailiTekstid),
+        'ip': get_client_ip(request)
+    }
+    return render(
+        request,
+        'main/kysimustik10.html',
+        context
+    )
+
+# Vue kysimustik9 tulemuste salvestamiseks
+def get_kysimustik10_ekspertiis(request):
+    vanusgrupp = json.loads(request.GET.get('vanusgrupp', ''))
+    v6tmetegevusedList = json.loads(request.GET.get('v6tmetegevusedList', ''))
+    kysimustikList = json.loads(request.GET.get('kysimustikList', ''))
+    yldkysimusedList = json.loads(request.GET.get('yldkysimusedList', ''))
+
+    v6tmetegevused = {
+        (v6tmetegevus["valdkond_nr"], v6tmetegevus["v6tmetegevus_nr"]): v6tmetegevus["text"]
+        for v6tmetegevus
+        in v6tmetegevusedList
+    }
+    skoorid = [
+        kysimus['score']
+        for kysimus
+        in kysimustikList
+        if (kysimus['valdkond_nr'] == '1' and kysimus['v6tmetegevus_nr'] == '2')
+    ]
+    header = tr(
+        th('võtmetegevused'), th('EH'), th('EA')
+    )
+    trs = []
+    for key, item in v6tmetegevused.items():
+        skoorid = [
+            str(kysimus['score'])
+            for kysimus
+            in kysimustikList
+            if (kysimus['valdkond_nr'] == str(key[0]) and kysimus['v6tmetegevus_nr'] == str(key[1]))
+        ]
+        if skoorid:
+            max_skoor = max(skoorid)
+        else:
+            max_skoor = ''
+        options = []
+        for n in range(5):
+            if max_skoor == str(n):
+                options.append(option(value=f"{n}", selected="selected")(f"{n}"))
+            else:
+                options.append(option(value=f"{n}")(f"{n}"))
+        select_field = select(name="skoor_{key[0]}_{key[1]}", id="skoor_{key[0]}_{key[1]}")(options)
+        row = [td(f'{key[0]}.{key[1]} {item}'), td(max_skoor), td(select_field)]
+        trs.append(tr(row))
+    html = table(border="1", class_="w3-table-all w3-small w3-card-4")(header, trs).render()
+
+    rfkd = [
+        '.'.join([kysimus['rfk_kategooria'], str(kysimus['score'])])
+        for kysimus
+        in kysimustikList
+        if (kysimus['score'] != '' and kysimus['rfk_kategooria'] != 'tyhi')
+    ]
+
+    trs = [
+        tr(td(Safe(get_icf_code_verbose(request=None, code=rfk)))) for rfk in rfkd
+    ]
+    rfk_table = table(border="1", class_="w3-table-all w3-small w3-card-4")(trs).render()
+
+    return JsonResponse(
+        {
+            'vanusgrupp': vanusgrupp,
+            'kysimustikList': kysimustikList,
+            'html': html,
+            'rfk_table': rfk_table,
+        },
+        safe=False
+    )
+
 import io
 from django.http import FileResponse
 from reportlab.pdfgen import canvas
@@ -1998,7 +2226,7 @@ def compare_codesets(icf_eng, icf_et_official):
         except:
             v = 'pole'
         if puhastatud_string(u) != puhastatud_string(v):
-            print(key, u, 'vs', v)
+            print(';'.join([key, u, v]))
 
 if __name__ == '__main__':
     # for i in range(1, 5):

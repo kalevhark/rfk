@@ -78,6 +78,7 @@ urlpatterns = [
     path('kysimustik7/', views.kysimustik7, name='kysimustik7'),
     path('kysimustik8/', views.kysimustik8, name='kysimustik8'),
     path('kysimustik9/', views.kysimustik9, name='kysimustik9'),
+    path('kysimustik10/', views.kysimustik10, name='kysimustik10'),
     path('some_view/', views.some_view, name='some_view'),
     path('main/', include('main.urls')),
     path('montonio/', include('montonio.urls')),
