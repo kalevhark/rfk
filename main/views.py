@@ -3,10 +3,12 @@ from datetime import datetime
 import itertools
 import json
 import math
+from pathlib import Path
+import os
+import random
 import re
 from unicodedata import category
 import xml.etree.ElementTree as ET
-import os
 
 if __name__ == "__main__":
     import django
@@ -21,14 +23,18 @@ if __name__ != '__main__':
 
     STATIC_DIR = settings.BASE_DIR / 'main' / 'static' / 'main'
 else:
-    from pathlib import Path
     BASE_DIR = Path(__file__).resolve().parent.parent
     STATIC_DIR = BASE_DIR / 'main' / 'static' / 'main'
+
+
+from django.conf import settings
+from django.db.models.functions import Length
 
 import openpyxl
 from pyhtml import *
 
-# from main.models import RFK
+from main.models import RFK
+from main.forms import KategooriaForm, ArticleFormSet
 
 RFK_REGEX = r"[bdes](?:\d{3,}\.\d+)"
 SCORE_CLASSES = ['', 'w3-pale-yellow', 'w3-yellow', 'w3-pale-red', 'w3-red']
@@ -440,6 +446,13 @@ def index(request):
         {}
     )
 
+def sandbox(request):
+    return render(
+        request,
+        'main/sandbox.html',
+        {}
+    )
+
 def privacy(request):
     return render(
         request,
@@ -447,113 +460,6 @@ def privacy(request):
         {}
     )
 
-def covidpass_s9a(request):
-    print(request.COOKIES)
-    html = render(
-        request,
-        'main/covidpass_s9a.html',
-        {
-            # 'object': 'Seda saab jagada!'
-        }
-    )
-    return HttpResponse(html)
-
-import qrcode
-import qrcode.image.svg
-import io
-from io import BytesIO
-from qrcode.image.styledpil import StyledPilImage
-import base64
-# import modules
-from PIL import Image, ImageOps
-
-def covidpass_s9a_3(request):
-    context = {}
-    if request.method == "POST":
-        factory = qrcode.image.svg.SvgImage
-        img = qrcode.make(
-            request.POST.get("qr_text", ""),
-            image_factory=factory,
-            box_size=20,
-            # embeded_image_path = "main/covidpass_S9a.png"
-        )
-        stream = BytesIO()
-        img.save(stream)
-        context["svg"] = stream.getvalue().decode()
-
-        qr = qrcode.QRCode(error_correction=qrcode.constants.ERROR_CORRECT_L)
-        qr.add_data(request.POST.get("qr_text", ""))
-
-        # img_1 = qr.make_image(image_factory=StyledPilImage, module_drawer=RoundedModuleDrawer())
-        # img_2 = qr.make_image(image_factory=StyledPilImage, color_mask=RadialGradiantColorMask())
-
-    return render(request, "main/covidpass_s9a_2.html", context=context)
-
-def covidpass_s9a_2(request):
-    # taking image which user wants
-    # in the QR code center
-    Logo_link = 'main/static/main/android-chrome-192x192.png'
-
-    logo = Image.open(Logo_link)
-    new_image = Image.new("RGBA", logo.size, "WHITE")  # Create a white rgba background
-    new_image.paste(logo, (0, 0), logo)  # Paste the image on the background. Go to the links given below for details.
-    # new_image.convert('RGB').save('test.jpg', "JPEG")  # Save as JPEG
-    logo = new_image
-
-    # taking base width
-    basewidth = 100
-
-    # adjust image size
-    wpercent = (basewidth / float(logo.size[0]))
-    hsize = int((float(logo.size[1]) * float(wpercent)))
-    logo = logo.resize((basewidth-30, hsize-30), Image.ANTIALIAS)
-    logo = ImageOps.expand(logo, border=10, fill='white')
-    QRcode = qrcode.QRCode(
-        error_correction=qrcode.constants.ERROR_CORRECT_H
-    )
-
-    # taking url or text
-    url = 'https://valgalinn.ee/wiki/isik/62-johan-m%C3%BCllerson/'
-
-    # adding URL or text to QRcode
-    QRcode.add_data(url)
-
-    # generating QR code
-    QRcode.make()
-
-    # taking color name from user
-    QRcolor = 'Green'
-
-    # adding color to QR code
-    QRimg = QRcode.make_image(
-        fill_color=QRcolor, back_color="white").convert('RGB')
-
-    # set size of QR code
-    pos = ((QRimg.size[0] - logo.size[0]) // 2,
-           (QRimg.size[1] - logo.size[1]) // 2)
-    QRimg.paste(logo, pos)
-
-    # save the QR code generated
-    # QRimg.save('gfg_QR.png')
-
-    # print('QR code generated!')
-    stream = BytesIO()
-    QRimg.save(stream, "PNG")
-
-    image_data = base64.b64encode(stream.getvalue()).decode('utf-8')
-
-    # return HttpResponse(f'<img id="plt" src="data:image/png;base64, {image_data}"></img>')
-    context = {'img': f'<img id="plt" src="data:image/png;base64, {image_data}"></img>'}
-    return render(request, "main/covidpass_s9a_2.html", context=context)
-
-
-
-def sandbox(request):
-    return render(
-        request,
-        'main/sandbox.html',
-        {}
-    )
 
 def rfk(request):
     return render(
@@ -944,80 +850,8 @@ def is_code_in_group(code, group):
     return False
 
 
-
-def test(method=1):
-    level = 1
-    rfk_set_b = {
-        'b4551': ('b4', 'b455', 'b450-b469', 2),
-        'b4552': ('b4', 'b455', 'b450-b469', 3),
-        'b4553': ('b4', 'b455', 'b450-b469', 2),
-    }
-    rfk_set_d = {
-        'd4551': ('d4', 'd455', 'd450-b469', 0),
-        'd4552': ('d4', 'd455', 'd450-b469', 3),
-        'd4553': ('d4', 'd455', 'd450-b469', 2),
-    }
-    rfk_set = dict()
-    for key in rfk_set_b:
-        rfk_set[key] = rfk_set_b[key]
-    for key in rfk_set_d:
-        rfk_set[key] = rfk_set_d[key]
-    parts = dict()
-    for code in rfk_set:
-        part = code[:2]  # kahekohaline nt b2
-        parts = calc_mean(rfk_set, parts, part, code, method)
-
-    rows = 'd'
-    columns = 'b'
-
-    vect_rows = [
-        code_block
-        for code_block
-        in parts.keys()
-        if code_block[0] in rows
-    ]
-    if vect_rows:
-        vect_rows.sort()
-    else:
-        vect_rows = ['TTa']  # kui tegevus/osalus piiranguid pole, siis Täpsustamata (TTa)
-
-    vect_columns = [
-        code_block
-        for code_block
-        in parts.keys()
-        if code_block[0] in columns
-    ]
-    if vect_columns:
-        vect_columns.sort()
-    else:
-        vect_columns = ['TTa']  # kui func või struct piiranguid pole, siis Täpsustamata (TTa)
-
-    for r in vect_rows:
-        for c in vect_columns:
-            score = ''
-            title = ''
-            try:
-                score, title = calc_score(parts[r], parts[c], method=method)
-            except:
-                if c == 'TTa': # kui func/struct t2psustamata, siis ainult d keskmine
-                    try:
-                        score, title = calc_score(parts[r], None, method=method)
-                    except KeyError:
-                        pass
-                elif r == 'TTa': # kui tegevus/osalus t2psustamata, siis ainult b/s keskmine
-                    score, title = calc_score(None, parts[c], method=method)
-            print(score, title)
-
 def get_client_ip(request):
-    remote_address = request.META.get('HTTP_X_FORWARDED_FOR') or request.META.get('REMOTE_ADDR')
     ip = request.META.get('REMOTE_ADDR')
-    # x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
-    # if x_forwarded_for:
-    #     proxies = x_forwarded_for.split(',')
-    #     while (len(proxies) > 0 and proxies[0].startswith(PRIVATE_IPS_PREFIX)):
-    #         proxies.pop(0)
-    #         if len(proxies) > 0:
-    #             ip = proxies[0]
     return ip
 
 def get_kysimustik7():
@@ -1819,33 +1653,7 @@ def get_kysimustik10_ekspertiis(request):
         safe=False
     )
 
-import io
-from django.http import FileResponse
-from reportlab.pdfgen import canvas
-
-def some_view(request):
-    # Create a file-like buffer to receive PDF data.
-    buffer = io.BytesIO()
-
-    # Create the PDF object, using the buffer as its "file."
-    p = canvas.Canvas(buffer)
-
-    # Draw things on the PDF. Here's where the PDF generation happens.
-    # See the ReportLab documentation for the full list of functionality.
-    p.drawString(100, 100, "Hello world.")
-
-    # Close the PDF object cleanly, and we're done.
-    p.showPage()
-    p.save()
-
-    # FileResponse sets the Content-Disposition header so that browsers
-    # present the option to save the file.
-    buffer.seek(0)
-    return FileResponse(buffer, as_attachment=True, filename='hello.pdf')
-
 def get_excel():
-    from django.conf import settings
-
     path = settings.BASE_DIR
     DATA_DIR = path / 'main' / 'static' / 'main' / 'data'
 
@@ -1875,8 +1683,6 @@ def get_excel():
         # for col in sheet.iter_cols(1, sheet.max_column):
         #     print(col[row].value)
 
-import openpyxl
-from main.forms import KategooriaForm, ArticleFormSet
 
 def read_codeset_from_excel():
     wb = openpyxl.load_workbook(settings.BASE_DIR / 'main' / 'static' / 'main' / 'data' / 'RFK_koodisett.xlsx')
@@ -1925,7 +1731,7 @@ def prt(request):
         }
     )
 
-import random
+
 def j6ul2024(request):
     rfk_codes_b = [
         'b535.1', # Seedesüsteemiga seonduvad aistingud
@@ -1963,7 +1769,6 @@ def j6ul2024(request):
         }
     )
 
-from main.models import RFK
 def import_icf2db():
     for code in icf_eng:
         row = RFK(**icf_eng[code])
@@ -2097,7 +1902,6 @@ def read_coreset_from_excel():
         )
     return coreset
 
-from django.db.models.functions import Length
 
 def coreset(request):
     function_groups = {
@@ -2173,66 +1977,6 @@ def expmoodul(request):
     )
 
 
-def get_helenamiia(request):
-    ipaadress = request.META.get('HTTP_X_FORWARDED_FOR') or request.META.get('REMOTE_ADDR')
-    return JsonResponse(
-        {
-            'uussisu': f'<strong>Nüüd on õige asi</strong><br>Sinu aadress on {ipaadress}',
-        },
-        safe=False
-    )
-
-def helenamiia(request):
-    metaandmed = request.META
-    return render(
-        request,
-        template_name='main/helenamiia.html',
-        context={
-            'metaandmed': metaandmed
-        }
-    )
-
-import string
-# puhastatud_string = lambda s: s.strip().lower().translate({ord(c): None for c in string.whitespace})
-puhastatud_string = lambda s: re.sub(r"\s+", "", s)
-
-import requests
-def compare_codesets(icf_eng, icf_et_official):
-    print("Puuduvad mitteametlikus:")
-    keys_official = icf_et_official.keys()
-    for key in keys_official:
-        if key not in icf_eng.keys():
-            print(key)
-    
-    print("Puuduvad ametlikus:")
-    keys_old = icf_eng.keys()
-    for key in keys_old:
-        if key not in icf_et_official.keys():
-            print(key)
-            # url = f'https://term.tehik.ee/fhir/CodeSystem/$lookup?system=https://fhir.ee/CodeSystem/rfk&code={key}'
-            # resp = requests.get(url)
-            # print(resp)
-
-    keys_all_set = set(list(keys_official) + list(keys_old))
-    keys_all = list(keys_all_set)
-    keys_all.sort()
-    for key in keys_all:
-        try:
-            u = icf_et_official[key]['Translated_title']
-        except:
-            u = 'pole'
-        try:
-            v = icf_eng[key]['Translated_title']
-        except:
-            v = 'pole'
-        if puhastatud_string(u) != puhastatud_string(v):
-            print(';'.join([key, u, v]))
-
 if __name__ == '__main__':
-    # for i in range(1, 5):
-    #     test(i)
-    # get_excel()
-    # import_icf2db()
-    compare_codesets(icf_eng, icf_et_official)
     print(icf_et_official['d450'])
     pass

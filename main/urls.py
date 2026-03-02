@@ -11,8 +11,6 @@ urlpatterns = [
     path('get_icf_path/', views.get_icf_path, name='get_icf_path'),
     path('get_icf_summary/', views.get_icf_summary, name='get_icf_summary'),
     path('get_icf_code_verbose/', views.get_icf_code_verbose, name='get_icf_code_verbose'),
-    # path('get_kysimustik2_results/', views.get_kysimustik2_results, name='get_kysimustik2_results'),
-    # path('get_kysimustik3_results/', views.get_kysimustik3_results, name='get_kysimustik3_results'),
     path('save_kysimustik7_results/', views.save_kysimustik7_results, name='save_kysimustik7_results'),
     path('save_kysimustik9_results/', views.save_kysimustik9_results, name='save_kysimustik9_results'),
     path('save_kysimustik10_results/', views.save_kysimustik10_results, name='save_kysimustik10_results'),
@@ -20,5 +18,4 @@ urlpatterns = [
     path('get_kysimustik9_ekspertiis/', views.get_kysimustik9_ekspertiis, name='get_kysimustik9_ekspertiis'),
     path('get_kysimustik10_ekspertiis/', views.get_kysimustik10_ekspertiis, name='get_kysimustik10_ekspertiis'),
     path('get_icf_calcs_prt/', views.get_icf_calcs_prt, name='get_icf_calcs_prt'),
-    path('get_helenamiia/', views.get_helenamiia, name='get_helenamiia'),
 ]
