@@ -2,9 +2,13 @@
       <h3 v-show="showBackgroundInfo">Üldküsimused</h3>
       <p>[[ yldkysimusedQuestion ]]</p>
       <div v-for="(kysimus, kysimusIndex) in yldkysimusedList" :key="kysimusIndex">
-        <p><span v-html="kysimus.text"></span></p>
+        <p 
+          class="fw-bolder"
+          v-html="kysimus.text">
+        </p>
         <p><small v-if="kysimus.kohustuslik">Kohustuslik</small></p>
         <textarea 
+          class="form-control"
           rows="3" 
           cols="80" 
           v-model="kysimus.answer" 

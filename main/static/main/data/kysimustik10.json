@@ -88,7 +88,7 @@
 			"faili_kysimus": "Juhul, kui soovite lapse tervisliku seisundi kohta lisada täiendavaid dokumente, mida ei ole kantud terviseportaali, siis saate seda teha siin."
 		},
 		"Laps 4-8": {
-			"pealkiri": "Kuni 4- kuni 8-aastase lapse puude raskusastme tuvastamine",
+			"pealkiri": "4- kuni 8-aastase lapse puude raskusastme tuvastamine",
 			"v6tmetegevused": [
 				{
 					"valdkond_nr": "1",
@@ -251,7 +251,7 @@
 			"faili_kysimus": "Kui lapse kohta on mõni nendest dokumentidest, siis palume võimalusel lisada need taotlusele:<br>- Koolivälise nõustamismeeskonna (Rajaleidja) hindamisleht.<br>- Iseloomustus koolist või lasteaiast.<br>- Õpilase individuaalse arengu jälgimise kaart.<br>- Kohaliku omavalitsuse juhtumiplaan.<br>- Spetsialistide (logopeed, psühholoog, füsioterapeut) hinnangud, mida ei ole kantud terviseportaali.<br>- Muu lapse tervislikku seisundit kirjeldav dokument, mis ei ole kättesaadav terviseportaalis."
 		},
 		"Laps 9-15": {
-			"pealkiri": "Kuni 9- kuni 15-aastase lapse puude raskusastme tuvastamine",
+			"pealkiri": "9- kuni 15-aastase lapse puude raskusastme tuvastamine",
 			"v6tmetegevused": [
 				{
 					"valdkond_nr": "1",

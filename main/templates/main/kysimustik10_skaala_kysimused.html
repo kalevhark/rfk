@@ -15,7 +15,11 @@
     <p>[[ kysimustikQuestion ]]</p>
     <div v-for="(kysimus, kysimusIndex) in kysimustikList">
       <span v-show="showBackgroundInfo">[[ kysimus.valdkond_nr ]].[[ kysimus.v6tmetegevus_nr ]]&NonBreakingSpace;</span>
-      <span v-html="kysimus.text"></span><span v-if="kysimus.kohustuslik" style="color: red"> *</span><br>
+      <span 
+        class="fw-bolder"
+        v-html="kysimus.text">
+      </span>
+      {% comment %} <span v-if="kysimus.kohustuslik" style="color: red"> *</span><br> {% endcomment %}
       <section class="row align-items-start">
         <span 
           class="col text-center" 
@@ -52,6 +56,7 @@
             <hr>
             <div>Palun täpsusta oma vastust</div>
             <textarea 
+              class="form-control"
               rows="3" cols="40" v-model="kysimus.answer"
               placeholder="Sisesta oma vastus siia">
             </textarea>
