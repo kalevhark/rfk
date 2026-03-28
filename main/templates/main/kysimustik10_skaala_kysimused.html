@@ -1,0 +1,64 @@
+{% load static %}
+<transition name="slide-fade">
+  <div v-show="showKysimustik" class="w3-row w3-padding w3-white">
+    <h3 v-show="showBackgroundInfo">Skaalaküsimused</h3>
+    <p>
+      See siin on küsimustiku skaala seletus. Järgnevatele küsimustele saad vastata vajutades numbrile, mis iseloomustab terviseseisundist tulenevaid piiranguid kõige täpsemalt.
+      <br>Piirangute raskusastmeid hinnatakse järgmiste arvväärtustega:
+      <br>0 – piirangut ei ole;
+      <br>1 – kerge piirang - ei takista igapäevaelu;
+      <br>2 – mõõdukas piirang - takistab sageli igapäevaelu; tegevus on ilmselgelt raskemini sooritatav kui ilma pikaajalise tervisekahjustuseta inimesel;
+      <br>3 – raske piirang - segab oluliselt igapäevaelu, esineb väga sageli või pidevalt; tegevuse sooritamine on peaaegu võimatu, kuid mingil määral siiski võimalik;
+      <br>4 – täielik piirang - takistab pidevalt igapäevaelu; tegevust ei ole võimalik sooritada, vastav funktsioon puudub.
+    </p>
+    <img src="{% static 'main/img/skaala.png' %}" alt="Piirangute skaala" class="kysimustik10-pilt">
+    <p>[[ kysimustikQuestion ]]</p>
+    <div v-for="(kysimus, kysimusIndex) in kysimustikList">
+      <span v-show="showBackgroundInfo">[[ kysimus.valdkond_nr ]].[[ kysimus.v6tmetegevus_nr ]]&NonBreakingSpace;</span>
+      <span v-html="kysimus.text"></span><span v-if="kysimus.kohustuslik" style="color: red"> *</span><br>
+      <section class="row align-items-start">
+        <span 
+          class="col text-center" 
+          v-for="n in skaalad[selectedSkaala].skaala" :key="n"
+        >
+          <input
+            type="radio"
+            :id="kysimusIndex + '-' + n"
+            :value="n"
+            v-model.number="kysimus.score"
+            v-bind:title="[[ skaalad[selectedSkaala].legend[n] ]]"
+            onclick="setChoice(this)"
+          />
+          <label :for="kysimusIndex + '-' + n">[[ n ]]</label>
+          <br>
+          <span 
+            class="visible"
+            :id="kysimusIndex + '-' + n + '-legend'"
+            v-if="n == 0 || n == 4">
+            [[ skaalad[selectedSkaala].legend[n] ]]
+          </span>
+          <span 
+            class="not-visible"
+            :id="kysimusIndex + '-' + n + '-legend'"
+            v-else>
+            [[ skaalad[selectedSkaala].legend[n] ]]
+          </span>
+        </span>
+        {% comment %} <span v-for="n in skaalad[selectedSkaala].skaala" :key="n">
+          <span>[[ skaalad[selectedSkaala].legend[n] ]]</span>
+        </span> {% endcomment %}
+        <transition name="slide-fade">
+          <div v-show="kysimus.score >= skaalad[selectedSkaala].extraKysimus">
+            <hr>
+            <div>Palun täpsusta oma vastust</div>
+            <textarea 
+              rows="3" cols="40" v-model="kysimus.answer"
+              placeholder="Sisesta oma vastus siia">
+            </textarea>
+          </div>
+          <div v-show="showBackgroundInfo" class="result">[[ getScore(kysimusIndex) ]]</div>          
+        </transition>
+      </section>
+    </div>
+  </div>
+</transition>

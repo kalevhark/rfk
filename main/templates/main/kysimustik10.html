@@ -4,6 +4,9 @@
 {% block title %}{{ block.super }} küsimustiku proto 10{% endblock %}
 
 {% block src %}
+  <!-- Bootstrap core JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  <!-- Custom javascript for this template -->
   <script type="text/javascript">
     // Muutujad vue jaoks
     var urlSaveResults = "{% url 'main:save_kysimustik10_results' %}";
@@ -20,215 +23,46 @@
 {% endblock %}
 
 {% block css %}
-  <style>
-    label {
-     padding-left: 0.4em;
-    }
-
-    .question {
-      width: 300px;
-    }
-
-    .unanswered {
-      width: 100px;
-      text-align: center;
-    }
-
-    .poll {
-      width: 30px;
-      text-align: center;
-    }
-
-    .result {
-      width: 80px;
-      text-align: left;
-    }
-
-    /*
-    Enter and leave animations can use different
-    durations and timing functions.
-    */
-    .slide-fade-enter-active {
-      transition: all 0.5s ease-out;
-    }
-
-    .slide-fade-leave-active {
-      transition: all 0.5s cubic-bezier(1, 0.5, 0.8, 1);
-    }
-
-    .slide-fade-enter-from,
-    .slide-fade-leave-to {
-      opacity: 0;
-    }
-
-    .fade-enter-active,
-    .fade-leave-active {
-      transition: opacity 0.5s ease;
-    }
-
-    .fade-enter-from,
-    .fade-leave-to {
-      opacity: 0;
-    }
-  </style>
+<!-- Bootstrap core CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="{% static 'main/kysimustik10.css' %}?ver=2026" >
 {% endblock %}
 
 {% block content %}
-  <div class="w3-container" id="kysimustik">
-    <button onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-black">
-      Mis värk on?
-    </button>
-
-    <button @click="showBackgroundInfo = !showBackgroundInfo" class="w3-button">
-      <span v-if="showBackgroundInfo">Ära näita valdkondi/võtmetegevusi/arvnäitajat</span>
-      <span v-else>Näita  valdkondi/võtmetegevusi/arvnäitajat</span>
-    </button>
-
-    <div id="id01" class="w3-modal">
-      <div class="w3-modal-content">
-        <div class="w3-container">
-          <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-display-topright">&times;</span>
-          <p>Enesehinnangust piirangu määraja arvutamine inimese valiku järgi</p>
-          <ul>
-            <li>inimene teeb valiku skaalal [[ skaalad[selectedSkaala].skaala[0] ]]-[[ skaalad[selectedSkaala].skaala.slice(-1)[0] ]] -> valik</li>
-            <li>arvnäitaja = 4 / [[ skaalad[selectedSkaala].skaala.slice(-1)[0] ]] * valik (arvutatakse kahe komakoha täpsusega)</li>
-            <li>määraja = 0, kui arvnäitaja < 1,00</li>
-            <li>määraja = 1, kui 1,00 <= arvnäitaja < 2,00</li>
-            <li>määraja = 2, kui 2,00 <= arvnäitaja < 2,76</li>
-            <li>määraja = 3, kui 2,76 <= arvnäitaja < 3,50</li>
-            <li>määraja = 4, kui 3,50 <= arvnäitaja</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-
-    <div v-if="showDebug">
-      &NonBreakingSpace;<span>Skaala?</span>&NonBreakingSpace;
-      <select v-model="selectedSkaala">
-        <option v-for="option in skaalad" v-bind:value="option.value">
-          [[ option.text ]]
-        </option>
-      </select>
-    </div>
-
-    &NonBreakingSpace;<span>Vanusgrupp?</span>&NonBreakingSpace;
-    <select v-model="selectedVanusgrupp">
-      <option v-for="option in vanusgrupid" v-bind:value="option.value">
-        [[ option.text ]]
-      </option>
-    </select>
-
-    <h3>Terviseseisundi kirjeldus</h3>
-    {% comment %} <div class="w3-panel w3-padding w3-card w3-pale-blue">
-      <h3 v-show="showBackgroundInfo">Progresseeruv või muutumatu terviseseisund</h3>
-      <p>[[ muutumatudSeisundidQuestion.kysimus ]]<span v-if="muutumatudSeisundidQuestion.kohustuslik" style="color: red"> *</span></p>
-      <textarea rows="3" cols="80" v-model="muutumatudSeisundidQuestion.answer" placeholder="siia saab kirjutada pika jutu..."></textarea>
-    </div> {% endcomment %}
-    
-    <div class="w3-panel w3-padding w3-card w3-pale-blue">
-      <h3 v-show="showBackgroundInfo">Üldküsimused</h3>
-      <p>[[ yldkysimusedQuestion ]]</p>
-      <div v-for="(kysimus, kysimusIndex) in yldkysimusedList" :key="kysimusIndex">
-        <p><span v-html="kysimus.text"></span><span v-if="kysimus.kohustuslik" style="color: red"> *</span></p>
-        <textarea rows="3" cols="80" v-model="kysimus.answer" placeholder="siia saab kirjutada pika jutu..."></textarea>
-      </div>
-    </div>
-
-    <div v-show="showKysimustik" class="w3-row w3-padding w3-pale-green">
-      <h3 v-show="showBackgroundInfo">Skaalaküsimused</h3>
-      <p>
-        Hinda hakkama saamist järgnevates olukordades:<br>
-        See siin on küsimustiku skaala seletus. Järgnevatele küsimustele saad vastata vajutades numbrile, mis iseloomustab terviseseisundist tulenevaid piiranguid kõige täpsemalt:<br>
-        Piirangute raskusastmeid hinnatakse järgmiste arvväärtustega:<br>
-        0 – piirangut ei ole;<br>
-        1 – kerge piirang - ei takista igapäevaelu;<br>
-        2 – mõõdukas piirang - takistab sageli igapäevaelu; tegevus on ilmselgelt raskemini sooritatav kui ilma pikaajalise tervisekahjustuseta inimesel;<br>
-        3 – raske piirang - segab oluliselt igapäevaelu, esineb väga sageli või pidevalt; tegevuse sooritamine on peaaegu võimatu, kuid mingil määral siiski võimalik;<br>
-        4 – täielik piirang - takistab pidevalt igapäevaelu; tegevust ei ole võimalik sooritada, vastav funktsioon puudub.
-      </p>
-      <p>  
-        <span v-for="rida in skaalad[selectedSkaala].legend">
-          [[ rida ]]&nbsp
-        </span>
-      </p>
-      <table>
-        <tr>
-          <th class="question"></th>
-          <th class="poll" v-for="n in skaalad[selectedSkaala].skaala" :key="n">
-            [[ n ]]
-          </th>
-          <th v-show="showBackgroundInfo" class="result"
-              title="Arvnäitaja 0-4">MM18
-          </th>
-        </tr>
-      </table>
-      <div v-for="(kysimus, kysimusIndex) in kysimustikList">
-        <span v-show="showBackgroundInfo">[[ kysimus.valdkond_nr ]].[[ kysimus.v6tmetegevus_nr ]]&NonBreakingSpace;</span>
-        <span v-html="kysimus.text"></span><span v-if="kysimus.kohustuslik" style="color: red"> *</span><br>
-        <table>
-          <tr>
-            <td class="question"></td>
-            <td class="poll" v-for="n in skaalad[selectedSkaala].skaala" :key="n">
-              <input
-                      type="radio"
-                      :id="n"
-                      :value="n"
-                      v-model.number="kysimus.score"
-                      v-bind:title="[[ skaalad[selectedSkaala].legend[n] ]]"
-              />
-              <label :for="n"></label>
-            </td>
-            <td v-show="showBackgroundInfo" class="result">[[ getScore(kysimusIndex) ]]</td>
-          </tr>
-          <transition name="slide-fade">
-            <tr v-show="kysimus.score >= skaalad[selectedSkaala].extraKysimus">
-              <td class="question"></td>
-              <td colspan="10">Täpsustage palun, milline tervisehäire peamiselt piiranguid põhjustab?</td>
-              <td><textarea rows="3" cols="40" v-model="kysimus.answer"
-                            placeholder="siia saab kirjutada pika jutu..."></textarea></td>
-            </tr>
-          </transition>
-        </table>
-      </div>
-    </div>
-
-    <div  v-show="showBackgroundInfo" class="w3-panel w3-padding w3-card w3-pale-blue">
-      <div class="w3-half">
-        <button id='refreshEkspertiis' @click="refreshEkspertiis">Ekspertarvamuse vaade</button>
-        <hr>
-        <div id="ekspertiis" class="w3-card"></div>
-        <hr>
-        <div id="rfkd" class="w3-card"></div>
-      </div>
-    </div>
-
-    <div class="w3-panel w3-padding w3-card w3-pale-blue">
-      <div class="w3-row">
-        <p>
-          Lisa soovi korral dokumendid ja lisainformatsioon
-         </p>
-        <p>
-          Soovime, et puude raskusastme tuvastamiseks saaksime kasutada võimalikult täpseid terviseandmeid. Selleks teavitage perearsti või peamiselt ravivat eriarsti puude raskusastme tuvastamise taotluse esitamise eel ja rääkige talle kavatsusest esitada puude raskusastme tuvastamise taotlus.
-        </p>
-        <p v-html="vanusgrupiFailiTekst"></p>
-        {% comment %} [[ vanusgrupiFailiTekst ]]<br> {% endcomment %}
-        <button id='saveFile' @click="saveFile">Lisa fail</button>
-      </div>
-    </div>
-    <div class="w3-panel w3-padding w3-card w3-light-grey">
-      <h3 v-show="showBackgroundInfo">Tagasiside</h3>
-      <div>
-        <p><span>Testimiseks: Nimi ja kommentaar küsimustiku kohta:</span></p>
-        <textarea rows="5" cols="80" v-model="feedback" placeholder="siia saab kirjutada pika jutu..."></textarea>
-        <br>
-        <button id='saveButton' @click="saveResults">Saada</button>
-        <button id='resetForm' @click="resetForm">Täida uuesti</button>
-      </div>
-    </div>
+  <div class="w3-container" id="kysimustik10">
+    {% include "main/kysimustik10_top.html" %}
+    <h3 >[[ vanusgrupid[selectedVanusgrupp].pealkiri ]]</h3>
+    <img src="{% static 'main/img/yldinfo.png' %}" alt="Taotluse üldinfo" class="kysimustik10-pilt">
+    <hr>
+    <img src="{% static 'main/img/raviarstid.png' %}" alt="Raviarstid ja spetsialistid" class="kysimustik10-pilt">
+    <h3>Enesehinnangu küsimustik</h3>
+    {% comment %} {% include "main/kysimustik10_muutumatu_seisund.html" %} {% endcomment %}
+    {% include "main/kysimustik10_yld_kysimused.html" %}
+    {% include "main/kysimustik10_skaala_kysimused.html" %}
+    {% include "main/kysimustik10_ekspertarsti_vaade.html" %}
+    <h3>Lisa soovi korral dokumendid ja lisainformatsioon</h3>
+    {% include "main/kysimustik10_faili_lisamine.html" %}
+    <img src="{% static 'main/img/bottom.png' %}" alt="Toetuse ja puudega isiku kaardi taotlemine" class="kysimustik10-pilt">
+    {% comment %} {% include "main/kysimustik10_tagasiside.html" %} {% endcomment %}
   </div>
 {% endblock %}
 
 {% block javascript %}
-  <script src="{% static 'main/kysimustik10.js' %}?ver=2025"></script>
+  <script src="{% static 'main/kysimustik10.js' %}?ver=2026"></script>
+  <script>
+    function setChoice(el) {
+      for (let i = 0; i < 5; i++) {
+        const sibling = document.getElementById(el.id.split('-')[0] + '-' + i + '-legend');
+        if (sibling) {
+          sibling.classList.remove('visible');
+          sibling.classList.add('not-visible');
+        }
+      }
+      var legendElement = document.getElementById(el.id + '-legend');
+      if (legendElement) {
+        legendElement.classList.add('visible');
+        legendElement.classList.remove('not-visible');
+      }
+    }
+  </script>
 {% endblock %}

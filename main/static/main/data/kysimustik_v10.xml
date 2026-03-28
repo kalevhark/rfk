@@ -31,11 +31,7 @@
 				<kysimus kohustuslik="ei">Palun kirjelda probleeme, mis lapsel terviseseisundi tõttu esinevad.</kysimus>
 				<kysimus kohustuslik="ei">Kui laps saab sotsiaalteenuseid, siis kirjelda milliseid teenuseid ja kui sageli ning kelle poolt.</kysimus>
 			</vanusgrupiYldKysimused>
-			<vanusgrupiFailiTekst>
-				<![CDATA[
-				Juhul, kui soovite lapse tervisliku seisundi kohta lisada täiendavaid dokumente, mida ei ole kantud terviseportaali, siis saate seda teha siin.
-				]]>
-			</vanusgrupiFailiTekst>
+			<vanusgrupiFailiTekst>Juhul, kui soovite lapse tervisliku seisundi kohta lisada täiendavaid dokumente, siis saate seda teha siin.</vanusgrupiFailiTekst>
 		</vanusgrupp>
 		<vanusgrupp name="Laps 3-8" kysimustik="true">
 			<muutumatudSeisundid kohustuslik="ei">Kas lapsel on mõni järgnevatest terviseseisunditest: jäseme osaline või täielik puudumine, juhitav hingamine või pidev hapnikuravi, mõlema silma pimedus, iseseisvalt liikumisvõimetu ja/või püsivalt ratastoolis? Kui jah, siis palun nimetage see.</muutumatudSeisundid>
@@ -92,17 +88,7 @@
 				<kysimus kohustuslik="ei">Kui laps saab sotsiaalteenuseid (näiteks tugiisik, sotsiaaltransport vms), siis kirjelda milliseid teenuseid ja kui sageli.</kysimus>
 				<kysimus kohustuslik="ei">Kirjeldage kas laps saab lasteaias individuaalset abi (näiteks tugiisik, logopeed, eripedagoog) või koolis kohandatud õpet (näiteks individuaalne õppekava, lihtsustatud õpe, toimetuleku- või hooldusõpe või tugiteenuseid), siis kirjelda seda.</kysimus>
 			</vanusgrupiYldKysimused>
-			<vanusgrupiFailiTekst>
-				<![CDATA[
-				Kui teil on lapse kohta mõni nendest dokumentidest, palume võimalusel lisada need taotlusele:<br>
-				- Koolivälise nõustamismeeskonna (Rajaleidja) hindamisleht.<br>
-				- Iseloomustus koolist või lasteaiast.<br>
-				- Õpilase individuaalse arengu jälgimise kaart.<br>
-				- Kohaliku omavalitsuse juhtumiplaan.<br>
-				- Spetsialistide (logopeed, psühholoog, füsioterapeut) hinnangud, mida ei ole kantud terviseportaali.<br>
-				- Muu lapse tervislikku seisundit kirjeldav dokument, mis ei ole kättesaadav terviseportaalis.
-				]]>
-			</vanusgrupiFailiTekst>
+			<vanusgrupiFailiTekst>Juhul, kui lapse kohta on koostatud kohaliku omavalitsuse juhtumiplaan või olete käinud haridusliku erivajaduse hindamisel, lisage need dokumendid taotlusele.</vanusgrupiFailiTekst>
 		</vanusgrupp>
 		<vanusgrupp name="Laps 9-15" kysimustik="true">
 			<muutumatudSeisundid kohustuslik="ei">Kas lapsel on mõni järgnevatest terviseseisunditest: jäseme osaline või täielik puudumine, juhitav hingamine või pidev hapnikuravi, mõlema silma pimedus, iseseisvalt liikumisvõimetu ja/või püsivalt ratastoolis? Kui jah, siis palun nimetage see.</muutumatudSeisundid>
@@ -164,17 +150,7 @@
 				<kysimus kohustuslik="ei">Kui laps saab sotsiaalteenuseid (tugiisik, sotsiaaltransport vms), siis kirjelda milliseid teenuseid ja kui sageli.</kysimus>
 				<kysimus kohustuslik="ei">Kui laps saab koolis kohandatud õpet (näiteks individuaalne õppekava, lihtsustatud õpe, toimetuleku- või hooldusõpe või tugiteenuseid nagu logopeed, eripedagoog, psühholoog), siis kirjelda kui sageli</kysimus>
 			</vanusgrupiYldKysimused>
-			<vanusgrupiFailiTekst>
-				<![CDATA[
-				Kui teil on lapse kohta mõni nendest dokumentidest, palume võimalusel lisada need taotlusele:<br>
-				- Koolivälise nõustamismeeskonna (Rajaleidja) hindamisleht.<br>
-				- Iseloomustus koolist või lasteaiast.<br>
-				- Õpilase individuaalse arengu jälgimise kaart.<br>
-				- Kohaliku omavalitsuse juhtumiplaan.<br>
-				- Spetsialistide (logopeed, psühholoog, füsioterapeut) hinnangud, mida ei ole kantud terviseportaali.<br>
-				- Muu lapse tervislikku seisundit kirjeldav dokument, mis ei ole kättesaadav terviseportaalis.
-				]]>
-			</vanusgrupiFailiTekst>
+			<vanusgrupiFailiTekst>Juhul, kui lapse kohta on koostatud kohaliku omavalitsuse juhtumiplaan või olete käinud haridusliku erivajaduse hindamisel, lisage need dokumendid taotlusele.</vanusgrupiFailiTekst>
 		</vanusgrupp>
 		<vanusgrupp name="Vanaduspensioniealine" kysimustik="true">
 			<muutumatudSeisundid kohustuslik="ei">Kas Teil esineb mõni järgnevatest terviseseisunditest: jäseme osaline või täielik puudumine, püsivalt voodihaige ja/või püsivalt ratastoolis, juhitav hingamine või pidev hapnikuravi (va uneapnoe), väljakujunenud dementsus, mõlema silma pimedus? Kui jah, siis palun nimetage see.</muutumatudSeisundid>
@@ -228,17 +204,7 @@
 				<kysimus kohustuslik="ei">Kes igapäevategevuste juures Teid abistab ja kui sageli?</kysimus>
 				<kysimus kohustuslik="ei">Milliseid sotsiaalteenuseid (koduteenus, sotsiaaltransport, tugiisik vms) olete saanud ja kui sageli?</kysimus>
 			</vanusgrupiYldKysimused>
-			<vanusgrupiFailiTekst>
-				<![CDATA[
-				Kui teil on mõni nendest dokumentidest, palume võimalusel lisada need taotlusele:<br>
-				- Ravi kokkuvõtted, uuringute tulemused vms välismaal osutatud tervishoiuteenuste kohta<br>
-				- Ravi kokkuvõtted, uuringute tulemused vms väljaspool tervishoiuasutust  tegutseva spetsialisti nagu füsioterapeudi, psühholoogi, logopeedi või tegevusterapeudi poolt osutatud teenuse kohta
-				- Hoolekandeasutuse tõend terviseseisundi kohta, hooldusplaan vms<br>
-				- KOV sotsiaaltöötaja hinnang inimese abivajaduse kohta (näiteks KOV abi- ja toetusvajaduse hindamine, juhtumiplaan vms)<br>
-				- Kohtumeditsiinilise ekspertiisi kokkuvõte<br>
-				- Muu tervisliku seisundit kirjeldav dokument, mis ei ole kättesaadav terviseportaalis.
-				]]>
-			</vanusgrupiFailiTekst>
+			<vanusgrupiFailiTekst>Kui on taotleja terviseseisundit kirjeldavaid dokumente (välja arvatud digiloos olevad dokumendid, näiteks audiogramm, vaateväljade uuring vms), palume need taotlusele lisada.</vanusgrupiFailiTekst>
 		</vanusgrupp>
 	</vanusgrupid>
 </kysimustik>

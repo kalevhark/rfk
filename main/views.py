@@ -1131,7 +1131,7 @@ def kysimustik8(request):
         context
     )
 
-# Vue kysimustik7 tulemuste salvestamiseks
+# Vue kysimustik8 tulemuste salvestamiseks
 def get_kysimustik8_ekspertiis(request):
     vanusgrupp = json.loads(request.GET.get('vanusgrupp', ''))
     checkedMuutumatudSeisundid = request.GET.get('checkedMuutumatudSeisundid', '')
@@ -1426,10 +1426,6 @@ def get_kysimustik9_ekspertiis(request):
     )
 
 
-#
-# Küsimustiku vaade ver 10
-#
-
 # Vue kysimustik10 tulemuste salvestamiseks
 def save_kysimustik10_results(request):
     kysimustik_results = {
@@ -1454,7 +1450,7 @@ def save_kysimustik10_results(request):
         safe=False
     )
 
-def get_kysimustik10():
+def get_kysimustik10_old():
     filename = 'kysimustik_v10.xml'
     file = STATIC_DIR / 'data' / filename
     with open(file, 'r', encoding='utf8') as f:
@@ -1562,6 +1558,121 @@ def get_kysimustik10():
     }
     return kysimustik
 
+
+def get_kysimustik10():
+    """
+    Loeb json failist andmed, mis on vajalikud kysimustiku kuvamiseks.
+    """
+    filename = 'kysimustik10.json'
+    file = STATIC_DIR / 'data' / filename
+    with open(file, 'r', encoding='utf8') as f:
+        kysimustik_json = json.load(f)
+
+    vanusgrupid = []
+    vanusgruppideMuutumatudSeisundid = {}
+    vanusgruppideV6tmetegevused = {}
+    vanusgruppideKysimused = {}
+    vanusgruppideYldKysimused = {}
+    vanusgruppideFailiTekstid = {}
+
+    n = 0
+
+    for vanusgrupp in kysimustik_json['vanusgrupid'].keys():
+        vanusgrupid.append(
+            {
+                'kysimustik': True if kysimustik_json['vanusgrupid'][vanusgrupp]['skaala_kysimused'] else False,
+                'text': vanusgrupp,
+                'pealkiri': kysimustik_json['vanusgrupid'][vanusgrupp]['pealkiri'],
+                'value': n
+            }
+        )
+
+        # vanusgruppide muutumatute seisundite loetelud
+        muutumatudSeisundidData = kysimustik_json['vanusgrupid'][vanusgrupp]['muutumatud_seisundid_kysimus']
+        vanusgruppideMuutumatudSeisundid[n] = {
+            'muutumatudSeisundidQuestion': {
+                'kysimus': muutumatudSeisundidData, 
+                'answer': ''
+            },
+        }
+
+        # vanusgrupi v6tmetegevused
+        vanusgrupiV6tmetegevusedData = kysimustik_json['vanusgrupid'][vanusgrupp]['v6tmetegevused']
+        vanusgrupiV6tmetegevusedList = [
+            {
+                'text': v6tmetegevus['v6tmetegevus'],
+                'valdkond_nr': v6tmetegevus['valdkond_nr'],
+                'v6tmetegevus_nr': v6tmetegevus['v6tmetegevus_nr'],
+            }
+            for v6tmetegevus
+            in vanusgrupiV6tmetegevusedData
+        ]
+        vanusgruppideV6tmetegevused[n] = {
+            'vanusgrupiV6tmetegevusedList': vanusgrupiV6tmetegevusedList
+        }
+
+        # vanusgrupi kysimused
+        if kysimustik_json['vanusgrupid'][vanusgrupp]['skaala_kysimused']:
+            vanusgrupiKysimusedQuestion = kysimustik_json['vanusgrupid'][vanusgrupp]['skaala_kysimused_sissejuhatus']
+            vanusgrupiKysimusedData = kysimustik_json['vanusgrupid'][vanusgrupp]['skaala_kysimused']
+            vanusgrupiKysimusedList = [
+                {
+                    'text': kysimus['kysimus'],
+                    'valdkond_nr': kysimus['valdkond_nr'],
+                    'v6tmetegevus_nr': kysimus['v6tmetegevus_nr'],
+                    'rfk_kategooria': kysimus['rfk_kategooria'],
+                    'kohustuslik': kysimus['kohustuslik'],
+                    'score': '',
+                    'answer': ''
+                }
+                for kysimus
+                in vanusgrupiKysimusedData
+            ]
+        else:
+            vanusgrupiKysimusedQuestion = ''
+            vanusgrupiKysimusedList = []
+
+        vanusgruppideKysimused[n] = {
+            'vanusgrupiKysimusedQuestion': vanusgrupiKysimusedQuestion,
+            'vanusgrupiKysimusedList': vanusgrupiKysimusedList
+        }
+
+        # vanusgrupi yldkysimused
+        vanusgrupiYldKysimusedQuestion = kysimustik_json['vanusgrupid'][vanusgrupp]['yld_kysimused_sissejuhatus']
+        vanusgrupiYldKysimusedData = kysimustik_json['vanusgrupid'][vanusgrupp]['yld_kysimused']
+        vanusgrupiYldKysimusedList = [
+            {
+                'text': kysimus['kysimus'],
+                'kohustuslik': kysimus['kohustuslik'],
+                'answer': ''
+            }
+            for kysimus
+            in vanusgrupiYldKysimusedData
+        ]
+        vanusgruppideYldKysimused[n] = {
+            'vanusgrupiYldKysimusedQuestion': vanusgrupiYldKysimusedQuestion,
+            'vanusgrupiYldKysimusedList': vanusgrupiYldKysimusedList
+        }
+
+        # vanusgrupiFailiTekst = child.find('vanusgrupiFailiTekst')
+        vanusgruppideFailiTekstid[n] = kysimustik_json['vanusgrupid'][vanusgrupp]['faili_kysimus']
+
+        n += 1
+
+    kysimustik = {
+        'vanusgrupid': vanusgrupid,
+        'vanusgruppideMuutumatudSeisundid': vanusgruppideMuutumatudSeisundid,
+        'vanusgruppideV6tmetegevused': vanusgruppideV6tmetegevused,
+        'vanusgruppideKysimused': vanusgruppideKysimused,
+        'vanusgruppideYldKysimused': vanusgruppideYldKysimused,
+        'vanusgruppideFailiTekstid': vanusgruppideFailiTekstid
+    }
+    return kysimustik
+
+
+#
+# Küsimustiku vaade ver 10
+#
 def kysimustik10(request):
     kysimustik = get_kysimustik10()
     vanusgrupid = kysimustik['vanusgrupid']
@@ -1587,7 +1698,8 @@ def kysimustik10(request):
         context
     )
 
-# Vue kysimustik9 tulemuste salvestamiseks
+
+# Vue kysimustik10 tulemuste salvestamiseks
 def get_kysimustik10_ekspertiis(request):
     vanusgrupp = json.loads(request.GET.get('vanusgrupp', ''))
     v6tmetegevusedList = json.loads(request.GET.get('v6tmetegevusedList', ''))
@@ -1652,6 +1764,7 @@ def get_kysimustik10_ekspertiis(request):
         },
         safe=False
     )
+
 
 def get_excel():
     path = settings.BASE_DIR

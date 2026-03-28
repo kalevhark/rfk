@@ -1,0 +1,43 @@
+<button onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-black">
+      Mis värk on?
+    </button>
+
+    <button @click="showBackgroundInfo = !showBackgroundInfo" class="w3-button">
+      <span v-if="showBackgroundInfo">Ära näita valdkondi/võtmetegevusi/arvnäitajat</span>
+      <span v-else>Näita  valdkondi/võtmetegevusi/arvnäitajat</span>
+    </button>
+
+    <div id="id01" class="w3-modal">
+      <div class="w3-modal-content">
+        <div class="w3-container">
+          <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+          <p>Enesehinnangust piirangu määraja arvutamine inimese valiku järgi</p>
+          <ul>
+            <li>inimene teeb valiku skaalal [[ skaalad[selectedSkaala].skaala[0] ]]-[[ skaalad[selectedSkaala].skaala.slice(-1)[0] ]] -> valik</li>
+            <li>arvnäitaja = 4 / [[ skaalad[selectedSkaala].skaala.slice(-1)[0] ]] * valik (arvutatakse kahe komakoha täpsusega)</li>
+            <li>määraja = 0, kui arvnäitaja < 1,00</li>
+            <li>määraja = 1, kui 1,00 <= arvnäitaja < 2,00</li>
+            <li>määraja = 2, kui 2,00 <= arvnäitaja < 2,76</li>
+            <li>määraja = 3, kui 2,76 <= arvnäitaja < 3,50</li>
+            <li>määraja = 4, kui 3,50 <= arvnäitaja</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+    <div v-if="showDebug">
+      &NonBreakingSpace;<span>Skaala?</span>&NonBreakingSpace;
+      <select v-model="selectedSkaala">
+        <option v-for="option in skaalad" v-bind:value="option.value">
+          [[ option.text ]]
+        </option>
+      </select>
+    </div>
+
+    &NonBreakingSpace;<span>Vanusgrupp?</span>&NonBreakingSpace;
+    <select v-model="selectedVanusgrupp">
+      <option v-for="option in vanusgrupid" v-bind:value="option.value">
+        [[ option.text ]]
+      </option>
+    </select>

@@ -28,14 +28,21 @@
             <a class="nav-link" href="{% url 'expmoodul' %}">hindamine</a>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">vanad asjad</a>
+            <a 
+              class="nav-link dropdown-toggle" 
+              data-bs-toggle="dropdown" 
+              href="#" role="button" 
+              aria-expanded="false">
+              muud asjad
+            </a>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="{% url 'prt' %}">analüüsija uus</a></li>
               <li><a class="dropdown-item" href="{% url 'sandbox' %}">analüüsija vana</a></li>
               <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="{% url 'kysimustik7' %}">LAVA proto 7</a></li>
-              <li><a class="dropdown-item" href="{% url 'kysimustik8' %}">LAVA proto 8</a></li>
+              {% comment %} <li><a class="dropdown-item" href="{% url 'kysimustik7' %}">LAVA proto 7</a></li> {% endcomment %}
+              {% comment %} <li><a class="dropdown-item" href="{% url 'kysimustik8' %}">LAVA proto 8</a></li> {% endcomment %}
               <li><a class="dropdown-item" href="{% url 'kysimustik9' %}">LAVA proto 9</a></li>
+              <li><a class="dropdown-item" href="{% url 'kysimustik10' %}">LAVA proto 10</a></li>
             </ul>
           </li>
         </ul>

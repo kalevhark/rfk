@@ -1,0 +1,103 @@
+label {
+  padding-left: 0.4em;
+}
+
+.question {
+  width: 300px;
+}
+
+.unanswered {
+  width: 100px;
+  text-align: center;
+}
+
+.poll {
+  width: 30px;
+  text-align: center;
+}
+
+.result {
+  width: 80px;
+  text-align: left;
+}
+
+/*
+Enter and leave animations can use different
+durations and timing functions.
+*/
+.slide-fade-enter-active {
+  transition: all 0.5s ease-out;
+}
+
+.slide-fade-leave-active {
+  transition: all 0.5s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  opacity: 0;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+#kysimustik10 {
+  max-width: 70%;
+}
+
+.kysimustik10-pilt {
+  max-width: 100%;
+  height: auto;
+}
+
+.pool{
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  font: normal normal 12px/1.3333 Arial, Helvetica, sans-serif;
+  justify-content: center; 
+}
+
+section{ 
+  background: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
+  margin: 2rem;
+  padding: 2rem; 
+}
+
+input{ display: none; }
+
+/* Radios */
+label{
+  border: 1px solid dodgerblue;
+  border-radius: 1.2rem;
+  color: dodgerblue;
+  cursor: pointer;
+  display: inline-block;
+  line-height: 1.5;
+  margin: 0 1rem 0 0;
+  padding: 0.5rem 1rem;
+  position: relative;
+  transition: all 0.3s; 
+}
+
+input[type=radio]:checked + label{
+  background: dodgerblue;
+  color: white; 
+}
+
+.visible {
+  visibility: visible;
+}
+
+.not-visible {
+  visibility: hidden;
+}

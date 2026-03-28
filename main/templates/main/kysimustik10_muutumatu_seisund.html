@@ -1,0 +1,5 @@
+<div class="w3-panel w3-padding w3-card w3-pale-blue">
+      <h3 v-show="showBackgroundInfo">Progresseeruv või muutumatu terviseseisund</h3>
+      <p>[[ muutumatudSeisundidQuestion.kysimus ]]<span v-if="muutumatudSeisundidQuestion.kohustuslik" style="color: red"> *</span></p>
+      <textarea rows="3" cols="80" v-model="muutumatudSeisundidQuestion.answer" placeholder="siia saab kirjutada pika jutu..."></textarea>
+    </div>

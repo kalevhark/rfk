@@ -1,0 +1,540 @@
+{
+	"valdkonnad" : [
+		{
+			"valdkond_nr": "1",
+			"valdkond": "Liikumine"
+		},
+		{
+			"valdkond_nr": "2",
+			"valdkond": "Käeline tegevus"
+		},
+		{
+			"valdkond_nr": "3",
+			"valdkond": "Suhtlemine"
+		},
+		{
+			"valdkond_nr": "4",
+			"valdkond": "Teadvusel püsimine ja enesehooldus"
+		},
+		{
+			"valdkond_nr": "5",
+			"valdkond": "Õppimine ja tegevuste elluviimine"
+		},
+		{
+			"valdkond_nr": "6",
+			"valdkond": "Muutustega kohanemine ja ohu tajumine"
+		},
+		{
+			"valdkond_nr": "7",
+			"valdkond": "Inimestevaheline lävimine ja suhted"
+		}
+	],
+	"vanusgrupid": {
+		"Laps 0-3": {
+			"pealkiri": "Noorema kui nelja-aastase lapse puude raskusastme tuvastamine",
+			"v6tmetegevused": [
+				{
+					"valdkond_nr": "1",
+					"v6tmetegevus_nr": "4",
+					"v6tmetegevus": "Liikumisega seotud muud piirangud"
+				},
+				{
+					"valdkond_nr": "2",
+					"v6tmetegevus_nr": "4",
+					"v6tmetegevus": "Käelise tegevusega seotud muud piirangud"
+				},
+				{
+					"valdkond_nr": "3",
+					"v6tmetegevus_nr": "1",
+					"v6tmetegevus": "Suhtlemine: nägemine"
+				},
+				{
+					"valdkond_nr": "3",
+					"v6tmetegevus_nr": "2",
+					"v6tmetegevus": "Suhtlemine: kuulmine"
+				},
+				{
+					"valdkond_nr": "3",
+					"v6tmetegevus_nr": "3",
+					"v6tmetegevus": "Suhtlemine: keel ja kõne"
+				},
+				{
+					"valdkond_nr": "4",
+					"v6tmetegevus_nr": "4",
+					"v6tmetegevus": "Teadvusel püsimise ja enesehooldusega seotud muud piirangud"
+				},
+				{
+					"valdkond_nr": "5",
+					"v6tmetegevus_nr": "3",
+					"v6tmetegevus": "Õppimise ja tegevuste sooritamisega seotud muud piirangud"
+				}
+			],
+			"yld_kysimused_sissejuhatus": null,
+			"yld_kysimused": [
+				{
+					"jrk_nr": 1,
+					"kysimus": "Palun kirjelda probleeme, mis lapsel terviseseisundi tõttu esinevad.",
+					"kohustuslik": true
+				},
+				{
+					"jrk_nr": 2,
+					"kysimus": "Kui laps saab tervishoiu- või sotsiaalteenuseid, siis nimeta milliseid teenuseid ja kui sageli neid osutatakse ja mis põhjusel. Kuidas hindate tulemuslikkust?",
+					"kohustuslik": false
+				}
+			],
+			"skaala_kysimused_sissejuhatus": "Hinda hakkamasaamist järgevates olukordades:",
+			"skaala_kysimused": null,
+			"muutumatud_seisundid_kysimus": null,
+			"faili_kysimus": "Juhul, kui soovite lapse tervisliku seisundi kohta lisada täiendavaid dokumente, mida ei ole kantud terviseportaali, siis saate seda teha siin."
+		},
+		"Laps 4-8": {
+			"pealkiri": "Kuni 4- kuni 8-aastase lapse puude raskusastme tuvastamine",
+			"v6tmetegevused": [
+				{
+					"valdkond_nr": "1",
+					"v6tmetegevus_nr": "4",
+					"v6tmetegevus": "Liikumisega seotud muud piirangud"
+				},
+				{
+					"valdkond_nr": "2",
+					"v6tmetegevus_nr": "4",
+					"v6tmetegevus": "Käelise tegevusega seotud muud piirangud"
+				},
+				{
+					"valdkond_nr": "3",
+					"v6tmetegevus_nr": "1",
+					"v6tmetegevus": "Suhtlemine: nägemine"
+				},
+				{
+					"valdkond_nr": "3",
+					"v6tmetegevus_nr": "2",
+					"v6tmetegevus": "Suhtlemine: kuulmine"
+				},
+				{
+					"valdkond_nr": "3",
+					"v6tmetegevus_nr": "3",
+					"v6tmetegevus": "Suhtlemine: keel ja kõne"
+				},
+				{
+					"valdkond_nr": "4",
+					"v6tmetegevus_nr": "4",
+					"v6tmetegevus": "Teadvusel püsimise ja enesehooldusega seotud muud piirangud"
+				},
+				{
+					"valdkond_nr": "5",
+					"v6tmetegevus_nr": "3",
+					"v6tmetegevus": "Õppimise ja tegevuste sooritamisega seotud muud piirangud"
+				},
+				{
+					"valdkond_nr": "6",
+					"v6tmetegevus_nr": "4",
+					"v6tmetegevus": "Muutustega kohanemise ja ohu tajumisega seotud muud piirangud"
+				},
+				{
+					"valdkond_nr": "7",
+					"v6tmetegevus_nr": "3",
+					"v6tmetegevus": "Inimestevahelise lävimise ja suhetega seotud muud piirangud"
+				}
+			],
+			"yld_kysimused_sissejuhatus": null,
+			"yld_kysimused": [
+				{
+					"jrk_nr": 1,
+					"kysimus": "Palun kirjelda probleeme, mis lapsel igapäevaelu tegevustes terviseseisundi tõttu esinevad.",
+					"kohustuslik": true
+				},
+				{
+					"jrk_nr": 2,
+					"kysimus": "Kui laps kasutab abivahendeid, siis milliseid ning kas nendest on abi? Kas laps vajab abivahendite kasutamisel kõrvalist abi ja juhendamist?",
+					"kohustuslik": false
+				},
+				{
+					"jrk_nr": 3,
+					"kysimus": "Kas laps vajab vaimse tervise seisundist tingitud järelevalvet ja kas vajadus on kinnitatud eriarsti poolt?",
+					"kohustuslik": false
+				},
+				{
+					"jrk_nr": 4,
+					"kysimus": "Kui laps saab sotsiaalteenuseid, siis nimeta milliseid teenuseid ja kui sageli.",
+					"kohustuslik": false
+				},
+				{
+					"jrk_nr": 5,
+					"kysimus": "Kirjeldage, kas laps saab haridusasutuses kohandatud õpet või täiendavat tuge hariduse tugispetsialistidelt. ",
+					"kohustuslik": false
+				}
+			],
+			"skaala_kysimused_sissejuhatus": "Järgnevalt on võimalik hinnata viieastmelisel skaalal lapse hakkama saamist erinevates olukordades:",
+			"skaala_kysimused": [
+				{
+					"jrk_nr": 1,
+					"kysimus": "suuteline iseseisvalt liikuma (kirjelda piiranguid, kui need on seotud füüsilise liikumisraskusega)",
+					"kohustuslik": false,
+					"valdkond_nr": "1",
+					"v6tmetegevus_nr": "4",
+					"rfk_kategooria": "d450"
+				},
+				{
+					"jrk_nr": 2,
+					"kysimus": "käeline tegevus",
+					"kohustuslik": false,
+					"valdkond_nr": "2",
+					"v6tmetegevus_nr": "4",
+					"rfk_kategooria": "d440"
+				},
+				{
+					"jrk_nr": 3,
+					"kysimus": "nägemine",
+					"kohustuslik": false,
+					"valdkond_nr": "3",
+					"v6tmetegevus_nr": "1",
+					"rfk_kategooria": "d110"
+				},
+				{
+					"jrk_nr": 4,
+					"kysimus": "kuulmine",
+					"kohustuslik": false,
+					"valdkond_nr": "3",
+					"v6tmetegevus_nr": "2",
+					"rfk_kategooria": "d115"
+				},
+				{
+					"jrk_nr": 5,
+					"kysimus": "kõnelemine",
+					"kohustuslik": false,
+					"valdkond_nr": "3",
+					"v6tmetegevus_nr": "3",
+					"rfk_kategooria": "d330"
+				},
+				{
+					"jrk_nr": 6,
+					"kysimus": "soole ja põie kontrollimine",
+					"kohustuslik": false,
+					"valdkond_nr": "4",
+					"v6tmetegevus_nr": "4",
+					"rfk_kategooria": "d530"
+				},
+				{
+					"jrk_nr": 7,
+					"kysimus": "uute teadmiste ja oskuste omandamine, sealhulgas erinevates huviringides osalemise huvi ja aktiivsus",
+					"kohustuslik": false,
+					"valdkond_nr": "5",
+					"v6tmetegevus_nr": "3",
+					"rfk_kategooria": "d155"
+				},
+				{
+					"jrk_nr": 8,
+					"kysimus": "tegevuses püsimine",
+					"kohustuslik": false,
+					"valdkond_nr": "6",
+					"v6tmetegevus_nr": "4",
+					"rfk_kategooria": "d210"
+				},
+				{
+					"jrk_nr": 9,
+					"kysimus": "eakaaslastega suhtlemine",
+					"kohustuslik": false,
+					"valdkond_nr": "7",
+					"v6tmetegevus_nr": "3",
+					"rfk_kategooria": "d7504"
+				},
+				{
+					"jrk_nr": 10,
+					"kysimus": "sõnalistest juhistest/käskudest/keeldudest aru saamine ja lihtsate korralduste täitmine",
+					"kohustuslik": false,
+					"valdkond_nr": "7",
+					"v6tmetegevus_nr": "3",
+					"rfk_kategooria": "d820"
+				}
+			],
+			"muutumatud_seisundid_kysimus": null,
+			"faili_kysimus": "Kui lapse kohta on mõni nendest dokumentidest, siis palume võimalusel lisada need taotlusele:<br>- Koolivälise nõustamismeeskonna (Rajaleidja) hindamisleht.<br>- Iseloomustus koolist või lasteaiast.<br>- Õpilase individuaalse arengu jälgimise kaart.<br>- Kohaliku omavalitsuse juhtumiplaan.<br>- Spetsialistide (logopeed, psühholoog, füsioterapeut) hinnangud, mida ei ole kantud terviseportaali.<br>- Muu lapse tervislikku seisundit kirjeldav dokument, mis ei ole kättesaadav terviseportaalis."
+		},
+		"Laps 9-15": {
+			"pealkiri": "Kuni 9- kuni 15-aastase lapse puude raskusastme tuvastamine",
+			"v6tmetegevused": [
+				{
+					"valdkond_nr": "1",
+					"v6tmetegevus_nr": "4",
+					"v6tmetegevus": "Liikumisega seotud muud piirangud"
+				},
+				{
+					"valdkond_nr": "2",
+					"v6tmetegevus_nr": "4",
+					"v6tmetegevus": "Käelise tegevusega seotud muud piirangud"
+				},
+				{
+					"valdkond_nr": "3",
+					"v6tmetegevus_nr": "1",
+					"v6tmetegevus": "Suhtlemine: nägemine"
+				},
+				{
+					"valdkond_nr": "3",
+					"v6tmetegevus_nr": "2",
+					"v6tmetegevus": "Suhtlemine: kuulmine"
+				},
+				{
+					"valdkond_nr": "3",
+					"v6tmetegevus_nr": "3",
+					"v6tmetegevus": "Suhtlemine: keel ja kõne"
+				},
+				{
+					"valdkond_nr": "4",
+					"v6tmetegevus_nr": "4",
+					"v6tmetegevus": "Teadvusel püsimise ja enesehooldusega seotud muud piirangud"
+				},
+				{
+					"valdkond_nr": "5",
+					"v6tmetegevus_nr": "3",
+					"v6tmetegevus": "Õppimise ja tegevuste sooritamisega seotud muud piirangud"
+				},
+				{
+					"valdkond_nr": "6",
+					"v6tmetegevus_nr": "4",
+					"v6tmetegevus": "Muutustega kohanemise ja ohu tajumisega seotud muud piirangud"
+				},
+				{
+					"valdkond_nr": "7",
+					"v6tmetegevus_nr": "3",
+					"v6tmetegevus": "Inimestevahelise lävimise ja suhetega seotud muud piirangud"
+				}
+			],
+			"yld_kysimused_sissejuhatus": null,
+			"yld_kysimused": [
+				{
+					"jrk_nr": 1,
+					"kysimus": "Palun kirjelda peamisi probleeme, mis lapsel igapäevaelu tegevustes terviseseisundi tõttu esinevad.",
+					"kohustuslik": true
+				},
+				{
+					"jrk_nr": 2,
+					"kysimus": "Kui laps kasutab abivahendeid, siis milliseid ning kas nendest on abi?  Kas laps vajab abivahendite kasutamisel kõrvalist abi ja juhendamist?",
+					"kohustuslik": false
+				},
+				{
+					"jrk_nr": 3,
+					"kysimus": "Kas laps vajab vaimse tervise seisundist tingitud järelevalvet ja kas vajadus on kinnitatud eriarsti poolt?",
+					"kohustuslik": false
+				},
+				{
+					"jrk_nr": 4,
+					"kysimus": "Kui laps saab sotsiaalteenuseid, siis nimetage milliseid teenuseid ja kui sageli.",
+					"kohustuslik": false
+				},
+				{
+					"jrk_nr": 5,
+					"kysimus": "Kirjeldage, kas laps saab koolis kohandatud õpet või tuge hariduse tugispetsialistidelt.",
+					"kohustuslik": false
+				}
+			],
+			"skaala_kysimused_sissejuhatus": "Järgnevalt on võimalik hinnata viieastmelisel skaalal lapse hakkama saamist erinevates olukordades:",
+			"skaala_kysimused": [
+				{
+					"jrk_nr": 1,
+					"kysimus": "kysimusuuteline iseseisvalt liikuma (kirjelda piiranguid, kui need on seotud füüsilise liikumisraskusega)s1",
+					"kohustuslik": false,
+					"valdkond_nr": "1",
+					"v6tmetegevus_nr": "4",
+					"rfk_kategooria": ""
+				},
+				{
+					"jrk_nr": 2,
+					"kysimus": "käelised tegevused",
+					"kohustuslik": false,
+					"valdkond_nr": "2",
+					"v6tmetegevus_nr": "4",
+					"rfk_kategooria": ""
+				},
+				{
+					"jrk_nr": 3,
+					"kysimus": "nägemine",
+					"kohustuslik": false,
+					"valdkond_nr": "3",
+					"v6tmetegevus_nr": "1",
+					"rfk_kategooria": ""
+				},
+				{
+					"jrk_nr": 4,
+					"kysimus": "kuulmine",
+					"kohustuslik": false,
+					"valdkond_nr": "3",
+					"v6tmetegevus_nr": "2",
+					"rfk_kategooria": ""
+				},
+				{
+					"jrk_nr": 5,
+					"kysimus": "kõnelemine",
+					"kohustuslik": false,
+					"valdkond_nr": "3",
+					"v6tmetegevus_nr": "3",
+					"rfk_kategooria": ""
+				},
+				{
+					"jrk_nr": 6,
+					"kysimus": "soole ja põie kontrollimine",
+					"kohustuslik": false,
+					"valdkond_nr": "4",
+					"v6tmetegevus_nr": "4",
+					"rfk_kategooria": ""
+				},
+				{
+					"jrk_nr": 7,
+					"kysimus": "uute teadmiste ja oskuste omandamine koolis, kodus ja huvitegevuses, sealhulgas erinevates huviringides osalemise huvi ja aktiivsus",
+					"kohustuslik": false,
+					"valdkond_nr": "5",
+					"v6tmetegevus_nr": "3",
+					"rfk_kategooria": ""
+				},
+				{
+					"jrk_nr": 8,
+					"kysimus": "tegevuste alustamine ja alustatud tegevuste lõpuni viimine",
+					"kohustuslik": false,
+					"valdkond_nr": "6",
+					"v6tmetegevus_nr": "4",
+					"rfk_kategooria": ""
+				},
+				{
+					"jrk_nr": 9,
+					"kysimus": "eakohane võime ohtu tajuda ja ohu korral abi otsida",
+					"kohustuslik": false,
+					"valdkond_nr": "6",
+					"v6tmetegevus_nr": "4",
+					"rfk_kategooria": ""
+				},
+				{
+					"jrk_nr": 10,
+					"kysimus": "eakohane tahe ja oskus luua uusi kontakte ja neid hoida",
+					"kohustuslik": false,
+					"valdkond_nr": "7",
+					"v6tmetegevus_nr": "3",
+					"rfk_kategooria": ""
+				}
+			],
+			"muutumatud_seisundid_kysimus": null,
+			"faili_kysimus": "Kui lapse kohta on mõni nendest dokumentidest, siis palume võimalusel lisada need taotlusele:<br>- Koolivälise nõustamismeeskonna (Rajaleidja) hindamisleht.<br>- Iseloomustus koolist või lasteaiast.<br>- Õpilase individuaalse arengu jälgimise kaart.<br>- Kohaliku omavalitsuse juhtumiplaan.<br>- Spetsialistide (logopeed, psühholoog, füsioterapeut) hinnangud, mida ei ole kantud terviseportaali.<br>- Muu lapse tervislikku seisundit kirjeldav dokument, mis ei ole kättesaadav terviseportaalis."
+		},
+		"Vanaduspensioniealine": {
+			"pealkiri": "Vanaduspensioniealise puude raskusastme tuvastamine",
+			"v6tmetegevused": [
+				{
+					"valdkond_nr": "1",
+					"v6tmetegevus_nr": "4",
+					"v6tmetegevus": "Liikumisega seotud muud piirangud"
+				},
+				{
+					"valdkond_nr": "2",
+					"v6tmetegevus_nr": "4",
+					"v6tmetegevus": "Käelise tegevusega seotud muud piirangud"
+				},
+				{
+					"valdkond_nr": "3",
+					"v6tmetegevus_nr": "1",
+					"v6tmetegevus": "Suhtlemine: nägemine"
+				},
+				{
+					"valdkond_nr": "3",
+					"v6tmetegevus_nr": "2",
+					"v6tmetegevus": "Suhtlemine: kuulmine"
+				},
+				{
+					"valdkond_nr": "3",
+					"v6tmetegevus_nr": "3",
+					"v6tmetegevus": "Suhtlemine: keel ja kõne"
+				},
+				{
+					"valdkond_nr": "4",
+					"v6tmetegevus_nr": "4",
+					"v6tmetegevus": "Teadvusel püsimise ja enesehooldusega seotud muud piirangud"
+				},
+				{
+					"valdkond_nr": "5",
+					"v6tmetegevus_nr": "3",
+					"v6tmetegevus": "Õppimise ja tegevuste sooritamisega seotud muud piirangud"
+				},
+				{
+					"valdkond_nr": "6",
+					"v6tmetegevus_nr": "4",
+					"v6tmetegevus": "Muutustega kohanemise ja ohu tajumisega seotud muud piirangud"
+				},
+				{
+					"valdkond_nr": "7",
+					"v6tmetegevus_nr": "3",
+					"v6tmetegevus": "Inimestevahelise lävimise ja suhetega seotud muud piirangud"
+				}
+			],
+			"yld_kysimused_sissejuhatus": null,
+			"yld_kysimused": [
+				{
+					"jrk_nr": 1,
+					"kysimus": "Palun kirjelda millist abi sa igapäevastes tegevustes (nt söömine, ravitoimingud, hügieenitoimingud, riietumine, liikumine, suhtlemine) vajad oma tervise tõttu?",
+					"kohustuslik": true
+				},
+				{
+					"jrk_nr": 2,
+					"kysimus": "Kui sageli vajad kõrvalist abi igapäevaelu tegevuste juures? Kes sind peamiselt abistab? ",
+					"kohustuslik": false
+				},
+				{
+					"jrk_nr": 3,
+					"kysimus": "Milliseid abivahendeid kasutad? Kas abivahenditest on abi?",
+					"kohustuslik": false
+				},
+				{
+					"jrk_nr": 4,
+					"kysimus": "Kui saad sotsiaalteenuseid (nt koduteenus, sotsiaaltransport), siis nimeta milliseid teenuseid ja kui sageli kasutad. Kui viibid püsivalt hooldekodus, siis mis ajast alates?",
+					"kohustuslik": false
+				},
+				{
+					"jrk_nr": 5,
+					"kysimus": "Kui sul esineb vaimse tervise probleeme, siis palun kirjelda neid. Kas oled nendega seoses pöördunud arsti või spetsialisti poole?",
+					"kohustuslik": false
+				}
+			],
+			"skaala_kysimused_sissejuhatus": "Järgnevalt on võimalik hinnata viieastmelisel skaalal enda hakkama saamist erinevates olukordades:",
+			"skaala_kysimused": [
+				{
+					"jrk_nr": 1,
+					"kysimus": "Liikumine väljaspool kodu",
+					"kohustuslik": false,
+					"valdkond_nr": "1",
+					"v6tmetegevus_nr": "4",
+					"rfk_kategooria": ""
+				},
+				{
+					"jrk_nr": 2,
+					"kysimus": "Riietumine, pesemine, tualetitoimingud, enesehooldus",
+					"kohustuslik": false,
+					"valdkond_nr": "4",
+					"v6tmetegevus_nr": "4",
+					"rfk_kategooria": ""
+				},
+				{
+					"jrk_nr": 3,
+					"kysimus": "Nägemine. Prillide olemasolu korral hinda piirangut prillide kasutamise olukorras, mitte ilma prillideta",
+					"kohustuslik": false,
+					"valdkond_nr": "3",
+					"v6tmetegevus_nr": "1",
+					"rfk_kategooria": ""
+				},
+				{
+					"jrk_nr": 4,
+					"kysimus": "Kuulmine. Kuuldeaparaadi olemasolu korral hinda piirangut abivahendi kasutamise olukorras, mitte ilma abivahendita",
+					"kohustuslik": false,
+					"valdkond_nr": "3",
+					"v6tmetegevus_nr": "2",
+					"rfk_kategooria": ""
+				},
+				{
+					"jrk_nr": 2,
+					"kysimus": "Kõnelemine",
+					"kohustuslik": false,
+					"valdkond_nr": "3",
+					"v6tmetegevus_nr": "3",
+					"rfk_kategooria": ""
+				}
+			],
+			"muutumatud_seisundid_kysimus": null,
+			"faili_kysimus": "Kui sul on mõni nendest dokumentidest, palume võimalusel lisada need taotlusele:<br>- Ravi kokkuvõtted, uuringute tulemused vms välismaal osutatud tervishoiuteenuste kohta<br>- Ravi kokkuvõtted, uuringute tulemused vms väljaspool tervishoiuasutust  tegutseva spetsialisti nagu füsioterapeudi, psühholoogi, logopeedi või tegevusterapeudi poolt osutatud teenuse kohta<br>- Hoolekandeasutuse tõend terviseseisundi kohta, hooldusplaan vms<br>- KOV sotsiaaltöötaja hinnang inimese abivajaduse kohta (näiteks KOV abi- ja toetusvajaduse hindamine, juhtumiplaan vms)<br>- Kohtumeditsiinilise ekspertiisi kokkuvõte<br>- Muu tervisliku seisundit kirjeldav dokument, mis ei ole kättesaadav terviseportaalis."
+		}
+	}
+}

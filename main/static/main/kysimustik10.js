@@ -45,11 +45,11 @@ function initialState() {
         },
         { text: '0-4', skaala: [0,1,2,3,4], extraKysimus: 1,
           legend: [
-            '0 - piiranguid ei ole',
-            '1 - kerge piirang',
-            '2 - mõõdukas piirang',
-            '3 - raske piirang',
-            '4 - täielik piirang'
+            'Piirangut ei ole',
+            'Kerge piirang',
+            'Mõõdukas piirang',
+            'Raske piirang',
+            'Täielik piirang'
           ],
           value: 1},
       ],
@@ -88,7 +88,7 @@ Vue.createApp({
       // Code that will run only after the
       // entire view has been rendered
       // this.selectedVanusgrupp = 3;
-      this.selectedVanusgrupp = getCookie('selectedVanusgrupp') || 0;
+      this.selectedVanusgrupp = getCookie('selectedVanusgrupp') || 1;
       this.muutumatudSeisundidQuestion = this.vanusgruppideMuutumatudSeisundid[this.selectedVanusgrupp]['muutumatudSeisundidQuestion'];
       this.v6tmetegevusedList = this.vanusgruppideV6tmetegevused[this.selectedVanusgrupp]['vanusgrupiV6tmetegevusedList'];
       this.kysimustikQuestion = this.vanusgruppideKysimused[this.selectedVanusgrupp]['vanusgrupiKysimusedQuestion'];
@@ -221,4 +221,4 @@ Vue.createApp({
         })
     },
   }
-}).mount('#kysimustik')
+}).mount('#kysimustik10')

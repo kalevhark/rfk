@@ -1,0 +1,14 @@
+<div class="w3-panel w3-padding w3-card w3-white">
+      <h3 v-show="showBackgroundInfo">Üldküsimused</h3>
+      <p>[[ yldkysimusedQuestion ]]</p>
+      <div v-for="(kysimus, kysimusIndex) in yldkysimusedList" :key="kysimusIndex">
+        <p><span v-html="kysimus.text"></span></p>
+        <p><small v-if="kysimus.kohustuslik">Kohustuslik</small></p>
+        <textarea 
+          rows="3" 
+          cols="80" 
+          v-model="kysimus.answer" 
+          placeholder="Sisesta oma vastus siia">
+        </textarea>
+      </div>
+    </div>

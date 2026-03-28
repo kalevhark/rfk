@@ -1,0 +1,10 @@
+<div class="w3-panel w3-padding w3-card w3-light-grey">
+      <h3 v-show="showBackgroundInfo">Tagasiside</h3>
+      <div>
+        <p><span>Testimiseks: Nimi ja kommentaar küsimustiku kohta:</span></p>
+        <textarea rows="5" cols="80" v-model="feedback" placeholder="siia saab kirjutada pika jutu..."></textarea>
+        <br>
+        <button id='saveButton' @click="saveResults">Saada</button>
+        <button id='resetForm' @click="resetForm">Täida uuesti</button>
+      </div>
+    </div>
