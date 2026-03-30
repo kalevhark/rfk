@@ -30,8 +30,8 @@
 		}
 	],
 	"vanusgrupid": {
-		"Laps 0-3": {
-			"pealkiri": "Noorema kui nelja-aastase lapse puude raskusastme tuvastamine",
+		"Laps 0-2": {
+			"pealkiri": "Noorema kui kolme-aastase lapse puude raskusastme tuvastamine",
 			"v6tmetegevused": [
 				{
 					"valdkond_nr": "1",
@@ -87,8 +87,8 @@
 			"muutumatud_seisundid_kysimus": null,
 			"faili_kysimus": "Juhul, kui soovite lapse tervisliku seisundi kohta lisada täiendavaid dokumente, mida ei ole kantud terviseportaali, siis saate seda teha siin."
 		},
-		"Laps 4-8": {
-			"pealkiri": "4- kuni 8-aastase lapse puude raskusastme tuvastamine",
+		"Laps 3-8": {
+			"pealkiri": "Kolme- kuni 8-aastase lapse puude raskusastme tuvastamine",
 			"v6tmetegevused": [
 				{
 					"valdkond_nr": "1",
@@ -331,7 +331,7 @@
 			"skaala_kysimused": [
 				{
 					"jrk_nr": 1,
-					"kysimus": "kysimusuuteline iseseisvalt liikuma (kirjelda piiranguid, kui need on seotud füüsilise liikumisraskusega)s1",
+					"kysimus": "suuteline iseseisvalt liikuma (kirjelda piiranguid, kui need on seotud füüsilise liikumisraskusega)",
 					"kohustuslik": false,
 					"valdkond_nr": "1",
 					"v6tmetegevus_nr": "4",
