@@ -200,7 +200,7 @@
 				},
 				{
 					"jrk_nr": 5,
-					"kysimus": "kõnelemine",
+					"kysimus": "suhtlemine (eakohane kõnelemine ja kõnest arusaamine)",
 					"kohustuslik": false,
 					"valdkond_nr": "3",
 					"v6tmetegevus_nr": "3",
@@ -248,7 +248,7 @@
 				}
 			],
 			"muutumatud_seisundid_kysimus": null,
-			"faili_kysimus": "Kui lapse kohta on mõni nendest dokumentidest, siis palume võimalusel lisada need taotlusele:<br>- Koolivälise nõustamismeeskonna (Rajaleidja) hindamisleht.<br>- Iseloomustus koolist või lasteaiast.<br>- Õpilase individuaalse arengu jälgimise kaart.<br>- Kohaliku omavalitsuse juhtumiplaan.<br>- Spetsialistide (logopeed, psühholoog, füsioterapeut) hinnangud, mida ei ole kantud terviseportaali.<br>- Muu lapse tervislikku seisundit kirjeldav dokument, mis ei ole kättesaadav terviseportaalis."
+			"faili_kysimus": "Kui lapse kohta on mõni nendest dokumentidest, siis palume võimalusel lisada need taotlusele:<br>- Koolivälise nõustamismeeskonna (Rajaleidja) hindamisleht.<br>- Iseloomustus koolist või lasteaiast.<br>- Õpilase individuaalse arengu jälgimise kaart.<br>- Kohaliku omavalitsuse juhtumiplaan.<br>- Spetsialistide (logopeed, psühholoog, füsioterapeut) hinnangud, mida ei ole kantud terviseportaali.<br>- Muu lapse tervislikku seisundit kirjeldav dokument (nt audiogramm, spirogramm, vaateväljade uuring jms.), mis ei ole kättesaadav terviseportaalis."
 		},
 		"Laps 9-15": {
 			"pealkiri": "9- kuni 15-aastase lapse puude raskusastme tuvastamine",
@@ -363,7 +363,7 @@
 				},
 				{
 					"jrk_nr": 5,
-					"kysimus": "kõnelemine",
+					"kysimus": "suhtlemine (eakohane kõnelemine ja kõnest arusaamine, kirjutamine ja lugemine)",
 					"kohustuslik": false,
 					"valdkond_nr": "3",
 					"v6tmetegevus_nr": "3",
@@ -411,7 +411,7 @@
 				}
 			],
 			"muutumatud_seisundid_kysimus": null,
-			"faili_kysimus": "Kui lapse kohta on mõni nendest dokumentidest, siis palume võimalusel lisada need taotlusele:<br>- Koolivälise nõustamismeeskonna (Rajaleidja) hindamisleht.<br>- Iseloomustus koolist või lasteaiast.<br>- Õpilase individuaalse arengu jälgimise kaart.<br>- Kohaliku omavalitsuse juhtumiplaan.<br>- Spetsialistide (logopeed, psühholoog, füsioterapeut) hinnangud, mida ei ole kantud terviseportaali.<br>- Muu lapse tervislikku seisundit kirjeldav dokument, mis ei ole kättesaadav terviseportaalis."
+			"faili_kysimus": "Kui lapse kohta on mõni nendest dokumentidest, siis palume võimalusel lisada need taotlusele:<br>- Koolivälise nõustamismeeskonna (Rajaleidja) hindamisleht.<br>- Iseloomustus koolist või lasteaiast.<br>- Õpilase individuaalse arengu jälgimise kaart.<br>- Kohaliku omavalitsuse juhtumiplaan.<br>- Spetsialistide (logopeed, psühholoog, füsioterapeut) hinnangud, mida ei ole kantud terviseportaali.<br>- Muu lapse tervislikku seisundit kirjeldav dokument (nt audiogramm, spirogramm, vaateväljade uuring jms.), mis ei ole kättesaadav terviseportaalis."
 		},
 		"Vanaduspensioniealine": {
 			"pealkiri": "Vanaduspensioniealise puude raskusastme tuvastamine",
@@ -526,7 +526,7 @@
 				},
 				{
 					"jrk_nr": 2,
-					"kysimus": "Kõnelemine",
+					"kysimus": "Suhtlemine (eakohane kõnelemine ja kõnest arusaamine, kirjutamine ja lugemine)",
 					"kohustuslik": false,
 					"valdkond_nr": "3",
 					"v6tmetegevus_nr": "3",
@@ -534,7 +534,7 @@
 				}
 			],
 			"muutumatud_seisundid_kysimus": null,
-			"faili_kysimus": "Kui sul on mõni nendest dokumentidest, palume võimalusel lisada need taotlusele:<br>- Ravi kokkuvõtted, uuringute tulemused vms välismaal osutatud tervishoiuteenuste kohta<br>- Ravi kokkuvõtted, uuringute tulemused vms väljaspool tervishoiuasutust  tegutseva spetsialisti nagu füsioterapeudi, psühholoogi, logopeedi või tegevusterapeudi poolt osutatud teenuse kohta<br>- Hoolekandeasutuse tõend terviseseisundi kohta, hooldusplaan vms<br>- KOV sotsiaaltöötaja hinnang inimese abivajaduse kohta (näiteks KOV abi- ja toetusvajaduse hindamine, juhtumiplaan vms)<br>- Kohtumeditsiinilise ekspertiisi kokkuvõte<br>- Muu tervisliku seisundit kirjeldav dokument, mis ei ole kättesaadav terviseportaalis."
+			"faili_kysimus": "Kui sul on mõni nendest dokumentidest, palume võimalusel lisada need taotlusele:<br>- Hoolekandeasutuse tõend terviseseisundi kohta, hooldusplaan vms<br>- KOV sotsiaaltöötaja hinnang inimese abivajaduse kohta (näiteks KOV abi- ja toetusvajaduse hindamine, juhtumiplaan vms)<br>- Kohtumeditsiinilise ekspertiisi kokkuvõte<br>- Välismaal osutatud ravi kokkuvõtted<br>- Füsioterapeudi, psühholoogi, logopeedi või tegevusterapeudi poolt osutatud teenuse kokkuvõtted, hindamised, uuringute tulemused<br>- Muu tervisliku seisundit kirjeldav dokument (nt audiogramm spirogramm, vaateväljade uuring jms.), mis ei ole kättesaadav terviseportaalis."
 		}
 	}
 }
